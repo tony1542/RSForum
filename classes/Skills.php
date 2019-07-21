@@ -29,7 +29,7 @@ class Skills
         'Construction'
     ];
     
-    private const PATH_TO_ICONS = '/images/OSRS/Skills/';
+    private const PATH_TO_ICONS = 'images/OSRS/Skills/';
     
     public static function getSkillNameFromIndex(int $index): string {
         return self::ALL[$index];

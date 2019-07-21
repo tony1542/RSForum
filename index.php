@@ -2,4 +2,7 @@
 
 include 'classes/Skills.php';
 
-echo Skills::getSkillIconFromName('Fishing');
+foreach (Skills::ALL as $skill) {
+    echo '<img src="' . Skills::getSkillIconFromName($skill) . '" />';
+    echo '<br>';
+}
