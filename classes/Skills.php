@@ -1,7 +1,5 @@
 <?php
 
-namespace App\Classes;
-
 class Skills
 {
     public const ALL = [
@@ -39,5 +37,15 @@ class Skills
     
     public static function getSkillIconFromIndex(int $index): string {
         return self::PATH_TO_ICONS . strtolower(self::getSkillNameFromIndex($index)) . '.png';
+    }
+    
+    public static function getSkillIconFromName(string $name) {
+        $file = self::PATH_TO_ICONS . strtolower($name) . '.png';
+        
+        if (!file_exists($file)) {
+            return false;
+        }
+        
+        return $file;
     }
 }

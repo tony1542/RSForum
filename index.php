@@ -1,3 +1,5 @@
 <?php
 
-echo 'Hello world';
+include 'classes/Skills.php';
+
+echo Skills::getSkillIconFromName('Fishing');
