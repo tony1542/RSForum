@@ -27,6 +27,8 @@ print_r($random_array);
 
 //this took SOOOO LOOOONGGGG OMG I FINALLY GOT IT HOLY FUCK
 
+# Looks good!
+
 
 
 
@@ -50,6 +52,7 @@ $array_to_filter = [
 
 
 //This is my manual attempt but I still use the array_filter, so I guess it isn't manual.
+# Correct, this isn't manual yet. I'll give you a hint: loop through the array by hand and use `unset()` on elements that you want to obliterate.
 
 function leFilter($string){
 
@@ -66,6 +69,8 @@ print_r($newArray_to_filter);
 
 
 //PHP Function
+# I like the use of the anonymous function here instead of passing 'leFilter' again. Shows that you did it with a PHP function 2 different ways.
+# Anonymous functions are mid-to-high level concepts, but I really like them. They are used a lot in high-level javascript too.
 print_r(array_filter($array_to_filter, function ($var) { return (stripos($var, 'e') === false); }));
 
 
@@ -93,16 +98,18 @@ $array_of_total_levels2 = [
 //Manual merging, son.
 $StonkMains = $array_of_total_levels + $array_of_total_levels2;
 
+# Looks good! Isn't it fucking weird you can just use `+` on two arrays in PHP?
 
 function filterArray($value){
     return ($value > 2000);
 }
 
+# Nice usage of array_filter here. Nice and clean.
 $filteredArray = array_filter($StonkMains, 'filterArray');
 
-foreach($filteredArray as $k => $v){
-    echo " $k = $v, ";
-}
+//foreach($filteredArray as $k => $v){
+//    echo " $k = $v, ";
+//}
 
 
 
