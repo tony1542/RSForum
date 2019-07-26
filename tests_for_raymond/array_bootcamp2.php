@@ -21,6 +21,7 @@ for ($i = 0; $i < 10; $i++) {
 
 }
 
+echo "<pre>";
 print_r($random_array);
 
 
@@ -122,7 +123,7 @@ function maxAcc($max_values)
 print_r(array_filter($StackedMain, "maxAcc"));
 
 
-
+echo "</pre>";
 
 ?>
 
