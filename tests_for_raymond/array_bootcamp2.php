@@ -54,13 +54,96 @@ $array_to_filter = [
 //This is my manual attempt but I still use the array_filter, so I guess it isn't manual.
 # Correct, this isn't manual yet. I'll give you a hint: loop through the array by hand and use `unset()` on elements that you want to obliterate.
 
-function leFilter($string){
 
-    return strpos($string, 'e') === false;
+
+
+
+$array_to_filter = [
+    'Basic_key',
+    'Advanced_key',
+    'Master_key',
+    'Dog'
+];
+
+
+// save the length of the array to a variable before enetering the for loop
+// because the length of the array changes during the for loop
+// however we still want to go through all 4 elements
+$array_length = count($array_to_filter);
+
+//loop through array to be filtered
+$indexA = 0;
+// compare indexA to array_length rather than count($array_to_filter)
+for ($indexA = 0; $indexA < $array_length; $indexA++) {
+    //set up two variables, one for current trying and another for a boolean flag
+    $current_string = $array_to_filter[$indexA];
+    $remove_item = false;
+
+    //loop through the current string to check for the letter e
+    for ($indexB = 0; $indexB < strlen($current_string); $indexB++) {
+        //condition to check for the letter e
+        if($current_string[$indexB] == 'e'){
+            //found the letter e, so set the flag to true
+            $remove_item = true;
+        }
+    }
+
+    //if 'e' was found, remove the item
+    if($remove_item){
+        unset($array_to_filter[$indexA]);
+    }
 }
-$newArray_to_filter = array_filter($array_to_filter, 'leFilter');
-print_r($newArray_to_filter);
 
+//the array should only have dog in it now
+print_r($array_to_filter);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//foreach ($array_to_filter as $key => $value){
+ //   if ( strpos($key, 'e') === false) {
+//        unset($array_to_filter[$key]);
+//    }
+//}
+//print_r($array_to_filter);
+
+
+//$array = \array_diff($array_to_filter, ['Basic_key', 'Advanced_key', 'Master_key']);
+//print_r($array);
+
+
+
+
+
+
+
+
+foreach ($array_to_filter as $v) {
+    if ( strpos($v, 'e') === false) {
+        $arrayFilter2bruh[] = $v; //do not populate a new array, Strip the elements out of the old array.
+    }
+}
+print_r($arrayFilter2bruh);
 
 
 
