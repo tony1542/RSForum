@@ -136,14 +136,20 @@ print_r($array_to_filter);
 
 
 
+$array_filter_test = [
+    'Basic_key',
+    'Advanced_key',
+    'Master_key',
+    'Dog'
+];
 
-
-foreach ($array_to_filter as $v) {
-    if ( strpos($v, 'e') === false) {
-        $arrayFilter2bruh[] = $v; //do not populate a new array, Strip the elements out of the old array.
+foreach ($array_filter_test as $key => $value) {
+    if (strpos($value, 'e') !== false) {
+        unset($array_filter_test[$key]);
     }
 }
-print_r($arrayFilter2bruh);
+
+print_r($array_filter_test);
 
 
 
