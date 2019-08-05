@@ -49,6 +49,13 @@
 
    echo "Total Level for Tony_X is " .$player->totalLevel. " and his total EXP is " . $exp->maxExp . " for now...";
 
+   echo "<h3>You are getting two variables in the object because you are dynamically declaring a variable.
+             This is happening because you are using `this->variableNameThatDoesntExistYet` if that makes sense.
+             PHP sees this and dyanmically creates a `public variableNameThatDoesntExistYet` if you assign it like you did in your constructors.
+             Let me know when you're avaiable to have a chat about it for me to clear more up about it. It's a confusing concept.
+             What you wrote technically works, but it only works because PHP can be a messy tool.
+         </h3>";
+   
    //Also doing it via your 2nd method just to say I did it.
 
     class runescape_player2 {
