@@ -31,15 +31,18 @@
        }
 }
     # I was going to have 1 construct but I learned I can't have 2 in 1 class, or at least not that someone of my skill level knows of.
+    // correct, can only have one constructor per class in PHP
 
     $player = new runescape_player('2277');
     
+   echo "<h1>Notice the declaration of two variables down here:</h1>";
     echo "<pre>";
     print_r($player);
     echo "</pre>";
    
     $exp = new max_club('451,380,905'); // nice, actually used my exp lol
 
+    echo "<h1>Notice the declaration of two variables down here:</h1>";
     echo "<pre>";
     print_r($exp);
     echo "</pre>";
