@@ -76,3 +76,24 @@
     // lmao
     echo "BREAKING NEWS: KIZE HAS HIT THE MAX RECORD OF " .$player2->getTotalLVL() . " TOTAL LEVEL, RUNESCAPE IS CROWNING HIM THE BEST EVER AT RUNESCAPE WITH 16 KING BLACK DRAGON KILLS!!";
 
+
+    
+    /*
+     * Here is an example of what you're doing, i use the declaredVariable, and then the way you did it, by copying the parameter name
+     * It should hopefully shed some light on why it is 'incorrect', but we can chat sometime to go over it more thoroughly
+     */
+    class test_class {
+        public $declaredVariable = '';
+        
+        public function __construct($variable_that_is_declared) {
+            $this->declaredVariable = $variable_that_is_declared;
+            $this->variable_that_is_declared = $variable_that_is_declared;
+        }
+    }
+    
+    $test = new test_class('test_string');
+    echo "<h3>Notice the two types of variables within the object.</h3>";
+    echo "<pre>";
+    print_r($test);
+    echo "</pre>";
+    
