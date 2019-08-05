@@ -33,7 +33,16 @@
     # I was going to have 1 construct but I learned I can't have 2 in 1 class, or at least not that someone of my skill level knows of.
 
     $player = new runescape_player('2277');
-    $exp = new max_club('451,380,905');
+    
+    echo "<pre>";
+    print_r($player);
+    echo "</pre>";
+   
+    $exp = new max_club('451,380,905'); // nice, actually used my exp lol
+
+    echo "<pre>";
+    print_r($exp);
+    echo "</pre>";
 
    echo "Total Level for Tony_X is " .$player->totalLevel. " and his total EXP is " . $exp->maxExp . " for now...";
 
@@ -54,5 +63,6 @@
 
     $player2 = new runescape_player2('9999');
 
+    // lmao
     echo "BREAKING NEWS: KIZE HAS HIT THE MAX RECORD OF " .$player2->getTotalLVL() . " TOTAL LEVEL, RUNESCAPE IS CROWNING HIM THE BEST EVER AT RUNESCAPE WITH 16 KING BLACK DRAGON KILLS!!";
 
