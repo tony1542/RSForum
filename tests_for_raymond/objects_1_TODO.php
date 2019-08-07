@@ -15,7 +15,7 @@
       
         public function __construct($TL){
 
-           $this->totalLevel = $TL;
+           $this->TL = $TL;
 
      }
    }
@@ -26,7 +26,7 @@
 
        public function __construct($MS){
 
-           $this->maxExp = $MS;
+           $this->MS = $MS;
 
        }
 }
@@ -47,7 +47,7 @@
     print_r($exp);
     echo "</pre>";
 
-   echo "Total Level for Tony_X is " .$player->totalLevel. " and his total EXP is " . $exp->maxExp . " for now...";
+   echo "Total Level for Tony_X is " .$player->TL. " and his total EXP is " . $exp->MS . " for now...";
 
    echo "<h3>You are getting two variables in the object because you are dynamically declaring a variable.
              This is happening because you are using `this->variableNameThatDoesntExistYet` if that makes sense.
@@ -63,11 +63,11 @@
         protected $TL = '';
 
         public function __construct($TL){
-            $this->totalLevel = $TL;
+            $this->TL = $TL;
         }
 
         public function getTotalLVL() {
-            return $this->totalLevel;
+            return $this->TL;
         }
     }
 
