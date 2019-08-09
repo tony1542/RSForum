@@ -31,7 +31,7 @@ class car {
             $price = -5000; // lol
         }
         
-        echo "<h5>Price: " . $price . "</h5>";
+        echo "<h5>Price: $" . $price . "</h5>";
     }
     
     // helper function that will nicely output our object data
