@@ -3,18 +3,18 @@
 // including our class so we can use it in this script
 include 'car.php';
 
-$ford = new car('Ford', 2010, 156000);
-$ford->print_price();
-$ford->print_data();
+$bandos = new rune_char('Bandos', 0, 65, 'Tony X', 'Kize');
+$bandos->print_item();
+$bandos->help_tony_print_data();
 
 echo "<hr>";
 
-$chevy = new car('chevy', 2017, 12500);
-$chevy->print_price();
-$chevy->print_data();
+$bronze= new rune_char('Bronze', 99, 1, 'Tony X', 'Kize');
+$bronze->print_item();
+$bronze->help_tony_print_data();
 
 echo "<hr>";
 
-$pontiac = new car('Pontiac', 1874, 99999999);
-$pontiac->print_price();
-$pontiac->print_data();
+$Justiciar = new rune_Char('Justiciar', 643, 99999999, 'Tony X', 'Kize');
+$Justiciar->print_item();
+$Justiciar->help_tony_print_data();
