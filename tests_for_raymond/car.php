@@ -26,7 +26,7 @@ class rune_char {
         
         // check for $gp here in the if statement instead of re-assinging it on line 29 right?
         // something similar to this:
-        // if ($gear === 'bandos' && $gp >= 49152369
+        // if ($gear === 'bandos' && $gp >= 49152369)
         if ($gear === 'bandos') { // I know the && $user === Tony X isn't needed, just kept it. only 1 user so I dont need to be so specific.
             $gp = 49152369;
             $can_buy = true;
