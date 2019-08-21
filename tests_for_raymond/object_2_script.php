@@ -38,8 +38,7 @@ $bronzet = new runescape_user('bronzeT', 19999901, 1, "Kize");
 $bronzet->print_item2();
 $bronzet->help_kize_print_data();
 
-if($bandos->user === "Tony X" && $dragon->user2 === 'Kize') {
+if ($bandos->user === "Tony X" && $dragon->user2 === 'Kize') {
     echo "<hr>";
     echo "While " . $bandos->user . " can afford bandos, " . $dragon->user2 . " cannot afford Bandos. GG";
-
 }
