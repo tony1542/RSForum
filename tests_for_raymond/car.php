@@ -8,10 +8,12 @@ class rune_char {
     public $str = ''; //Str is year
     public $def = ''; // def is miles
     public $user = '';
+    public $gp = 0; // Should be by itself
     public $kizeGP = 1000000;
     public $tonyGP = 999999999;
 
-    public function __construct($gear, $str, $def, $user, $kizeGP, $tonyGP) {
+    //public function __construct($gear, $str, $def, $user, $kizeGP, $tonyGP) {
+    public function __construct($gear, $str, $def, $user, $gp) {
 
         $this->gear = $gear;
         $this->str = $str;
