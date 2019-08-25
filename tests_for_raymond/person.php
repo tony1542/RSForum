@@ -17,26 +17,15 @@ class person {
 
         $name = strtolower($this->name);
         $age = $this->age;
-        $old = false;       //set to false until true
-        $adult = false;     //set to false until true
-        $young = false;     //set to false until true
 
         //Checking age
         if ($age > 35 && $age < 130){
-            $old = true; //if age is greater then 35 and less than 130, set it to true
-        } else if ($age <= 35 && $age >= 25){
-            $adult = true; //if age is less or equal to 35 AND greater or equal to 25, set it to true
-        }else if ($age < 25 && $age > 0){
-            $young = true; //if age is less then 25 AND greater than 0, set it to true
-        }
-
-        if ($old == true) {
             echo  $name . " is old as hell";
-        }else if ($adult == true) {
+        } else if ($age <= 35 && $age >= 25){
             echo  $name . " is extremely adult";
-        }else if ($young == true) {
+        }else if ($age < 25 && $age > 0){
             echo  $name . " is a young baby, ready to be smothered with a pillow.";
-        } else {
+        }else {
             echo $name .", this is all a dream; wake up!";
         }
     }
