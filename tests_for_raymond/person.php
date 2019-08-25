@@ -23,11 +23,11 @@ class person {
 
         //Checking age
         if ($age > 35 && $age < 130){
-            $old = true;
+            $old = true; //if age is greater then 35 and less than 130, set it to true
         } else if ($age <= 35 && $age >= 25){
-            $adult = true;
+            $adult = true; //if age is less or equal to 35 AND greater or equal to 25, set it to true
         }else if ($age < 25 && $age > 0){
-            $young = true;
+            $young = true; //if age is less then 25 AND greater than 0, set it to true
         }
 
         if ($old == true) {
@@ -39,13 +39,10 @@ class person {
         } else {
             echo $name .", this is all a dream; wake up!";
         }
-
     }
 
     public function print_data() {
         echo "<h5>Name: " . $this->name ."</h5>";
         echo "<h5>age: " . $this->age ."</h5>";
     }
-
-
 }
