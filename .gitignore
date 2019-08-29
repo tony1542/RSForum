@@ -1,2 +1,5 @@
 # PHPStorm settings
 .idea
+
+# Composer auto-loaded stuff
+vendor
