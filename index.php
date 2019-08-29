@@ -10,5 +10,6 @@
 
 include 'vendor/autoload.php';
 
+# example of bronze
 $bronze = new \App\Classes\Bronze();
 dump($bronze->getDefenceLevel());
