@@ -2,8 +2,8 @@
 
 namespace App\Classes;
 
-class Iron extends Armor {
+class barrows extends Armor {
     public function getDefenceLevel() {
-        return 5;
+        return 70;
     }
 }
