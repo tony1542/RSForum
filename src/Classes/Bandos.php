@@ -3,5 +3,7 @@
 namespace App\Classes;
 
 class Bandos extends Armor {
-    // TODO implement
+    public function getDefenceLevel() {
+        return 65;
+    }
 }

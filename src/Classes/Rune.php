@@ -3,5 +3,7 @@
 namespace App\Classes;
 
 class Rune extends Armor {
-    // TODO Implement
+    public function getDefenceLevel() {
+        return 40;
+    }
 }
