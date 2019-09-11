@@ -10,15 +10,15 @@
 
 include 'vendor/autoload.php';
 
-use App\Classes\Bronze;
-use App\Classes\Bandos;
-use App\Classes\Mithril;
-use App\Classes\Dragon;
-use App\Classes\Adamant;
-use App\Classes\barrows;
-use App\Classes\justiciar;
-use App\Classes\Iron;
-use App\Classes\Rune;
+use App\Classes\Equipment\Armor\Bronze;
+use App\Classes\Equipment\Armor\Bandos;
+use App\Classes\Equipment\Armor\Mithril;
+use App\Classes\Equipment\Armor\Dragon;
+use App\Classes\Equipment\Armor\Adamant;
+use App\Classes\Equipment\Armor\barrows;
+use App\Classes\Equipment\Armor\justiciar;
+use App\Classes\Equipment\Armor\Iron;
+use App\Classes\Equipment\Armor\Rune;
 
 # example of bronze
 $bronze = new Bronze();

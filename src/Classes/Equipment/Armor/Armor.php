@@ -2,7 +2,7 @@
 
 // Note the namespace. Our global one is App, but we are within the 'Classes' directory, so we add it to the namespace link
 // Again, think of this like a website's directory layout
-namespace App\Classes;
+namespace App\Classes\Equipment\Armor;
 
 // Base class for runescape armor
 // Note the use of the word 'abstract' here. It means you cannot instantiate it. (Cannot use $armor = new Armor())

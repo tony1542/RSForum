@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Classes;
+namespace App\Classes\Equipment\Armor;
 
 class Iron extends Armor {
     public function getDefenceLevel() {
