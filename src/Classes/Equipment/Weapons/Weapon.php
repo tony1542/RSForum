@@ -3,5 +3,5 @@
 namespace App\Classes\Equipment\Weapons;
 
 abstract class Weapon {
-    abstract public function canWield();
+    abstract public function levelRequirement();
 }

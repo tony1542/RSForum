@@ -10,56 +10,9 @@
 
 include 'vendor/autoload.php';
 
-use App\Classes\Equipment\Armor\Bronze;
-use App\Classes\Equipment\Armor\Bandos;
-use App\Classes\Equipment\Armor\Mithril;
-use App\Classes\Equipment\Armor\Dragon;
-use App\Classes\Equipment\Armor\Adamant;
-use App\Classes\Equipment\Armor\barrows;
-use App\Classes\Equipment\Armor\justiciar;
-use App\Classes\Equipment\Armor\Iron;
-use App\Classes\Equipment\Armor\Rune;
+use App\Classes\Equipment\Weapons\Daggers\BronzeDagger;
+use App\Classes\Equipment\Weapons\Daggers\IronDagger;
+use App\Classes\Equipment\Weapons\Daggers\AbyssalDagger;
 
-# example of bronze
-$bronze = new Bronze();
-dump($bronze->getDefenceLevel() . " defense level for Bronze Armor");
-
-echo "\n";
-
-$bandos = new Bandos();
-echo "Bandos defense level: " . $bandos->getDefenceLevel();
-
-echo "\n";
-
-$dragon = new Dragon();
-echo "dragon defense level: " . $dragon->getDefenceLevel();
-
-echo "\n";
-
-$mithril = new mithril();
-echo "Mithril defense level: " . $mithril->getDefenceLevel();
-
-echo "\n";
-
-$adamant = new Adamant();
-echo "Adamant defense level: " . $adamant->getDefenceLevel();
-
-echo "\n";
-
-$barrows = new barrows();
-echo "Barrows defense level: " . $barrows->getDefenceLevel();
-
-echo "\n";
-
-$justicair = new justiciar();
-echo "Justicair defense level: " . $justicair->getDefenceLevel();
-
-echo "\n";
-
-$iron = new Iron();
-echo "Iron defense level: " . $iron->getDefenceLevel();
-
-echo "\n";
-
-$rune = new Rune();
-echo "Rune defense level: " . $rune->getDefenceLevel();
+$bronze = new BronzeDagger();
+$bronze->levelRequirement();
