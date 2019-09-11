@@ -9,5 +9,5 @@ namespace App\Classes;
 abstract class Armor {
     // Abstract function here telling all children classes they MUST implement their own version of this
     // An example of this would be a bronze child class returning 1
-    abstract function getDefenceLevel();
+    abstract public function getDefenceLevel();
 }
