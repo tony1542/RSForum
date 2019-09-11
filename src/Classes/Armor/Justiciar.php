@@ -2,7 +2,7 @@
 
 namespace App\Classes;
 
-class justicair extends Armor {
+class Justiciar extends Armor {
     public function getDefenceLevel() {
         return 75;
     }

@@ -2,7 +2,7 @@
 
 namespace App\Classes;
 
-class barrows extends Armor {
+class Barrows extends Armor {
     public function getDefenceLevel() {
         return 70;
     }

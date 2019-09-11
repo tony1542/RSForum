@@ -16,7 +16,7 @@ use App\Classes\Mithril;
 use App\Classes\Dragon;
 use App\Classes\Adamant;
 use App\Classes\barrows;
-use App\Classes\justicair;
+use App\Classes\justiciar;
 use App\Classes\Iron;
 use App\Classes\Rune;
 
@@ -51,7 +51,7 @@ echo "Barrows defense level: " . $barrows->getDefenceLevel();
 
 echo "\n";
 
-$justicair = new justicair();
+$justicair = new justiciar();
 echo "Justicair defense level: " . $justicair->getDefenceLevel();
 
 echo "\n";
