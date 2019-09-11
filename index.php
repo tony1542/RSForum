@@ -4,15 +4,14 @@
 # @see https://getcomposer.org/doc/04-schema.md#psr-4
 
 # 1. Run 'php composer.phar install' to pull down our copy of the composer.json contents and have it run ok.
-# 2. Fill out the methods within /src/Classes for the pre-made classes i've made for you
-# 3. Add 5 more custom armor classes that extend the 'Armor' abstract class.
-# 4. Print out every single one of them within this script. Example, "Bronze: 1". So show the name of the class & what the defence level is that is required.
+# 2. Create another directory under /classes/equipment/weapons/ like i did with Daggers
+# 3. Create another base class like Dagger.php but use a different weapon type, scimitar, sword, spear etc.
+# 4. Create at least 3 sub-classes of this new base weapon class you've created
+# 5. print them out below like i did with the bronze dagger
 
 include 'vendor/autoload.php';
 
 use App\Classes\Equipment\Weapons\Daggers\BronzeDagger;
-use App\Classes\Equipment\Weapons\Daggers\IronDagger;
-use App\Classes\Equipment\Weapons\Daggers\AbyssalDagger;
 
-$bronze = new BronzeDagger();
-$bronze->levelRequirement();
+$bronzeDagger = new BronzeDagger();
+echo $bronzeDagger->levelRequirement();
