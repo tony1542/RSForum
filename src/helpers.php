@@ -30,6 +30,8 @@ function dd($array, $verbose = false) {
  *
  * @param string $name - The name of the view we want
  * @param mixed  $data - The various data being passed to the view
+ *
+ * @see https://www.php.net/manual/en/language.constants.predefined.php#constant.dir
  */
 function view($name, $data = []) {
     // Our pre-made partials
