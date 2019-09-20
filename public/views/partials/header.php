@@ -5,4 +5,5 @@
     <title>Runescape</title>
 </head>
 <body>
+    <!-- In this div is where all of our dynamic content will be nested -->
     <div class='main-container'>
