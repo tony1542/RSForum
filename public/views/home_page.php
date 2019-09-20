@@ -1,3 +1,14 @@
 <!-- TODO update this page to include at least 1 card of information @see https://getbootstrap.com/docs/4.3/components/card/ -->
 <!-- you could just put filler text in the card, like lorem ipsum https://loremipsum.io -->
-<h1>Home Page</h1>
+<div class="card" style="width: 30rem;">
+    <div class="card-body">
+        <h5 class="card-title">Fremennik Exiles</h5>
+        <h6 class="card-subtitle mb-2 text-muted">From the creators of Fremennik isles...</h6>
+        <p class="card-text">The Fremennik Exiles is an upcoming quest in the Fremennik quest series.
+
+            First pitched in early 2017, development on the quest was done in Mod Ed and Wolf's personal project time, with a large chunk of the quest
+            being completed before personal projects were cancelled in mid 2018, halting development of the quest until August 2019.</p>
+        <a href="https://www.reddit.com/r/2007scape/comments/d6g3hc/fremennik_exiles_is_next_week/" class="card-link" target="_blank">Reddit Link</a>
+        <a href="https://oldschool.runescape.wiki/w/The_Fremennik_Exiles" class="card-link" target="_blank">	This quest has a quick guide found here.</a>
+    </div>
+</div>
