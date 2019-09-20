@@ -23,3 +23,27 @@ function dd($array, $verbose = false) {
     dump($array, $verbose);
     die;
 }
+
+/**
+ * Function pulls in our header & footer and inserts our data in between
+ * Note: this function will kill execution of the script when it is done
+ *
+ * @param string $name - The name of the view we want
+ * @param mixed  $data - The various data being passed to the view
+ */
+function view($name, $data = []) {
+    // Our pre-made partials
+    $header = __DIR__ . '/../public/views/partials/header.php';
+    $footer = __DIR__ . '/../public/views/partials/footer.php';
+    
+    // The dynamic file name we are grabbing
+    $file_name = __DIR__ . '/../public/views/' . $name . '.php';
+    
+    if (is_file($file_name)) {
+        require $header;
+        require $file_name;
+        require $footer;
+    }
+    
+    die;
+}
