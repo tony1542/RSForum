@@ -33,7 +33,7 @@
 
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    Register
+                                   Sign In
                                 </button>
                                 <a href="#" class="btn btn-link">
                                     Forgot Your Password?
