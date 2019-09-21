@@ -23,7 +23,6 @@ require('vendor/autoload.php');
  * (Note, functions are NOT case-sensitive in PHP. so our functions might be camelcase, but they don't have to be the same case)
  */
 
-use App\Http\Request;
 use App\Http\Router;
 
 try {
