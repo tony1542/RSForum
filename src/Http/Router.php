@@ -2,6 +2,8 @@
 
 namespace App\Http;
 
+use App\Controllers\AbstractBaseController;
+
 use RuntimeException;
 
 class Router
@@ -39,6 +41,10 @@ class Router
         // If there isn't a method that matches what was passed in for that controller
         if (!method_exists($controller, $action)) {
             throw new RuntimeException('"' . $controller . '" does not respond to the "' . $action . '" action.');
+        }
+    
+        if (!$controller->canAccess($action, $parameters)) {
+            throw new RuntimeException('Access denied.');
         }
         
         return $controller->$action($parameters);
