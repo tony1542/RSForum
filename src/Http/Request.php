@@ -11,7 +11,7 @@ class Request
     
     protected string $default_controller_action = 'index';
     
-    public string $default_ctonroller;
+    public string $default_controller;
     public string $default_controller_prefix = "App\\Controllers\\";
     protected string $default_controller_suffix = 'sController';
     
@@ -33,10 +33,6 @@ class Request
     public function getController() : string
     {
         $controller = self::explodeUri()[self::CONTROLLER_POSITION];
-        
-        if ($controller === '') {
-            return $this->default_ctonroller;
-        }
         
         return urldecode($controller) . $this->default_controller_suffix;
     }
