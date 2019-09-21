@@ -2,7 +2,8 @@
 
 namespace App\Controllers;
 
-class PagesController extends AbstractBaseController {
+class PagesController extends AbstractBaseController
+{
     public function canAccess($action, $parameters = [])
     {
         return true;
