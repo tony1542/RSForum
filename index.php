@@ -15,6 +15,12 @@ require('vendor/autoload.php');
  *
  * Also the try/catch is a concept that isn't important to know for now.
  * Just know that it will catch errors that are thrown and will be displayed in our '/partials/error.php' template!
+ *
+ * For example, try loading up a dummy URL and look at what errors you get
+ * Try the following URLs:
+ * - /User - look at the error message, it tells us UsersController doesn't exist
+ * - /Page/FakeFunction - look at the error message, it tells us PagesController doesn't have a 'fakefunction' function
+ * (Note, functions are NOT case-sensitive in PHP. so our functions might be camelcase, but they don't have to be the same case)
  */
 
 use App\Http\Router;
