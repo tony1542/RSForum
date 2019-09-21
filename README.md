@@ -9,6 +9,9 @@ First, switch to whatever branch you want to copy. In this example, we'll copy t
 - git checkout -b new_branch_name_here
 You'll now have a `new_branch_name_here` branch that is a copy of `master`
 
+# HTML / Layouts / Formatting
+We use [Bootstrap 4.3](https://getbootstrap.com/docs/4.3/layout/overview/), click the link to see how-tos for what classes to use and how the layouts work
+
 # Routing breakdown / example
  Example (these classes might not exist yet, they are just to help understand how the routing works)
  let's say we have this as a URL "`/Character/Show/23`"
