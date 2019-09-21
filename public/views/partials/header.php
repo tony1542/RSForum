@@ -20,10 +20,12 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                 </li>
+            </ul>
+            <ul class='navbar-nav'>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Sign-In</a>
                 </li>
-                <li>
+                <li class='nav-item'>
                     <a class="nav-link" href="#">Register</a>
                 </li>
             </ul>
