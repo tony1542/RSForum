@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Classes\Equipment\Armor;
+namespace App\Models\Equipment\Armor;
 
 class Bandos extends Armor {
     public function getDefenceLevel() {

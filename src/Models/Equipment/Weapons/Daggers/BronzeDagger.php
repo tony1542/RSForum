@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Classes\Equipment\Weapons\Daggers;
+namespace App\Models\Equipment\Weapons\Daggers;
 
 class BronzeDagger extends Dagger {
     public function levelRequirement() {

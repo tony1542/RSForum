@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Classes\Equipment\Weapons;
+namespace App\Models\Equipment\Weapons;
 
 abstract class Weapon {
     abstract public function levelRequirement();

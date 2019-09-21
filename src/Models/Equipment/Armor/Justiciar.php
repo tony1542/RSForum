@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Classes\Equipment\Armor;
+namespace App\Models\Equipment\Armor;
 
 class Justiciar extends Armor {
     public function getDefenceLevel() {
