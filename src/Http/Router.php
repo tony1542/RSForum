@@ -1,0 +1,46 @@
+<?php
+
+namespace App\Http;
+
+use RuntimeException;
+
+class Router
+{
+    /**
+     * Call the requested action's method with any parameters.
+     *
+     * @return mixed
+     *
+     * @throws RuntimeException
+     */
+    public static function callAction()
+    {
+        $request = new Request();
+        
+        $parameters = $request->getParameters();
+        $controller = $request->getController();
+        $action     = $request->getAction();
+        $prefix     = $request->default_controller_prefix;
+        
+        if ($controller !== $request->default_controller) {
+            $controller = $prefix . $controller;
+        }
+        
+        // If there isn't a class that matches what was passed in
+        if (!class_exists($controller)) {
+            throw new RuntimeException(
+                '"' . $controller . '" controller does not exist.'
+            );
+        }
+        
+        /** @var AbstractBaseController $controller */
+        $controller = new $controller;
+        
+        // If there isn't a method that matches what was passed in for that controller
+        if (!method_exists($controller, $action)) {
+            throw new RuntimeException('"' . $controller . '" does not respond to the "' . $action . '" action.');
+        }
+        
+        return $controller->$action($parameters);
+    }
+}
