@@ -1,11 +1,11 @@
-<div class="d-flex justify-content-center">
-    <div class="card col-md-4">
-        <div class="card-body">
-            <form>
-                <div class="form-group">
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">Register</div>
+            <div class="card-body">
+                <form action="" method="">
                     <label for="exampleInputUser">Username</label>
                     <input type="user" class="form-control" id="exampleInputUser" aria-describedby="UserHelp" placeholder="Enter Username">
-                </div>
                 <div class="form-group">
                     <label for="exampleInputEmail">Email</label>
                     <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="EmailHelp" placeholder="Enter Email">
