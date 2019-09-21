@@ -9,11 +9,11 @@ class Request
     protected const ACTION_POSITION     = 1;
     protected const ID_POSITION         = 2;
     
-    protected string $default_controller_action = 'index';
+    protected $default_controller_action = 'index';
     
-    public string $default_controller;
-    public string $default_controller_prefix = "App\\Controllers\\";
-    protected string $default_controller_suffix = 'sController';
+    public $default_controller;
+    public $default_controller_prefix = "App\\Controllers\\";
+    protected $default_controller_suffix = 'sController';
     
     /**
      * Fetch the request URI
