@@ -1,5 +1,12 @@
 <?php
 
-include 'vendor/autoload.php';
+require('vendor/autoload.php');
 
-view('home_page');
+use App\Http\Router;
+
+try {
+    session_start();
+    Router::callAction();
+} catch (Exception $e) {
+    view('partials/error', ['errors' => [$e->getMessage()]]);
+}
