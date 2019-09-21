@@ -34,6 +34,11 @@ function dd($array, $verbose = false) {
  * @see https://www.php.net/manual/en/language.constants.predefined.php#constant.dir
  */
 function view($name, $data = []) {
+    // This extract function allows our views to be able to communicate with the data passed in.
+    // @see https://www.php.net/manual/en/function.extract.php
+    // @see https://www.php.net/manual/en/function.get-defined-vars.php - You can play with this function by using it with 'extract()' commented out and then not to see the difference
+    extract($data, EXTR_OVERWRITE);
+    
     // Our pre-made partials
     $header = __DIR__ . '/../public/views/partials/header.php';
     $footer = __DIR__ . '/../public/views/partials/footer.php';
