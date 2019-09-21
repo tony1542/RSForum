@@ -17,4 +17,8 @@ class UsersController extends AbstractBaseController
     {
         view('register');
     }
+    public function signin()
+    {
+        view('signin');
+    }
 }
