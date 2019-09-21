@@ -40,7 +40,9 @@ class Router
         
         // If there isn't a method that matches what was passed in for that controller
         if (!method_exists($controller, $action)) {
-            throw new RuntimeException('"' . $controller . '" does not respond to the "' . $action . '" action.');
+            throw new RuntimeException(
+                '"' . get_class($controller) . '" does not have a "' . $action . '" function.'
+            );
         }
     
         if (!$controller->canAccess($action, $parameters)) {
