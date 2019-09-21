@@ -2,6 +2,8 @@
 
 namespace App\Http;
 
+use App\Controllers\PagesController;
+
 class Request
 {
     // These constants will help the class tell which part of the URL belongs to the controller / action / ID
@@ -11,7 +13,7 @@ class Request
     
     protected $default_controller_action = 'index';
     
-    public $default_controller;
+    public $default_controller = PagesController::class;
     public $default_controller_prefix = "App\\Controllers\\";
     protected $default_controller_suffix = 'sController';
     
@@ -33,6 +35,11 @@ class Request
     public function getController() : string
     {
         $controller = self::explodeUri()[self::CONTROLLER_POSITION];
+    
+        // If no controller is passed, use our default
+        if ($controller === '') {
+            return $this->default_controller;
+        }
         
         return urldecode($controller) . $this->default_controller_suffix;
     }
