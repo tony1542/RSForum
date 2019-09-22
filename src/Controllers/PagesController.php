@@ -9,7 +9,7 @@ class PagesController extends AbstractBaseController
         return true;
     }
     
-    public function index() : void
+    public function index()
     {
         view('home_page');
     }
