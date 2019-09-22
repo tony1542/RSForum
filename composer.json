@@ -4,5 +4,8 @@
       "App\\": "src/"
     },
     "files": ["src/helpers.php"]
+  },
+  "require": {
+    "ext-pdo": "*"
   }
 }
