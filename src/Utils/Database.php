@@ -11,9 +11,11 @@ class Database
      *
      * @param bool $debug - If we want more detailed errors
      *
+     * @return PDO
+     *
      * @see https://www.php.net/manual/en/class.pdo.php
      */
-    public function __construct($debug = false)
+    public static function getInstance($debug = false)
     {
         $pdo = new PDO('mysql:host=localhost;dbname=tonysphpadminabuse', 'root', '');
     
