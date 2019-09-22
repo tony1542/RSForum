@@ -24,7 +24,7 @@ class Request
     /**
      * Fetch the request URI
      */
-    public static function getUri() : string
+    public static function getUri()
     {
         return trim(
             parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/'
