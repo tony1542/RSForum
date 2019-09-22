@@ -25,6 +25,17 @@ function dd($array, $verbose = false) {
 }
 
 /**
+ * Redirect to a new page
+ *
+ * @param string $path
+ */
+function redirect($path)
+{
+    header('Location: /' . $path);
+    die;
+}
+
+/**
  * Function pulls in our header & footer and inserts our data in between
  * Note: this function will kill execution of the script when it is done
  *
