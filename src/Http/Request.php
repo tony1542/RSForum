@@ -31,12 +31,12 @@ class Request
         );
     }
     
-    public static function explodeUri() : array
+    public static function explodeUri()
     {
         return explode('/', self::getUri());
     }
     
-    public function getController() : string
+    public function getController()
     {
         $controller = self::explodeUri()[self::CONTROLLER_POSITION];
     
