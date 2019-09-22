@@ -69,12 +69,12 @@ class Request
      *
      * @return array
      */
-    public function getParameters() : array
+    public function getParameters()
     {
         return $_GET['parameters'] ?? $_POST['parameters'] ?? [];
     }
     
-    public function getPostValues() : array
+    public function getPostValues()
     {
         return $_POST ?? [];
     }
