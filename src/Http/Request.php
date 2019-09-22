@@ -48,7 +48,7 @@ class Request
         return urldecode($controller) . $this->default_controller_suffix;
     }
     
-    public function getAction() : string
+    public function getAction()
     {
         $uri = self::explodeUri();
         
@@ -59,7 +59,7 @@ class Request
         return urldecode(strtolower($uri[self::ACTION_POSITION]));
     }
     
-    public function getID() : int
+    public function getID()
     {
         return urldecode(self::explodeUri()[self::ID_POSITION] ?? 0);
     }
