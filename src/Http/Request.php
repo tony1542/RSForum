@@ -79,7 +79,7 @@ class Request
         return $_POST ?? [];
     }
     
-    public function getGetValues() : array
+    public function getGetValues()
     {
         return $_GET ?? [];
     }
@@ -89,7 +89,7 @@ class Request
      *
      * @param bool|int $verbose
      */
-    public function dump($verbose = 0) : void
+    public function dump($verbose = 0)
     {
         dump([
             'controller' => $this->getController(),
