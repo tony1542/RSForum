@@ -3,7 +3,7 @@
         <div class="card">
             <div class="card-header">Register</div>
             <div class="card-body">
-                <form action="" method="">
+                <form action="/User/Register" method="post">
                     <div class="form-group">
                         <label for="username">Username</label>
                         <input type="user" class="form-control" id="username" placeholder="Enter Username">
