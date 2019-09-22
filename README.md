@@ -27,7 +27,7 @@ We use [Bootstrap 4.3](https://getbootstrap.com/docs/4.3/layout/overview/), clic
  # Using our database connection class
 - Make sure your MySQL is running locally, (open XAMPP control panel and making sure MySQL is running)
 - Make sure you've run the `/database_seed.sql` file in the project root
-- Run something like the following to get an instance of the database: 
+- Run something like the following to use the database: 
 ```php
 use App\Utils\Database;
 
