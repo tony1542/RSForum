@@ -21,8 +21,10 @@ class UsersController extends AbstractBaseController
     // @see https://www.php.net/manual/en/function.password-hash.php
     public function register()
     {
-        $request = new Request();
-        $request->dump();
+        // use the following lines to print out everything in the request to help debug
+        //$request = new Request();
+        //$request->dump();
+        //die;
         
         view('register');
     }
