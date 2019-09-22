@@ -23,3 +23,17 @@ We use [Bootstrap 4.3](https://getbootstrap.com/docs/4.3/layout/overview/), clic
  
  Also the try/catch is a concept that isn't important to know for now.
  Just know that it will catch errors that are thrown and will be displayed in our '/partials/error.php' template!
+ 
+ # Using our database connection class
+- Make sure your MySQL is running locally, (open XAMPP control panel and making sure MySQL is running)
+- Make sure you've run the `/database_seed.sql` file in the project root
+- Run something like the following to use the database: 
+```php
+use App\Utils\Database;
+
+$instance = Database::getInstance();
+$statement = $instance->prepare('SELECT * FROM user');
+$statement->execute();
+
+dump($statement->fetchAll(PDO::FETCH_ASSOC));
+```
