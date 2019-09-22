@@ -4,6 +4,10 @@ namespace App\Http;
 
 use App\Controllers\PagesController;
 
+/*
+ * Class handles the request aspect of our application
+ * We can use it to grab $_POST or $_GET values and other helpful functions
+ */
 class Request
 {
     // These constants will help the class tell which part of the URL belongs to the controller / action / ID
