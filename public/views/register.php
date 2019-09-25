@@ -24,7 +24,7 @@
                         <div class="form-group">
                             <input name="password" class="form-control" id="password_confirm" placeholder="Password">
                         </div>
-                        <button class="btn btn-primary" name ="save">Register</button>
+                        <button class="btn btn-primary">Register</button>
                     </div>
                 </form>
             </div>

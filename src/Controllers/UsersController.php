@@ -22,22 +22,25 @@ class UsersController extends AbstractBaseController
     // @see https://www.php.net/manual/en/function.password-hash.php
     public function register()
     {
-        // use the following lines to print out everything in the request to help debug
-        //$request = new Request();
-        //$request->dump();
-        //die;
-        if(isset($_POST['save']))
-        {
+        if(count($_POST)) {
             $DB = Database::getInstance();
             $_POST['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
             $sql = $DB->prepare("INSERT INTO user (username, password, email_address) VALUES (?,?,?)");
-            $sql->execute([
+
+            $values = [
                 $_POST['username'],
                 $_POST['password'],
-                $_POST['email_address'],
-            ]);
+                $_POST['email_address']
+            ];
+
+            $sql->execute($values);
+
+
+            $_SESSION['username'] = $_POST['username'];
+
             redirect("");
         }
+
         view('register');
     }
     public function signin()
@@ -45,3 +48,5 @@ class UsersController extends AbstractBaseController
         view('signin');
     }
 }
+
+
