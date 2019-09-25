@@ -3,6 +3,7 @@
 require('vendor/autoload.php');
 
 use App\Http\Router;
+use App\Utils\Database;
 
 try {
     session_start();
