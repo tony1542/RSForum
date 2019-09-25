@@ -8,7 +8,6 @@ class PagesController extends AbstractBaseController
     {
         return true;
     }
-    
     public function index()
     {
         view('home_page');
