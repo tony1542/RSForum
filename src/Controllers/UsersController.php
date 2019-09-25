@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Http\Request;
+use App\Utils\Database;
 
 class UsersController extends AbstractBaseController
 {
@@ -25,7 +26,18 @@ class UsersController extends AbstractBaseController
         //$request = new Request();
         //$request->dump();
         //die;
-        
+        if(isset($_POST['save']))
+        {
+            $DB = Database::getInstance();
+            $_POST['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
+            $sql = $DB->prepare("INSERT INTO user (username, password, email_address) VALUES (?,?,?)");
+            $sql->execute([
+                $_POST['username'],
+                $_POST['password'],
+                $_POST['email_address'],
+            ]);
+            redirect("");
+        }
         view('register');
     }
     public function signin()
