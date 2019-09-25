@@ -65,3 +65,7 @@ function view($name, $data = []) {
     
     die;
 }
+
+function isLocalhost() {
+    return $_SERVER['SERVER_NAME'] === 'localhost';
+}

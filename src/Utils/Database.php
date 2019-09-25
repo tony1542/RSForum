@@ -9,17 +9,15 @@ class Database
     /**
      * Create an instance of our database
      *
-     * @param bool $debug - If we want more detailed errors
-     *
      * @return PDO
      *
      * @see https://www.php.net/manual/en/class.pdo.php
      */
-    public static function getInstance($debug = false)
+    public static function getInstance()
     {
         $pdo = new PDO('mysql:host=localhost;dbname=tonysphpadminabuse', 'root', '');
-    
-        if ($debug) {
+        
+        if (isLocalhost()) {
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }
     
