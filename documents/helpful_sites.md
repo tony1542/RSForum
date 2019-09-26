@@ -1,0 +1,2 @@
+- [PHP The Right Way - Best practices](https://phptherightway.com/)
+- [Huge collection of books & PHP resources](https://github.com/manithchhuon/the-best-php-books)
