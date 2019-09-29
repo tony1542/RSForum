@@ -35,7 +35,6 @@ class Database
      */
     public static function debugQuery(PDOStatement $statement)
     {
-        // TODO explode this on something and get only the 'sent sql:' portion
         ob_start();
         $statement->debugDumpParams();
         $contents = ob_get_clean();
