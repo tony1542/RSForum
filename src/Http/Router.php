@@ -9,7 +9,7 @@ use RuntimeException;
 class Router
 {
     /**
-     * Call the requested action's method with any parameters.
+     * Call the requested action's method with any parameters
      *
      * @return mixed
      *

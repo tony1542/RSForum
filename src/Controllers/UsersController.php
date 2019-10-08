@@ -2,12 +2,12 @@
 
 namespace App\Controllers;
 
-use App\Http\Request;
 use App\Utils\Database;
 
 class UsersController extends AbstractBaseController
 {
-    public function canAccess($action, $parameters = []) {
+    public function canAccess($action, $parameters = [])
+    {
        return true;
     }
     
@@ -43,10 +43,9 @@ class UsersController extends AbstractBaseController
 
         view('register');
     }
+    
     public function signin()
     {
         view('signin');
     }
 }
-
-
