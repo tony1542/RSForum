@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Utils\Database;
+use App\Utils\Session;
 
 class UsersController extends AbstractBaseController
 {
