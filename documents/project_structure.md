@@ -1,0 +1,2 @@
+- The `public` folder is for anything that the end-user can see. It'll have views, html, css, and js in it.
+- The `src` folder contains our source code for the backend or server.

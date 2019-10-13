@@ -1,15 +1,3 @@
-<?php
- $user = $_SESSION['username'];
-?>
-
-<div class ="alert alert-success" role="alert">
-   WELCOME, <?= $user ?>
-</div>
-
-<?php
-    unset($_SESSION['username']);
-?>
-
 <div class="d-flex justify-content-center">
     <div class="card col-md-4">
         <div class="card-body">
