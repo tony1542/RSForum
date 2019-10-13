@@ -3,10 +3,6 @@ use App\Utils\Session;
 Session::flash('username');
 ?>
 
-
-
-
-
 <div class="d-flex justify-content-center">
     <div class="card col-md-6">
         <div class="card-body">
