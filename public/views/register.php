@@ -3,7 +3,7 @@
         <div class="card">
             <div class="card-header">Register</div>
             <div class="card-body">
-                <form action="/User/Register" method="post">
+                <form action="<?php echo htmlspecialchars($_SERVER["register.php"]);?>" method="post">
                     <div class="form-group">
                         <label for="username">Username</label>
                         <input name="username" class="form-control" id="username" placeholder="Enter Username">
