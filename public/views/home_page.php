@@ -11,11 +11,11 @@ if ( isset($_SESSION['username']))
 <?php
 }
 
-?>
 //Is there a better way to use <\?php then the 3 I used to do the same thing?
 //Php storm is telling me line 8 is a void method, why is that?
 //If I go into Session and add a "return $key;", this void warning goes away but it will display the persons username AND 'username' used in flash
 //so if I make an account with username as 123, it would come out as 123username on the welcome text if I add a return $key;
+?>
 
 
 
