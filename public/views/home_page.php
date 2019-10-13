@@ -1,24 +1,12 @@
 <?php
 use App\Utils\Session;
-
-if ( isset($_SESSION['username']))
-{
 ?>
+
+<?php if (isset($_SESSION['username'])) : ?>
     <div class="alert alert-success" role="alert">
-    Welcome, <?=Session::flash('username');?>!
+        Welcome, <?= Session::flash('username') ?>!
     </div>
-
-<?php
-}
-
-//Is there a better way to use <\?php then the 3 I used to do the same thing?
-//Php storm is telling me line 8 is a void method, why is that?
-//If I go into Session and add a "return $key;", this void warning goes away but it will display the persons username AND 'username' used in flash
-//so if I make an account with username as 123, it would come out as 123username on the welcome text if I add a return $key;
-?>
-
-
-
+<?php endif; ?>
 
 <div class="d-flex justify-content-center">
     <div class="card col-md-6">
