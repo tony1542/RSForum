@@ -30,10 +30,7 @@ class UsersController extends AbstractBaseController
             ];
 
             $sql->execute($values);
-
-
             $_SESSION['username'] = $_POST['username'];
-
             redirect("");
         }
 

@@ -50,19 +50,32 @@ function view($name, $data = []) {
     // @see https://www.php.net/manual/en/function.get-defined-vars.php - You can play with this function by using it with 'extract()' commented out and then not to see the difference
     extract($data, EXTR_OVERWRITE);
     
-    // Our pre-made partials
-    $header = __DIR__ . '/../public/views/partials/header.php';
-    $footer = __DIR__ . '/../public/views/partials/footer.php';
+    // Our 'home-page' or master page
+    $page = __DIR__ . '/../public/views/partials/page.php';
+    
+    // Our error partial
+    $error_file = __DIR__ . '/../public/views/partials/error.php';
     
     // The dynamic file name we are grabbing
     $file_name = __DIR__ . '/../public/views/' . $name . '.php';
     
+    $data['rendered_view'] = null;
+    $data['rendered_errors'] = null;
+    
     if (is_file($file_name)) {
-        require $header;
-        require $file_name;
-        require $footer;
+        ob_start();
+        require($file_name);
+        $data['rendered_view'] = ob_get_clean();
+        
+        // If there are any errors passed to our view, render them & send them into our view
+        if (isset($data['errors']) && count($data['errors']) && $name !== 'partials/error') {
+            ob_start();
+            require($error_file);
+            $data['rendered_errors'] = ob_get_clean();
+        }
     }
     
+    require($page);
     die;
 }
 
