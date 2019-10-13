@@ -11,16 +11,8 @@ class Session
      */
     public static function flash($key)
     {
-        if ( isset($_SESSION['username']) )
-        {
-?>
-            <div class="alert alert-success" role="alert">
-                Welcome, <?= $_SESSION[$key]?>
-            </div>
-
-<?php
-            unset($_SESSION[$key]);
-        }
+       echo $_SESSION[$key];
+       unset($_SESSION[$key]);
     }
 }
 
