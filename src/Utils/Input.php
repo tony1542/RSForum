@@ -5,8 +5,6 @@ namespace App\Utils;
 class Input
 {
     /**
-     * Takes in a variable, trims whitespace, strips slashes, and removed
-     *
      * @param mixed $variable - variable to be sanitized
      *
      * @return string - sanitized variable
