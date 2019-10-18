@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Used to 'pretty-print' any array, object, or the like.
+ * Used to 'pretty-print' any array, object, or the like
  *
  * @param mixed $array
  * @param bool  $verbose - A flag to specify whether we want a print_r or a more verbose var_dump
@@ -12,7 +12,7 @@ function dump($array, $verbose = false) {
 }
 
 /**
- * Dump and die.
+ * Dump and die
  *
  * @param mixed $array
  * @param bool  $verbose
@@ -45,7 +45,7 @@ function redirect($path)
  * @see https://www.php.net/manual/en/language.constants.predefined.php#constant.dir
  */
 function view($name, $data = []) {
-    // This extract function allows our views to be able to communicate with the data passed in.
+    // This extract function allows our views to be able to communicate with the data passed in
     // @see https://www.php.net/manual/en/function.extract.php
     // @see https://www.php.net/manual/en/function.get-defined-vars.php - You can play with this function by using it with 'extract()' commented out and then not to see the difference
     extract($data, EXTR_OVERWRITE);
