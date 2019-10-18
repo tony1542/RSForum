@@ -70,9 +70,9 @@ class UsersController extends AbstractBaseController {
         }
     }
     
+    // TODO implement validation
     public function signin() {
         if (count($_POST)) {
-            
             $email_address = $password = "";
             
             $checkData = new formValid();
