@@ -4,6 +4,6 @@
 - Constants should be declared using `SCREAMING_SNAKE_CASE`
 - `if` / `elseif` / `while` / `for` / `foreach` etc. should have their `{` on the same line
 
-[Reference][https://www.php-fig.org/psr/psr-1/]
+[Reference][https://www.php-fig.org/psr/psr-1/#1-overview]
 
-[https://www.php-fig.org/psr/psr-1/]: https://www.php-fig.org/psr/psr-1/
+[https://www.php-fig.org/psr/psr-1/#1-overview]: https://www.php-fig.org/psr/psr-1/#1-overview
