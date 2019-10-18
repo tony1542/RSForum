@@ -63,17 +63,17 @@ class UsersController extends AbstractBaseController {
         
         // If we have gotten this far, it means there were no errors when validating. Insert the user into the database
         $db = Database::getInstance();
-        $_POST['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        $password = password_hash($password, PASSWORD_DEFAULT);
         $sql = $db->prepare("INSERT INTO user (username, password, email_address) VALUES (?, ?, ?)");
         
         $values = [
-            $_POST['username'],
-            $_POST['password'],
-            $_POST['email_address']
+            $username,
+            $password,
+            $email_address
         ];
         
         $sql->execute($values);
-        $_SESSION['username'] = $_POST['username'];
+        $_SESSION['username'] = $username;
         redirect("");
     }
     
@@ -94,9 +94,9 @@ class UsersController extends AbstractBaseController {
                 view('signin', [
                     'errors' => $form_error
                 ]);
-                if (!$form_error) {
+               //if the code gets this far, there are no errors.
                     //TODO login code, boyyyy
-                }
+
             }
         }
         view('signin');
