@@ -4,3 +4,4 @@
     - `/Http` - contains various HTTP classes for handling logic: routing / getting request values / handling sessions
     - `/Models` - contains classes that typically represent something in our database like a `User` class for example
     - `/Utils` - contains any other 'helper' class that contain helpful methods that we use throughout the code base
+    - `/helpers.php` - A simple php file containing any globally-accessible functions
