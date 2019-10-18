@@ -23,6 +23,7 @@ class UsersController extends AbstractBaseController {
             view('register');
         }
         
+        // Sanitizing our user input before validating
         $username = Input::sanitize($_POST["username"]);
         $email_address = Input::sanitize($_POST["email_address"]);
         $password = Input::sanitize($_POST["password"]);
@@ -53,13 +54,14 @@ class UsersController extends AbstractBaseController {
             $form_errors[] = "Your passwords do not match!";
         }
         
-        // If we have found any errors, re-show the form with them. Otherwise, insert the user into the database
+        // If we have found any errors, re-show the form with them
         if (count($form_errors)) {
             view('register', [
                 'errors' => $form_errors
             ]);
         }
         
+        // If we have gotten this far, it means there were no errors when validating. Insert the user into the database
         $db = Database::getInstance();
         $_POST['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
         $sql = $db->prepare("INSERT INTO user (username, password, email_address) VALUES (?, ?, ?)");
