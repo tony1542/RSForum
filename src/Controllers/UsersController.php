@@ -6,15 +6,18 @@ use App\Utils\Database;
 use App\Models\formValid;
 
 class UsersController extends AbstractBaseController {
-    public function canAccess($action, $parameters = []) {
+    public function canAccess($action, $parameters = [])
+    {
         return true;
     }
     
-    public function index() {
+    public function index()
+    {
     
     }
     
-    public function register() {
+    public function register()
+    {
         if (!count($_POST)) {
             view('register');
         }
@@ -34,25 +37,32 @@ class UsersController extends AbstractBaseController {
         if (!$username) {
             $form_error[] = "Please enter a username";
         }
+        
         if (strlen($username) < 5 || strlen($username) > 12) {
             $form_error[] = 'Please enter a username between 5 and 12 characters long';
         }
+        
         if (!filter_var($email_address, FILTER_VALIDATE_EMAIL)) {
             $form_error[] = 'Please enter a valid email address';
         }
+        
         if (!$password) {
             $form_error[] = 'Please enter a password';
         }
+        
         if (!$password_confirm) {
             $form_error[] = "Please fill out \"Confirm Password\"";
         }
+        
         if ($password != $password_confirm) {
             $form_error[] = "Your passwords do not match!";
         }
+        
         if (count($form_error)) {
             view('register',
                 ['errors' => $form_error]);
         }
+        
         if (!$form_error) {
             $db = Database::getInstance();
             $_POST['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
@@ -71,7 +81,8 @@ class UsersController extends AbstractBaseController {
     }
     
     // TODO implement validation
-    public function signin() {
+    public function signin()
+    {
         if (count($_POST)) {
             $email_address = $password = "";
             
@@ -98,5 +109,3 @@ class UsersController extends AbstractBaseController {
         view('signin');
     }
 }
-
-
