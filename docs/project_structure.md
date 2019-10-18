@@ -1,6 +1,6 @@
-- `public` folder is for anything that the end-user can see. It'll have views, html, css, and js in it.
-- `src` folder contains our source code for the backend or server.
-    - `Controllers`
-    - `Http`
-    - `Models`
-    - `Utils`
+- `/public` - is for anything that the end-user can see. It'll have views, html, css, and js in it.
+- `/src`  - contains our source code for the backend or server.
+    - `/Controllers`
+    - `/Http`
+    - `/Models`
+    - `/Utils`
