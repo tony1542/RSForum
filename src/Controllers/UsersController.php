@@ -5,7 +5,8 @@ namespace App\Controllers;
 use App\Utils\Database\Connection;
 use App\Utils\Input\Sanitizer;
 
-class UsersController extends AbstractBaseController {
+class UsersController extends AbstractBaseController
+{
     public function canAccess($action, $parameters = [])
     {
         return true;
