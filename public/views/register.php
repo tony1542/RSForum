@@ -18,13 +18,13 @@
 
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input name="password" class="form-control" id="password" placeholder="Password">
+                        <input type ="password" name="password" class="form-control" id="password" placeholder="Password">
                     </div>
 
                     <div class="form-group">
                         <label for="password_confirm">Password (Confirm)</label>
                         <div class="form-group">
-                            <input name="password_confirm" class="form-control" id="password_confirm" placeholder="Password">
+                            <input type ="password" name="password_confirm" class="form-control" id="password_confirm" placeholder="Password">
                         </div>
                         <button class="btn btn-primary">Register</button>
                     </div>
