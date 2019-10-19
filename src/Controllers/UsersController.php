@@ -78,7 +78,7 @@ class UsersController extends AbstractBaseController {
     }
     
     // TODO implement validation
-    public function signin()
+    public function signIn()
     {
         if (count($_POST)) {
             $email_address = Input::sanitize($_POST["email_address"]);
@@ -99,6 +99,7 @@ class UsersController extends AbstractBaseController {
 
             }
         }
+        
         view('signin');
     }
 }
