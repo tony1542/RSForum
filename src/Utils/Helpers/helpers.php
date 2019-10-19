@@ -1,5 +1,7 @@
 <?php
 
+use App\Utils\Http\Server;
+
 /**
  * Used to 'pretty-print' any array, object, or the like
  *
@@ -50,14 +52,17 @@ function view($name, $data = []) {
     // @see https://www.php.net/manual/en/function.get-defined-vars.php - You can play with this function by using it with 'extract()' commented out and then not to see the difference
     extract($data, EXTR_OVERWRITE);
     
+    // This variable contains our project root so we can use an absolute path
+    $root = Server::getRoot();
+    
     // Our 'home-page' or master page
-    $page = __DIR__ . '/../public/views/partials/page.php';
+    $page = $root . '/public/views/partials/page.php';
     
     // Our error partial
-    $error_file = __DIR__ . '/../public/views/partials/error.php';
+    $error_file = $root . '/public/views/partials/error.php';
     
     // The dynamic file name we are grabbing
-    $file_name = __DIR__ . '/../public/views/' . $name . '.php';
+    $file_name = $root . '/public/views/' . $name . '.php';
     
     $data['rendered_view'] = null;
     $data['rendered_errors'] = null;
