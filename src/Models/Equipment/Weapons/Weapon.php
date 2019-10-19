@@ -2,6 +2,7 @@
 
 namespace App\Models\Equipment\Weapons;
 
-abstract class Weapon {
+abstract class Weapon
+{
     abstract public function levelRequirement();
 }
