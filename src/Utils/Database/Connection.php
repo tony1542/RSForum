@@ -2,6 +2,7 @@
 
 namespace App\Utils\Database;
 
+use App\Utils\Http\Server;
 use PDO;
 use PDOStatement;
 
@@ -19,7 +20,7 @@ class Connection
         $pdo = new PDO('mysql:host=localhost;dbname=tonysphpadminabuse', 'root', '');
         
         // If we are on localhost, we want more detailed error messages since we are developing
-        if (isLocalhost()) {
+        if (Server::isLocalHost()) {
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }
     
