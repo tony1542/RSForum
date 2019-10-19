@@ -3,7 +3,6 @@
 namespace App\Utils\Http;
 
 use App\Controllers\AbstractBaseController;
-
 use RuntimeException;
 
 class Router
