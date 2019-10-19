@@ -1,6 +1,8 @@
 <?php
 
 use App\Utils\Http\Server;
+use Psr\Container\ContainerInterface;
+use App\Utils\Container\DependencyInjectionContainer;
 
 /**
  * Used to 'pretty-print' any array, object, or the like
@@ -85,4 +87,22 @@ function view($name, $data = [])
     
     require($page);
     die;
+}
+
+/**
+ * Bootstraps our application with any setup required
+ */
+function setApplicationVariables()
+{
+    // Turn sessions on so we have access to the $_SESSION super-global
+    session_start();
+    
+    // Checks if we have a dependency injection container set. If we don't, add a new one to the session
+    $container = getDependencyContainer();
+    
+    if (!$container instanceof ContainerInterface) {
+        $container = new DependencyInjectionContainer();
+    }
+    
+    setDependencyContainer($container);
 }

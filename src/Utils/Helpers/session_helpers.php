@@ -1,20 +1,18 @@
 <?php
 
 use App\Utils\Http\Session;
-use App\Utils\Container\DependencyContainer;
-use App\Utils\Container\NotFoundException;
-
+use App\Utils\Container\DependencyInjectionContainer;
 
 use Psr\Container\ContainerInterface;
 
 /**
  * Retrieves our injection container from our session
  *
- * @return ContainerInterface|DependencyContainer
+ * @return ContainerInterface|DependencyInjectionContainer
  */
 function getDependencyContainer()
 {
-    return Session::get(DependencyContainer::class);
+    return Session::get(DependencyInjectionContainer::class);
 }
 
 /**
@@ -24,5 +22,5 @@ function getDependencyContainer()
  */
 function setDependencyContainer(ContainerInterface $container)
 {
-    Session::set(DependencyContainer::class, $container);
+    Session::set(DependencyInjectionContainer::class, $container);
 }
