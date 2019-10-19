@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use App\Utils\Database\Connection;
-use App\Utils\Input;
+use App\Utils\Input\Sanitizer;
 
 class UsersController extends AbstractBaseController {
     public function canAccess($action, $parameters = [])
@@ -24,14 +24,14 @@ class UsersController extends AbstractBaseController {
         }
         
         // Sanitizing our user input before validating
-        $username = Input::sanitize($_POST["username"]);
-        $email_address = Input::sanitize($_POST["email_address"]);
-        $password = Input::sanitize($_POST["password"]);
-        $password_confirm = Input::sanitize($_POST["password_confirm"]);
+        $username = Sanitizer::sanitize($_POST['username']);
+        $email_address = Sanitizer::sanitize($_POST['email_address']);
+        $password = Sanitizer::sanitize($_POST['password']);
+        $password_confirm = Sanitizer::sanitize($_POST['password_confirm']);
         $form_errors = [];
         
         if (!$username) {
-            $form_errors[] = "Please enter a username";
+            $form_errors[] = 'Please enter a username';
         }
         
         if (strlen($username) < 5 || strlen($username) > 12) {
@@ -47,11 +47,11 @@ class UsersController extends AbstractBaseController {
         }
         
         if (!$password_confirm) {
-            $form_errors[] = "Please fill out \"Confirm Password\"";
+            $form_errors[] = 'Please fill out \'Confirm Password\'';
         }
         
         if ($password != $password_confirm) {
-            $form_errors[] = "Your passwords do not match!";
+            $form_errors[] = 'Your passwords do not match!';
         }
         
         // If we have found any errors, re-show the form with them
@@ -64,7 +64,7 @@ class UsersController extends AbstractBaseController {
         // If we have gotten this far, it means there were no errors when validating. Insert the user into the database
         $db = Connection::getInstance();
         $password = password_hash($password, PASSWORD_DEFAULT);
-        $sql = $db->prepare("INSERT INTO user (username, password, email_address) VALUES (?, ?, ?)");
+        $sql = $db->prepare('INSERT INTO user (username, password, email_address) VALUES (?, ?, ?)');
         
         $values = [
             $username,
@@ -74,15 +74,15 @@ class UsersController extends AbstractBaseController {
         
         $sql->execute($values);
         $_SESSION['username'] = $username;
-        redirect("");
+        redirect('');
     }
     
     // TODO implement validation
     public function signIn()
     {
         if (count($_POST)) {
-            $email_address = Input::sanitize($_POST["email_address"]);
-            $password = Input::sanitize($_POST["password"]);
+            $email_address = Sanitizer::sanitize($_POST['email_address']);
+            $password = Sanitizer::sanitize($_POST['password']);
             
             if (!filter_var($email_address, FILTER_VALIDATE_EMAIL)) {
                 $form_error[] = 'Please enter a valid email address';

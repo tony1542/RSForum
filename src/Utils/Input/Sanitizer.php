@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Utils;
+namespace App\Utils\Input;
 
-class Input
+class Sanitizer
 {
     /**
      * @param mixed $variable - variable to be sanitized
