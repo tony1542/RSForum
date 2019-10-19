@@ -2,8 +2,10 @@
 
 namespace App\Models\Equipment\Armor;
 
-class Iron extends Armor {
-    public function getDefenceLevel() {
+class Iron extends Armor
+{
+    public function getDefenceLevel()
+    {
         return 5;
     }
 }
