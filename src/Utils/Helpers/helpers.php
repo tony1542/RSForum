@@ -8,7 +8,8 @@ use App\Utils\Http\Server;
  * @param mixed $array
  * @param bool  $verbose - A flag to specify whether we want a print_r or a more verbose var_dump
  */
-function dump($array, $verbose = false) {
+function dump($array, $verbose = false)
+{
     $method = $verbose ? 'var_dump' : 'print_r';
     echo '<pre>'; $method($array); echo '</pre>';
 }
@@ -21,7 +22,8 @@ function dump($array, $verbose = false) {
  *
  * @see dump()
  */
-function dd($array, $verbose = false) {
+function dd($array, $verbose = false)
+{
     dump($array, $verbose);
     die;
 }
@@ -46,7 +48,8 @@ function redirect($path)
  *
  * @see https://www.php.net/manual/en/language.constants.predefined.php#constant.dir
  */
-function view($name, $data = []) {
+function view($name, $data = [])
+{
     // This extract function allows our views to be able to communicate with the data passed in
     // @see https://www.php.net/manual/en/function.extract.php
     // @see https://www.php.net/manual/en/function.get-defined-vars.php - You can play with this function by using it with 'extract()' commented out and then not to see the difference
