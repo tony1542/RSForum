@@ -18,7 +18,7 @@ class Request
     protected $default_controller_action = 'index';
     
     public $default_controller = PagesController::class;
-    public $default_controller_prefix = "App\\Controllers\\";
+    public $default_controller_prefix = 'App\\Controllers\\';
     protected $default_controller_suffix = 'sController';
     
     /**
