@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Utils;
+namespace App\Utils\Database;
 
 use PDO;
 use PDOStatement;
 
-class Database
+class Connection
 {
     /**
      * Create an instance of our database

@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Utils\Database;
+use App\Utils\Database\Connection;
 use App\Utils\Input;
 
 class UsersController extends AbstractBaseController {
@@ -62,7 +62,7 @@ class UsersController extends AbstractBaseController {
         }
         
         // If we have gotten this far, it means there were no errors when validating. Insert the user into the database
-        $db = Database::getInstance();
+        $db = Connection::getInstance();
         $password = password_hash($password, PASSWORD_DEFAULT);
         $sql = $db->prepare("INSERT INTO user (username, password, email_address) VALUES (?, ?, ?)");
         
