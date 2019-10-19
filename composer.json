@@ -4,7 +4,8 @@
       "App\\": "src/"
     },
     "files": [
-      "src/Utils/Helpers/helpers.php"
+      "src/Utils/Helpers/helpers.php",
+      "src/Utils/Helpers/session_helpers.php"
     ]
   },
   "require": {

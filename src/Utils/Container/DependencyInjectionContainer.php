@@ -4,7 +4,7 @@ namespace App\Utils\Container;
 
 use Psr\Container\ContainerInterface;
 
-class DependencyContainer implements ContainerInterface
+class DependencyInjectionContainer implements ContainerInterface
 {
     /**
      * All registered key pairs.

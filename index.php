@@ -5,7 +5,7 @@ require('vendor/autoload.php');
 use App\Utils\Http\Router;
 
 try {
-    session_start();
+    setApplicationVariables();
     Router::callAction();
 } catch (Exception $e) {
     view('partials/error', ['errors' => [$e->getMessage()]]);
