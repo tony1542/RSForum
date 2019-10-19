@@ -3,8 +3,8 @@
     - `/Controllers` - contains controller classes whose purpose is to direct traffic / flow through our site
     - `/Models` - contains classes that typically represent something in our database like a `User` class for example
     - `/Utils` - contains any other 'helper' class(es) / packages that contain helpful methods that we use throughout the code base
-       - `/Http` - contains various HTTP classes for handling logic: routing / getting request values / handling sessions
-       - `/Helpers` - A package containing any globally-accessible functions. This means you don't need a class name or anything to call the functions. It'd be like calling `array_key_exists()` or something
        - `/Container` - A package containing code for our dependency injection container
        - `/Database` - A package containing code for creating / handling database connections
-       - `Input` - A package for handling user-input and how to sanitize / noramlize it
+       - `/Helpers` - A package containing any globally-accessible functions. This means you don't need a class name or anything to call the functions. It'd be like calling `array_key_exists()` or something
+       - `/Http` - contains various HTTP classes for handling logic: routing / getting request values / handling sessions
+       - `/Input` - A package for handling user-input and how to sanitize / noramlize it
