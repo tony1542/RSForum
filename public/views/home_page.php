@@ -1,5 +1,5 @@
 <?php
-use App\Http\Session;
+use App\Utils\Http\Session;
 ?>
 
 <?php if (isset($_SESSION['username'])) : ?>

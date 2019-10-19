@@ -2,7 +2,7 @@
 
 require('vendor/autoload.php');
 
-use App\Http\Router;
+use App\Utils\Http\Router;
 
 try {
     session_start();

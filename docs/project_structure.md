@@ -1,7 +1,7 @@
 - `/public` - is for anything that the end-user can see. It'll have views, html, css, and js in it
 - `/src`  - contains our source code for the backend or server
     - `/Controllers` - contains controller classes whose purpose is to direct traffic / flow through our site
-    - `/Http` - contains various HTTP classes for handling logic: routing / getting request values / handling sessions
     - `/Models` - contains classes that typically represent something in our database like a `User` class for example
-    - `/Utils` - contains any other 'helper' class that contain helpful methods that we use throughout the code base
+    - `/Utils` - contains any other 'helper' class(es) / packages that contain helpful methods that we use throughout the code base
+       - `/Http` - contains various HTTP classes for handling logic: routing / getting request values / handling sessions
     - `/helpers.php` - A simple php file containing any globally-accessible functions
