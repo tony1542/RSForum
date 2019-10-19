@@ -2,7 +2,6 @@
 
 use App\Utils\Http\Session;
 use App\Utils\Container\DependencyInjectionContainer;
-
 use Psr\Container\ContainerInterface;
 
 /**
