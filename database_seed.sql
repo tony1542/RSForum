@@ -1,6 +1,7 @@
 # Create database
 CREATE DATABASE IF NOT EXISTS tonysphpadminabuse;
 
+# Create user table
 CREATE TABLE user
 (
     user_id       int AUTO_INCREMENT,
