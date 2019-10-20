@@ -1,3 +1,4 @@
+# Create database
 CREATE DATABASE IF NOT EXISTS tonysphpadminabuse;
 
 CREATE TABLE user
