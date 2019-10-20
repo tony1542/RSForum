@@ -12,6 +12,7 @@ CREATE TABLE user
         PRIMARY KEY (user_id)
 );
 
+# Insert a row of dummy data
 INSERT INTO user
 SET username      = 'test',
     email_address = 'test@test.com',
