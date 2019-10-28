@@ -3,6 +3,7 @@
 use App\Utils\Http\Server;
 use Psr\Container\ContainerInterface;
 use App\Utils\Container\DependencyInjectionContainer;
+use App\Utils\Database\Connection;
 
 /**
  * Used to 'pretty-print' any array, object, or the like
@@ -105,4 +106,14 @@ function setApplicationVariables()
     }
     
     setDependencyContainer($container);
+}
+
+/**
+ * Returns an instance of our database connection
+ *
+ * @return PDO
+ */
+function getDatabase()
+{
+    return Connection::getInstance();
 }

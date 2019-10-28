@@ -63,7 +63,7 @@ class UsersController extends AbstractBaseController
         }
         
         // If we have gotten this far, it means there were no errors when validating. Insert the user into the database
-        $db = Connection::getInstance();
+        $db = getDatabase();
         $password = password_hash($password, PASSWORD_DEFAULT);
         $sql = $db->prepare('INSERT INTO user (username, password, email_address) VALUES (?, ?, ?)');
         
