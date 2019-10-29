@@ -12,3 +12,20 @@ $statement->execute();
 
 dump($statement->fetchAll(PDO::FETCH_ASSOC));
 ```
+
+# Using a parametized query with our connection class
+```php
+// Note, this line could change if we ever update the location of our database class; a good rule of thumb is start typing 'use Connection' and let the intellisense locate it for you
+use App\Utils\Database\Connection;
+
+// get database instance
+$instance = getDatabase();
+
+// our statement with a parameter for the user_id (note the ? mark)
+$statement = $instance->prepare('SELECT * FROM user WHERE user_id = ?');
+
+// calling execute and passing in an array of values to bind with however many ? marks we have
+$statement->execute([1]);
+
+// printing out our result set
+dd($statement->fetchAll(PDO::FETCH_ASSOC));
