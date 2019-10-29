@@ -23,6 +23,9 @@ class Connection
         if (Server::isLocalHost()) {
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }
+        
+        // @see https://www.php.net/manual/en/pdo.connections.php#example-1036
+        $pdo->setAttribute(PDO::ATTR_PERSISTENT, true);
     
         return $pdo;
     }
