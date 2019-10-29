@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\User;
 use App\Utils\Database\Connection;
 use App\Utils\Input\Sanitizer;
 
@@ -21,7 +22,13 @@ class UsersController extends AbstractBaseController
     {
         // If nothing is in $_POST, just show the register form
         if (!count($_POST)) {
-            view('register');
+        $Ray = new User('50');
+
+        die(var_dump($Ray));
+
+
+
+            //view('register');
         }
         
         // Sanitizing our user input before validating
