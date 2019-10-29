@@ -151,7 +151,7 @@ class Levels
     public static function find($player_experience)
     {
         $player_experience = (int) $player_experience;
-        $player_level = 0;
+        $player_level = 1;
         
         foreach (self::ALL as $level => $level_experience) {
             if (!($player_experience >= $level_experience)) {
