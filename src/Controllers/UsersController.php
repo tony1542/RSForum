@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\User;
 use App\Utils\Database\Connection;
 use App\Utils\Input\Sanitizer;
+use PDO;
 
 class UsersController extends AbstractBaseController
 {
@@ -22,13 +23,7 @@ class UsersController extends AbstractBaseController
     {
         // If nothing is in $_POST, just show the register form
         if (!count($_POST)) {
-        $Ray = new User('50');
-
-        die(var_dump($Ray));
-
-
-
-            //view('register');
+          view('register');
         }
         
         // Sanitizing our user input before validating
@@ -48,6 +43,16 @@ class UsersController extends AbstractBaseController
         
         if (!filter_var($email_address, FILTER_VALIDATE_EMAIL)) {
             $form_errors[] = 'Please enter a valid email address';
+        }
+
+        $db = getDatabase();
+        $sql = $db->prepare('SELECT email_address FROM user WHERE email_address =?');
+        $sql->execute([$email_address]);
+        $value = $sql->fetchAll(PDO::FETCH_ASSOC);
+        $value = ($value[0]);
+        $compare_email =$value['email_address'];
+        if($compare_email == $email_address){
+            $form_errors[] = 'Sorry, that email has been taken by another user, please try again.';
         }
         
         if (!$password) {
@@ -91,7 +96,8 @@ class UsersController extends AbstractBaseController
         if (count($_POST)) {
             $email_address = Sanitizer::sanitize($_POST['email_address']);
             $password = Sanitizer::sanitize($_POST['password']);
-            
+            $form_error = [];
+
             if (!filter_var($email_address, FILTER_VALIDATE_EMAIL)) {
                 $form_error[] = 'Please enter a valid email address';
             }
@@ -102,12 +108,27 @@ class UsersController extends AbstractBaseController
                 view('signin', [
                     'errors' => $form_error
                 ]);
-               //if the code gets this far, there are no errors.
-                    //TODO login code, boyyyy
-
             }
+            //if the code gets this far, there are no errors.
+            $db = getDatabase();
+            $sql = $db->prepare('SELECT * FROM user WHERE email_address =?');
+            $sql->execute([$email_address]);
+            $value = $sql->fetchAll(PDO::FETCH_ASSOC);
+            $value = ($value[0]);
+
+
+
+            //Connection::debugQuery($sql);
+           $sql->fetchAll(PDO::FETCH_ASSOC);
+
+           if (password_verify($password, $value['password'])){//passwords are the same..
+               //commence the log-in
+               $user_id = $value['user_id'];
+
+               $user = new User($user_id);
+               $user->login($email_address, $password);
+           }
         }
-        
         view('signin');
     }
 }
