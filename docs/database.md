@@ -6,7 +6,7 @@
 // Note, this line could change if we ever update the location of our database class; a good rule of thumb is start typing 'use Connection' and let the intellisense locate it for you
 use App\Utils\Database\Connection;
 
-$instance = Connection::getInstance();
+$instance = getDatabase();
 $statement = $instance->prepare('SELECT * FROM user');
 $statement->execute();
 
