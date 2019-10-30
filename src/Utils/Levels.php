@@ -23,7 +23,7 @@ class Levels
         
         $skill_cap = $include_virtual_levels === true ? self::VIRTUAL_SKILL_CAP : self::REGULAR_SKILL_CAP;
         for ($i = 1; $i <= $skill_cap; $i++) {
-            $modifier += floor($i + 300 * pow(2, ($i / 7)));
+            $modifier += floor($i + 300 * 2 ** ($i / 7));
             $level = floor($modifier / 4);
         
             if ($player_experience < $level) {
