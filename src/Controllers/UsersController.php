@@ -52,12 +52,14 @@ class UsersController extends AbstractBaseController
         if($value){
             $value = ($value[0]);
             $compare_email = $value['email_address'];
+            //if I don't compare the emails inside of the $value if statement the page takes a array to the knee.
+            if($compare_email == $email_address){
+                $form_errors[] = 'Sorry, that email has been taken by another user, please try again.';
+            }
         }
 
         if (!filter_var($email_address, FILTER_VALIDATE_EMAIL)) {
             $form_errors[] = 'Please enter a valid email address';
-        }else if($compare_email == $email_address){
-            $form_errors[] = 'Sorry, that email has been taken by another user, please try again.';
         }
         
         if (!$password) {
