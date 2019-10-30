@@ -19,14 +19,14 @@ class Levels
      */
     public static function findFromExp($player_experience, $include_virtual_levels = true)
     {
-        $modifier = 0;
+        $total = 0;
         
         $skill_cap = $include_virtual_levels === true ? self::VIRTUAL_SKILL_CAP : self::REGULAR_SKILL_CAP;
         for ($i = 1; $i <= $skill_cap; $i++) {
-            $modifier += floor($i + 300 * 2 ** ($i / 7));
-            $level = floor($modifier / 4);
+            $total += floor($i + 300 * 2 ** ($i / 7));
+            $level_experience = floor($total / 4);
         
-            if ($player_experience < $level) {
+            if ($player_experience < $level_experience) {
                 return $i;
             }
         }
