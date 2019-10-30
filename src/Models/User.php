@@ -2,6 +2,7 @@
 
 namespace App\Models;
 use PDO;
+use App\Utils\Http\Session;
 
 class User
 {
@@ -20,9 +21,7 @@ class User
         $statement->execute([$user_id]);
         $values = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-
-
-        $values = ($values[0]);
+        $values = ($values[0]);//step into the array to get to the values we want
         $username = $values['username'];
         $email_address = $values['email_address'];
         $password = $values['password'];
@@ -36,25 +35,38 @@ class User
         //$this->first_name = $first_name; if we ever use either of these variables, assign them above and uncomment to use them @ user obj
         // $this->last_name = $last_name;
     }
-    public function login($email_address, $password)
+    public static function login($email_address, $password)
     {
-
+        $data_error = [];
         $db = getDatabase();
         $sql = $db->prepare('SELECT * FROM user WHERE email_address =?');
         $sql->execute([$email_address]);
         $value = $sql->fetchAll(PDO::FETCH_ASSOC);
-        $value = ($value[0]);
 
-        $sql->fetchAll(PDO::FETCH_ASSOC);
-
-        if (password_verify($password, $value['password'])){//passwords are the same..
-            //commence the log-in
-            $user_id = $value['user_id'];
-
-            $user = new User($user_id);
-
-            $_SESSION['username'] = $user->username;
-            redirect('');
+        if($value) {//If $value has an array with stuff in that array, step in to grab them
+            $value = ($value[0]);
+            //Nested password verify into $value otherwise undefined index occurs since $password doesnt exist unless $value is correct.
+            if (!password_verify($password, $value['password'])){
+                //if $password doesnt equal the password that is hashed, they're too tall to ride.
+                $data_error[] = 'Your password is incorrect.';
+            }
+        } else {
+            // else if value is an empty array, echo an error which means they failed to login
+            $data_error[] = 'Your email or password is incorrect';
         }
+        if (count($data_error)) {
+            //send them back to signin with some helpful error messages.
+            view('signin', [
+                'errors' => $data_error
+            ]);
+        }
+        //commence the log-in
+        $user_id = $value['user_id'];
+        $user = new User($user_id);
+
+        echo "You shouldn't see this yet..";
+        // $_SESSION['username'] = $user->username; different way to do this found below
+        Session::set('username',$user->username);
+        redirect('');
     }
 }

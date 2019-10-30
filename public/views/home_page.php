@@ -4,7 +4,7 @@ use App\Utils\Http\Session;
 
 <?php if (isset($_SESSION['username'])) : ?>
     <div class="alert alert-success" role="alert">
-        Welcome, <?= Session::flash('username') ?>!
+        Welcome, <?= Session::get('username') ?>!
     </div>
 <?php endif; ?>
 
