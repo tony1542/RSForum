@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User\User;
 use App\Utils\Http\Session;
 use App\Utils\Container\DependencyInjectionContainer;
 use Psr\Container\ContainerInterface;
@@ -22,4 +23,20 @@ function getDependencyContainer()
 function setDependencyContainer(ContainerInterface $container)
 {
     Session::set(DependencyInjectionContainer::class, $container);
+}
+
+/**
+ * @return User
+ */
+function getSignedInUser()
+{
+    return Session::get(User::class);
+}
+
+/**
+ * @param User $user
+ */
+function setSignedInUser(User $user)
+{
+    Session::set(User::class, $user);
 }
