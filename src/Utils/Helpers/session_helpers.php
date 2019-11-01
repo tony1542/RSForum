@@ -6,7 +6,7 @@ use App\Utils\Container\DependencyInjectionContainer;
 use Psr\Container\ContainerInterface;
 
 /**
- * Retrieves our injection container from our session
+ * Returns our injection container from our session
  *
  * @return ContainerInterface|DependencyInjectionContainer
  */
@@ -26,14 +26,25 @@ function setDependencyContainer(ContainerInterface $container)
 }
 
 /**
+ * Returns the current signed in user (object) from our session
+ * If one doesn't exist, return an empty user object
+ *
  * @return User
  */
 function getSignedInUser()
 {
-    return Session::get(User::class);
+    $signed_in_user = Session::get(User::class);
+
+    if ($signed_in_user instanceof User) {
+        return $signed_in_user;
+    }
+    
+    return new User();
 }
 
 /**
+ * Sets our signed in user (object) within our session
+ *
  * @param User $user
  */
 function setSignedInUser(User $user)
