@@ -46,8 +46,10 @@ class User
         if($value) {//If $value has an array with stuff in that array, step in to grab them
             $value = ($value[0]);
             //Nested password verify into $value otherwise undefined index occurs since $password doesnt exist unless $value is correct.
+            // if I use (!password_verify) it enters if statement, without the ! it skips this entirely
+
             if (!password_verify($password, $value['password'])){
-                //if $password doesnt equal the password that is hashed, they're too tall to ride.
+                //if $password is false, they're too tall to ride.
                 $data_error[] = 'Your password is incorrect.';
             }
         } else {
@@ -64,7 +66,6 @@ class User
         $user_id = $value['user_id'];
         $user = new User($user_id);
 
-        echo "You shouldn't see this yet..";
         // $_SESSION['username'] = $user->username; different way to do this found below
         Session::set('username',$user->username);
         redirect('');
