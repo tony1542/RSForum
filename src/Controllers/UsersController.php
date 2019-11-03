@@ -97,8 +97,7 @@ class UsersController extends AbstractBaseController
         Session::set('username',$username);
         redirect('');
     }
-    
-    // TODO implement validation
+
     public function signIn()
     {
         if (!count($_POST)) {

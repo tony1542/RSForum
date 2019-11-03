@@ -62,14 +62,9 @@ class User
                 'errors' => $data_error
             ]);
         }
-        //commence the log-in
-        // TODO don't make another instance of the User object. you have all the data you need within $value since
-        // TODO you pulled it down from the database if you found a match
-        $user_id = $value['user_id'];
-        $user = new User($user_id);
-
-        // $_SESSION['username'] = $user->username; different way to do this found below
-        Session::set('username',$user->username);
+        $username = $value['username'];
+        // $_SESSION['username'] = $username; different way to do this found below
+        Session::set('username',$username);
         redirect('');
     }
 }
