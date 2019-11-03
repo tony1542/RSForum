@@ -3,6 +3,7 @@ use App\Utils\Http\Session;
 ?>
 
 <?php if (isset($_SESSION['username'])) : ?>
+<!-- TODO if you refresh the home page after signing in, you'll always see this message. we only want to see it once -->
     <div class="alert alert-success" role="alert">
         Welcome, <?= Session::get('username') ?>!
     </div>
