@@ -7,7 +7,7 @@ use Psr\Container\ContainerInterface;
 class DependencyInjectionContainer implements ContainerInterface
 {
     /**
-     * All registered key pairs.
+     * All registered key pairs
      *
      * @var array
      */
@@ -25,7 +25,7 @@ class DependencyInjectionContainer implements ContainerInterface
     public function get($id)
     {
         if (!$this->has($id)) {
-            throw new NotFoundException('Could not find requested resource in the container.');
+            throw new NotFoundException('Could not find requested resource (' . $id . ') in the container.');
         }
         
         return $this->registry[$id];
