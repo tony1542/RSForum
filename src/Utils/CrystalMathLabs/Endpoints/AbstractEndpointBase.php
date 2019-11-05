@@ -11,7 +11,7 @@ use Psr\Http\Message\StreamInterface;
 abstract class AbstractEndpointBase implements EndpointInterface
 {
     protected $base_api_url = 'http://crystalmathlabs.com/tracker/api.php?';
-    protected $endpoint_url = '';
+    protected $end_point_url = '';
     
     /** @var Client */
     protected $client = null;
@@ -33,7 +33,7 @@ abstract class AbstractEndpointBase implements EndpointInterface
      */
     public function call()
     {
-        $fullUrl = $this->base_api_url . $this->endpoint_url;
+        $fullUrl = $this->base_api_url . $this->end_point_url;
         
         $body = $this->client->request('GET', $fullUrl)->getBody();
         $contents = substr($body->getContents(), 3, 5);
