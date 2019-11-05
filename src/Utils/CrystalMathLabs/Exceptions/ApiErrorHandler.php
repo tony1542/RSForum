@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\Utils\CML\Exception;
+namespace App\Utils\CrystalMathLabs\Exceptions;
 
 class ApiErrorHandler
 {
