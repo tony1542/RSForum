@@ -48,4 +48,16 @@ abstract class AbstractEndpointBase implements EndpointInterface
      * @return mixed
      */
     public abstract function format(StreamInterface $data);
+    
+    /**
+     * Initial format based on how the vast majority of the API Calls are returned
+     *
+     * @param StreamInterface $result
+     *
+     * @return array
+     */
+    public function formatStandard(StreamInterface $result)
+    {
+        return explode("\n", $result);
+    }
 }
