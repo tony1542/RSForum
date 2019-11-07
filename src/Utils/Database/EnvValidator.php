@@ -3,7 +3,7 @@
 namespace App\Utils\Database;
 
 /**
- * Class job is to enforce we have the proper values in our .env configuration file
+ * This class is enforcing we have the proper values in our .env configuration file
  */
 class EnvValidator
 {
