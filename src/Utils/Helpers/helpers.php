@@ -1,6 +1,7 @@
 <?php
 
 use App\Utils\Http\Server;
+use Dotenv\Dotenv;
 use Psr\Container\ContainerInterface;
 use App\Utils\Container\DependencyInjectionContainer;
 use App\Utils\Database\Connection;
@@ -97,6 +98,10 @@ function setApplicationVariables()
 {
     // Turn sessions on so we have access to the $_SESSION super-global
     session_start();
+    
+    // Load .env file into the application
+    $dot_env = Dotenv::create(Server::getRoot() . DIRECTORY_SEPARATOR . 'config');
+    $dot_env->load();
     
     // Checks if we have a dependency injection container set. If we don't, add a new one to the session
     $container = getDependencyContainer();
