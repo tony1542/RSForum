@@ -26,7 +26,16 @@ class Connection
     {
         $options = self::getConnectionParameters();
     
-        $pdo = new PDO('mysql:host=localhost;dbname=tonysphpadminabuse', 'root', '');
+        $connection = $options[self::CONNECTION];
+        $dbname = $options[self::DB_NAME];
+        $username = $options[self::USERNAME];
+        $password = $options[self::PASSWORD];
+    
+        $pdo = new PDO(
+            $connection . ';dbname=' . $dbname,
+            $username,
+            $password
+        );
         
         // If we are on localhost, we want more detailed error messages since we are developing
         if (Server::isLocalHost()) {
@@ -40,6 +49,8 @@ class Connection
     }
     
     /**
+     * Grabs our database values from our .env file
+     *
      * @return array
      *
      * @throws EnvException
