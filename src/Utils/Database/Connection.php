@@ -8,15 +8,24 @@ use PDOStatement;
 
 class Connection
 {
+    const CONNECTION = 'connection';
+    const DB_NAME    = 'db_name';
+    const USERNAME   = 'username';
+    const PASSWORD   = 'password';
+    
     /**
      * Create an instance of our database
      *
      * @return PDO
      *
      * @see https://www.php.net/manual/en/class.pdo.php
+     *
+     * @throws EnvException
      */
     public static function getInstance()
     {
+        $options = self::getConnectionParameters();
+    
         $pdo = new PDO('mysql:host=localhost;dbname=tonysphpadminabuse', 'root', '');
         
         // If we are on localhost, we want more detailed error messages since we are developing
@@ -28,6 +37,25 @@ class Connection
         $pdo->setAttribute(PDO::ATTR_PERSISTENT, true);
     
         return $pdo;
+    }
+    
+    /**
+     * @return array
+     *
+     * @throws EnvException
+     */
+    protected static function getConnectionParameters()
+    {
+        $database_name = 'DB';
+        
+        EnvValidator::enforce($database_name);
+        
+        return [
+            self::CONNECTION => getenv($database_name . '_CONNECTION_URL'),
+            self::DB_NAME    => getenv($database_name . '_NAME'),
+            self::USERNAME   => getenv($database_name . '_USERNAME'),
+            self::PASSWORD   => getenv($database_name . '_PASSWORD')
+        ];
     }
     
     /**

@@ -15,10 +15,10 @@ class EnvValidator
     public static function enforce($database_name)
     {
         $enforcements = [
-            $database_name . '_DB_NAME',
-            $database_name . '_DB_CONNECTION_URL',
-            $database_name . '_DB_USERNAME',
-            $database_name . '_DB_PASSWORD'
+            $database_name . '_NAME',
+            $database_name . '_CONNECTION_URL',
+            $database_name . '_USERNAME',
+            $database_name . '_PASSWORD'
         ];
         
         $throw_exception = false;
