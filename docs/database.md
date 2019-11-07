@@ -1,3 +1,7 @@
+# Creating the necessary credentials
+- Look at `/config/.env.example` and create an `.env` file in that same folder with the correct values
+- Run `composer dump-autoload` to pull down our packages & you should be able to connect
+
  # Using our database connection class
 - Make sure your MySQL is running locally, (open XAMPP control panel and making sure MySQL is running)
 - Make sure you've run the `/database_seed.sql` file in the project root
