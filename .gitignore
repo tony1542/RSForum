@@ -3,3 +3,6 @@
 
 # Composer auto-loaded stuff
 vendor
+
+# User configurations
+config/.env
