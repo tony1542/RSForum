@@ -2,8 +2,11 @@
 
 namespace App\Controllers;
 
+use App\Models\User;
 use App\Utils\Database\Connection;
 use App\Utils\Input\Sanitizer;
+use App\Utils\Http\Session;
+use PDO;
 
 class UsersController extends AbstractBaseController
 {
@@ -21,9 +24,11 @@ class UsersController extends AbstractBaseController
     {
         // If nothing is in $_POST, just show the register form
         if (!count($_POST)) {
+            //Session_destroy is sitting here to 'logout' until I have one made.
+            session_destroy();
             view('register');
         }
-        
+
         // Sanitizing our user input before validating
         $username = Sanitizer::sanitize($_POST['username']);
         $email_address = Sanitizer::sanitize($_POST['email_address']);
@@ -38,7 +43,21 @@ class UsersController extends AbstractBaseController
         if (strlen($username) < 5 || strlen($username) > 12) {
             $form_errors[] = 'Please enter a username between 5 and 12 characters long';
         }
-        
+
+        $db = getDatabase();
+        $sql = $db->prepare('SELECT email_address FROM user WHERE email_address =?');
+        $sql->execute([$email_address]);
+        $value = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+        if($value){
+            $value = ($value[0]);
+            $compare_email = $value['email_address'];
+
+            if($compare_email == $email_address){
+                $form_errors[] = 'Sorry, that email has been taken by another user, please try again.';
+            }
+        }
+
         if (!filter_var($email_address, FILTER_VALIDATE_EMAIL)) {
             $form_errors[] = 'Please enter a valid email address';
         }
@@ -74,17 +93,20 @@ class UsersController extends AbstractBaseController
         ];
         
         $sql->execute($values);
-        $_SESSION['username'] = $username;
+       // $_SESSION['username'] = $username;
+        Session::set('username',$username);
         redirect('');
     }
-    
-    // TODO implement validation
+
     public function signIn()
     {
-        if (count($_POST)) {
+        if (!count($_POST)) {
+            view('signin');
+        }
             $email_address = Sanitizer::sanitize($_POST['email_address']);
             $password = Sanitizer::sanitize($_POST['password']);
-            
+            $form_error = [];
+
             if (!filter_var($email_address, FILTER_VALIDATE_EMAIL)) {
                 $form_error[] = 'Please enter a valid email address';
             }
@@ -95,12 +117,10 @@ class UsersController extends AbstractBaseController
                 view('signin', [
                     'errors' => $form_error
                 ]);
-               //if the code gets this far, there are no errors.
-                    //TODO login code, boyyyy
-
             }
-        }
-        
-        view('signin');
+            //if the code gets this far, there are no errors.
+              User::login($email_address, $password);
+
+            view('signin');
     }
 }

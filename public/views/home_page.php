@@ -1,8 +1,9 @@
 <?php
 use App\Utils\Http\Session;
 ?>
-
 <?php if (isset($_SESSION['username'])) : ?>
+    <!-- TODO if you refresh the home page after signing in, you'll always see this message. we only want to see it once -->
+    <!-- TODO - hint, you'll want to use Session::flash to only show it once -->
     <div class="alert alert-success" role="alert">
         Welcome, <?= Session::flash('username') ?>!
     </div>
