@@ -5,13 +5,15 @@ namespace App\Utils\Database;
 /**
  * Class job is to enforce we have the proper values in our .env configuration file
  */
-class EnvValidator {
+class EnvValidator
+{
     /**
      * @param string $database_name
      *
      * @throws EnvException
      */
-    public static function enforce($database_name) {
+    public static function enforce($database_name)
+    {
         $enforcements = [
             $database_name . '_DB_NAME',
             $database_name . '_DB_CONNECTION_URL',
