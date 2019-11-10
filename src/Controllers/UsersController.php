@@ -23,7 +23,7 @@ class UsersController extends AbstractBaseController
     {
         // If nothing is in $_POST, just show the register form
         if (!count($_POST)) {
-            // Session_destroy is sitting here to 'logout' until I have one made.
+            // Session_destroy is sitting here to 'logout' until I have one made
             Session::destroy();
             view('register');
         }
@@ -47,13 +47,13 @@ class UsersController extends AbstractBaseController
         $sql = $db->prepare('SELECT email_address FROM user WHERE email_address =?');
         $sql->execute([$email_address]);
         $value = $sql->fetchAll(PDO::FETCH_ASSOC);
-
-        if($value){
-            $value = ($value[0]);
+    
+        if ($value) {
+            $value = $value[0];
             $compare_email = $value['email_address'];
-
-            if($compare_email == $email_address){
-                $form_errors[] = 'Sorry, that email has been taken by another user, please try again.';
+        
+            if ($compare_email == $email_address) {
+                $form_errors[] = 'Sorry, that email has been taken by another user, please try again';
             }
         }
 
@@ -70,7 +70,7 @@ class UsersController extends AbstractBaseController
         }
         
         if ($password != $password_confirm) {
-            $form_errors[] = 'Your passwords do not match!';
+            $form_errors[] = 'Your passwords do not match';
         }
         
         // If we have found any errors, re-show the form with them
@@ -120,7 +120,7 @@ class UsersController extends AbstractBaseController
             ]);
         }
     
-        //if the code gets this far, there are no errors.
+        // if the code gets this far, there are no errors.
         User::login($email_address, $password);
     
         view('signin');
