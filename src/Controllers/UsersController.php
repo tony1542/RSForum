@@ -23,8 +23,8 @@ class UsersController extends AbstractBaseController
     {
         // If nothing is in $_POST, just show the register form
         if (!count($_POST)) {
-            //Session_destroy is sitting here to 'logout' until I have one made.
-            session_destroy();
+            // Session_destroy is sitting here to 'logout' until I have one made.
+            Session::destroy();
             view('register');
         }
 
