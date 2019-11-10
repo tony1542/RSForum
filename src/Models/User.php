@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+
 use PDO;
 use App\Utils\Http\Session;
 
@@ -21,19 +22,19 @@ class User
         $statement->execute([$user_id]);
         $values = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-        $values = ($values[0]);
-        $username = $values['username'];
-        $email_address = $values['email_address'];
-        $password = $values['password'];
-        $user_id = $values['user_id'];
-
-        $this->username = $username;
-        $this->email_address = $email_address;
-        $this->password = $password;
+        if (!$values || !is_array($values)) {
+            return;
+        }
+        
+        $values = $values[0];
+        $this->username = $values['username'];
+        $this->email_address = $values['email_address'];
+        $this->password = $values['password'];
         $this->user_id = $user_id;
-        //$this->first_name = $first_name; if we ever use either of these variables, assign them above and uncomment to use them @ user obj
-        // $this->last_name = $last_name;
+        $this->first_name = $values['first_name'];
+        $this->last_name = $values['last_name'];
     }
+    
     public static function login($email_address, $password)
     {
         $data_error = [];
