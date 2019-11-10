@@ -3,7 +3,6 @@
 namespace App\Controllers;
 
 use App\Models\User;
-use App\Utils\Database\Connection;
 use App\Utils\Input\Sanitizer;
 use App\Utils\Http\Session;
 use PDO;
@@ -93,7 +92,6 @@ class UsersController extends AbstractBaseController
         ];
         
         $sql->execute($values);
-       // $_SESSION['username'] = $username;
         Session::set('username',$username);
         redirect('');
     }
@@ -103,24 +101,28 @@ class UsersController extends AbstractBaseController
         if (!count($_POST)) {
             view('signin');
         }
-            $email_address = Sanitizer::sanitize($_POST['email_address']);
-            $password = Sanitizer::sanitize($_POST['password']);
-            $form_error = [];
-
-            if (!filter_var($email_address, FILTER_VALIDATE_EMAIL)) {
-                $form_error[] = 'Please enter a valid email address';
-            }
-            if (!$password) {
-                $form_error[] = 'Please enter a password';
-            }
-            if (count($form_error)) {
-                view('signin', [
-                    'errors' => $form_error
-                ]);
-            }
-            //if the code gets this far, there are no errors.
-              User::login($email_address, $password);
-
-            view('signin');
+        
+        $email_address = Sanitizer::sanitize($_POST['email_address']);
+        $password = Sanitizer::sanitize($_POST['password']);
+        $form_error = [];
+    
+        if (!filter_var($email_address, FILTER_VALIDATE_EMAIL)) {
+            $form_error[] = 'Please enter a valid email address';
+        }
+    
+        if (!$password) {
+            $form_error[] = 'Please enter a password';
+        }
+    
+        if (count($form_error)) {
+            view('signin', [
+                'errors' => $form_error
+            ]);
+        }
+    
+        //if the code gets this far, there are no errors.
+        User::login($email_address, $password);
+    
+        view('signin');
     }
 }
