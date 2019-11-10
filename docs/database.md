@@ -33,3 +33,18 @@ $statement->execute([1]);
 
 // printing out our result set
 dd($statement->fetchAll(PDO::FETCH_ASSOC));
+```
+
+# Helpful DB debugging function
+```php
+$instance = getDatabase();
+
+// our statement with a parameter for the user_id (note the ? mark)
+$statement = $instance->prepare('SELECT * FROM user WHERE user_id = ?');
+
+// calling execute and passing in an array of values to bind with however many ? marks we have
+$statement->execute([1]);
+
+/** @see https://www.php.net/manual/en/pdostatement.debugdumpparams.php */
+Connection::debugQuery($statement);
+```
