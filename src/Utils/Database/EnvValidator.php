@@ -8,6 +8,9 @@ namespace App\Utils\Database;
 class EnvValidator
 {
     /**
+     * Loops through the enforcements & checks our .env file for them
+     * If they are not found, an exception is thrown
+     *
      * @param string $database_name
      *
      * @throws EnvException
