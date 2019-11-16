@@ -45,7 +45,9 @@ class Router
         }
     
         if (!$controller->canAccess($action, $parameters)) {
-            throw new RuntimeException('Access denied.');
+            throw new RuntimeException(
+                '"' . get_class($controller) . '"\'s "' . $action . '" function was denied access.'
+            );
         }
         
         return $controller->$action($parameters);
