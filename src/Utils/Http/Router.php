@@ -50,6 +50,7 @@ class Router
             );
         }
         
+        // Call the action requested and pass any parameters given
         return $controller->$action($parameters);
     }
 }
