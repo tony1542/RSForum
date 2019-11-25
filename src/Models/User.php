@@ -67,6 +67,6 @@ class User
 
         $sql = $db->prepare("UPDATE user SET logged_in = 1 WHERE email_address = '{$_SESSION['email_address']}'");
         $sql->execute();
-        redirect("User/Details/{$_SESSION['user_id']}");
+        redirect("User/details/{$_SESSION['user_id']}");
     }
 }
