@@ -1,6 +1,6 @@
 <?php
 $form_errors = [];
-if (empty($_SESSION['username']) OR empty($_SESSION['email_address']) OR empty($_SESSION['passwords'])) {
+if (empty($_SESSION['username']) OR empty($_SESSION['email_address']) OR empty($_SESSION['password'])) {
     $login_error[] = 'Please log in to see this page.';
 }
 if (count($login_error)) {
