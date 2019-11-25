@@ -22,12 +22,24 @@
                 </li>
             </ul>
             <ul class='navbar-nav'>
+                <?php if (isset($_SESSION['user_id'])) : ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="/User/details/<?=$_SESSION['user_id']?>">Profile</a>
+                </li>
+                <?php else : ?>
                 <li class="nav-item">
                     <a class="nav-link" href="/User/SignIn">Sign-In</a>
                 </li>
+                <?php endif; ?>
+                <?php if (isset($_SESSION['user_id'])) : ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/User/logout">Log-Out</a>
+                    </li>
+                <?php else : ?>
                 <li class='nav-item'>
                     <a class="nav-link" href="/User/Register">Register</a>
                 </li>
+                <?php endif; ?>
             </ul>
         </div>
     </nav>

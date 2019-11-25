@@ -13,6 +13,7 @@ class User
     protected $last_name = '';
     private $password = '';
     protected $user_id = '';
+    protected $logged_in = '';
 
     public function __construct($user_id)
     {
@@ -33,6 +34,7 @@ class User
         $this->user_id = $user_id;
         $this->first_name = $values['first_name'];
         $this->last_name = $values['last_name'];
+        $this->logged_in = $values['logged_in'];
     }
     
     public static function login($email_address, $password)
@@ -57,9 +59,14 @@ class User
         if (!password_verify($password, $value['password'])) {
             $data_error[] = 'Your password is incorrect.';
         }
-        
         $username = $value['username'];
+        $_SESSION['user_id'] = $value['user_id'];
         Session::set('username', $username);
-        redirect('');
+        Session::set('email_address', $email_address);
+        Session::set('password', $password);
+
+        $sql = $db->prepare("UPDATE user SET logged_in = 1 WHERE email_address = '{$_SESSION['email_address']}'");
+        $sql->execute();
+        redirect("User/Details/{$_SESSION['user_id']}");
     }
 }

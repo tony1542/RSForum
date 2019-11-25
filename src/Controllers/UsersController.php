@@ -6,7 +6,6 @@ use App\Models\User;
 use App\Utils\Input\Sanitizer;
 use App\Utils\Http\Session;
 use PDO;
-
 class UsersController extends AbstractBaseController
 {
     public function canAccess($action, $parameters = [])
@@ -23,8 +22,6 @@ class UsersController extends AbstractBaseController
     {
         // If nothing is in $_POST, just show the register form
         if (!count($_POST)) {
-            // Session_destroy is sitting here to 'logout' until I have one made
-            Session::destroy();
             view('register');
         }
 
@@ -93,6 +90,7 @@ class UsersController extends AbstractBaseController
         
         $sql->execute($values);
         Session::set('username',$username);
+        $_SESSION['name'] = $username; //Setting name for our homepage welcome message.
         redirect('');
     }
 
@@ -123,6 +121,20 @@ class UsersController extends AbstractBaseController
         // if the code gets this far, there are no errors.
         User::login($email_address, $password);
     
-        view('signin');
+        redirect('');
+    }
+    public function details()
+    {
+        if (!count($_POST)) {
+            view('profile');
+        }
+    }
+    public function logout()
+    {
+        $db = getDatabase();
+        $sql = $db->prepare("UPDATE user SET logged_in = 0 WHERE email_address = '{$_SESSION['email_address']}'");
+        $sql->execute();
+        session_destroy();
+        redirect('');
     }
 }
