@@ -60,17 +60,20 @@ class User
     
         // If value isn't set or isn't an array, their credentials were wrong
         if (!$value || !is_array($value)) {
-            view('signin', [
-                'errors' => 'Your email or password is incorrect'
-            ]);
+           $data_error[] = "Your Email or Password is incorrect";
         }
     
         // If $value has an array with stuff in that array, step in to grab them
-        $value = $value[0];
-        
-        // Nested password verify into $value otherwise undefined index occurs since $password doesnt exist unless $value is correct
-        if (!password_verify($password, $value['password'])) {
-            $data_error[] = 'Your password is incorrect.';
+        if ($value) {
+            $value = $value[0];
+            if (!password_verify($password, $value['password'])) {
+                $data_error[] = 'Your Email or Password is incorrect.';
+            }
+        }
+        if (count($data_error)) {
+            view('signin', [
+                'errors' => $data_error
+            ]);
         }
         $username = $value['username'];
         $_SESSION['user_id'] = $value['user_id'];
