@@ -1,6 +1,9 @@
 # Create database
 CREATE DATABASE IF NOT EXISTS tonysphpadminabuse;
 
+# Select our new database for operation
+USE tonysphpadminabuse;
+
 # Create user table
 CREATE TABLE user
 (
