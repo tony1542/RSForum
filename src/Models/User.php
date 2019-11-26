@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Utils\Http\Request;
 use PDO;
 use App\Utils\Http\Session;
 
@@ -32,11 +33,23 @@ class User
         $this->email_address = $values['email_address'];
         $this->password = $values['password'];
         $this->user_id = $user_id;
-        $this->first_name = $values['first_name'];
-        $this->last_name = $values['last_name'];
+        //$this->first_name = $values['first_name']; Since these do not exist in db yet, they create an undefined index if left uncommented.
+        //$this->last_name = $values['last_name'];
         $this->logged_in = $values['logged_in'];
     }
-    
+    public function getUsername()
+    {
+        return $this->username;
+    }
+    public function getEmail()
+    {
+        return $this->email_address;
+    }
+    public function getHashedPass()
+    {
+        return $this->password;
+    }
+
     public static function login($email_address, $password)
     {
         $data_error = [];
@@ -63,7 +76,6 @@ class User
         $_SESSION['user_id'] = $value['user_id'];
         Session::set('username', $username);
         Session::set('email_address', $email_address);
-        Session::set('password', $password);
 
         $sql = $db->prepare("UPDATE user SET logged_in = 1 WHERE email_address = '{$_SESSION['email_address']}'");
         $sql->execute();

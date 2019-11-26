@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Utils\Http\Request;
 use App\Models\User;
 use App\Utils\Input\Sanitizer;
 use App\Utils\Http\Session;
@@ -126,7 +127,26 @@ class UsersController extends AbstractBaseController
     public function details()
     {
         if (!count($_POST)) {
-            view('profile');
+            $user_id = Request::getID();
+            $login_error = [];
+            if (empty($_SESSION['username']) || empty($_SESSION['email_address'])) {
+                $login_error[] = 'Please log in to see this page.';
+            }
+            if ($user_id != $_SESSION['user_id']){
+                $login_error[] = 'That page is not for you to see';
+            }
+            if (count($login_error)) {
+                view('home_page', [
+                    'errors' => $login_error
+                ]);
+            }
+            $user_id = Request::getID();
+            $user = new User($user_id);
+            $username = $user->getUsername();
+            $email = $user->getEmail();
+            $hashedPass = $user->getHashedPass();
+            $data = array('username' => $username, 'email_address' => $email, 'password' => $hashedPass);
+            view('profile', $data);
         }
     }
     public function logout()
