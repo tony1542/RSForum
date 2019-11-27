@@ -2,11 +2,11 @@
 
 namespace App\Controllers;
 
+use App\Utils\Http\Request;
 use App\Models\User;
 use App\Utils\Input\Sanitizer;
 use App\Utils\Http\Session;
 use PDO;
-
 class UsersController extends AbstractBaseController
 {
     public function canAccess($action, $parameters = [])
@@ -23,8 +23,6 @@ class UsersController extends AbstractBaseController
     {
         // If nothing is in $_POST, just show the register form
         if (!count($_POST)) {
-            // Session_destroy is sitting here to 'logout' until I have one made
-            Session::destroy();
             view('register');
         }
 
@@ -93,6 +91,7 @@ class UsersController extends AbstractBaseController
         
         $sql->execute($values);
         Session::set('username',$username);
+        $_SESSION['name'] = $username; //Setting name for our homepage welcome message.
         redirect('');
     }
 
@@ -123,6 +122,36 @@ class UsersController extends AbstractBaseController
         // if the code gets this far, there are no errors.
         User::login($email_address, $password);
     
-        view('signin');
+        redirect('');
+    }
+    public function details()
+    {
+        if (!count($_POST)) {
+            $user_id = Request::getID();
+            $login_error = [];
+            if (empty($_SESSION['username']) || empty($_SESSION['email_address'])) {
+                $login_error[] = 'Please Sign-In to see this page.';
+            } else if ($user_id != $_SESSION['user_id']){
+                     $login_error[] = 'That page is not for you to see';
+                }
+            if (count($login_error)) {
+                view('home_page', [
+                    'errors' => $login_error
+                ]);
+            }
+            $user = new User($user_id);
+            $username = $user->getUsername();
+            $email = $user->getEmail();
+            $data = array('username' => $username, 'email_address' => $email);
+            view('profile', $data);
+        }
+    }
+    public function logout()
+    {
+        $db = getDatabase();
+        $sql = $db->prepare("UPDATE user SET logged_in = 0 WHERE email_address = '{$_SESSION['email_address']}'");
+        $sql->execute();
+        session_destroy();
+        redirect('');
     }
 }

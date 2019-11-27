@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Utils\Http\Request;
 use PDO;
 use App\Utils\Http\Session;
 
@@ -13,6 +14,7 @@ class User
     protected $last_name = '';
     private $password = '';
     protected $user_id = '';
+    protected $logged_in = '';
 
     public function __construct($user_id)
     {
@@ -31,10 +33,23 @@ class User
         $this->email_address = $values['email_address'];
         $this->password = $values['password'];
         $this->user_id = $user_id;
-        $this->first_name = $values['first_name'];
-        $this->last_name = $values['last_name'];
+        //$this->first_name = $values['first_name']; Since these do not exist in db yet, they create an undefined index if left uncommented.
+        //$this->last_name = $values['last_name'];
+        $this->logged_in = $values['logged_in'];
     }
-    
+    public function getUsername()
+    {
+        return $this->username;
+    }
+    public function getEmail()
+    {
+        return $this->email_address;
+    }
+    public function getHashedPass()
+    {
+        return $this->password;
+    }
+
     public static function login($email_address, $password)
     {
         $data_error = [];
@@ -45,21 +60,28 @@ class User
     
         // If value isn't set or isn't an array, their credentials were wrong
         if (!$value || !is_array($value)) {
-            view('signin', [
-                'errors' => 'Your email or password is incorrect'
-            ]);
+           $data_error[] = "Your Email or Password is incorrect";
         }
     
         // If $value has an array with stuff in that array, step in to grab them
-        $value = $value[0];
-        
-        // Nested password verify into $value otherwise undefined index occurs since $password doesnt exist unless $value is correct
-        if (!password_verify($password, $value['password'])) {
-            $data_error[] = 'Your password is incorrect.';
+        if ($value) {
+            $value = $value[0];
+            if (!password_verify($password, $value['password'])) {
+                $data_error[] = 'Your Email or Password is incorrect.';
+            }
         }
-        
+        if (count($data_error)) {
+            view('signin', [
+                'errors' => $data_error
+            ]);
+        }
         $username = $value['username'];
+        $_SESSION['user_id'] = $value['user_id'];
         Session::set('username', $username);
-        redirect('');
+        Session::set('email_address', $email_address);
+
+        $sql = $db->prepare("UPDATE user SET logged_in = 1 WHERE email_address = '{$_SESSION['email_address']}'");
+        $sql->execute();
+        redirect("User/details/{$_SESSION['user_id']}");
     }
 }

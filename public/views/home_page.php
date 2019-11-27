@@ -1,9 +1,9 @@
 <?php
 use App\Utils\Http\Session;
 ?>
-<?php if (isset($_SESSION['username'])) : ?>
+<?php if (isset($_SESSION['name'])) : ?>
     <div class="alert alert-success" role="alert">
-        Welcome, <?= Session::flash('username') ?>!
+        Welcome <?= Session::flash('name') ?>, Please Sign-in!
     </div>
 <?php endif; ?>
 
