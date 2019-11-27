@@ -16,14 +16,12 @@ class Router
      */
     public static function callAction()
     {
-        $request = new Request();
+        $parameters = Request::getParameters();
+        $controller = Request::getController();
+        $action     = Request::getAction();
+        $prefix     = Request::$default_controller_prefix;
         
-        $parameters = $request->getParameters();
-        $controller = $request->getController();
-        $action     = $request->getAction();
-        $prefix     = $request->default_controller_prefix;
-        
-        if ($controller !== $request->default_controller) {
+        if ($controller !== Request::$default_controller) {
             $controller = $prefix . $controller;
         }
         

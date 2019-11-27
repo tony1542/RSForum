@@ -15,11 +15,11 @@ class Request
     protected const ACTION_POSITION     = 1;
     protected const ID_POSITION         = 2;
     
-    protected $default_controller_action = 'index';
+    protected static $default_controller_action = 'index';
     
-    public $default_controller = PagesController::class;
-    public $default_controller_prefix = 'App\\Controllers\\';
-    protected $default_controller_suffix = 'sController';
+    public static $default_controller = PagesController::class;
+    public static $default_controller_prefix = 'App\\Controllers\\';
+    protected static $default_controller_suffix = 'sController';
     
     /**
      * Fetch the request URI
@@ -36,30 +36,30 @@ class Request
         return explode('/', self::getUri());
     }
     
-    public function getController()
+    public static function getController()
     {
         $controller = self::explodeUri()[self::CONTROLLER_POSITION];
     
         // If no controller is passed, use our default
         if ($controller === '') {
-            return $this->default_controller;
+            return self::$default_controller;
         }
         
-        return urldecode($controller) . $this->default_controller_suffix;
+        return urldecode($controller) . self::$default_controller_suffix;
     }
     
-    public function getAction()
+    public static function getAction()
     {
         $uri = self::explodeUri();
         
         if (!isset($uri[self::ACTION_POSITION])) {
-            return $this->default_controller_action;
+            return self::$default_controller_action;
         }
         
         return urldecode(strtolower($uri[self::ACTION_POSITION]));
     }
     
-    public function getID()
+    public static function getID()
     {
         return urldecode(self::explodeUri()[self::ID_POSITION] ?? 0);
     }
@@ -69,17 +69,17 @@ class Request
      *
      * @return array
      */
-    public function getParameters()
+    public static function getParameters()
     {
         return $_GET['parameters'] ?? $_POST['parameters'] ?? [];
     }
     
-    public function getPostValues()
+    public static function getPostValues()
     {
         return $_POST ?? [];
     }
     
-    public function getGetValues()
+    public static function getGetValues()
     {
         return $_GET ?? [];
     }
@@ -89,15 +89,15 @@ class Request
      *
      * @param bool|int $verbose
      */
-    public function dump($verbose = 0)
+    public static function dump($verbose = 0)
     {
         dump([
-            'controller' => $this->getController(),
-            'action'     => $this->getAction(),
-            'id'         => $this->getID(),
-            'parameters' => $this->getParameters(),
-            'postArray'  => $this->getPostValues(),
-            'getArray'   => $this->getGetValues(),
+            'controller' => self::getController(),
+            'action'     => self::getAction(),
+            'id'         => self::getID(),
+            'parameters' => self::getParameters(),
+            'postArray'  => self::getPostValues(),
+            'getArray'   => self::getGetValues(),
             'uri'        => self::getUri()
         ], $verbose);
     }
