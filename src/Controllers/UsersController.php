@@ -134,7 +134,6 @@ class UsersController extends AbstractBaseController
             } else if ($user_id != $_SESSION['user_id']){
                      $login_error[] = 'That page is not for you to see';
                 }
-
             if (count($login_error)) {
                 view('home_page', [
                     'errors' => $login_error
@@ -143,8 +142,7 @@ class UsersController extends AbstractBaseController
             $user = new User($user_id);
             $username = $user->getUsername();
             $email = $user->getEmail();
-            $hashedPass = $user->getHashedPass();
-            $data = array('username' => $username, 'email_address' => $email, 'password' => $hashedPass);
+            $data = array('username' => $username, 'email_address' => $email);
             view('profile', $data);
         }
     }
