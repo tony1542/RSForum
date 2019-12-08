@@ -1,4 +1,4 @@
-<div class="card-columns">
+<div class="card-deck">
     <?php /** @var \App\Models\User $member */ ?>
     <?php foreach ($data['members'] as $member) : ?>
         <div class="card">
