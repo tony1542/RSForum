@@ -94,7 +94,7 @@ class User
     public static function getMembers()
     {
         $database = getDatabase();
-        $sql = $database->prepare('SELECT * FROM user');
+        $sql = $database->prepare('SELECT user_id FROM user');
         $sql->execute();
         
         $members = $sql->fetchAll(PDO::FETCH_ASSOC);
