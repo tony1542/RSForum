@@ -157,6 +157,10 @@ class UsersController extends AbstractBaseController
     
     public function members()
     {
+        if (!isset($_SESSION['user_id'])) {
+            redirect('');
+        }
+        
         view('members', [
             'members' => User::getMembers()
         ]);
