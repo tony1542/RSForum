@@ -36,14 +36,17 @@ class User
         //$this->last_name = $values['last_name'];
         $this->logged_in = $values['logged_in'];
     }
+    
     public function getUsername()
     {
         return $this->username;
     }
+    
     public function getEmail()
     {
         return $this->email_address;
     }
+    
     public function getHashedPass()
     {
         return $this->password;
@@ -82,5 +85,25 @@ class User
         $sql = $db->prepare("UPDATE user SET logged_in = 1 WHERE email_address = '{$_SESSION['email_address']}'");
         $sql->execute();
         redirect("User/details/{$_SESSION['user_id']}");
+    }
+    
+    /*
+     * Function returns an active list of members
+     * Note: will convert database records into User objects
+     */
+    public static function getMembers()
+    {
+        $database = getDatabase();
+        $sql = $database->prepare('SELECT * FROM user');
+        $sql->execute();
+        
+        $members = $sql->fetchAll(PDO::FETCH_ASSOC);
+        $users = [];
+        
+        foreach ($members as $member) {
+            $users[] = new self($member['user_id']);
+        }
+        
+        return $users;
     }
 }
