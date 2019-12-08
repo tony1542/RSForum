@@ -154,4 +154,11 @@ class UsersController extends AbstractBaseController
         session_destroy();
         redirect('');
     }
+    
+    public function members()
+    {
+        view('members', [
+            'members' => User::getMembers()
+        ]);
+    }
 }
