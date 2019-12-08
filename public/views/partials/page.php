@@ -24,7 +24,10 @@
             <ul class='navbar-nav'>
                 <?php if (isset($_SESSION['user_id'])) : ?>
                 <li class="nav-item">
-                    <a class="nav-link" href="/User/details/<?=$_SESSION['user_id']?>">Profile</a>
+                    <a class="nav-link" href="/User/Details/<?=$_SESSION['user_id']?>">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/User/Members/">Members</a>
                 </li>
                 <?php else : ?>
                 <li class="nav-item">
@@ -33,7 +36,7 @@
                 <?php endif; ?>
                 <?php if (isset($_SESSION['user_id'])) : ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="/User/logout">Log-Out</a>
+                        <a class="nav-link" href="/User/Logout">Log-Out</a>
                     </li>
                 <?php else : ?>
                 <li class='nav-item'>
