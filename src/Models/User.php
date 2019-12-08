@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Utils\Http\Request;
 use PDO;
 use App\Utils\Http\Session;
 
