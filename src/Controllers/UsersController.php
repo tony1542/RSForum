@@ -168,7 +168,7 @@ class UsersController extends AbstractBaseController
         }
         
         view('members', [
-            'members' => $members = User::getMembers()
+            'members' => User::getMembers()
         ]);
     }
 }
