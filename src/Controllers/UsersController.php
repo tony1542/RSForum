@@ -2,10 +2,12 @@
 
 namespace App\Controllers;
 
+use App\Utils\CrystalMathLabs\Api;
 use App\Utils\Http\Request;
 use App\Models\User;
 use App\Utils\Input\Sanitizer;
 use App\Utils\Http\Session;
+use App\Utils\Runescape\Levels;
 use PDO;
 class UsersController extends AbstractBaseController
 {
@@ -124,28 +126,32 @@ class UsersController extends AbstractBaseController
     
         redirect('');
     }
+    
     public function details()
     {
-        if (!count($_POST)) {
-            $user_id = Request::getID();
-            $login_error = [];
-            if (empty($_SESSION['username']) || empty($_SESSION['email_address'])) {
-                $login_error[] = 'Please Sign-In to see this page.';
-            } else if ($user_id != $_SESSION['user_id']){
-                     $login_error[] = 'That page is not for you to see';
-                }
-            if (count($login_error)) {
-                view('home_page', [
-                    'errors' => $login_error
-                ]);
-            }
-            $user = new User($user_id);
-            $username = $user->getUsername();
-            $email = $user->getEmail();
-            $data = array('username' => $username, 'email_address' => $email);
-            view('profile', $data);
+        if (count($_POST)) {
+            return;
         }
+        
+        $user_id = Request::getID();
+        $login_error = [];
+        
+        if (empty($_SESSION['username']) || empty($_SESSION['email_address'])) {
+            $login_error[] = 'Please Sign-In to see this page.';
+        } elseif ($user_id != $_SESSION['user_id']) {
+            $login_error[] = 'That page is not for you to see';
+        }
+        
+        if (count($login_error)) {
+            view('home_page', [
+                'errors' => $login_error
+            ]);
+        }
+        
+        view('profile', ['user' => new User($user_id)]);
+    
     }
+    
     public function logout()
     {
         $db = getDatabase();
@@ -162,7 +168,7 @@ class UsersController extends AbstractBaseController
         }
         
         view('members', [
-            'members' => User::getMembers()
+            'members' => $members = User::getMembers()
         ]);
     }
 }

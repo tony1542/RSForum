@@ -1,3 +1,5 @@
+<?php /** @var \App\Models\User $user */ ?>
+
 <div class="row justify-content-center">
     <div class="col-md-8">
         <div class="card">
@@ -6,13 +8,16 @@
                 <form method="post">
                     <div class="form-group">
                         <b>Username:</b>
-                        <label for="username"><?= $username ?></label><br>
+                        <label for="username"><?= $user->getUsername() ?></label><br>
                     </div>
                     <div class="form-group">
                         <b>Email Address: </b>
-                        <label for="email"><?= $email_address ?></label><br>
+                        <label for="email"><?= $user->getEmail() ?></label><br>
                     </div>
                 </form>
+            </div>
+            <div class="card-footer">
+                Total Level: <?= $user->getTotalLevel() ?>
             </div>
         </div>
     </div>
