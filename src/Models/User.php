@@ -87,19 +87,20 @@ class User
         redirect("User/details/{$_SESSION['user_id']}");
     }
     
-    /*
+    /**
      * Function returns an active list of members
      * Note: will convert database records into User objects
+     *
+     * @return User[]
      */
     public static function getMembers()
     {
         $database = getDatabase();
         $sql = $database->prepare('SELECT user_id FROM user');
         $sql->execute();
-        
         $members = $sql->fetchAll(PDO::FETCH_ASSOC);
-        $users = [];
         
+        $users = [];
         foreach ($members as $member) {
             $users[] = new self($member['user_id']);
         }
