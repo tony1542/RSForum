@@ -5,13 +5,15 @@
             <div class="card-body">
                 <form method="post">
                     <div class="form-group">
-                        <b>Username:</b> <label for="username"><?= $username ?></label><br>
+                        <b>Username:</b>
+                        <label for="username"><?= $username ?></label><br>
                     </div>
                     <div class="form-group">
-                        <b>Email Address: </b> <label for="email"><?= $email_address ?></label><br>
+                        <b>Email Address: </b>
+                        <label for="email"><?= $email_address ?></label><br>
                     </div>
+                </form>
             </div>
-            </form>
         </div>
     </div>
 </div>
