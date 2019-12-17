@@ -11,7 +11,7 @@ class User
     protected $email_address = '';
     protected $first_name = '';
     protected $last_name = '';
-    private $password = '';
+    protected $password = '';
     protected $user_id = '';
     protected $logged_in = '';
 

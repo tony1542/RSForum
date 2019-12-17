@@ -29,9 +29,4 @@ class ApiErrorHandler
             throw new ApiException(self::ERRORS[$result]);
         }
     }
-    
-    public static function getGenericMessage()
-    {
-        return 'Something went wrong while trying to fetch the data.';
-    }
 }

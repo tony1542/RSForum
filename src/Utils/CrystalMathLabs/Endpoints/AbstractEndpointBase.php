@@ -42,11 +42,6 @@ abstract class AbstractEndpointBase implements EndpointInterface
         return $this->format($body);
     }
     
-    /**
-     * @param StreamInterface $data
-     *
-     * @return mixed
-     */
     public abstract function format(StreamInterface $data);
     
     /**
