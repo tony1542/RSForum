@@ -44,6 +44,10 @@ class Levels
     {
         $total_level = 0;
         
+        if (!is_array($stats) && !count($stats)) {
+            return $total_level;
+        }
+        
         foreach ($stats as $stat) {
             $level = (int) $stat['level'];
             
