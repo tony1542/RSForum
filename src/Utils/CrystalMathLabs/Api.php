@@ -17,9 +17,9 @@ class Api
     public static function getCurrentPlayerCount()
     {
         try {
-            $currentPlayerCount = new CurrentPlayerCount();
+            $current_player_count = new CurrentPlayerCount();
     
-            return $currentPlayerCount->call();
+            return $current_player_count->call();
         } catch (GuzzleException|ApiException $e) {
             return null;
         }
@@ -31,11 +31,11 @@ class Api
     public static function getCurrentTopPlayers()
     {
         try {
-            $topPlayers = new TopPlayers(
+            $top_players = new TopPlayers(
                 Session::get(TopPlayers::TIME_PERIOD_NAME)
             );
     
-            return $topPlayers->call();
+            return $top_players->call();
         } catch (GuzzleException|ApiException $e) {
             return null;
         }
@@ -49,9 +49,9 @@ class Api
     public static function getStatsForPlayer(string $playerName)
     {
         try {
-            $statsForPlayer = new Stats($playerName);
+            $stats_for_player = new Stats($playerName);
     
-            return $statsForPlayer->call();
+            return $stats_for_player->call();
         } catch (GuzzleException|ApiException $e) {
             return null;
         }

@@ -37,7 +37,7 @@ class TopPlayers extends AbstractEndpointBase
     {
         $result = $this->formatStandard($result);
         
-        $currentTopPlayers = [];
+        $current_top_players = [];
         foreach ($result as $row) {
             $row = explode(',', $row);
             $name = $row[0] ?? null;
@@ -47,12 +47,12 @@ class TopPlayers extends AbstractEndpointBase
                 continue;
             }
             
-            $currentTopPlayers[] = [
+            $current_top_players[] = [
                 'name' => $name,
                 'exp'  => number_format($exp)
             ];
         }
         
-        return $currentTopPlayers;
+        return $current_top_players;
     }
 }
