@@ -33,9 +33,9 @@ abstract class AbstractEndpointBase implements EndpointInterface
      */
     public function call()
     {
-        $fullUrl = $this->base_api_url . $this->end_point_url;
+        $full_url = $this->base_api_url . $this->end_point_url;
         
-        $body = $this->client->request('GET', $fullUrl)->getBody();
+        $body = $this->client->request('GET', $full_url)->getBody();
         $contents = substr($body->getContents(), 3, 5);
         $this->error_handler->checkForErrors($contents);
         

@@ -34,8 +34,8 @@ class Stats extends AbstractEndpointBase
             }
             
             $skills[] = [
-                'skillIndex' => $key,
-                'skillName'  => Skills::getSkillNameFromIndex($key),
+                'skill_index' => $key,
+                'skill_name'  => Skills::getSkillNameFromIndex($key),
                 'exp'        => number_format($exp),
                 'level'      => $counter !== 0 ? Levels::findFromExp($exp) : null,
                 'rank'       => number_format($rank)

@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Utils\CrystalMathLabs\Api;
+use App\Utils\Runescape\Levels;
 use PDO;
 use App\Utils\Http\Session;
 
@@ -14,7 +16,9 @@ class User
     protected $password = '';
     protected $user_id = '';
     protected $logged_in = '';
-
+    protected $skills = [];
+    protected $total_level = 0;
+    
     public function __construct($user_id)
     {
         // Creating an instance of our db connection, then using a pdo to query our db for a user_id match
@@ -32,9 +36,10 @@ class User
         $this->email_address = $values['email_address'];
         $this->password = $values['password'];
         $this->user_id = $user_id;
-        //$this->first_name = $values['first_name']; Since these do not exist in db yet, they create an undefined index if left uncommented.
-        //$this->last_name = $values['last_name'];
         $this->logged_in = $values['logged_in'];
+        
+        $this->skills = Api::getStatsForPlayer($this->getUsername());
+        $this->total_level = Levels::getTotalLevel($this->getSkills());
     }
     
     public function getUsername()
@@ -47,11 +52,16 @@ class User
         return $this->email_address;
     }
     
-    public function getHashedPass()
+    public function getTotalLevel()
     {
-        return $this->password;
+        return $this->total_level;
     }
-
+    
+    public function getSkills()
+    {
+        return $this->skills;
+    }
+    
     public static function login($email_address, $password)
     {
         $data_error = [];
@@ -87,19 +97,20 @@ class User
         redirect("User/details/{$_SESSION['user_id']}");
     }
     
-    /*
+    /**
      * Function returns an active list of members
      * Note: will convert database records into User objects
+     *
+     * @return User[]
      */
     public static function getMembers()
     {
         $database = getDatabase();
         $sql = $database->prepare('SELECT user_id FROM user');
         $sql->execute();
-        
         $members = $sql->fetchAll(PDO::FETCH_ASSOC);
-        $users = [];
         
+        $users = [];
         foreach ($members as $member) {
             $users[] = new self($member['user_id']);
         }

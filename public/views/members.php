@@ -6,6 +6,9 @@
             <div class="card-body text-center">
                 <img class="img-fluid" src="/public/images/comic2.png" />
             </div>
+            <div class="card-footer">
+                Total level: <?= $member->getTotalLevel() ?>
+            </div>
         </div>
     <?php endforeach; ?>
 </div>

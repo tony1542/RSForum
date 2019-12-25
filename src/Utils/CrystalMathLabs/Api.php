@@ -13,44 +13,47 @@ class Api
 {
     /**
      * @return mixed
-     *
-     * @throws GuzzleException
-     * @throws ApiException
      */
-    public function getCurrentPlayerCount()
+    public static function getCurrentPlayerCount()
     {
-        $currentPlayerCount = new CurrentPlayerCount();
-        
-        return $currentPlayerCount->call();
+        try {
+            $current_player_count = new CurrentPlayerCount();
+    
+            return $current_player_count->call();
+        } catch (GuzzleException|ApiException $e) {
+            return null;
+        }
     }
     
     /**
      * @return array|mixed
-     *
-     * @throws GuzzleException
-     * @throws ApiException
      */
-    public function getCurrentTopPlayers()
+    public static function getCurrentTopPlayers()
     {
-        $topPlayers = new TopPlayers(
-            Session::get(TopPlayers::TIME_PERIOD_NAME)
-        );
-        
-        return $topPlayers->call();
+        try {
+            $top_players = new TopPlayers(
+                Session::get(TopPlayers::TIME_PERIOD_NAME)
+            );
+    
+            return $top_players->call();
+        } catch (GuzzleException|ApiException $e) {
+            return null;
+        }
     }
     
     /**
      * @param string $playerName
      *
      * @return array|mixed
-     *
-     * @throws ApiException
-     * @throws GuzzleException
      */
-    public function getStatsForPlayer(string $playerName)
+    public static function getStatsForPlayer(string $playerName)
     {
-        $statsForPlayer = new Stats($playerName);
-        
-        return $statsForPlayer->call();
+        try {
+            $stats_for_player = new Stats($playerName);
+    
+            return $stats_for_player->call();
+        } catch (GuzzleException|ApiException $e) {
+            return null;
+        }
     }
 }
