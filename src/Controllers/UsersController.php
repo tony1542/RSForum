@@ -143,7 +143,9 @@ class UsersController extends AbstractBaseController
     
     public function details()
     {
-        view('profile', ['user' => getSignedInUser()]);
+        $user_id = Request::getID();
+        $user = new User($user_id);
+        view('profile', ['user' => $user]);
     }
     
     public function logout()
@@ -162,6 +164,13 @@ class UsersController extends AbstractBaseController
     
     public function update()
     {
-    
+        $post_values = Request::getPostValues();
+        $new_username = $post_values['username'];
+        
+        $user_id = Request::getID();
+        $user = new User($user_id);
+        $user->update($new_username);
+        
+        redirect("User/Details/" . $user->getID());
     }
 }

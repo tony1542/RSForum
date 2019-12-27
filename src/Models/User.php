@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Utils\CrystalMathLabs\Api;
+use App\Utils\Database\Connection;
 use App\Utils\Http\Request;
 use App\Utils\Runescape\Levels;
 use PDO;
