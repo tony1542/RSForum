@@ -143,4 +143,30 @@ class User
         $sql = $database->prepare("UPDATE user SET username = ? WHERE user_id = ?");
         $sql->execute([$username, Request::getID()]);
     }
+    
+    /**
+     * Verifies a username matches Runescape's restraints
+     *
+     * @param string $username
+     *
+     * @return array
+     */
+    public static function verifyUsername($username)
+    {
+        $errors = [];
+        
+        if (!$username) {
+            $errors[] = 'Enter a username';
+        }
+        
+        if (strlen($username) > 12) {
+            $errors[] = 'Username cannot be longer than 12 characters';
+        }
+    
+        if (!preg_match('/^[a-zA-Z]+[a-zA-Z0-9-_ ]*[a-zA-Z0-9]$/', $username)) {
+            $errors[] = 'Username can only contain numbers, letters, or spaces';
+        }
+        
+        return $errors;
+    }
 }

@@ -51,15 +51,8 @@ class UsersController extends AbstractBaseController
         $email_address = Sanitizer::sanitize($_POST['email_address']);
         $password = Sanitizer::sanitize($_POST['password']);
         $password_confirm = Sanitizer::sanitize($_POST['password_confirm']);
-        $form_errors = [];
         
-        if (!$username) {
-            $form_errors[] = 'Please enter a username';
-        }
-        
-        if (strlen($username) < 5 || strlen($username) > 12) {
-            $form_errors[] = 'Please enter a username between 5 and 12 characters long';
-        }
+        $form_errors = User::verifyUsername($username);
 
         $db = getDatabase();
         $sql = $db->prepare('SELECT email_address FROM user WHERE email_address =?');
@@ -171,15 +164,7 @@ class UsersController extends AbstractBaseController
         $post_values = Request::getPostValues();
         $new_username = $post_values['username'];
     
-        $errors = [];
-        if (strlen($new_username) > 12) {
-            $errors[] = 'Username cannot be longer than 12 characters';
-        }
-        
-        if (!preg_match('/^[a-zA-Z]+[a-zA-Z0-9-_ ]*[a-zA-Z0-9]$/', $new_username)) {
-            $errors[] = 'Username can only contain numbers, letters, or spaces';
-        }
-
+        $errors = User::verifyUsername($new_username);
         if (count($errors)) {
             view($this->getIncludePrefix() . 'profile', ['errors' => $errors]);
         }
