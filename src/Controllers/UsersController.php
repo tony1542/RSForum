@@ -14,6 +14,17 @@ class UsersController extends AbstractBaseController
     public function canAccess($action, $parameters = [])
     {
         return true;
+     
+        switch ($action) {
+            case 'logout':
+                break;
+            case 'update':
+                break;
+            case 'members':
+                return false; // TODO check that a user is logged in for this
+            default:
+                return true;
+        }
     }
     
     public function index()
@@ -52,7 +63,7 @@ class UsersController extends AbstractBaseController
             $value = $value[0];
             $compare_email = $value['email_address'];
         
-            if ($compare_email == $email_address) {
+            if ($compare_email === $email_address) {
                 $form_errors[] = 'Sorry, that email has been taken by another user, please try again';
             }
         }
@@ -92,8 +103,9 @@ class UsersController extends AbstractBaseController
         ];
         
         $sql->execute($values);
-        Session::set('username',$username);
-        $_SESSION['name'] = $username; //Setting name for our homepage welcome message.
+        $user_id = $db->lastInsertId();
+        setSignedInUser(new User($user_id));
+        
         redirect('');
     }
 
@@ -129,10 +141,6 @@ class UsersController extends AbstractBaseController
     
     public function details()
     {
-        if (count($_POST)) {
-            return;
-        }
-        
         $user_id = Request::getID();
         $login_error = [];
         
@@ -155,6 +163,7 @@ class UsersController extends AbstractBaseController
     public function logout()
     {
         $user = new User(Request::getID());
+        $user->logout();
         redirect('');
     }
     

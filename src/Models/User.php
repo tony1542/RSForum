@@ -20,8 +20,12 @@ class User
     protected $skills = [];
     protected $total_level = 0;
     
-    public function __construct($user_id)
+    public function __construct($user_id = 0)
     {
+        if (!$user_id) {
+            return;
+        }
+        
         // Creating an instance of our db connection, then using a pdo to query our db for a user_id match
         $instance = getDatabase();
         $statement = $instance->prepare('SELECT * FROM user WHERE user_id =?');
@@ -98,14 +102,17 @@ class User
         Session::set('username', $username);
         Session::set('email_address', $email_address);
 
-        $sql = $db->query("UPDATE user SET logged_in = 1 WHERE email_address = '{$_SESSION['email_address']}'");
+        $sql = $db->prepare("UPDATE user SET logged_in = 1 WHERE email_address = ?");
+        $sql->execute([$_SESSION['email_address']]);
+        
         redirect("User/Details/{$_SESSION['user_id']}");
     }
     
     public function logout()
     {
         $db = getDatabase();
-        $sql = $db->query("UPDATE user SET logged_in = 0 WHERE email_address = '{$_SESSION['email_address']}'");
+        $sql = $db->prepare("UPDATE user SET logged_in = 0 WHERE email_address = ?");
+        $sql->execute([$_SESSION['email_address']]);
         session_destroy();
     }
     
