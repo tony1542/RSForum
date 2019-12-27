@@ -11,6 +11,11 @@ use App\Utils\Runescape\Levels;
 use PDO;
 class UsersController extends AbstractBaseController
 {
+    protected function getIncludePrefix()
+    {
+        return 'user/';
+    }
+    
     public function canAccess($action, $parameters = [])
     {
         $signed_in_user = getSignedInUser();
@@ -38,7 +43,7 @@ class UsersController extends AbstractBaseController
     {
         // If nothing is in $_POST, just show the register form
         if (!count($_POST)) {
-            view('register');
+            view($this->getIncludePrefix() . 'register');
         }
 
         // Sanitizing our user input before validating
@@ -88,7 +93,7 @@ class UsersController extends AbstractBaseController
         
         // If we have found any errors, re-show the form with them
         if (count($form_errors)) {
-            view('register', [
+            view($this->getIncludePrefix() . 'register', [
                 'errors' => $form_errors
             ]);
         }
@@ -114,7 +119,7 @@ class UsersController extends AbstractBaseController
     public function signIn()
     {
         if (!count($_POST)) {
-            view('signin');
+            view($this->getIncludePrefix() . 'signin');
         }
         
         $email_address = Sanitizer::sanitize($_POST['email_address']);
@@ -130,7 +135,7 @@ class UsersController extends AbstractBaseController
         }
     
         if (count($form_error)) {
-            view('signin', [
+            view($this->getIncludePrefix() . 'signin', [
                 'errors' => $form_error
             ]);
         }
@@ -145,7 +150,7 @@ class UsersController extends AbstractBaseController
     {
         $user_id = Request::getID();
         $user = new User($user_id);
-        view('profile', ['user' => $user]);
+        view($this->getIncludePrefix() . 'profile', ['user' => $user]);
     }
     
     public function logout()
@@ -157,7 +162,7 @@ class UsersController extends AbstractBaseController
     
     public function members()
     {
-        view('members', [
+        view($this->getIncludePrefix() . 'members', [
             'members' => User::getMembers()
         ]);
     }
@@ -166,6 +171,19 @@ class UsersController extends AbstractBaseController
     {
         $post_values = Request::getPostValues();
         $new_username = $post_values['username'];
+    
+        $errors = [];
+        if (strlen($new_username) > 12) {
+            $errors[] = 'Username cannot be longer than 12 characters';
+        }
+        
+        if (!preg_match('/^[a-zA-Z]+[a-zA-Z0-9-_ ]*[a-zA-Z0-9]$/', $new_username)) {
+            $errors[] = 'Username can only contain numbers, letters, or spaces';
+        }
+
+        if (count($errors)) {
+            view($this->getIncludePrefix() . 'profile', ['errors' => $errors]);
+        }
         
         $user_id = Request::getID();
         $user = new User($user_id);

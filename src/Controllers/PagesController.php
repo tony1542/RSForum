@@ -4,6 +4,11 @@ namespace App\Controllers;
 
 class PagesController extends AbstractBaseController
 {
+    protected function getIncludePrefix()
+    {
+        return 'pages/';
+    }
+    
     public function canAccess($action, $parameters = [])
     {
         return true;
@@ -11,6 +16,6 @@ class PagesController extends AbstractBaseController
     
     public function index()
     {
-        view('home_page');
+        view($this->getIncludePrefix() . 'home_page');
     }
 }
