@@ -13,15 +13,17 @@ class UsersController extends AbstractBaseController
 {
     public function canAccess($action, $parameters = [])
     {
-        return true;
-     
+        $signed_in_user = getSignedInUser();
+        $is_user_signed_in = $signed_in_user->getID() > 0;
+        $same_user_as_requesting = $signed_in_user->getID() === Request::getID();
+        
         switch ($action) {
-            case 'logout':
-                break;
-            case 'update':
-                break;
             case 'members':
-                return false; // TODO check that a user is logged in for this
+                return $is_user_signed_in;
+            case 'logout':
+            case 'update':
+            case 'details':
+                return $is_user_signed_in && $same_user_as_requesting;
             default:
                 return true;
         }
@@ -141,23 +143,7 @@ class UsersController extends AbstractBaseController
     
     public function details()
     {
-        $user_id = Request::getID();
-        $login_error = [];
-        
-        if (empty($_SESSION['username']) || empty($_SESSION['email_address'])) {
-            $login_error[] = 'Please Sign-In to see this page.';
-        } elseif ($user_id != $_SESSION['user_id']) {
-            $login_error[] = 'That page is not for you to see';
-        }
-        
-        if (count($login_error)) {
-            view('home_page', [
-                'errors' => $login_error
-            ]);
-        }
-        
-        view('profile', ['user' => new User($user_id)]);
-    
+        view('profile', ['user' => getSignedInUser()]);
     }
     
     public function logout()
@@ -169,10 +155,6 @@ class UsersController extends AbstractBaseController
     
     public function members()
     {
-        if (!isset($_SESSION['user_id'])) {
-            redirect('');
-        }
-        
         view('members', [
             'members' => User::getMembers()
         ]);

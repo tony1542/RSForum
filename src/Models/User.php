@@ -92,20 +92,20 @@ class User
                 $data_error[] = 'Your Email or Password is incorrect.';
             }
         }
+        
         if (count($data_error)) {
             view('signin', [
                 'errors' => $data_error
             ]);
         }
-        $username = $value['username'];
-        $_SESSION['user_id'] = $value['user_id'];
-        Session::set('username', $username);
-        Session::set('email_address', $email_address);
-
+        
+        $user = new User($value['user_id']);
+        setSignedInUser($user);
+        
         $sql = $db->prepare("UPDATE user SET logged_in = 1 WHERE email_address = ?");
         $sql->execute([$_SESSION['email_address']]);
         
-        redirect("User/Details/{$_SESSION['user_id']}");
+        redirect("User/Details/" . getSignedInUser()->getID());
     }
     
     public function logout()
