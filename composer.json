@@ -10,9 +10,9 @@
   },
   "require": {
     "psr/container": "^1.0",
-    "guzzlehttp/guzzle": "^6.3",
+    "guzzlehttp/guzzle": "^6.5",
     "vlucas/phpdotenv": "^3.6",
     "ext-pdo": "*",
-    "nesbot/carbon": "^2.26"
+    "nesbot/carbon": "^2.27"
   }
 }
