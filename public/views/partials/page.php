@@ -5,7 +5,7 @@
 
     <title>Runescape</title>
 
-    <!-- Boostrap CSS -->
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
@@ -18,30 +18,29 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/">Home
+                        <span class="sr-only">(current)</span>
+                    </a>
                 </li>
             </ul>
             <ul class='navbar-nav'>
-                <?php if (isset($_SESSION['user_id'])) : ?>
-                <li class="nav-item">
-                    <a class="nav-link" href="/User/Details/<?=$_SESSION['user_id']?>">Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/User/Members/">Members</a>
-                </li>
-                <?php else : ?>
-                <li class="nav-item">
-                    <a class="nav-link" href="/User/SignIn">Sign-In</a>
-                </li>
-                <?php endif; ?>
-                <?php if (isset($_SESSION['user_id'])) : ?>
+                <?php if (getSignedInUser()->getID() > 0) : ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/User/Details/<?= getSignedInUser()->getID() ?>">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/User/Members/">Members</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/User/Logout">Log-Out</a>
                     </li>
                 <?php else : ?>
-                <li class='nav-item'>
-                    <a class="nav-link" href="/User/Register">Register</a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/User/SignIn">Sign-In</a>
+                    </li>
+                    <li class='nav-item'>
+                        <a class="nav-link" href="/User/Register">Register</a>
+                    </li>
                 <?php endif; ?>
             </ul>
         </div>

@@ -24,8 +24,8 @@ class UsersController extends AbstractBaseController
         
         switch ($action) {
             case 'members':
-                return $is_user_signed_in;
             case 'logout':
+                return $is_user_signed_in;
             case 'update':
             case 'details':
                 return $is_user_signed_in && $same_user_as_requesting;
@@ -155,8 +155,7 @@ class UsersController extends AbstractBaseController
     
     public function logout()
     {
-        $user = new User(Request::getID());
-        $user->logout();
+        getSignedInUser()->logout();
         redirect('');
     }
     
