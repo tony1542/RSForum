@@ -62,6 +62,11 @@ class User
         return $this->skills;
     }
     
+    public function getId()
+    {
+        return $this->user_id;
+    }
+    
     public static function login($email_address, $password)
     {
         $data_error = [];
@@ -94,7 +99,7 @@ class User
 
         $sql = $db->prepare("UPDATE user SET logged_in = 1 WHERE email_address = '{$_SESSION['email_address']}'");
         $sql->execute();
-        redirect("User/details/{$_SESSION['user_id']}");
+        redirect("User/Details/{$_SESSION['user_id']}");
     }
     
     /**

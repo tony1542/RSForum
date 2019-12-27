@@ -5,15 +5,19 @@
         <div class="card">
             <div class="card-header">Account Details</div>
             <div class="card-body">
-                <form method="post">
+                <form method="post" action="/User/Update/<?= $user->getId() ?>">
                     <div class="form-group">
-                        <b>Username:</b>
-                        <label for="username"><?= $user->getUsername() ?></label><br>
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" id="username" value="<?= $user->getUsername() ?>" />
                     </div>
                     <div class="form-group">
-                        <b>Email Address: </b>
-                        <label for="email"><?= $user->getEmail() ?></label><br>
+                        <label for="email">Email Address</label>
+                        <input type="email" class="form-control" id="email" disabled value="<?= $user->getEmail() ?>" />
                     </div>
+                    
+                    <button class="btn btn-primary">
+                        Update
+                    </button>
                 </form>
             </div>
             <div class="card-footer">
