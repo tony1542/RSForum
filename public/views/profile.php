@@ -5,10 +5,10 @@
         <div class="card">
             <div class="card-header">Account Details</div>
             <div class="card-body">
-                <form method="post" action="/User/Update/<?= $user->getId() ?>">
+                <form method="post" action="/User/Update/<?= $user->getID() ?>">
                     <div class="form-group">
                         <label for="username">Username</label>
-                        <input type="text" class="form-control" id="username" value="<?= $user->getUsername() ?>" />
+                        <input type="text" class="form-control" id="username" name="username" value="<?= $user->getUsername() ?>" />
                     </div>
                     <div class="form-group">
                         <label for="email">Email Address</label>

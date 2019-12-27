@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Utils\CrystalMathLabs\Api;
+use App\Utils\Http\Request;
 use App\Utils\Runescape\Levels;
 use PDO;
 use App\Utils\Http\Session;
@@ -62,7 +63,7 @@ class User
         return $this->skills;
     }
     
-    public function getId()
+    public function getID()
     {
         return $this->user_id;
     }
@@ -97,9 +98,15 @@ class User
         Session::set('username', $username);
         Session::set('email_address', $email_address);
 
-        $sql = $db->prepare("UPDATE user SET logged_in = 1 WHERE email_address = '{$_SESSION['email_address']}'");
-        $sql->execute();
+        $sql = $db->query("UPDATE user SET logged_in = 1 WHERE email_address = '{$_SESSION['email_address']}'");
         redirect("User/Details/{$_SESSION['user_id']}");
+    }
+    
+    public function logout()
+    {
+        $db = getDatabase();
+        $sql = $db->query("UPDATE user SET logged_in = 0 WHERE email_address = '{$_SESSION['email_address']}'");
+        session_destroy();
     }
     
     /**
@@ -111,8 +118,7 @@ class User
     public static function getMembers()
     {
         $database = getDatabase();
-        $sql = $database->prepare('SELECT user_id FROM user');
-        $sql->execute();
+        $sql = $database->query("SELECT user_id FROM user");
         $members = $sql->fetchAll(PDO::FETCH_ASSOC);
         
         $users = [];
@@ -121,5 +127,12 @@ class User
         }
         
         return $users;
+    }
+    
+    public function update($username)
+    {
+        $database = getDatabase();
+        $sql = $database->prepare("UPDATE user SET username = ? WHERE user_id = ?");
+        $sql->execute([$username, Request::getID()]);
     }
 }

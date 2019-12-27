@@ -154,10 +154,7 @@ class UsersController extends AbstractBaseController
     
     public function logout()
     {
-        $db = getDatabase();
-        $sql = $db->prepare("UPDATE user SET logged_in = 0 WHERE email_address = '{$_SESSION['email_address']}'");
-        $sql->execute();
-        session_destroy();
+        $user = new User(Request::getID());
         redirect('');
     }
     
@@ -170,5 +167,10 @@ class UsersController extends AbstractBaseController
         view('members', [
             'members' => User::getMembers()
         ]);
+    }
+    
+    public function update()
+    {
+    
     }
 }
