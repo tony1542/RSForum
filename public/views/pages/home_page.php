@@ -1,7 +1,8 @@
 <?php
-use App\Utils\Http\Session;
+    use App\Utils\Http\Session;
 ?>
-<?php if (isset($_SESSION['name'])) : ?>
+
+<?php if (Session::has('name')) : ?>
     <div class="alert alert-success" role="alert">
         Welcome <?= Session::flash('name') ?>, Please Sign-in!
     </div>
