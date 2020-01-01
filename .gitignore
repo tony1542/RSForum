@@ -1,8 +1,27 @@
 # PHPStorm settings
-.idea
+/.idea
+/_windows
+/codestyles
+/colors
+/inspection
+/keymaps
+baseRefactoring.xml
+colors.scheme.xml
+databaseDrivers.xml
+databaseSettings.xml
+debugger.xml
+editor.xml
+filtypes.xml
+find.xml
+github.xml
+markdown.xml
+php.xml
+project.default.xml
+vcs.xml
+wsl.distributions.xml
 
 # Composer auto-loaded stuff
-vendor
+/vendor
 
 # User configurations
 config/.env
