@@ -7,6 +7,11 @@ use App\Utils\Http\Router;
 try {
     setApplicationVariables();
     Router::callAction();
-} catch (Exception $e) {
-    view('partials/error', ['errors' => [$e->getMessage()]]);
+} catch (Throwable $t) {
+    view('partials/error', [
+        'errors' => [
+            '<h4>Message</h4> ' . $t->getMessage(),
+            '<h4>Trace</h4><pre>' . $t->getTraceAsString() . '</pre>'
+        ]
+    ]);
 }
