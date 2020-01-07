@@ -47,14 +47,15 @@ class UserSkills {
     {
         $query = [];
         foreach ($this->skills as $skill_row) {
-            $query[] = $skill_row['skill_name'] . ' = ' . $skill_row['exp'];
+            $query[] = $skill_row['skill_name'] . ' = ' . (int) filter_var($skill_row['exp'], FILTER_SANITIZE_NUMBER_INT);
         }
-        $query = implode(',', $query);
         
-        dd($query);
+        $query = implode(', ', $query);
+        
         $database = getDatabase();
         
-        $sql = $database->prepare();
+        $sql = $database->prepare('INSERT INTO user_skills SET ' . $query . ', username = ?');
+        $sql->execute([$this->username]);
     }
     
     public function getSkills()
