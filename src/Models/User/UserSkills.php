@@ -15,8 +15,13 @@ class UserSkills {
     {
         $this->username = $username;
         $this->skills = Api::getStatsForPlayer($username);
-        $this->total_level = Levels::getTotalLevel($this->skills);
+        $this->total_level = Levels::getTotalLevel(
+            array_column($this->getSkills(), 'level')
+        );
         
+        $this->skills = null;
+        
+        // If we find a skills response from the API, insert a record into the database
         if ($this->skills) {
             $this->insertSkills();
             
@@ -25,7 +30,9 @@ class UserSkills {
         
         // If our API isn't connecting, check the DB for a user's skills
         $this->skills = $this->getLastUpdated();
-        $this->total_level = Levels::getTotalLevel($this->skills);
+        $this->total_level = Levels::getTotalLevel(
+            array_column($this->getSkills(), 'level')
+        );
         
         // If we have no record in the DB, return 'N/A'
         if (!$this->skills) {
@@ -37,10 +44,31 @@ class UserSkills {
     protected function getLastUpdated()
     {
         $database = getDatabase();
-        $sql = $database->prepare("SELECT * FROM user_skills WHERE username = ?");
+        $sql = $database->prepare('SELECT * FROM user_skills
+                                     WHERE username = ?
+                                   ORDER BY user_stat_id DESC
+                                   LIMIT 1');
         $sql->execute([$this->username]);
         
-        return $sql->fetchAll(PDO::FETCH_ASSOC);
+        $result = $sql->fetch(PDO::FETCH_ASSOC);
+        
+        // Unset the rows we don't need
+        unset($result['user_stat_id'], $result['username'], $result['overall']);
+        
+        if (!is_array($result)) {
+            return [];
+        }
+    
+        $return_array = [];
+        foreach ($result as $skill => $exp) {
+            $return_array[] = [
+                'skill_name' => ucwords($skill),
+                'exp'   => $exp,
+                'level' => Levels::findFromExp($exp, false)
+            ];
+        }
+        
+        return $return_array;
     }
     
     protected function insertSkills()
