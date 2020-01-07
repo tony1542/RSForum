@@ -38,14 +38,14 @@ class Levels
      * @param array $stats         - array of stats to iterate
      * @param bool  $virtual_level - if we are going above the 99 skill cap
      *
-     * @return int|string
+     * @return int|null
      */
     public static function getTotalLevel($stats, $virtual_level = false)
     {
         $total_level = 0;
         
         if (!is_array($stats)) {
-            return 'N/A';
+            return null;
         }
         
         foreach ($stats as $stat) {

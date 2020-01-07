@@ -19,7 +19,7 @@ CREATE TABLE user
 CREATE TABLE user_skills
 (
     user_stat_id int AUTO_INCREMENT,
-    user_id      int NOT NULL,
+    username     varchar(12)  NOT NULL,
     overall      int NULL,
     attack       int NULL,
     defence      int NULL,
@@ -47,3 +47,9 @@ CREATE TABLE user_skills
     CONSTRAINT user_stats_pk
         PRIMARY KEY (user_stat_id)
 );
+
+CREATE INDEX user_skills_user_stat_id_index
+    ON user_skills (user_stat_id);
+
+CREATE INDEX user_skills_username_index
+    ON user_skills (username);

@@ -37,10 +37,7 @@ class User
         $this->user_id = $user_id;
         $this->logged_in = $values['logged_in'];
         
-        $this->skills = new UserSkills(
-            $user_id,
-            $this->getUsername()
-        );
+        $this->skills = new UserSkills($this->getUsername());
     }
     
     public function getUsername()
