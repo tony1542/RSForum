@@ -29,7 +29,6 @@ abstract class AbstractEndpointBase implements EndpointInterface
      * @return array|mixed
      *
      * @throws ApiException
-     * @throws GuzzleException
      */
     public function call()
     {
