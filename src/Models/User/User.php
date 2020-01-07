@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\User;
 
 use App\Utils\CrystalMathLabs\Api;
 use App\Utils\Runescape\Levels;

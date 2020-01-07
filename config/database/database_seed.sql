@@ -16,7 +16,7 @@ CREATE TABLE user
         PRIMARY KEY (user_id)
 );
 
-CREATE TABLE user_stats
+CREATE TABLE user_skills
 (
     user_stat_id int AUTO_INCREMENT,
     user_id      int NOT NULL,

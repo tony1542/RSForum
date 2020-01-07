@@ -2,13 +2,12 @@
 
 namespace App\Controllers;
 
-use App\Utils\CrystalMathLabs\Api;
 use App\Utils\Http\Request;
-use App\Models\User;
+use App\Models\User\User;
 use App\Utils\Input\Sanitizer;
 use App\Utils\Http\Session;
-use App\Utils\Runescape\Levels;
 use PDO;
+
 class UsersController extends AbstractBaseController
 {
     public function canAccess($action, $parameters = [])

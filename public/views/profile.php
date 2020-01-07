@@ -1,4 +1,4 @@
-<?php /** @var \App\Models\User $user */ ?>
+<?php /** @var \App\Models\User\User $user */ ?>
 
 <div class="row justify-content-center">
     <div class="col-md-8">
