@@ -26,3 +26,5 @@
         </div>
     </div>
 </div>
+
+<script src="/public/js/user/profile.js"></script>
