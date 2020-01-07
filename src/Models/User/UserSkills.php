@@ -19,8 +19,6 @@ class UserSkills {
             array_column($this->getSkills(), 'level')
         );
         
-        $this->skills = null;
-        
         // If we find a skills response from the API, insert a record into the database
         if ($this->skills) {
             $this->insertSkills();
