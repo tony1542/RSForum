@@ -160,16 +160,33 @@ class UsersController extends AbstractBaseController
     public function update()
     {
         $post_values = Request::getPostValues();
-        $new_username = $post_values['username'];
-    
-        $errors = User::verifyUsername($new_username);
-        if (count($errors)) {
-            view($this->getIncludePrefix() . 'profile', ['errors' => $errors]);
+
+        if (!$post_values) {
+            redirect("User/Details/" . Request::getID());
         }
         
         $user_id = Request::getID();
         $user = new User($user_id);
-        $user->update($new_username);
+    
+        $new_username = $post_values['username'];
+        $errors = User::verifyUsername($new_username);
+        if (count($errors)) {
+            view($this->getIncludePrefix() . 'profile', [
+                'user' => $user,
+                'errors' => $errors
+            ]);
+        }
+        
+        $success = $user->update($new_username);
+        
+        if (!$success) {
+            view($this->getIncludePrefix() . 'profile', [
+                'user' => $user,
+                'errors' => [
+                    'The username ' . $new_username . ' is already taken'
+                ]
+            ]);
+        }
         
         redirect("User/Details/" . $user->getID());
     }

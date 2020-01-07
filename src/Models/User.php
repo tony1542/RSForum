@@ -137,11 +137,34 @@ class User
         return $users;
     }
     
+    /**
+     * @param string $username
+     *
+     * @return bool
+     */
     public function update($username)
     {
+        // No change in username
+        if ($username === getSignedInUser()->getUsername()) {
+            return true;
+        }
+        
         $database = getDatabase();
+        
+        // Check for existing usernames
+        $sql = $database->prepare("SELECT COUNT(*) AS count FROM user WHERE username = ?");
+        $sql->execute([$username]);
+        $results = $sql->fetch(PDO::FETCH_ASSOC);
+
+        if ((int) $results['count'] !== 0) {
+            return false;
+        }
+        
+        // If we are all good, update the database
         $sql = $database->prepare("UPDATE user SET username = ? WHERE user_id = ?");
         $sql->execute([$username, Request::getID()]);
+        
+        return true;
     }
     
     /**
