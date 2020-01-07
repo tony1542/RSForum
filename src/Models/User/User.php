@@ -11,13 +11,12 @@ class User
 {
     protected $username ='';
     protected $email_address = '';
-    protected $first_name = '';
-    protected $last_name = '';
     protected $password = '';
     protected $user_id = '';
     protected $logged_in = '';
-    protected $skills = [];
-    protected $total_level = 0;
+    
+    /** @var UserSkills $skills */
+    protected $skills;
     
     public function __construct($user_id)
     {
@@ -38,8 +37,10 @@ class User
         $this->user_id = $user_id;
         $this->logged_in = $values['logged_in'];
         
-        $this->skills = Api::getStatsForPlayer($this->getUsername());
-        $this->total_level = Levels::getTotalLevel($this->getSkills());
+        $this->skills = new UserSkills(
+            $user_id,
+            $this->getUsername()
+        );
     }
     
     public function getUsername()
@@ -54,12 +55,7 @@ class User
     
     public function getTotalLevel()
     {
-        return $this->total_level;
-    }
-    
-    public function getSkills()
-    {
-        return $this->skills;
+        return $this->skills->getTotalLevel();
     }
     
     public static function login($email_address, $password)
