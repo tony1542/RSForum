@@ -2,18 +2,34 @@
 
 namespace App\Controllers;
 
-use App\Utils\CrystalMathLabs\Api;
 use App\Utils\Http\Request;
 use App\Models\User;
 use App\Utils\Input\Sanitizer;
-use App\Utils\Http\Session;
-use App\Utils\Runescape\Levels;
 use PDO;
+
 class UsersController extends AbstractBaseController
 {
+    protected function getIncludePrefix()
+    {
+        return 'user/';
+    }
+    
     public function canAccess($action, $parameters = [])
     {
-        return true;
+        $signed_in_user = getSignedInUser();
+        $is_user_signed_in = $signed_in_user->getID() > 0;
+        $same_user_as_requesting = $signed_in_user->getID() === Request::getID();
+        
+        switch ($action) {
+            case 'members':
+            case 'logout':
+                return $is_user_signed_in;
+            case 'update':
+            case 'details':
+                return $is_user_signed_in && $same_user_as_requesting;
+            default:
+                return true;
+        }
     }
     
     public function index()
@@ -25,7 +41,7 @@ class UsersController extends AbstractBaseController
     {
         // If nothing is in $_POST, just show the register form
         if (!count($_POST)) {
-            view('register');
+            view($this->getIncludePrefix() . 'register');
         }
 
         // Sanitizing our user input before validating
@@ -33,15 +49,8 @@ class UsersController extends AbstractBaseController
         $email_address = Sanitizer::sanitize($_POST['email_address']);
         $password = Sanitizer::sanitize($_POST['password']);
         $password_confirm = Sanitizer::sanitize($_POST['password_confirm']);
-        $form_errors = [];
         
-        if (!$username) {
-            $form_errors[] = 'Please enter a username';
-        }
-        
-        if (strlen($username) < 5 || strlen($username) > 12) {
-            $form_errors[] = 'Please enter a username between 5 and 12 characters long';
-        }
+        $form_errors = User::verifyUsername($username);
 
         $db = getDatabase();
         $sql = $db->prepare('SELECT email_address FROM user WHERE email_address =?');
@@ -52,7 +61,7 @@ class UsersController extends AbstractBaseController
             $value = $value[0];
             $compare_email = $value['email_address'];
         
-            if ($compare_email == $email_address) {
+            if ($compare_email === $email_address) {
                 $form_errors[] = 'Sorry, that email has been taken by another user, please try again';
             }
         }
@@ -75,7 +84,7 @@ class UsersController extends AbstractBaseController
         
         // If we have found any errors, re-show the form with them
         if (count($form_errors)) {
-            view('register', [
+            view($this->getIncludePrefix() . 'register', [
                 'errors' => $form_errors
             ]);
         }
@@ -92,15 +101,16 @@ class UsersController extends AbstractBaseController
         ];
         
         $sql->execute($values);
-        Session::set('username',$username);
-        $_SESSION['name'] = $username; //Setting name for our homepage welcome message.
+        $user_id = $db->lastInsertId();
+        setSignedInUser(new User($user_id));
+        
         redirect('');
     }
 
     public function signIn()
     {
         if (!count($_POST)) {
-            view('signin');
+            view($this->getIncludePrefix() . 'signin');
         }
         
         $email_address = Sanitizer::sanitize($_POST['email_address']);
@@ -116,7 +126,7 @@ class UsersController extends AbstractBaseController
         }
     
         if (count($form_error)) {
-            view('signin', [
+            view($this->getIncludePrefix() . 'signin', [
                 'errors' => $form_error
             ]);
         }
@@ -129,46 +139,55 @@ class UsersController extends AbstractBaseController
     
     public function details()
     {
-        if (count($_POST)) {
-            return;
-        }
-        
         $user_id = Request::getID();
-        $login_error = [];
-        
-        if (empty($_SESSION['username']) || empty($_SESSION['email_address'])) {
-            $login_error[] = 'Please Sign-In to see this page.';
-        } elseif ($user_id != $_SESSION['user_id']) {
-            $login_error[] = 'That page is not for you to see';
-        }
-        
-        if (count($login_error)) {
-            view('home_page', [
-                'errors' => $login_error
-            ]);
-        }
-        
-        view('profile', ['user' => new User($user_id)]);
-    
+        $user = new User($user_id);
+        view($this->getIncludePrefix() . 'profile', ['user' => $user]);
     }
     
     public function logout()
     {
-        $db = getDatabase();
-        $sql = $db->prepare("UPDATE user SET logged_in = 0 WHERE email_address = '{$_SESSION['email_address']}'");
-        $sql->execute();
-        session_destroy();
+        getSignedInUser()->logout();
         redirect('');
     }
     
     public function members()
     {
-        if (!isset($_SESSION['user_id'])) {
-            redirect('');
-        }
-        
-        view('members', [
+        view($this->getIncludePrefix() . 'members', [
             'members' => User::getMembers()
         ]);
+    }
+    
+    public function update()
+    {
+        $post_values = Request::getPostValues();
+
+        if (!$post_values) {
+            redirect("User/Details/" . Request::getID());
+        }
+        
+        $user_id = Request::getID();
+        $user = new User($user_id);
+    
+        $new_username = $post_values['username'];
+        $errors = User::verifyUsername($new_username);
+        if (count($errors)) {
+            view($this->getIncludePrefix() . 'profile', [
+                'user' => $user,
+                'errors' => $errors
+            ]);
+        }
+        
+        $success = $user->update($new_username);
+        
+        if (!$success) {
+            view($this->getIncludePrefix() . 'profile', [
+                'user' => $user,
+                'errors' => [
+                    'The username ' . $new_username . ' is already taken'
+                ]
+            ]);
+        }
+        
+        redirect("User/Details/" . $user->getID());
     }
 }
