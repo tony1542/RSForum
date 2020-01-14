@@ -18,4 +18,12 @@ abstract class AbstractBaseController
      * @return mixed
      */
     abstract public function canAccess($action, $parameters = []);
+    
+    /**
+     * Returns a simple string indicating where a particular controller's view will belong
+     * For example, for User, the `getIncludePrefix` function would return 'user/';
+     *
+     * @return string
+     */
+    abstract protected function getIncludePrefix();
 }

@@ -3,6 +3,8 @@
 namespace App\Models\User;
 
 use App\Utils\CrystalMathLabs\Api;
+use App\Utils\Database\Connection;
+use App\Utils\Http\Request;
 use App\Utils\Runescape\Levels;
 use PDO;
 use App\Utils\Http\Session;
@@ -18,8 +20,12 @@ class User
     /** @var UserSkills $skills */
     protected $skills;
     
-    public function __construct($user_id)
+    public function __construct($user_id = 0)
     {
+        if (!$user_id) {
+            return;
+        }
+        
         // Creating an instance of our db connection, then using a pdo to query our db for a user_id match
         $instance = getDatabase();
         $statement = $instance->prepare('SELECT * FROM user WHERE user_id =?');
@@ -55,6 +61,11 @@ class User
         return $this->skills->getTotalLevel();
     }
     
+    public function getID()
+    {
+        return $this->user_id;
+    }
+    
     public static function login($email_address, $password)
     {
         $data_error = [];
@@ -75,19 +86,28 @@ class User
                 $data_error[] = 'Your Email or Password is incorrect.';
             }
         }
+        
         if (count($data_error)) {
             view('signin', [
                 'errors' => $data_error
             ]);
         }
-        $username = $value['username'];
-        $_SESSION['user_id'] = $value['user_id'];
-        Session::set('username', $username);
-        Session::set('email_address', $email_address);
-
-        $sql = $db->prepare("UPDATE user SET logged_in = 1 WHERE email_address = '{$_SESSION['email_address']}'");
-        $sql->execute();
-        redirect("User/details/{$_SESSION['user_id']}");
+        
+        $user = new User($value['user_id']);
+        setSignedInUser($user);
+        
+        $sql = $db->prepare("UPDATE user SET logged_in = 1 WHERE email_address = ?");
+        $sql->execute([$_SESSION['email_address']]);
+        
+        redirect("User/Details/" . getSignedInUser()->getID());
+    }
+    
+    public function logout()
+    {
+        $db = getDatabase();
+        $sql = $db->prepare("UPDATE user SET logged_in = 0 WHERE email_address = ?");
+        $sql->execute([$_SESSION['email_address']]);
+        session_destroy();
     }
     
     /**
@@ -99,8 +119,7 @@ class User
     public static function getMembers()
     {
         $database = getDatabase();
-        $sql = $database->prepare('SELECT user_id FROM user');
-        $sql->execute();
+        $sql = $database->query("SELECT user_id FROM user");
         $members = $sql->fetchAll(PDO::FETCH_ASSOC);
         
         $users = [];
@@ -109,5 +128,61 @@ class User
         }
         
         return $users;
+    }
+    
+    /**
+     * @param string $username
+     *
+     * @return bool
+     */
+    public function update($username)
+    {
+        // No change in username
+        if ($username === getSignedInUser()->getUsername()) {
+            return true;
+        }
+        
+        $database = getDatabase();
+        
+        // Check for existing usernames
+        $sql = $database->prepare("SELECT COUNT(*) AS count FROM user WHERE username = ?");
+        $sql->execute([$username]);
+        $results = $sql->fetch(PDO::FETCH_ASSOC);
+
+        if ((int) $results['count'] !== 0) {
+            return false;
+        }
+        
+        // If we are all good, update the database
+        $sql = $database->prepare("UPDATE user SET username = ? WHERE user_id = ?");
+        $sql->execute([$username, Request::getID()]);
+        
+        return true;
+    }
+    
+    /**
+     * Verifies a username matches Runescape's restraints
+     *
+     * @param string $username
+     *
+     * @return array
+     */
+    public static function verifyUsername($username)
+    {
+        $errors = [];
+        
+        if (!$username) {
+            $errors[] = 'Enter a username';
+        }
+        
+        if (strlen($username) > 12) {
+            $errors[] = 'Username cannot be longer than 12 characters';
+        }
+    
+        if (!preg_match('/^[a-zA-Z]+[a-zA-Z0-9-_ ]*[a-zA-Z0-9]$/', $username)) {
+            $errors[] = 'Username can only contain numbers, letters, or spaces';
+        }
+        
+        return $errors;
     }
 }

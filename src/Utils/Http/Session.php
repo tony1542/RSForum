@@ -14,7 +14,10 @@ class Session
     public static function flash($key)
     {
         $value = $_SESSION[$key];
-        unset($_SESSION[$key]);
+        
+        if (isset($_SESSION[$key])) {
+            unset($_SESSION[$key]);
+        }
     
         return $value;
     }
