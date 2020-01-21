@@ -17,9 +17,9 @@ class Request
     
     protected static $default_controller_action = 'index';
     
-    public static $default_controller = PagesController::class;
-    public static $default_controller_prefix = 'App\\Controllers\\';
-    protected static $default_controller_suffix = 'sController';
+    public static string $default_controller = PagesController::class;
+    public static string $default_controller_prefix = 'App\\Controllers\\';
+    protected static string $default_controller_suffix = 'sController';
     
     /**
      * Fetch the request URI

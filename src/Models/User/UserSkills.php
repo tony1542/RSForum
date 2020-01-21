@@ -7,9 +7,9 @@ use App\Utils\Runescape\Levels;
 use PDO;
 
 class UserSkills {
-    protected $skills = [];
-    protected $total_level = 0;
-    protected $username;
+    protected array $skills = [];
+    protected int $total_level = 0;
+    protected string $username;
     
     public function __construct($username)
     {

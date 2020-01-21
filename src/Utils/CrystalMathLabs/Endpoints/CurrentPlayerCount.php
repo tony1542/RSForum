@@ -6,7 +6,7 @@ use Psr\Http\Message\StreamInterface;
 
 class CurrentPlayerCount extends AbstractEndpointBase
 {
-    protected $end_point_url = 'type=players';
+    protected string $end_point_url = 'type=players';
     
     public function format(StreamInterface $data)
     {

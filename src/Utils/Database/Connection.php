@@ -8,10 +8,10 @@ use PDOStatement;
 
 class Connection
 {
-    const CONNECTION = 'connection';
-    const DB_NAME    = 'db_name';
-    const USERNAME   = 'username';
-    const PASSWORD   = 'password';
+    public const CONNECTION = 'connection';
+    public const DB_NAME    = 'db_name';
+    public const USERNAME   = 'username';
+    public const PASSWORD   = 'password';
     
     /**
      * Create an instance of our database

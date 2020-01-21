@@ -4,8 +4,8 @@ namespace App\Utils\Runescape;
 
 class Levels
 {
-    const REGULAR_SKILL_CAP = 99;
-    const VIRTUAL_SKILL_CAP = 126;
+    public const REGULAR_SKILL_CAP = 99;
+    public const VIRTUAL_SKILL_CAP = 126;
     
     /**
      * Returns a players level in a skill given their experience

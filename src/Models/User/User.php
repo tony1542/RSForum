@@ -8,11 +8,11 @@ use App\Utils\Http\Session;
 
 class User
 {
-    protected $username ='';
-    protected $email_address = '';
-    protected $password = '';
-    protected $user_id = '';
-    protected $logged_in = '';
+    protected string $username ='';
+    protected string $email_address = '';
+    protected string $password = '';
+    protected string $user_id = '';
+    protected bool $logged_in = false;
     
     protected UserSkills $skills;
     
