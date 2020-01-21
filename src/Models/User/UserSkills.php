@@ -37,9 +37,9 @@ class UserSkills {
             );
         }
         
-        // If we have no record in the DB, return 'N/A'
+        // If we have no record in the DB, return 0
         if (!$this->skills) {
-            $this->total_level = 'N/A';
+            $this->total_level = 0;
         }
     }
     
