@@ -8,7 +8,7 @@
     </div>
 <?php endif; ?>
 
-<div class="d-flex justify-content-center">
+<div class="d-flex justify-content-center mb-2">
     <div class="card col-md-6">
         <div class="card-body">
             <h5 class="card-title">Fremennik Exiles</h5>
