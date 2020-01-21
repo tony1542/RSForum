@@ -4,7 +4,7 @@ namespace App\Utils\Runescape;
 
 class Skills
 {
-    const ALL = [
+    public const ALL = [
         'Overall',
         'Attack',
         'Defence',
@@ -32,7 +32,7 @@ class Skills
     ];
     
     // Our path to the skill thumbnails
-    const PATH_TO_ICONS = '/public/Images/OSRS/Skills/';
+    public const PATH_TO_ICONS = '/public/Images/OSRS/Skills/';
     
     /**
      * Get skill name out of our array given an index
@@ -41,7 +41,7 @@ class Skills
      *
      * @return string
      */
-    public static function getSkillNameFromIndex($index)
+    public static function getSkillNameFromIndex($index): string
     {
         return self::ALL[$index];
     }
@@ -53,7 +53,7 @@ class Skills
      *
      * @return string - Icon location
      */
-    public static function getSkillIconFromIndex($index)
+    public static function getSkillIconFromIndex($index): string
     {
         $skillName = self::getSkillNameFromIndex($index);
         $path = self::PATH_TO_ICONS . strtolower($skillName) . '.png';
