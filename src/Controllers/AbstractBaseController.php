@@ -15,7 +15,7 @@ abstract class AbstractBaseController
      * @param string $action
      * @param array  $parameters
      *
-     * @return mixed
+     * @return bool
      */
     abstract public function canAccess($action, $parameters = []);
     
