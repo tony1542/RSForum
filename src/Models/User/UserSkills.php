@@ -37,7 +37,7 @@ class UserSkills {
             );
         }
         
-        // If we have no record in the DB, return 0
+        // If we have no record in the DB, set total level to 0
         if (!$this->skills) {
             $this->total_level = 0;
         }
@@ -96,6 +96,6 @@ class UserSkills {
     
     public function getTotalLevel()
     {
-        return $this->total_level;
+        return $this->total_level ?: 'N/A';
     }
 }
