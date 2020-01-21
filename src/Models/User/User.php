@@ -1,25 +1,20 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\User;
 
-use App\Utils\CrystalMathLabs\Api;
-use App\Utils\Database\Connection;
 use App\Utils\Http\Request;
-use App\Utils\Runescape\Levels;
 use PDO;
 use App\Utils\Http\Session;
 
 class User
 {
-    protected $username ='';
-    protected $email_address = '';
-    protected $first_name = '';
-    protected $last_name = '';
-    protected $password = '';
-    protected $user_id = '';
-    protected $logged_in = '';
-    protected $skills = [];
-    protected $total_level = 0;
+    protected string $username ='';
+    protected string $email_address = '';
+    protected string $password = '';
+    protected string $user_id = '';
+    protected bool $logged_in = false;
+    
+    protected UserSkills $skills;
     
     public function __construct($user_id = 0)
     {
@@ -44,8 +39,7 @@ class User
         $this->user_id = $user_id;
         $this->logged_in = $values['logged_in'];
         
-        $this->skills = Api::getStatsForPlayer($this->getUsername());
-        $this->total_level = Levels::getTotalLevel($this->getSkills());
+        $this->skills = new UserSkills($this->getUsername());
     }
     
     public function getUsername()
@@ -60,12 +54,7 @@ class User
     
     public function getTotalLevel()
     {
-        return $this->total_level;
-    }
-    
-    public function getSkills()
-    {
-        return $this->skills;
+        return $this->skills->getTotalLevel();
     }
     
     public function getID()
@@ -114,7 +103,7 @@ class User
         $db = getDatabase();
         $sql = $db->prepare("UPDATE user SET logged_in = 0 WHERE email_address = ?");
         $sql->execute([$_SESSION['email_address']]);
-        session_destroy();
+        Session::destroy();
     }
     
     /**

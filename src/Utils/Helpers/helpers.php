@@ -37,7 +37,7 @@ function dd($array, $verbose = false)
  *
  * @param string $path
  */
-function redirect($path)
+function redirect(string $path)
 {
     header('Location: /' . $path);
     die;
@@ -52,7 +52,7 @@ function redirect($path)
  *
  * @see https://www.php.net/manual/en/language.constants.predefined.php#constant.dir
  */
-function view($name, $data = [])
+function view(string $name, $data = [])
 {
     // This extract function allows our views to be able to communicate with the data passed in
     // @see https://www.php.net/manual/en/function.extract.php

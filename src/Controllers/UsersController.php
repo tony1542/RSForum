@@ -3,8 +3,9 @@
 namespace App\Controllers;
 
 use App\Utils\Http\Request;
-use App\Models\User;
+use App\Models\User\User;
 use App\Utils\Input\Sanitizer;
+use App\Utils\Http\Session;
 use PDO;
 
 class UsersController extends AbstractBaseController

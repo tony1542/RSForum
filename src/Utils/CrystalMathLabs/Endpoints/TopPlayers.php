@@ -6,18 +6,18 @@ use Psr\Http\Message\StreamInterface;
 
 class TopPlayers extends AbstractEndpointBase
 {
-    const TIME_PERIOD_NAME = 'timePeriod';
-    const TIME_PERIOD_DAY   = 'day';
-    const TIME_PERIOD_WEEK  = 'week';
-    const TIME_PERIOD_MONTH = 'month';
+    public const TIME_PERIOD_NAME = 'timePeriod';
+    public const TIME_PERIOD_DAY   = 'day';
+    public const TIME_PERIOD_WEEK  = 'week';
+    public const TIME_PERIOD_MONTH = 'month';
     
-    const TIME_PERIODS = [
+    public const TIME_PERIODS = [
         self::TIME_PERIOD_DAY,
         self::TIME_PERIOD_WEEK,
         self::TIME_PERIOD_MONTH
     ];
     
-    protected $end_point_url = 'type=currenttop';
+    protected string $end_point_url = 'type=currenttop';
     
     /**
      * @param string $type
@@ -33,9 +33,9 @@ class TopPlayers extends AbstractEndpointBase
         $this->end_point_url .= '&timeperiod=' . $type;
     }
     
-    public function format(StreamInterface $result)
+    public function format(StreamInterface $data)
     {
-        $result = $this->formatStandard($result);
+        $result = $this->formatStandard($data);
         
         $current_top_players = [];
         foreach ($result as $row) {

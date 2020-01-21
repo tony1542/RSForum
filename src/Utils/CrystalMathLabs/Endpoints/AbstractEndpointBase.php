@@ -10,14 +10,11 @@ use Psr\Http\Message\StreamInterface;
 
 abstract class AbstractEndpointBase implements EndpointInterface
 {
-    protected $base_api_url = 'http://crystalmathlabs.com/tracker/api.php?';
-    protected $end_point_url = '';
+    protected string $base_api_url = 'http://crystalmathlabs.com/tracker/api.php?';
+    protected string $end_point_url = '';
     
-    /** @var Client */
-    protected $client = null;
-    
-    /** @var ApiErrorHandler */
-    protected $error_handler = null;
+    protected Client $client;
+    protected ApiErrorHandler $error_handler;
     
     public function __construct()
     {
@@ -29,7 +26,6 @@ abstract class AbstractEndpointBase implements EndpointInterface
      * @return array|mixed
      *
      * @throws ApiException
-     * @throws GuzzleException
      */
     public function call()
     {
@@ -42,7 +38,7 @@ abstract class AbstractEndpointBase implements EndpointInterface
         return $this->format($body);
     }
     
-    public abstract function format(StreamInterface $data);
+    abstract public function format(StreamInterface $data);
     
     /**
      * Initial format based on how the vast majority of the API Calls are returned

@@ -9,7 +9,7 @@ use App\Utils\Runescape\Levels;
 
 class Stats extends AbstractEndpointBase
 {
-    protected $end_point_url = 'type=stats&player=';
+    protected string $end_point_url = 'type=stats&player=';
     
     public function __construct(string $playerName)
     {

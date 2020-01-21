@@ -4,7 +4,7 @@
 
 <?php if (Session::has('name')) : ?>
     <div class="alert alert-success" role="alert">
-        Welcome <?= Session::flash('name') ?>, Please Sign-in!
+        Welcome <?= Session::flash('name') ?>
     </div>
 <?php endif; ?>
 

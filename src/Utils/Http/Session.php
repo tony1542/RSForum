@@ -11,7 +11,7 @@ class Session
      *
      * @return mixed      - The value of whatever session variable provided
      */
-    public static function flash($key)
+    public static function flash(string $key)
     {
         $value = $_SESSION[$key];
         
@@ -25,14 +25,14 @@ class Session
     /**
      * Retrieves an item from the session if it exists
      *
-     * @param string $id
+     * @param string $key
      *
      * @return bool|mixed
      */
-    public static function get($id)
+    public static function get(string $key)
     {
-        if (self::has($id)) {
-            return $_SESSION[$id];
+        if (self::has($key)) {
+            return $_SESSION[$key];
         }
         
         return false;
@@ -41,35 +41,35 @@ class Session
     /**
      * Checks if an item exists within the session
      *
-     * @param string $id
+     * @param string $key
      *
      * @return bool
      */
-    public static function has($id)
+    public static function has(string $key)
     {
-        return isset($_SESSION[$id]);
+        return isset($_SESSION[$key]);
     }
     
     /**
      * Sets a key => value in the session array
      *
-     * @param string $id
+     * @param string $key
      * @param mixed  $value
      */
-    public static function set($id, $value)
+    public static function set(string $key, $value)
     {
-        $_SESSION[$id] = $value;
+        $_SESSION[$key] = $value;
     }
     
     /**
      * Removes an item from the session if it exists
      *
-     * @param string $id
+     * @param string $key
      */
-    public static function unset($id)
+    public static function unset(string $key)
     {
-        if (self::has($id)) {
-            unset($_SESSION[$id]);
+        if (self::has($key)) {
+            unset($_SESSION[$key]);
         }
     }
     

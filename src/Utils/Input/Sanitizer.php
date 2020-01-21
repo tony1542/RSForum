@@ -5,11 +5,11 @@ namespace App\Utils\Input;
 class Sanitizer
 {
     /**
-     * @param mixed $variable - variable to be sanitized
+     * @param string $variable - variable to be sanitized
      *
      * @return string - sanitized variable
      */
-    public static function sanitize($variable)
+    public static function sanitize(string $variable)
     {
         $variable = trim($variable);
         $variable = stripslashes($variable);

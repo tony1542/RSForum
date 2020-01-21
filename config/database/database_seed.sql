@@ -16,8 +16,40 @@ CREATE TABLE user
         PRIMARY KEY (user_id)
 );
 
-# Insert a row of dummy data
-INSERT INTO user
-SET username      = 'test',
-    email_address = 'test@test.com',
-    password      = 'testpassword';
+CREATE TABLE user_skills
+(
+    user_stat_id int AUTO_INCREMENT,
+    username     varchar(12)  NOT NULL,
+    overall      int NULL,
+    attack       int NULL,
+    defence      int NULL,
+    strength     int NULL,
+    hitpoints    int NULL,
+    ranged       int NULL,
+    prayer       int NULL,
+    magic        int NULL,
+    cooking      int NULL,
+    woodcutting  int NULL,
+    fletching    int NULL,
+    fishing      int NULL,
+    firemaking   int NULL,
+    crafting     int NULL,
+    smithing     int NULL,
+    mining       int NULL,
+    herblore     int NULL,
+    agility      int NULL,
+    thieving     int NULL,
+    slayer       int NULL,
+    farming      int NULL,
+    runecrafting int NULL,
+    hunter       int NULL,
+    construction int NULL,
+    CONSTRAINT user_stats_pk
+        PRIMARY KEY (user_stat_id)
+);
+
+CREATE INDEX user_skills_user_stat_id_index
+    ON user_skills (user_stat_id);
+
+CREATE INDEX user_skills_username_index
+    ON user_skills (username);

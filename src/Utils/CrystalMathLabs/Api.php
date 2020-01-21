@@ -44,7 +44,7 @@ class Api
     /**
      * @param string $playerName
      *
-     * @return array|mixed
+     * @return array
      */
     public static function getStatsForPlayer(string $playerName)
     {
@@ -53,7 +53,7 @@ class Api
     
             return $stats_for_player->call();
         } catch (GuzzleException|ApiException $e) {
-            return null;
+            return [];
         }
     }
 }
