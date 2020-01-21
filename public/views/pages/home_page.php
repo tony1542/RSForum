@@ -31,7 +31,6 @@
     </div>
 </div>
 
-
 <div class="d-flex justify-content-center">
     <div class="card col-md-6">
         <div class="card-body">
