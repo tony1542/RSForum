@@ -22,11 +22,6 @@ abstract class AbstractEndpointBase implements EndpointInterface
         $this->error_handler = new ApiErrorHandler();
     }
     
-    /**
-     * @return array|mixed
-     *
-     * @throws ApiException
-     */
     public function call()
     {
         $full_url = $this->base_api_url . $this->end_point_url;

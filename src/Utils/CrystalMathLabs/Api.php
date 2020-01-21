@@ -7,7 +7,7 @@ use App\Utils\CrystalMathLabs\Endpoints\Stats;
 use App\Utils\CrystalMathLabs\Endpoints\TopPlayers;
 use App\Utils\CrystalMathLabs\Exceptions\ApiException;
 use App\Utils\Http\Session;
-use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Exception\RequestException;
 
 class Api
 {
@@ -20,7 +20,7 @@ class Api
             $current_player_count = new CurrentPlayerCount();
     
             return $current_player_count->call();
-        } catch (GuzzleException|ApiException $e) {
+        } catch (RequestException|ApiException $e) {
             return null;
         }
     }
@@ -36,7 +36,7 @@ class Api
             );
     
             return $top_players->call();
-        } catch (GuzzleException|ApiException $e) {
+        } catch (RequestException|ApiException $e) {
             return null;
         }
     }
@@ -52,7 +52,7 @@ class Api
             $stats_for_player = new Stats($playerName);
     
             return $stats_for_player->call();
-        } catch (GuzzleException|ApiException $e) {
+        } catch (RequestException|ApiException $e) {
             return [];
         }
     }

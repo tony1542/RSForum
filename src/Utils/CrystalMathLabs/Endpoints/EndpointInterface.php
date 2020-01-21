@@ -2,6 +2,8 @@
 
 namespace App\Utils\CrystalMathLabs\Endpoints;
 
+use App\Utils\CrystalMathLabs\Exceptions\ApiException;
+use GuzzleHttp\Exception\RequestException;
 use Psr\Http\Message\StreamInterface;
 
 interface EndpointInterface
@@ -10,6 +12,8 @@ interface EndpointInterface
      * Call the endpoint and return the result
      *
      * @return mixed
+     *
+     * @throws RequestException|ApiException
      */
     public function call();
     
