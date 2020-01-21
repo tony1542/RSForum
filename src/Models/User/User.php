@@ -2,10 +2,7 @@
 
 namespace App\Models\User;
 
-use App\Utils\CrystalMathLabs\Api;
-use App\Utils\Database\Connection;
 use App\Utils\Http\Request;
-use App\Utils\Runescape\Levels;
 use PDO;
 use App\Utils\Http\Session;
 
@@ -17,8 +14,7 @@ class User
     protected $user_id = '';
     protected $logged_in = '';
     
-    /** @var UserSkills $skills */
-    protected $skills;
+    protected UserSkills $skills;
     
     public function __construct($user_id = 0)
     {
@@ -107,7 +103,7 @@ class User
         $db = getDatabase();
         $sql = $db->prepare("UPDATE user SET logged_in = 0 WHERE email_address = ?");
         $sql->execute([$_SESSION['email_address']]);
-        session_destroy();
+        Session::destroy();
     }
     
     /**

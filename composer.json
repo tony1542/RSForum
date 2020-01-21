@@ -13,6 +13,7 @@
     "guzzlehttp/guzzle": "^6.5.2",
     "vlucas/phpdotenv": "^3.6",
     "nesbot/carbon": "^2.28",
-    "ext-pdo": "*"
+    "ext-pdo": "*",
+    "php": "^7.4"
   }
 }
