@@ -1,8 +1,8 @@
 # Create database
-CREATE DATABASE IF NOT EXISTS tonysphpadminabuse;
+CREATE DATABASE IF NOT EXISTS rsforum;
 
 # Select our new database for operation
-USE tonysphpadminabuse;
+USE rsforum;
 
 # Create user table
 CREATE TABLE user
