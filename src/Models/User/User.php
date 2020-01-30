@@ -10,9 +10,9 @@ class User
 {
     protected string $username ='';
     protected string $email_address = '';
-    protected string $password = '';
     protected string $user_id = '';
     protected bool $logged_in = false;
+    protected bool $admin = false;
     
     protected UserSkills $skills;
     
@@ -24,7 +24,9 @@ class User
         
         // Creating an instance of our db connection, then using a pdo to query our db for a user_id match
         $instance = getDatabase();
-        $statement = $instance->prepare('SELECT * FROM user WHERE user_id = ?');
+        $statement = $instance->prepare('SELECT user_id, username, email_address, logged_in, admin
+                                            FROM user
+                                         WHERE user_id = ?');
         $statement->execute([$user_id]);
         $values = $statement->fetchAll(PDO::FETCH_ASSOC);
 
@@ -35,9 +37,9 @@ class User
         $values = $values[0];
         $this->username = $values['username'];
         $this->email_address = $values['email_address'];
-        $this->password = $values['password'];
         $this->user_id = $user_id;
         $this->logged_in = $values['logged_in'];
+        $this->admin = $values['admin'];
         
         $this->skills = new UserSkills($this->getUsername());
     }
@@ -60,6 +62,11 @@ class User
     public function getID(): string
     {
         return $this->user_id;
+    }
+    
+    public function isAdmin(): bool
+    {
+        return $this->admin;
     }
     
     public static function login(string $email_address, string $password): void

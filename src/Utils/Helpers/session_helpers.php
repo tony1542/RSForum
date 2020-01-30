@@ -12,7 +12,7 @@ use Psr\Container\ContainerInterface;
  */
 function getDependencyContainer(): ContainerInterface
 {
-    return Session::get(DependencyInjectionContainer::class);
+    return Session::get(DependencyInjectionContainer::class) ?: new DependencyInjectionContainer();
 }
 
 /**
