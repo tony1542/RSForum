@@ -64,6 +64,11 @@ class User
         return $this->user_id;
     }
     
+    public function getSkills(): array
+    {
+        return $this->skills->getSkills();
+    }
+    
     public function isAdmin(): bool
     {
         return $this->admin;

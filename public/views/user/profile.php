@@ -20,10 +20,26 @@
                     </button>
                 </form>
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="row justify-content-center mt-4">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">Stats</div>
+            <div class="card-body">
+                <?php foreach ($user->getSkills() as $skill): ?>
+                    <!-- TODO i think the getSkills() function returns differently if it is pulled from the DB versus our API calls -->
+                    <!-- TODO normalize them so they are the same -->
+                    <img src="<?= \App\Utils\Runescape\Skills::getSkillIconFromIndex($skill['skill_index']); ?>" alt="<?= $skill['skill_name'] ?>">
+                <?php endforeach; ?>
+            </div>
             <div class="card-footer">
                 Total Level: <?= $user->getTotalLevel() ?>
             </div>
         </div>
+        
     </div>
 </div>
 
