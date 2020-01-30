@@ -1,5 +1,7 @@
 In our `/src/helpers.php`, we have some globally-accessible functions that should be used to help you debug.
 
+(These were inspired by [Laravel's](https://laravel.com/docs/6.x/helpers#method-dd))
+
 - `dump()`, this function will take in any variable as the first parameter (_string, int, float, a class, etc._) and whether or not you want a verbose description of it as the second paramter (_this second parameter is optional and set to `false` by default_)
 - `dd()`, this function is idential to `dump()` with the only difference being, that after execution of `dd()`, it will kill execution of the script. `dd()` stands for dump and die.
 
