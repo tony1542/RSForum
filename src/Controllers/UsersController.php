@@ -6,6 +6,7 @@ use App\Utils\Http\Request;
 use App\Models\User\User;
 use App\Utils\Input\Sanitizer;
 use App\Utils\Http\Session;
+use App\Utils\Runescape\Skills;
 use PDO;
 
 class UsersController extends AbstractBaseController
@@ -76,7 +77,7 @@ class UsersController extends AbstractBaseController
             $form_errors[] = 'Please fill out \'Confirm Password\'';
         }
         
-        if ($password != $password_confirm) {
+        if ($password !== $password_confirm) {
             $form_errors[] = 'Your passwords do not match';
         }
         
@@ -139,7 +140,22 @@ class UsersController extends AbstractBaseController
     {
         $user_id = Request::getID();
         $user = new User($user_id);
-        view($this->getIncludePrefix() . 'profile', ['user' => $user]);
+        
+        $skills = $user->getSkills();
+        $skills_array = [];
+        foreach ($skills as $key => $row) {
+            $skills_array[] = [
+                'src'        => Skills::getSkillIconFromIndex($row['skill_index']),
+                'skill_name' => $row['skill_name'],
+                'exp'        => $row['exp'],
+                'level'      => $row['level']
+            ];
+        }
+    
+        view($this->getIncludePrefix() . 'profile', [
+            'user'   => $user,
+            'skills' => $skills_array
+        ]);
     }
     
     public function logout(): void

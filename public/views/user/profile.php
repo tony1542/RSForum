@@ -29,11 +29,21 @@
         <div class="card">
             <div class="card-header">Stats</div>
             <div class="card-body">
-                <?php foreach ($user->getSkills() as $skill): ?>
-                    <!-- TODO i think the getSkills() function returns differently if it is pulled from the DB versus our API calls -->
-                    <!-- TODO normalize them so they are the same -->
-                    <img src="<?= \App\Utils\Runescape\Skills::getSkillIconFromIndex($skill['skill_index']); ?>" alt="<?= $skill['skill_name'] ?>">
-                <?php endforeach; ?>
+                <div class="row">
+                    <?php foreach ($skills as $skill): ?>
+                        <div class="col-md-4 mb-2">
+                            <div class="card">
+                                <div class="card-body">
+                                    <img src="<?= $skill['src'] ?>" alt="<?= $skill['skill_name'] ?>">
+                                    &nbsp;<?= $skill['skill_name'] ?>
+                                    &nbsp;<?= $skill['level'] ?>
+                                    <hr>
+                                    <?= $skill['exp'] ?>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
             </div>
             <div class="card-footer">
                 Total Level: <?= $user->getTotalLevel() ?>
