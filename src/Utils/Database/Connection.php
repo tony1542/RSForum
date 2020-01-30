@@ -19,8 +19,6 @@ class Connection
      * @return PDO
      *
      * @see https://www.php.net/manual/en/class.pdo.php
-     *
-     * @throws EnvException
      */
     public static function getInstance(): PDO
     {
@@ -52,20 +50,14 @@ class Connection
      * Grabs our database values from our .env file
      *
      * @return array
-     *
-     * @throws EnvException
      */
     protected static function getConnectionParameters(): array
     {
-        $database_name = 'DB';
-        
-        EnvValidator::enforce($database_name);
-        
         return [
-            self::CONNECTION => getenv($database_name . '_CONNECTION_URL'),
-            self::DB_NAME    => getenv($database_name . '_NAME'),
-            self::USERNAME   => getenv($database_name . '_USERNAME'),
-            self::PASSWORD   => getenv($database_name . '_PASSWORD')
+            self::CONNECTION => getenv('DB_CONNECTION_URL'),
+            self::DB_NAME    => getenv('DB_NAME'),
+            self::USERNAME   => getenv('DB_USERNAME'),
+            self::PASSWORD   => getenv('DB_PASSWORD')
         ];
     }
     

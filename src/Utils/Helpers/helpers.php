@@ -1,5 +1,7 @@
 <?php
 
+use App\Utils\Database\EnvException;
+use App\Utils\Database\EnvValidator;
 use App\Utils\Http\Server;
 use Dotenv\Dotenv;
 use Psr\Container\ContainerInterface;
@@ -93,6 +95,8 @@ function view(string $name, $data = []): void
 
 /**
  * Bootstraps our application with any setup required
+ *
+ * @throws EnvException
  */
 function setApplicationVariables(): void
 {
@@ -102,6 +106,9 @@ function setApplicationVariables(): void
     // Load .env file into the application
     $dot_env = Dotenv::create(Server::getRoot() . DIRECTORY_SEPARATOR . 'config');
     $dot_env->load();
+    
+    // Check if our expected .env file has the expected values
+    EnvValidator::enforce('DB');
     
     // Checks if we have a dependency injection container set. If we don't, add a new one to the session
     $container = getDependencyContainer();
