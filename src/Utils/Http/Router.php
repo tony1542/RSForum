@@ -14,7 +14,7 @@ class Router
      *
      * @throws RuntimeException
      */
-    public static function callAction(): void
+    public static function callAction()
     {
         $parameters = Request::getParameters();
         $controller = Request::getController();
