@@ -42,12 +42,12 @@ class User
         $this->skills = new UserSkills($this->getUsername());
     }
     
-    public function getUsername()
+    public function getUsername(): string
     {
         return $this->username;
     }
     
-    public function getEmail()
+    public function getEmail(): string
     {
         return $this->email_address;
     }
@@ -57,12 +57,12 @@ class User
         return $this->skills->getTotalLevel();
     }
     
-    public function getID()
+    public function getID(): string
     {
         return $this->user_id;
     }
     
-    public static function login($email_address, $password)
+    public static function login(string $email_address, string $password): void
     {
         $data_error = [];
         $db = getDatabase();
@@ -98,7 +98,7 @@ class User
         redirect("User/Details/" . getSignedInUser()->getID());
     }
     
-    public function logout()
+    public function logout(): void
     {
         $db = getDatabase();
         $sql = $db->prepare("UPDATE user SET logged_in = 0 WHERE email_address = ?");
@@ -112,7 +112,7 @@ class User
      *
      * @return User[]
      */
-    public static function getMembers()
+    public static function getMembers(): array
     {
         $database = getDatabase();
         $sql = $database->query("SELECT user_id FROM user");
@@ -126,12 +126,7 @@ class User
         return $users;
     }
     
-    /**
-     * @param string $username
-     *
-     * @return bool
-     */
-    public function update($username)
+    public function update(string $username): bool
     {
         // No change in username
         if ($username === getSignedInUser()->getUsername()) {
@@ -155,15 +150,8 @@ class User
         
         return true;
     }
-    
-    /**
-     * Verifies a username matches Runescape's restraints
-     *
-     * @param string $username
-     *
-     * @return array
-     */
-    public static function verifyUsername($username)
+
+    public static function verifyUsername(string $username): array
     {
         $errors = [];
         

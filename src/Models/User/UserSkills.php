@@ -11,7 +11,7 @@ class UserSkills {
     protected int $total_level = 0;
     protected string $username;
     
-    public function __construct($username)
+    public function __construct(string $username)
     {
         $this->username = $username;
         $this->skills = Api::getStatsForPlayer($username);
