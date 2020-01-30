@@ -7,7 +7,7 @@
                 <img class="img-fluid" src="/public/images/comic2.png" />
             </div>
             <div class="card-footer">
-                Total level: <?= $member->getTotalLevel() ?>
+                Total level: <?= $member->getTotalLevel() ?: 'N/A' ?>
             </div>
         </div>
     <?php endforeach; ?>

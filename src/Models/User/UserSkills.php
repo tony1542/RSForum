@@ -44,7 +44,7 @@ class UserSkills {
     }
     
     // Get latest updated stats from database
-    protected function getLastUpdated()
+    protected function getLastUpdated(): array
     {
         $database = getDatabase();
         $sql = $database->prepare('SELECT * FROM user_skills
@@ -74,7 +74,7 @@ class UserSkills {
         return $return_array;
     }
     
-    protected function insertSkills()
+    protected function insertSkills(): void
     {
         $query = [];
         foreach ($this->skills as $skill_row) {
@@ -89,13 +89,13 @@ class UserSkills {
         $sql->execute([$this->username]);
     }
     
-    public function getSkills()
+    public function getSkills(): array
     {
         return $this->skills;
     }
     
-    public function getTotalLevel()
+    public function getTotalLevel(): int
     {
-        return $this->total_level ?: 'N/A';
+        return $this->total_level;
     }
 }

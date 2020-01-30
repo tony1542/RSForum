@@ -17,7 +17,7 @@
                 </form>
             </div>
             <div class="card-footer">
-                Total Level: <?= $user->getTotalLevel() ?>
+                Total Level: <?= $user->getTotalLevel() ?: 'N/A' ?>
             </div>
         </div>
     </div>

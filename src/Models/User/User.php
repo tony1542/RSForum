@@ -52,7 +52,7 @@ class User
         return $this->email_address;
     }
     
-    public function getTotalLevel()
+    public function getTotalLevel(): int
     {
         return $this->skills->getTotalLevel();
     }
