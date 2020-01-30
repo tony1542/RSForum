@@ -19,7 +19,6 @@ class User
     public function __construct($user_id = 0)
     {
         if (!$user_id) {
-            // some changes
             return;
         }
         
