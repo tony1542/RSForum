@@ -3,7 +3,7 @@
 <div class="row justify-content-center">
     <div class="col-md-8">
         <div class="card">
-            <div class="card-header">Account asdf</div>
+            <div class="card-header">Account</div>
             <div class="card-body">
                 <form method="post" action="/User/Update/<?= $user->getID() ?>">
                     <div class="form-group">
