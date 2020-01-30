@@ -22,7 +22,7 @@
             </div>
             <div class="card-footer">
                 Total Level: <?= $user->getTotalLevel() ?>
-            </div>
+            </div>qweaweawe
         </div>
     </div>
 </div>
