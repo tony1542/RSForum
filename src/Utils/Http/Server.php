@@ -4,12 +4,12 @@ namespace App\Utils\Http;
 
 class Server
 {
-    public static function getOptions()
+    public static function getOptions(): array
     {
         return $_SERVER;
     }
     
-    public static function getRoot()
+    public static function getRoot(): string
     {
         if (self::isCommandLine()) {
             return self::getOptions()['PWD'];
@@ -18,7 +18,7 @@ class Server
         return self::getOptions()['DOCUMENT_ROOT'];
     }
     
-    public static function isLocalHost()
+    public static function isLocalHost(): bool
     {
         if (self::isCommandLine()) {
             return true;
@@ -35,7 +35,7 @@ class Server
         return (in_array($address, $whitelist));
     }
     
-    public static function isCommandLine()
+    public static function isCommandLine(): bool
     {
        return PHP_SAPI === 'cli';
     }

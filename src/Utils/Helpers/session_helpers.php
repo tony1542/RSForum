@@ -8,9 +8,9 @@ use Psr\Container\ContainerInterface;
 /**
  * Returns our injection container from our session
  *
- * @return ContainerInterface|DependencyInjectionContainer
+ * @return ContainerInterface
  */
-function getDependencyContainer()
+function getDependencyContainer(): ContainerInterface
 {
     return Session::get(DependencyInjectionContainer::class);
 }
@@ -20,7 +20,7 @@ function getDependencyContainer()
  *
  * @param ContainerInterface $container
  */
-function setDependencyContainer(ContainerInterface $container)
+function setDependencyContainer(ContainerInterface $container): void
 {
     Session::set(DependencyInjectionContainer::class, $container);
 }
@@ -31,7 +31,7 @@ function setDependencyContainer(ContainerInterface $container)
  *
  * @return User
  */
-function getSignedInUser()
+function getSignedInUser(): User
 {
     $signed_in_user = Session::get(User::class);
 
@@ -47,7 +47,7 @@ function getSignedInUser()
  *
  * @param User $user
  */
-function setSignedInUser(User $user)
+function setSignedInUser(User $user): void
 {
     Session::set(User::class, $user);
 }

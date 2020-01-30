@@ -15,7 +15,7 @@ class EnvValidator
      *
      * @throws EnvException
      */
-    public static function enforce($database_name)
+    public static function enforce(string $database_name): void
     {
         $enforcements = [
             $database_name . '_NAME',

@@ -12,7 +12,7 @@ use App\Utils\Database\Connection;
  * @param mixed $array
  * @param bool  $verbose - A flag to specify whether we want a print_r or a more verbose var_dump
  */
-function dump($array, $verbose = false)
+function dump($array, $verbose = false): void
 {
     $method = $verbose ? 'var_dump' : 'print_r';
     echo '<pre>'; $method($array); echo '</pre>';
@@ -26,7 +26,7 @@ function dump($array, $verbose = false)
  *
  * @see dump()
  */
-function dd($array, $verbose = false)
+function dd($array, $verbose = false): void
 {
     dump($array, $verbose);
     die;
@@ -37,7 +37,7 @@ function dd($array, $verbose = false)
  *
  * @param string $path
  */
-function redirect(string $path)
+function redirect(string $path): void
 {
     header('Location: /' . $path);
     die;
@@ -52,7 +52,7 @@ function redirect(string $path)
  *
  * @see https://www.php.net/manual/en/language.constants.predefined.php#constant.dir
  */
-function view(string $name, $data = [])
+function view(string $name, $data = []): void
 {
     // This extract function allows our views to be able to communicate with the data passed in
     // @see https://www.php.net/manual/en/function.extract.php
@@ -94,7 +94,7 @@ function view(string $name, $data = [])
 /**
  * Bootstraps our application with any setup required
  */
-function setApplicationVariables()
+function setApplicationVariables(): void
 {
     // Turn sessions on so we have access to the $_SESSION super-global
     session_start();
@@ -118,7 +118,7 @@ function setApplicationVariables()
  *
  * @return PDO
  */
-function getDatabase()
+function getDatabase(): PDO
 {
     return Connection::getInstance();
 }

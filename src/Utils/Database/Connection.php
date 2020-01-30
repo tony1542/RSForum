@@ -22,7 +22,7 @@ class Connection
      *
      * @throws EnvException
      */
-    public static function getInstance()
+    public static function getInstance(): PDO
     {
         $options = self::getConnectionParameters();
     
@@ -55,7 +55,7 @@ class Connection
      *
      * @throws EnvException
      */
-    protected static function getConnectionParameters()
+    protected static function getConnectionParameters(): array
     {
         $database_name = 'DB';
         
@@ -76,12 +76,11 @@ class Connection
      *
      * @see https://www.php.net/manual/en/pdostatement.debugdumpparams.php
      */
-    public static function debugQuery(PDOStatement $statement)
+    public static function debugQuery(PDOStatement $statement): void
     {
         ob_start();
         $statement->debugDumpParams();
         $contents = ob_get_clean();
-        
         dump($contents);
     }
 }
