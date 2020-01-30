@@ -24,7 +24,7 @@ class User
         
         // Creating an instance of our db connection, then using a pdo to query our db for a user_id match
         $instance = getDatabase();
-        $statement = $instance->prepare('SELECT * FROM user WHERE user_id =?');
+        $statement = $instance->prepare('SELECT * FROM user WHERE user_id = ?');
         $statement->execute([$user_id]);
         $values = $statement->fetchAll(PDO::FETCH_ASSOC);
 

@@ -10,12 +10,12 @@ use PDO;
 
 class UsersController extends AbstractBaseController
 {
-    protected function getIncludePrefix()
+    protected function getIncludePrefix(): string
     {
         return 'user/';
     }
     
-    public function canAccess($action, $parameters = [])
+    public function canAccess(string $action, array $parameters = []): bool
     {
         $signed_in_user = getSignedInUser();
         $is_user_signed_in = $signed_in_user->getID() > 0;
@@ -33,12 +33,9 @@ class UsersController extends AbstractBaseController
         }
     }
     
-    public function index()
-    {
+    public function index(): void {}
     
-    }
-    
-    public function register()
+    public function register(): void
     {
         // If nothing is in $_POST, just show the register form
         if (!count($_POST)) {
@@ -108,7 +105,7 @@ class UsersController extends AbstractBaseController
         redirect('');
     }
 
-    public function signIn()
+    public function signIn(): void
     {
         if (!count($_POST)) {
             view($this->getIncludePrefix() . 'signin');
@@ -138,27 +135,27 @@ class UsersController extends AbstractBaseController
         redirect('');
     }
     
-    public function details()
+    public function details(): void
     {
         $user_id = Request::getID();
         $user = new User($user_id);
         view($this->getIncludePrefix() . 'profile', ['user' => $user]);
     }
     
-    public function logout()
+    public function logout(): void
     {
         getSignedInUser()->logout();
         redirect('');
     }
     
-    public function members()
+    public function members(): void
     {
         view($this->getIncludePrefix() . 'members', [
             'members' => User::getMembers()
         ]);
     }
     
-    public function update()
+    public function update(): void
     {
         $post_values = Request::getPostValues();
 
