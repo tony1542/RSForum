@@ -43,12 +43,13 @@ class UserSkills {
         }
     }
     
-    // Get latest updated stats from database
+    // TODO update to latest db schema
     protected function getLastUpdated(): array
     {
         $database = getDatabase();
         $sql = $database->prepare('SELECT * FROM user_skills
                                      WHERE username = ?
+                                   GROUP BY username
                                    ORDER BY user_stat_id DESC
                                    LIMIT 1');
         $sql->execute([$this->username]);
@@ -74,6 +75,7 @@ class UserSkills {
         return $return_array;
     }
     
+    // TODO update to fit new schema
     protected function insertSkills(): void
     {
         $query = [];
