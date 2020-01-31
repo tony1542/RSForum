@@ -6,6 +6,7 @@ CREATE TABLE user_skills
     skill_exp    int DEFAULT 0 NOT NULL,
     skill_index  int DEFAULT 0 NOT NULL,
     `rank`       int DEFAULT 0 NOT NULL,
+    date_added   date          NOT NULL,
     CONSTRAINT user_skills_pk
         PRIMARY KEY (user_stat_id)
 );
