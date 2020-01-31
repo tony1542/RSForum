@@ -15,21 +15,13 @@ class UserSkills {
     {
         $this->username = $username;
         $this->skills = Api::getStatsForPlayer($username);
-        
-        if ($this->skills) {
-            $this->total_level = Levels::getTotalLevel(
-                array_column($this->getSkills(), 'level')
-            );
-        }
-
+    
         // If we find a skills response from the API, insert a record into the database
         if ($this->skills) {
             $this->insertSkills();
-            
-            return;
         }
-        
-        // If our API isn't connecting, check the DB for a user's skills
+
+        // Check the DB for a user's skills
         $this->skills = $this->getLastUpdated();
         if ($this->skills) {
             $this->total_level = Levels::getTotalLevel(
