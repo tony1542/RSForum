@@ -1,7 +1,7 @@
 <?php /** @var \App\Models\User\User $user */ ?>
 
-<div class="row">
-    <div class="<?php echo $show_skills ? 'col-lg-4' : 'col-lg-12'; ?> mb-4">
+<div class="row justify-content-center">
+    <div class="<?php echo $show_skills ? 'col-lg-4' : 'col-md-8'; ?> mb-4">
         <div class="card">
             <div class="card-header">Account</div>
             <div class="card-body">

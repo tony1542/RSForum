@@ -138,9 +138,14 @@ class UsersController extends AbstractBaseController
     
     public function details(): void
     {
+        view($this->getIncludePrefix() . 'profile', $this->getDetails());
+    }
+    
+    protected function getDetails(): array
+    {
         $user_id = Request::getID();
         $user = new User($user_id);
-        
+    
         $skills = $user->getSkills();
         $skills_array = [];
         foreach ($skills as $key => $row) {
@@ -152,11 +157,11 @@ class UsersController extends AbstractBaseController
             ];
         }
     
-        view($this->getIncludePrefix() . 'profile', [
+        return [
             'user'        => $user,
             'skills'      => $skills_array,
             'show_skills' => count($skills_array) > 0
-        ]);
+        ];
     }
     
     public function logout(): void
@@ -180,27 +185,21 @@ class UsersController extends AbstractBaseController
             redirect("User/Details/" . Request::getID());
         }
         
+        $details = $this->getDetails();
+        
         $user_id = Request::getID();
         $user = new User($user_id);
     
         $new_username = $post_values['username'];
         $errors = User::verifyUsername($new_username);
         if (count($errors)) {
-            view($this->getIncludePrefix() . 'profile', [
-                'user' => $user,
-                'errors' => $errors
-            ]);
+            view($this->getIncludePrefix() . 'profile', array_merge(['errors' => $errors], $details));
         }
         
         $success = $user->update($new_username);
         
         if (!$success) {
-            view($this->getIncludePrefix() . 'profile', [
-                'user' => $user,
-                'errors' => [
-                    'The username ' . $new_username . ' is already taken'
-                ]
-            ]);
+            view($this->getIncludePrefix() . 'profile', array_merge(['errors' => ['The username ' . $new_username . ' is already taken']], $details));
         }
         
         redirect("User/Details/" . $user->getID());

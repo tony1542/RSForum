@@ -18,8 +18,15 @@ class User
     
     public function __construct($user_id = 0)
     {
+        if ($user_id) {
+            $this->load($user_id);
+        }
+    }
+    
+    public function load(int $user_id = 0): void
+    {
         if (!$user_id) {
-            return;
+            $user_id = (int) $this->getID();
         }
         
         // Creating an instance of our db connection, then using a pdo to query our db for a user_id match
@@ -29,18 +36,18 @@ class User
                                          WHERE user_id = ?');
         $statement->execute([$user_id]);
         $values = $statement->fetchAll(PDO::FETCH_ASSOC);
-
+    
         if (!$values || !is_array($values)) {
             return;
         }
-        
+    
         $values = $values[0];
         $this->username = $values['username'];
         $this->email_address = $values['email_address'];
         $this->user_id = $user_id;
         $this->logged_in = $values['logged_in'];
         $this->admin = $values['admin'];
-        
+    
         $this->skills = new UserSkills($this->getUsername());
     }
     
@@ -140,11 +147,6 @@ class User
     
     public function update(string $username): bool
     {
-        // No change in username
-        if ($username === getSignedInUser()->getUsername()) {
-            return true;
-        }
-        
         $database = getDatabase();
         
         // Check for existing usernames
@@ -159,6 +161,8 @@ class User
         // If we are all good, update the database
         $sql = $database->prepare("UPDATE user SET username = ? WHERE user_id = ?");
         $sql->execute([$username, Request::getID()]);
+        
+        $this->load();
         
         return true;
     }
