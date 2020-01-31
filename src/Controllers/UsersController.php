@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\Todo\Todo;
 use App\Utils\Http\Request;
 use App\Models\User\User;
 use App\Utils\Input\Sanitizer;
@@ -142,7 +143,10 @@ class UsersController extends AbstractBaseController
     {
         $user_id = Request::getID();
         $user = new User($user_id);
-        view($this->getIncludePrefix() . 'profile', ['user' => $user]);
+        view($this->getIncludePrefix() . 'profile', [
+            'user' => $user,
+            'todos' =>  Todo::show(1)
+        ]);
     }
     
     public function logout()

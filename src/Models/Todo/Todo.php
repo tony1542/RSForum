@@ -10,7 +10,7 @@ use App\Utils\Http\Session;
 
 class Todo
 {
-    protected string $todo_id='';
+    protected string $task_id='';
     protected string $title='';
     protected string $description='';
     protected bool $is_completed= false;
@@ -32,15 +32,15 @@ class Todo
     }
 
     $value = $values[0];
-    $this->todo_id = $value['todo_id'];
+    $this->task_id = $value['task_id'];
     $this->title = $value['title'];
     $this->description = $value['description'];
     $this->is_completed = $value['is_completed'];
     $this->user_id = $user_id;
 }
-public function getTodoID()
+public function getTaskID()
 {
-    return $this->todo_id;
+    return $this->task_id;
 }
 public function getTitle()
 {
@@ -52,8 +52,12 @@ public function getDescription()
 }
 public function getIsCompleted()
 {
-    return $this->is_completed;
+    return (int)$this->is_completed; //casted the boolean with (int) to make bool show up if it's false;O
 }
+    public function getUID()
+    {
+        return $this->user_id;
+    }
 
 public function add()
 {
@@ -64,12 +68,11 @@ public function add()
     //if we get this far, no errors, insert task into database.
 
     $db = getDatabase();
-    $sql = $db->prepare("INSERT INTO todo (title, description, is_completed) VALUES (?, ?, ?)");
+    $sql = $db->prepare("INSERT INTO todo (title, description) VALUES (?, ?)");
 
     $values = [
         $title,
-    $description,
-    $is_completed
+    $description
         ];
 
     $sql->execute($values);
@@ -84,11 +87,7 @@ public static function show($user_id)
 
     $todos = [];
     foreach($values as $task){
-        $todos[] = new self($task['todo_id']);
-        $todos[] = new self($task['title']);
-        $todos[] = new self($task['description']);
-        $todos[] = new self($task['is_complete']);
-        $todos[] = new self($task['user_id']);
+        $todos[] = new self($task['task_id']);
     }
     return $todos;
 }

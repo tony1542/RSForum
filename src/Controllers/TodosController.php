@@ -51,9 +51,6 @@ class TodosController extends AbstractBaseController
                 'errors' => $errors
             ]);
         }
-        Todo::show(1);
-
-        redirect('');
     }
     public function show()
     {
