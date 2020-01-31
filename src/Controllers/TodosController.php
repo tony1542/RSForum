@@ -28,7 +28,7 @@ class TodosController extends AbstractBaseController
     {
 
     }
-    public function add()
+    public function add($user_id = 1)
     {
         if(!count($_POST)) {
             view($this->getIncludePrefix() . 'profile');
@@ -51,6 +51,11 @@ class TodosController extends AbstractBaseController
                 'errors' => $errors
             ]);
         }
+        $user_id = 1;
+        $task_added = Todo::add($user_id, $title, $description);
+        view($this->getIncludePrefix() . 'profile', [
+            'todos' =>  Todo::show(1)
+        ]);
     }
     public function show()
     {

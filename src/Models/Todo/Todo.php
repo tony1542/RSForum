@@ -59,24 +59,22 @@ public function getIsCompleted()
         return $this->user_id;
     }
 
-public function add()
+public function add($user_id, $title, $description)
 {
     if(!count($_POST)) {
         view($this->getIncludePrefix() . 'profile');
     }
-
     //if we get this far, no errors, insert task into database.
 
     $db = getDatabase();
-    $sql = $db->prepare("INSERT INTO todo (title, description) VALUES (?, ?)");
+    $sql = $db->prepare("INSERT INTO todo (title, description, user_id) VALUES (?, ?, ?)");
 
     $values = [
         $title,
-    $description
+    $description,
+        $user_id
         ];
-
     $sql->execute($values);
-    redirect('/Details');
 }
 public static function show($user_id)
 {
@@ -87,8 +85,9 @@ public static function show($user_id)
 
     $todos = [];
     foreach($values as $task){
-        $todos[] = new self($task['task_id']);
+        $todos[] = new self($task['user_id']);
     }
+   // dd($todos);
     return $todos;
 }
 

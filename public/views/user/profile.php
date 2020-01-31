@@ -49,7 +49,7 @@
 </thead>
 <tbody>
 <td></td><tr>
-<form method="post" action="/Todo/Add" class="input_form">
+<form method="post" action="/Todo/" class="input_form">
     <input type="text" name="title" class="title">
     <input type="text" name="description" class="description">
     <button type="submit" name="submit" id="add_btn" class="add_btn">Add Task</button>
@@ -57,19 +57,20 @@
 </tr>
 </td>
 
-<?php
-?>
 
 
 
 <?php $i = 1;{ ?>
 <tr>
     <td> <?php echo $i; ?> </td>
-    <td class="task"> <?php echo $todos[0]->getTaskID(); ?> </td>
-    <td><?php echo $todos[0]->getTitle() ?></td>
-    <td><?php echo $todos[0]->getDescription() ?></td>
-    <td><?php echo $todos[0]->getIsCompleted()?></td>
-    <td><?php echo $todos[0]->getUID() ?></td>
+   <?php foreach ($data['todos'] as $task) : ?>
+       <td><?php echo $todos[0]->getTitle() ?></td>
+       <td><?php echo $todos[0]->getDescription() ?></td>
+       <td><?php echo $todos[0]->getIsCompleted()?></td>
+       <td><?php echo $todos[0]->getUID() ?></td>
+
+    <?php endforeach; ?>
+
 </tr>
 <?php $i++; } ?>
 </tbody>

@@ -145,7 +145,7 @@ class UsersController extends AbstractBaseController
         $user = new User($user_id);
         view($this->getIncludePrefix() . 'profile', [
             'user' => $user,
-            'todos' =>  Todo::show(1)
+            'todos' =>  Todo::show($user_id)
         ]);
     }
     
