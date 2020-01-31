@@ -1,7 +1,7 @@
 <?php /** @var \App\Models\User\User $user */ ?>
 
 <div class="row">
-    <div class="col-lg-4 mb-4">
+    <div class="<?php echo $show_skills ? 'col-lg-4' : 'col-lg-12'; ?> mb-4">
         <div class="card">
             <div class="card-header">Account</div>
             <div class="card-body">
@@ -23,32 +23,34 @@
         </div>
     </div>
 
-    <div class="col-lg-8 mb-4">
-        <div class="card">
-            <div class="card-header">Stats</div>
-            <div class="card-body">
-                <div class="row">
-                    <?php foreach ($skills as $skill): ?>
-                        <div class="col-md-4 mb-2">
-                            <div class="card">
-                                <div class="card-body">
-                                    <img src="<?= $skill['src'] ?>" alt="<?= $skill['skill_name'] ?>">
-                                    &nbsp;<?= $skill['skill_name'] ?>
-                                    &nbsp;<?= $skill['level'] ?>
-                                    <hr>
-                                    <?= $skill['exp'] ?>
+    <?php if ($show_skills): ?>
+        <div class="col-lg-8 mb-4">
+            <div class="card">
+                <div class="card-header">Stats</div>
+                <div class="card-body">
+                    <div class="row">
+                        <?php foreach ($skills as $skill): ?>
+                            <div class="col-md-4 mb-2">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <img src="<?= $skill['src'] ?>" alt="<?= $skill['skill_name'] ?>">
+                                        &nbsp;<?= $skill['skill_name'] ?>
+                                        &nbsp;<?= $skill['level'] ?>
+                                        <hr>
+                                        <?= $skill['exp'] ?>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    <?php endforeach; ?>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    Total Level: <?= $user->getTotalLevel() ?>
                 </div>
             </div>
-            <div class="card-footer">
-                Total Level: <?= $user->getTotalLevel() ?>
-            </div>
         </div>
-
-    </div>
+    <?php endif; ?>
+    
 </div>
 
 <script src="/public/js/user/profile.js"></script>

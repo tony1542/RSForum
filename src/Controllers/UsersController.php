@@ -153,8 +153,9 @@ class UsersController extends AbstractBaseController
         }
     
         view($this->getIncludePrefix() . 'profile', [
-            'user'   => $user,
-            'skills' => $skills_array
+            'user'        => $user,
+            'skills'      => $skills_array,
+            'show_skills' => count($skills_array) > 0
         ]);
     }
     
