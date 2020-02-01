@@ -60,14 +60,18 @@
 
 
 
-<?php $i = 1;{ ?>
+<?php
+
+dd($data['todos']);
+
+{ ?>
 <tr>
     <td> <?php echo $i; ?> </td>
    <?php foreach ($data['todos'] as $task) : ?>
-       <td><?php echo $todos[0]->getTitle() ?></td>
-       <td><?php echo $todos[0]->getDescription() ?></td>
-       <td><?php echo $todos[0]->getIsCompleted()?></td>
-       <td><?php echo $todos[0]->getUID() ?></td>
+       <td><?php echo $todos[1]->getTitle() ?></td>
+       <td><?php echo $todos->getDescription() ?></td>
+       <td><?php echo $todos->getIsCompleted()?></td>
+       <td><?php echo $task->getUID() ?></td>
 
     <?php endforeach; ?>
 

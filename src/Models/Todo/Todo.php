@@ -3,6 +3,7 @@
 
 namespace App\Models\Todo;
 
+use App\Utils\Database\Connection;
 use App\Utils\Http\Request;
 use App\Utils\Input\Sanitizer;
 use PDO;
@@ -16,7 +17,7 @@ class Todo
     protected bool $is_completed= false;
     protected string $user_id='';
 
-    public function __construct($user_id = 1)
+    public function __construct($user_id = null)
 {
     if(!$user_id){
         return;
@@ -25,18 +26,25 @@ class Todo
     $instance = getDatabase();
     $stmt = $instance->prepare('SELECT * FROM todo WHERE user_id =?');
     $stmt->execute([$user_id]);
-    $values = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $value = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    if (!$values || !is_array($values)) {
+
+
+    if (!$value || !is_array($value)) {
         return;
     }
-
-    $value = $values[0];
-    $this->task_id = $value['task_id'];
-    $this->title = $value['title'];
-    $this->description = $value['description'];
-    $this->is_completed = $value['is_completed'];
-    $this->user_id = $user_id;
+    $todos = [];;
+$i = 0;
+    foreach($value as $task[$i]){
+         $this->task_id = $task[$i]['task_id'];
+         $this->title = $task[$i]['title'];
+         $this->description = $task[$i]['description'];
+         $this->is_completed = $task[$i]['is_completed'];
+         $this->user_id = $user_id;
+         $todos[] = $task[$i];
+         $i++;
+    }
+    return $todos;
 }
 public function getTaskID()
 {
@@ -76,20 +84,5 @@ public function add($user_id, $title, $description)
         ];
     $sql->execute($values);
 }
-public static function show($user_id)
-{
-    $db = getDatabase();
-    $sql = $db->prepare("SELECT * FROM todo WHERE user_id =?");
-    $sql->execute([$user_id]);
-    $values = $sql->fetchAll(PDO::FETCH_ASSOC);
-
-    $todos = [];
-    foreach($values as $task){
-        $todos[] = new self($task['user_id']);
-    }
-   // dd($todos);
-    return $todos;
-}
-
 
 }
