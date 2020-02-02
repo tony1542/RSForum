@@ -28,13 +28,12 @@ class User
                                             FROM user
                                          WHERE user_id = ?');
         $statement->execute([$user_id]);
-        $values = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $values = $statement->fetch(PDO::FETCH_ASSOC);
 
         if (!$values || !is_array($values)) {
             return;
         }
         
-        $values = $values[0];
         $this->username = $values['username'];
         $this->email_address = $values['email_address'];
         $this->user_id = $user_id;
