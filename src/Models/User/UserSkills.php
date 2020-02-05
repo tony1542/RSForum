@@ -21,11 +21,11 @@ class UserSkills {
                 array_column($this->getSkills(), 'level')
             );
         }
-
+        
         // If we find a skills response from the API, insert a record into the database
         if ($this->skills) {
             $this->insertSkills();
-            
+        
             return;
         }
         
@@ -56,19 +56,23 @@ class UserSkills {
         $result = $sql->fetch(PDO::FETCH_ASSOC);
         
         // Unset the rows we don't need
-        unset($result['user_stat_id'], $result['username'], $result['overall']);
+        unset($result['user_stat_id'], $result['username']);
         
         if (!is_array($result)) {
             return [];
         }
     
         $return_array = [];
+        $i = 0;
         foreach ($result as $skill => $exp) {
             $return_array[] = [
-                'skill_name' => ucwords($skill),
-                'exp'   => $exp,
-                'level' => Levels::findFromExp($exp, false)
+                'skill_index' => $i,
+                'skill_name'  => ucwords($skill),
+                'exp'         => number_format($exp),
+                'level'       => $i === 0 ? null : Levels::findFromExp($exp),
+                'rank'        => null // TODO update our db table to track rank as well. will require a refactor of the table
             ];
+            $i++;
         }
         
         return $return_array;
