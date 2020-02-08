@@ -3,6 +3,7 @@
 namespace App\Models\User;
 
 use App\Utils\CrystalMathLabs\Api;
+use App\Utils\Database\Connection;
 use App\Utils\Runescape\Levels;
 use PDO;
 
@@ -15,6 +16,8 @@ class UserSkills {
     {
         $this->username = $username;
         $this->skills = Api::getStatsForPlayer($username);
+        
+        dump($this->skills);
         
         if ($this->skills) {
             $this->total_level = Levels::getTotalLevel(
@@ -83,13 +86,14 @@ class UserSkills {
         $query = [];
         foreach ($this->skills as $skill_row) {
             $query[] = $skill_row['skill_name'] . ' = ' . (int) filter_var($skill_row['exp'], FILTER_SANITIZE_NUMBER_INT);
+            $query[] = 'rank = ' . (int) filter_var($skill_row['rank'], FILTER_SANITIZE_NUMBER_INT);
         }
         
         $query = implode(', ', $query);
         
         $database = getDatabase();
-        
         $sql = $database->prepare('INSERT INTO user_skills SET ' . $query . ', username = ?');
+        dd(Connection::debugQuery($sql));
         $sql->execute([$this->username]);
     }
     
