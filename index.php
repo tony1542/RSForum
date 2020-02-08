@@ -2,6 +2,7 @@
 
 require('vendor/autoload.php');
 
+use App\Utils\Database\EnvException;
 use App\Utils\Http\Router;
 
 try {
@@ -9,6 +10,10 @@ try {
     Router::callAction();
 } catch (Throwable $t) {
     $errors = ['Something went wrong.'];
+    
+    if ($t instanceof EnvException) {
+        $errors = [$t->getMessage()];
+    }
     
     if (getSignedInUser()->isAdmin()) {
         $errors = [
