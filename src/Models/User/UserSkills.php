@@ -33,8 +33,6 @@ class UserSkills {
         // If our API isn't connecting, check the DB for a user's skills
         $this->skills = $this->getLastUpdated();
         
-        dd($this->skills);
-        
         if ($this->skills) {
             $this->total_level = Levels::getTotalLevel(
                 array_column($this->getSkills(), 'level')
@@ -58,6 +56,7 @@ class UserSkills {
         $sql->execute([$this->username]);
         
         $result = $sql->fetchAll(PDO::FETCH_ASSOC);
+        $result = array_reverse($result);
         
         // Unset the rows we don't need
         unset($result['user_stat_id'], $result['username']);
