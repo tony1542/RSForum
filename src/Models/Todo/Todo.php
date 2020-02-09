@@ -17,34 +17,16 @@ class Todo
     protected bool $is_completed= false;
     protected string $user_id='';
 
-    public function __construct($user_id = null)
+    public function __construct($task_id, $title, $description, $is_completed, $user_id)
 {
     if(!$user_id){
         return;
 }
-    //Create an instance of our DB, then PDO query db for task based off user_id
-    $instance = getDatabase();
-    $stmt = $instance->prepare('SELECT * FROM todo WHERE user_id =?');
-    $stmt->execute([$user_id]);
-    $value = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-
-
-    if (!$value || !is_array($value)) {
-        return;
-    }
-    $todos = [];;
-$i = 0;
-    foreach($value as $task[$i]){
-         $this->task_id = $task[$i]['task_id'];
-         $this->title = $task[$i]['title'];
-         $this->description = $task[$i]['description'];
-         $this->is_completed = $task[$i]['is_completed'];
-         $this->user_id = $user_id;
-         $todos[] = $task[$i];
-         $i++;
-    }
-    return $todos;
+        $this->task_id = $task_id;
+       $this->title= $title;
+        $this->description = $description;
+       $this->is_completed = $is_completed;
+        $this->user_id = $user_id;
 }
 public function getTaskID()
 {
@@ -83,6 +65,8 @@ public function add($user_id, $title, $description)
         $user_id
         ];
     $sql->execute($values);
+
+
 }
 
 }

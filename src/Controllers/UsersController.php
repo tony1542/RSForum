@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\Todo\Todo;
+use App\Models\Todo\TodoCollector;
 use App\Utils\Http\Request;
 use App\Models\User\User;
 use App\Utils\Input\Sanitizer;
@@ -143,9 +144,10 @@ class UsersController extends AbstractBaseController
     {
         $user_id = Request::getID();
         $user = new User($user_id);
+        $todo = new TodoCollector($user_id);
         view($this->getIncludePrefix() . 'profile', [
             'user' => $user,
-            'todos' =>  Todo::show($user_id)
+            'todo' => $todo->getTasks()
         ]);
     }
     
@@ -161,7 +163,13 @@ class UsersController extends AbstractBaseController
             'members' => User::getMembers()
         ]);
     }
-    
+
+    public function todo()
+    {
+
+    }
+
+
     public function update()
     {
         $post_values = Request::getPostValues();
