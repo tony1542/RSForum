@@ -83,17 +83,17 @@ class UserSkills {
     
     protected function insertSkills(): void
     {
-        $query = [];
+        $database = getDatabase();
+    
         foreach ($this->skills as $skill_row) {
-            $query[] = $skill_row['skill_name'] . ' = ' . (int) filter_var($skill_row['exp'], FILTER_SANITIZE_NUMBER_INT);
-            $query[] = 'rank = ' . (int) filter_var($skill_row['rank'], FILTER_SANITIZE_NUMBER_INT);
+            $sql = '';
+            $sql .= 'skill_exp = ' . (int) filter_var($skill_row['exp'], FILTER_SANITIZE_NUMBER_INT);
+            $sql .= ', skill_name = ?';
+            $sql .= ', rank = ' . (int) filter_var($skill_row['rank'], FILTER_SANITIZE_NUMBER_INT);
+            $sql = $database->prepare('INSERT INTO user_skills SET ' . $sql . ', username = ?');
+            $sql->execute([$skill_row['skill_name'], $this->username]);
         }
         
-        $query = implode(', ', $query);
-        
-        $database = getDatabase();
-        $sql = $database->prepare('INSERT INTO user_skills SET ' . $query . ', username = ?');
-        dd(Connection::debugQuery($sql));
         $sql->execute([$this->username]);
     }
     
