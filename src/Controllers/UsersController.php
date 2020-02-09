@@ -150,7 +150,19 @@ class UsersController extends AbstractBaseController
             'todo' => $todo->getTasks()
         ]);
     }
-    
+
+    protected function getDetailsOrSomeShit()
+    {
+        $user_id = Request::getID();
+        $user = new User($user_id);
+        $todo = new TodoCollector($user_id);
+
+        return [
+            'user' => $user,
+            'todo' => $todo->getTasks()
+        ];
+    }
+
     public function logout()
     {
         getSignedInUser()->logout();
@@ -163,12 +175,6 @@ class UsersController extends AbstractBaseController
             'members' => User::getMembers()
         ]);
     }
-
-    public function todo()
-    {
-
-    }
-
 
     public function update()
     {

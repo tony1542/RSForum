@@ -49,10 +49,10 @@ public function getIsCompleted()
         return $this->user_id;
     }
 
-public function add($user_id, $title, $description)
+public static function add($title, $description, $user_id)
 {
     if(!count($_POST)) {
-        view($this->getIncludePrefix() . 'profile');
+        redirect("Todo/Tasks/" . getSignedInUser()->getID());
     }
     //if we get this far, no errors, insert task into database.
 
@@ -66,7 +66,7 @@ public function add($user_id, $title, $description)
         ];
     $sql->execute($values);
 
-
+    redirect("Todo/Tasks/" . getSignedInUser()->getID());
 }
 
 }
