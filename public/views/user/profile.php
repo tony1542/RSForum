@@ -39,6 +39,9 @@
                                         <hr>
                                         <?= $skill['exp'] ?>
                                     </div>
+                                    <div class="card-footer">
+                                        # <?= $skill['rank'] ?>
+                                    </div>
                                 </div>
                             </div>
                         <?php endforeach; ?>

@@ -153,7 +153,8 @@ class UsersController extends AbstractBaseController
                 'src'        => Skills::getSkillIconFromIndex($row['skill_index']),
                 'skill_name' => $row['skill_name'],
                 'exp'        => $row['exp'],
-                'level'      => $row['level']
+                'level'      => $row['level'],
+                'rank'       => $row['rank']
             ];
         }
     

@@ -31,6 +31,7 @@ class UserSkills {
         
         // If our API isn't connecting, check the DB for a user's skills
         $this->skills = $this->getLastUpdated();
+        
         if ($this->skills) {
             $this->total_level = Levels::getTotalLevel(
                 array_column($this->getSkills(), 'level')
@@ -50,10 +51,11 @@ class UserSkills {
         $sql = $database->prepare('SELECT * FROM user_skills
                                      WHERE username = ?
                                    ORDER BY user_stat_id DESC
-                                   LIMIT 1');
+                                   LIMIT 24');
         $sql->execute([$this->username]);
         
-        $result = $sql->fetch(PDO::FETCH_ASSOC);
+        $result = $sql->fetchAll(PDO::FETCH_ASSOC);
+        $result = array_reverse($result);
         
         // Unset the rows we don't need
         unset($result['user_stat_id'], $result['username']);
@@ -64,13 +66,13 @@ class UserSkills {
     
         $return_array = [];
         $i = 0;
-        foreach ($result as $skill => $exp) {
+        foreach ($result as $row) {
             $return_array[] = [
                 'skill_index' => $i,
-                'skill_name'  => ucwords($skill),
-                'exp'         => number_format($exp),
-                'level'       => $i === 0 ? null : Levels::findFromExp($exp),
-                'rank'        => null // TODO update our db table to track rank as well. will require a refactor of the table
+                'skill_name'  => ucwords($row['skill_name']),
+                'exp'         => number_format($row['skill_exp']),
+                'level'       => $i === 0 ? null : Levels::findFromExp($row['skill_exp']),
+                'rank'        => number_format($row['rank'])
             ];
             $i++;
         }
@@ -80,17 +82,16 @@ class UserSkills {
     
     protected function insertSkills(): void
     {
-        $query = [];
-        foreach ($this->skills as $skill_row) {
-            $query[] = $skill_row['skill_name'] . ' = ' . (int) filter_var($skill_row['exp'], FILTER_SANITIZE_NUMBER_INT);
-        }
-        
-        $query = implode(', ', $query);
-        
         $database = getDatabase();
-        
-        $sql = $database->prepare('INSERT INTO user_skills SET ' . $query . ', username = ?');
-        $sql->execute([$this->username]);
+    
+        foreach ($this->skills as $skill_row) {
+            $sql = '';
+            $sql .= 'skill_exp = ' . (int) filter_var($skill_row['exp'], FILTER_SANITIZE_NUMBER_INT);
+            $sql .= ', skill_name = ?';
+            $sql .= ', rank = ' . (int) filter_var($skill_row['rank'], FILTER_SANITIZE_NUMBER_INT);
+            $sql = $database->prepare('INSERT INTO user_skills SET ' . $sql . ', username = ?');
+            $sql->execute([$skill_row['skill_name'], $this->username]);
+        }
     }
     
     public function getSkills(): array
