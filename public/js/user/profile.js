@@ -4,9 +4,5 @@ $(document).ready(function () {
         return confirm('Click ok to update your profile');
     });
 });
-$(document).ready(function () {
-    $('#TaskEdit').submit(function (e) {
-        return confirm('Press ok to add task');
-    });
-});
+
 

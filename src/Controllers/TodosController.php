@@ -34,6 +34,7 @@ class TodosController extends AbstractBaseController
                 return true;
         }
     }
+
     public function index()
     {
 
@@ -41,6 +42,7 @@ class TodosController extends AbstractBaseController
 
     public function tasks()
     {
+
         $user_id = Request::getID();
         $user = new User($user_id);
         $todo = new TodoCollector($user_id);
@@ -50,27 +52,74 @@ class TodosController extends AbstractBaseController
         ]);
     }
 
-    public function update()
+    public function edit()
     {
+        if (!count($_POST)) {
+            view($this->getIncludePrefix() . 'task');
+        }
+        //clean dat user input yo
+        $title = Sanitizer::sanitize($_POST['title']);
+        $description = Sanitizer::sanitize($_POST['description']);
+
+        $complete = $_POST['complete'];
+        $task_id = $_POST['hidden_edit'];
+        $user_id = Request::getID();
+        $user = new user($user_id);
+        $todo = new TodoCollector($user_id);
+
+        if (!$title) {
+            $errors[] = 'Edit Canceled; User did not enter a title';
+        }
+        if (!$description) {
+            $errors[] = 'Edit Canceled; User did not enter a description';
+        }
+        if (count($errors)) {
+            view($this->getIncludePrefix() . 'task', [
+                'errors' => $errors,
+                'user' => $user,
+                'todo' => $todo->getTasks()
+            ]);
+        }
+        //the chumps didn't mess anything up, send it.
+        Todo::edit($task_id, $user_id, $title, $description, $complete);
+
 
     }
+
     public function delete()
     {
+        if (!count($_POST)) {
+            view($this->getIncludePrefix() . 'task');
+        }
+        $user_id = Request::getID();
+        $task_id = $_POST['hidden_delete'];
+        Todo::delete($user_id, $task_id);
     }
+
+    public function complete()
+    {
+        if (!count($_POST)) {
+            view($this->getIncludePrefix() . 'task');
+        }
+        $user_id = Request::getID();
+        $task_id = $_POST['hidden_complete'];
+        Todo::complete($user_id, $task_id);
+    }
+
     public function add()
     {
-        if(!count($_POST)) {
+        if (!count($_POST)) {
             view($this->getIncludePrefix() . 'task');
         }
         //Sanatize user input
         $title = Sanitizer::sanitize($_POST['title']);
         $description = Sanitizer::sanitize($_POST['description']);
-        $is_completed= false;
+        $date = date("Y-m-d");
         $errors = [];
-        if(!$title) {
+        if (!$title) {
             $errors[] = 'Please enter a title';
         }
-        if(!$description) {
+        if (!$description) {
             $errors[] = 'Please enter a description';
         }
         $user_id = Request::getID();
@@ -84,7 +133,7 @@ class TodosController extends AbstractBaseController
                 'todo' => $todo->getTasks()
             ]);
         }
-        Todo::add($title, $description, $user_id);
+        Todo::add($title, $description, $date, $user_id);
     }
 
     public function getData()
@@ -98,7 +147,7 @@ class TodosController extends AbstractBaseController
             'todo' => $todo->getTasks()
         ];
         //If I wanted to call this function but perhaps add to do it, like say our error function, it would look like this.
-       // $return_array = $this->getData();
-       // $return_array[] = $errors;
+        // $return_array = $this->getData();
+        // $return_array[] = $errors;
     }
 }

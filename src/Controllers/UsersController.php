@@ -144,10 +144,8 @@ class UsersController extends AbstractBaseController
     {
         $user_id = Request::getID();
         $user = new User($user_id);
-        $todo = new TodoCollector($user_id);
         view($this->getIncludePrefix() . 'profile', [
-            'user' => $user,
-            'todo' => $todo->getTasks()
+            'user' => $user
         ]);
     }
 
