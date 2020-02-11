@@ -28,12 +28,9 @@
                         <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Task ID</th>
                             <th scope="col">Title</th>
-                            <th scope="col">Description</th>
                             <th scope="col">Complete</th>
                             <th scope="col">Date Created</th>
-                            <th scope="col">User ID</th>
                             <th scope="col">Task Editor</th>
                         </tr>
                         </thead>
@@ -41,9 +38,11 @@
                         <?php $i = 1; ?>
                         <?php foreach ($todo as $value) { ?>
                             <th scope="row"><?= $i ?></th>
-                            <td><?= $value->getTaskID(); ?></td>
-                            <td><?= $value->getTitle(); ?></td>
-                            <td><?= $value->getDescription(); ?></td>
+                            <td>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#titleModel-<?=$i;?>">
+                                <?= $value->getTitle(); ?>
+                                </button>
+                            </td>
                             <?php $complete = $value->getIsCompleted(); ?>
                             <?php if ($complete == 0) : ?>
                                 <td>No</td>
@@ -51,7 +50,6 @@
                                 <td>Yes</td>
                             <?php endif; ?>
                             <td><?= $value->getDate() ?></td>
-                            <td><?= $value->getUID(); ?></td>
                             <form name="Complete" id="Complete" method="post"
                                   action="/Todo/Complete/<?= $user->getID() ?>">
                                 <?php $edit = $value->getTaskID(); ?>
@@ -87,9 +85,8 @@
                                                 <label for="title">Title:</label><input type="text" name="title"
                                                                                         value="<?= $value->getTitle(); ?>"><br>
 
-                                                <label for="title">Description: </label><input type="text"
-                                                                                               name="description"
-                                                                                               value="<?= $value->getDescription(); ?>"><br>
+                                                <label for="title">Description: </label>
+                                                <textarea rows="5" cols="60" type="text" name="description" value="<?= $value->getDescription(); ?>"><?= $value->getDescription(); ?></textarea><br>
                                                 <label for="title">Complete: </label>
                                                 <select id="complete" name="complete">
                                                     <option <?php if ($complete == 0) echo 'selected'; ?> value="0"
@@ -112,6 +109,28 @@
                             </div>
                             </td>
                             </tr>
+
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="titleModel-<?=$i;?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle"><?=$value->getTitle();?></h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <textarea rows="5" cols="60" readonly><?=$value->getDescription();?></textarea>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <?php $i++;
                         } ?>
                         </tbody>
