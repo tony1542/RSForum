@@ -53,3 +53,18 @@ CREATE INDEX user_skills_user_stat_id_index
 
 CREATE INDEX user_skills_username_index
     ON user_skills (username);
+
+    create table todo
+(
+    task_id      int auto_increment
+        primary key,
+    title        varchar(255)         null,
+    description  varchar(255)         null,
+    is_completed tinyint(1) default 0 not null,
+    date         date                 not null,
+    user_id      int                  null
+);
+
+create index user_id
+    on todo (user_id);
+
