@@ -12,12 +12,12 @@ use PDO;
 
 class TodosController extends AbstractBaseController
 {
-    protected function getIncludePrefix()
+    protected function getIncludePrefix(): string
     {
         return 'user/';
     }
 
-    public function canAccess($action, $parameters = [])
+    public function canAccess($action, $parameters = []): bool
     {
         $signed_in_user = getSignedInUser();
         $is_user_signed_in = $signed_in_user->getID() > 0;
