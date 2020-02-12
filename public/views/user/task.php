@@ -89,11 +89,9 @@
                                                 <textarea rows="5" cols="60" type="text" name="description" value="<?= $value->getDescription(); ?>"><?= $value->getDescription(); ?></textarea><br>
                                                 <label for="title">Complete: </label>
                                                 <select id="complete" name="complete">
-                                                    <option <?php if ($complete == 0) echo 'selected'; ?> value="0"
-                                                                                                          name="zero">No
+                                                    <option <?php if ($complete == 0) echo 'selected'; ?> value="0" name="zero">No
                                                     </option>
-                                                    <option <?php if ($complete == 1) echo 'selected'; ?> value="1"
-                                                                                                          name="one">Yes
+                                                    <option <?php if ($complete == 1) echo 'selected'; ?> value="1" name="one">Yes
                                                     </option>
                                                 </select><br>
 
