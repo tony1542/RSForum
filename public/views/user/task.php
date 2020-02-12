@@ -22,7 +22,7 @@
                 </form>
                 <br>
                 <?php if (!$todo) : ?>
-                    <p>Your list looks empty..</p>
+                    <p>Your list looks empty, <?=$user->getUsername(); ?></p>
                 <?php else : ?>
                     <table class="table table-striped">
                         <thead>
