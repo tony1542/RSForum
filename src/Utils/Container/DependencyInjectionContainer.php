@@ -6,12 +6,7 @@ use Psr\Container\ContainerInterface;
 
 class DependencyInjectionContainer implements ContainerInterface
 {
-    /**
-     * All registered key pairs
-     *
-     * @var array
-     */
-    protected $registry = [];
+    protected array $registry = [];
     
     /**
      * Returns an item in the container if it exists
@@ -38,7 +33,7 @@ class DependencyInjectionContainer implements ContainerInterface
      *
      * @return bool
      */
-    public function has($id)
+    public function has($id): bool
     {
         return array_key_exists($id, $this->registry);
     }
@@ -49,7 +44,7 @@ class DependencyInjectionContainer implements ContainerInterface
      * @param  string $id
      * @param  mixed  $value
      */
-    public function set($id, $value)
+    public function set(string $id, $value): void
     {
         $this->registry[$id] = $value;
     }

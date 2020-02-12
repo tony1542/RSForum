@@ -1,4 +1,4 @@
-<div class="card-deck">
+<div class="card-columns">
     <?php /** @var \App\Models\User\User $member */ ?>
     <?php foreach ($data['members'] as $member) : ?>
         <div class="card">
@@ -7,7 +7,7 @@
                 <img class="img-fluid" src="/public/images/comic2.png" />
             </div>
             <div class="card-footer">
-                Total level: <?= $member->getTotalLevel() ?>
+                Total level: <?= $member->getTotalLevel() ?: 'N/A' ?>
             </div>
         </div>
     <?php endforeach; ?>

@@ -23,7 +23,7 @@ class ApiErrorHandler
      *
      * @throws ApiException
      */
-    public function checkForErrors($result)
+    public function checkForErrors(string $result): void
     {
         if (array_key_exists($result, self::ERRORS)) {
             throw new ApiException(self::ERRORS[$result]);

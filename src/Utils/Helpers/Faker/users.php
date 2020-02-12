@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Script iterates 10 times and enters in dummy user data
+ */
+
 require('vendor/autoload.php');
 
 setApplicationVariables();

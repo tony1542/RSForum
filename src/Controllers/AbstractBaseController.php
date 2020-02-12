@@ -17,7 +17,7 @@ abstract class AbstractBaseController
      *
      * @return bool
      */
-    abstract public function canAccess($action, $parameters = []);
+    abstract public function canAccess(string $action, array $parameters = []): bool;
     
     /**
      * Returns a simple string indicating where a particular controller's view will belong
@@ -25,5 +25,5 @@ abstract class AbstractBaseController
      *
      * @return string
      */
-    abstract protected function getIncludePrefix();
+    abstract protected function getIncludePrefix(): string;
 }

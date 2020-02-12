@@ -6,17 +6,17 @@ use App\Utils\Http\Session;
 
 class PagesController extends AbstractBaseController
 {
-    protected function getIncludePrefix()
+    protected function getIncludePrefix(): string
     {
         return 'pages/';
     }
     
-    public function canAccess($action, $parameters = [])
+    public function canAccess(string $action, array $parameters = []): bool
     {
         return true;
     }
     
-    public function index()
+    public function index(): void
     {
         $user = getSignedInUser();
         

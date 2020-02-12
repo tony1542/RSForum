@@ -41,7 +41,7 @@ class Skills
      *
      * @return string
      */
-    public static function getSkillNameFromIndex($index)
+    public static function getSkillNameFromIndex(int $index): string
     {
         return self::ALL[$index];
     }
@@ -53,7 +53,7 @@ class Skills
      *
      * @return string - Icon location
      */
-    public static function getSkillIconFromIndex($index)
+    public static function getSkillIconFromIndex(int $index): string
     {
         $skillName = self::getSkillNameFromIndex($index);
         $path = self::PATH_TO_ICONS . strtolower($skillName) . '.png';

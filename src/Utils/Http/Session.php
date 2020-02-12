@@ -45,7 +45,7 @@ class Session
      *
      * @return bool
      */
-    public static function has(string $key)
+    public static function has(string $key): bool
     {
         return isset($_SESSION[$key]);
     }
@@ -56,7 +56,7 @@ class Session
      * @param string $key
      * @param mixed  $value
      */
-    public static function set(string $key, $value)
+    public static function set(string $key, $value): void
     {
         $_SESSION[$key] = $value;
     }
@@ -66,7 +66,7 @@ class Session
      *
      * @param string $key
      */
-    public static function unset(string $key)
+    public static function unset(string $key): void
     {
         if (self::has($key)) {
             unset($_SESSION[$key]);
@@ -78,7 +78,7 @@ class Session
      *
      * @return bool
      */
-    public static function destroy()
+    public static function destroy(): bool
     {
         return session_destroy();
     }

@@ -8,6 +8,18 @@ namespace App\Utils\Database;
 class EnvValidator
 {
     /**
+     * @param string $env_file_path
+     *
+     * @throws EnvException
+     */
+    public static function fileExists(string $env_file_path): void
+    {
+        if (!file_exists($env_file_path)) {
+            throw new EnvException('No configuration found for the site');
+        }
+    }
+    
+    /**
      * Loops through the enforcements & checks our .env file for them
      * If they are not found, an exception is thrown
      *
@@ -15,7 +27,7 @@ class EnvValidator
      *
      * @throws EnvException
      */
-    public static function enforce($database_name)
+    public static function enforce(string $database_name): void
     {
         $enforcements = [
             $database_name . '_NAME',

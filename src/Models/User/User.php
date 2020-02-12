@@ -10,59 +10,77 @@ class User
 {
     protected string $username ='';
     protected string $email_address = '';
-    protected string $password = '';
     protected string $user_id = '';
     protected bool $logged_in = false;
+    protected bool $admin = false;
     
     protected UserSkills $skills;
     
     public function __construct($user_id = 0)
     {
+        if ($user_id) {
+            $this->load($user_id);
+        }
+    }
+    
+    public function load(int $user_id = 0): void
+    {
         if (!$user_id) {
-            return;
+            $user_id = (int) $this->getID();
         }
         
         // Creating an instance of our db connection, then using a pdo to query our db for a user_id match
         $instance = getDatabase();
-        $statement = $instance->prepare('SELECT * FROM user WHERE user_id =?');
+        $statement = $instance->prepare('SELECT user_id, username, email_address, logged_in, admin
+                                            FROM user
+                                         WHERE user_id = ?');
         $statement->execute([$user_id]);
-        $values = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $values = $statement->fetch(PDO::FETCH_ASSOC);
 
         if (!$values || !is_array($values)) {
             return;
         }
         
-        $values = $values[0];
         $this->username = $values['username'];
         $this->email_address = $values['email_address'];
-        $this->password = $values['password'];
         $this->user_id = $user_id;
         $this->logged_in = $values['logged_in'];
-        
+        $this->admin = $values['admin'];
+    
         $this->skills = new UserSkills($this->getUsername());
     }
     
-    public function getUsername()
+    public function getUsername(): string
     {
         return $this->username;
     }
     
-    public function getEmail()
+    public function getEmail(): string
     {
         return $this->email_address;
     }
     
-    public function getTotalLevel()
+    public function getTotalLevel(): int
     {
         return $this->skills->getTotalLevel();
     }
     
-    public function getID()
+    public function getID(): string
     {
         return $this->user_id;
     }
     
-    public static function login($email_address, $password)
+    public function getSkills(): array
+    {
+        return $this->skills->getSkills();
+    }
+    
+    public function isAdmin(): bool
+    {
+        return $this->admin;
+    }
+    
+    public static function login(string $email_address, string $password): void
     {
         $data_error = [];
         $db = getDatabase();
@@ -98,7 +116,7 @@ class User
         redirect("User/Details/" . getSignedInUser()->getID());
     }
     
-    public function logout()
+    public function logout(): void
     {
         $db = getDatabase();
         $sql = $db->prepare("UPDATE user SET logged_in = 0 WHERE email_address = ?");
@@ -112,7 +130,7 @@ class User
      *
      * @return User[]
      */
-    public static function getMembers()
+    public static function getMembers(): array
     {
         $database = getDatabase();
         $sql = $database->query("SELECT user_id FROM user");
@@ -125,18 +143,8 @@ class User
         return $users;
     }
     
-    /**
-     * @param string $username
-     *
-     * @return bool
-     */
-    public function update($username)
+    public function update(string $username): bool
     {
-        // No change in username
-        if ($username === getSignedInUser()->getUsername()) {
-            return true;
-        }
-        
         $database = getDatabase();
         
         // Check for existing usernames
@@ -152,17 +160,12 @@ class User
         $sql = $database->prepare("UPDATE user SET username = ? WHERE user_id = ?");
         $sql->execute([$username, Request::getID()]);
         
+        $this->load();
+        
         return true;
     }
-    
-    /**
-     * Verifies a username matches Runescape's restraints
-     *
-     * @param string $username
-     *
-     * @return array
-     */
-    public static function verifyUsername($username)
+
+    public static function verifyUsername(string $username): array
     {
         $errors = [];
         

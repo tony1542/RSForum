@@ -15,7 +15,7 @@ class Request
     protected const ACTION_POSITION     = 1;
     protected const ID_POSITION         = 2;
     
-    protected static $default_controller_action = 'index';
+    protected static string $default_controller_action = 'index';
     
     public static string $default_controller = PagesController::class;
     public static string $default_controller_prefix = 'App\\Controllers\\';
@@ -24,19 +24,19 @@ class Request
     /**
      * Fetch the request URI
      */
-    public static function getUri()
+    public static function getUri(): string
     {
         return trim(
             parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/'
         );
     }
     
-    public static function explodeUri()
+    public static function explodeUri(): array
     {
         return explode('/', self::getUri());
     }
     
-    public static function getController()
+    public static function getController(): string
     {
         $controller = self::explodeUri()[self::CONTROLLER_POSITION];
     
@@ -48,7 +48,7 @@ class Request
         return urldecode($controller) . self::$default_controller_suffix;
     }
     
-    public static function getAction()
+    public static function getAction(): string
     {
         $uri = self::explodeUri();
         
@@ -59,27 +59,22 @@ class Request
         return urldecode(strtolower($uri[self::ACTION_POSITION]));
     }
     
-    public static function getID()
+    public static function getID(): string
     {
         return urldecode(self::explodeUri()[self::ID_POSITION] ?? 0);
     }
-    
-    /**
-     * Gets all parameters sent in the request
-     *
-     * @return array
-     */
-    public static function getParameters()
+
+    public static function getParameters(): array
     {
         return $_GET['parameters'] ?? $_POST['parameters'] ?? [];
     }
     
-    public static function getPostValues()
+    public static function getPostValues(): array
     {
         return $_POST ?? [];
     }
     
-    public static function getGetValues()
+    public static function getGetValues(): array
     {
         return $_GET ?? [];
     }
@@ -89,7 +84,7 @@ class Request
      *
      * @param bool|int $verbose
      */
-    public static function dump($verbose = 0)
+    public static function dump($verbose = 0): void
     {
         dump([
             'controller' => self::getController(),

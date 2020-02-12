@@ -1,5 +1,7 @@
 <?php
 
+use App\Utils\Database\EnvException;
+use App\Utils\Database\EnvValidator;
 use App\Utils\Http\Server;
 use Dotenv\Dotenv;
 use Psr\Container\ContainerInterface;
@@ -12,7 +14,7 @@ use App\Utils\Database\Connection;
  * @param mixed $array
  * @param bool  $verbose - A flag to specify whether we want a print_r or a more verbose var_dump
  */
-function dump($array, $verbose = false)
+function dump($array, $verbose = false): void
 {
     $method = $verbose ? 'var_dump' : 'print_r';
     echo '<pre>'; $method($array); echo '</pre>';
@@ -26,7 +28,7 @@ function dump($array, $verbose = false)
  *
  * @see dump()
  */
-function dd($array, $verbose = false)
+function dd($array, $verbose = false): void
 {
     dump($array, $verbose);
     die;
@@ -37,7 +39,7 @@ function dd($array, $verbose = false)
  *
  * @param string $path
  */
-function redirect(string $path)
+function redirect(string $path): void
 {
     header('Location: /' . $path);
     die;
@@ -52,7 +54,7 @@ function redirect(string $path)
  *
  * @see https://www.php.net/manual/en/language.constants.predefined.php#constant.dir
  */
-function view(string $name, $data = [])
+function view(string $name, $data = []): void
 {
     // This extract function allows our views to be able to communicate with the data passed in
     // @see https://www.php.net/manual/en/function.extract.php
@@ -93,15 +95,24 @@ function view(string $name, $data = [])
 
 /**
  * Bootstraps our application with any setup required
+ *
+ * @throws EnvException
  */
-function setApplicationVariables()
+function setApplicationVariables(): void
 {
     // Turn sessions on so we have access to the $_SESSION super-global
     session_start();
+    $env_file_path = Server::getRoot() . DIRECTORY_SEPARATOR . 'config';
+    
+    // Verify our env file exists
+    EnvValidator::fileExists($env_file_path . DIRECTORY_SEPARATOR . '.env.');
     
     // Load .env file into the application
-    $dot_env = Dotenv::create(Server::getRoot() . DIRECTORY_SEPARATOR . 'config');
+    $dot_env = Dotenv::create($env_file_path);
     $dot_env->load();
+    
+    // Check if our expected .env file has the expected values
+    EnvValidator::enforce('DB');
     
     // Checks if we have a dependency injection container set. If we don't, add a new one to the session
     $container = getDependencyContainer();
@@ -118,7 +129,7 @@ function setApplicationVariables()
  *
  * @return PDO
  */
-function getDatabase()
+function getDatabase(): PDO
 {
     return Connection::getInstance();
 }

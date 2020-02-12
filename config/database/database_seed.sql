@@ -1,8 +1,8 @@
 # Create database
-CREATE DATABASE IF NOT EXISTS tonysphpadminabuse;
+CREATE DATABASE IF NOT EXISTS rsforum;
 
 # Select our new database for operation
-USE tonysphpadminabuse;
+USE rsforum;
 
 # Create user table
 CREATE TABLE user
@@ -12,6 +12,7 @@ CREATE TABLE user
     email_address varchar(255) NOT NULL,
     password      varchar(255) NOT NULL,
     logged_in     tinyint      DEFAULT 0 NOT NULL,
+    admin         tinyint      DEFAULT 0 NOT NULL,
     CONSTRAINT user_pk
         PRIMARY KEY (user_id)
 );

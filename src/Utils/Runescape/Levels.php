@@ -17,7 +17,7 @@ class Levels
      *
      * @see https://oldschool.runescape.wiki/w/Experience#Levels_1-99
      */
-    public static function findFromExp($player_experience, $include_virtual_levels = true)
+    public static function findFromExp(int $player_experience, bool $include_virtual_levels = true): int
     {
         $total = 0;
         
@@ -34,18 +34,12 @@ class Levels
         return $skill_cap;
     }
     
-    /**
-     * @param array $levels        - array of stats to iterate
-     * @param bool  $virtual_level - if we are going above the 99 skill cap
-     *
-     * @return int|null
-     */
-    public static function getTotalLevel($levels, $virtual_level = false)
+    public static function getTotalLevel(array $levels, bool $virtual_level = false): int
     {
         $total_level = 0;
         
         if (!is_array($levels)) {
-            return null;
+            return 0;
         }
         
         foreach ($levels as $level) {
