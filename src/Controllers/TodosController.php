@@ -24,12 +24,11 @@ class TodosController extends AbstractBaseController
         $same_user_as_requesting = $signed_in_user->getID() === Request::getID();
 
         switch ($action) {
-            case 'members':
-            case 'logout':
-                return $is_user_signed_in;
-            case 'update':
-            case 'details':
-                return $is_user_signed_in && $same_user_as_requesting;
+            case 'add':
+            case 'delete':
+            case 'edit':
+            case 'complete':
+                return $same_user_as_requesting;
             default:
                 return true;
         }
@@ -42,7 +41,6 @@ class TodosController extends AbstractBaseController
 
     public function tasks()
     {
-
         $user_id = Request::getID();
         $user = new User($user_id);
         $todo = new TodoCollector($user_id);
@@ -134,20 +132,5 @@ class TodosController extends AbstractBaseController
             ]);
         }
         Todo::add($title, $description, $date, $user_id);
-    }
-
-    public function getData()
-    {
-        $user_id = Request::getID();
-        $user = new User($user_id);
-        $todo = new TodoCollector($user_id);
-
-        return [
-            'user' => $user,
-            'todo' => $todo->getTasks()
-        ];
-        //If I wanted to call this function but perhaps add to do it, like say our error function, it would look like this.
-        // $return_array = $this->getData();
-        // $return_array[] = $errors;
     }
 }

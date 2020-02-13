@@ -22,7 +22,7 @@
                         <input type="email" class="form-control" id="email" disabled value="<?= $user->getEmail() ?>" />
                     </div>
                     
-                    <button  onclick="submit_UserEdit()" id="UserEdit" class="btn btn-primary">
+                    <button  onclick="UserEdit()" id="UserEdit" class="btn btn-primary">
                         Update
                     </button>
                 </form>
