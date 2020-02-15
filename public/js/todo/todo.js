@@ -3,3 +3,4 @@ $(document).ready(function() {
         return confirm('Press ok to delete task');
     });
 });
+

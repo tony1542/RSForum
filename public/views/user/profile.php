@@ -1,12 +1,5 @@
 <?php /** @var \App\Models\User\User $user */ ?>
 
-
-<?php
-
-//Todo Fix Tonys javascript, it breaks the Add Task button.
-
-?>
-
 <div class="row justify-content-center">
     <div class="<?php echo $show_skills ? 'col-lg-4' : 'col-md-8'; ?> mb-4">
         <div class="card">
