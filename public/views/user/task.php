@@ -53,24 +53,19 @@
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-4">
-                                            <form name="Complete" id="Complete" method="post"
-                                                  action="/Todo/Complete/<?= $user->getID() ?>">
-                                                <input class="btn btn-success" type="submit" value="Complete"
-                                                       name="Complete<?=$edit?>">
+                                            <form name="Complete" id="Complete" method="post" action="/Todo/Complete/<?= $user->getID() ?>">
+                                                <input class="btn btn-success" type="submit" value="Complete" name="Complete<?=$edit?>">
                                                 <input type="hidden" name="hidden_complete<?=$edit?>" value="<?= $edit ?>">
                                             </form>
                                         </div>
                                         <div class="col-4">
-                                            <form name="Delete" id="DeleteTask" method="post"
-                                                  action="/Todo/Delete/<?= $user->getID() ?>">
+                                            <form name="Delete" id="DeleteTask" method="post" action="/Todo/Delete/<?= $user->getID() ?>">
                                                 <input class="btn btn-danger" type="submit" value="Delete" name="Delete<?=$edit?>">
                                                 <input type="hidden" name="hidden_delete<?=$edit?>" value="<?= $edit ?>">
-
                                             </form>
                                         </div>
                                         <div class="col-4">
-                                            <button type="button" class="btn btn-info" data-toggle="modal"
-                                                    data-target="#TaskModal-<?= $edit ?>">
+                                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#TaskModal-<?= $edit ?>">
                                                 Edit
                                             </button>
                                         </div>
@@ -92,19 +87,18 @@
                                 <div class="modal-body">
                                     <form name="Edit" id="Edit" method="post" action="/Todo/Edit/<?= $user->getID() ?>">
                                         <input type="hidden" name="hidden_edit" value="<?= $edit ?>"></td>
-                                        <label for="title">Title:</label><input type="text" name="title"
-                                                                                value="<?= $value->getTitle(); ?>"><br>
 
+                                        <label for="title">Title:</label>
+                                        <input type="text" name="title" value="<?= $value->getTitle(); ?>"><br>
                                         <label for="title">Description: </label>
-                                        <textarea rows="5" cols="60"
-                                                  name="description"><?= $value->getDescription(); ?></textarea><br>
+                                        <textarea rows="5" cols="60" name="description"><?= $value->getDescription(); ?></textarea><br>
                                         <label for="title">Complete: </label>
                                         <select id="complete" name="complete">
-                                            <option <?php if ($value->getIsCompleted() == 0) echo 'selected'; ?>
-                                                value="0" name="zero">No
+                                            <option
+                                                <?php if ($value->getIsCompleted() == 0) echo 'selected'; ?>value="0" name="zero">No
                                             </option>
-                                            <option <?php if ($value->getIsCompleted() == 1) echo 'selected'; ?>
-                                                value="1" name="one">Yes
+                                            <option
+                                                <?php if ($value->getIsCompleted() == 1) echo 'selected'; ?>value="1" name="one">Yes
                                             </option>
                                         </select><br>
                                 </div>
@@ -112,7 +106,7 @@
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
                                     </button>
                                     <input type="submit" class="btn btn-primary" value="Save changes">
-                                    </form>
+                                    </form> <?php //Closing tag for form ID Edit. phpstorm thinks it doesn't belong to anything. ?>
                                 </div>
                             </div>
                         </div>
