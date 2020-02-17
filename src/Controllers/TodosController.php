@@ -58,13 +58,11 @@ class TodosController extends AbstractBaseController
         //clean dat user input yo
         $title = Sanitizer::sanitize($_POST['title']);
         $description = Sanitizer::sanitize($_POST['description']);
-
         $complete = $_POST['complete'];
         $task_id = $_POST['hidden_edit'];
         $user_id = Request::getID();
         $user = new user($user_id);
         $todo = new TodoCollector($user_id);
-
         if (!$title) {
             $errors[] = 'Edit Canceled; User did not enter a title';
         }
@@ -80,8 +78,6 @@ class TodosController extends AbstractBaseController
         }
         //the chumps didn't mess anything up, send it.
         Todo::edit($task_id, $user_id, $title, $description, $complete);
-
-
     }
 
     public function delete()
