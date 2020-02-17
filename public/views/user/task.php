@@ -56,16 +56,15 @@
                                             <form name="Complete" id="Complete" method="post"
                                                   action="/Todo/Complete/<?= $user->getID() ?>">
                                                 <input class="btn btn-success" type="submit" value="Complete"
-                                                       name="Complete">
-                                                <input type="hidden" name="hidden_complete" value="<?= $edit ?>">
+                                                       name="Complete<?=$edit?>">
+                                                <input type="hidden" name="hidden_complete<?=$edit?>" value="<?= $edit ?>">
                                             </form>
                                         </div>
                                         <div class="col-4">
-                                            <form name="Delete" id="DeleteTask" onclick="DeleteTask()" method="post"
+                                            <form name="Delete" id="DeleteTask" method="post"
                                                   action="/Todo/Delete/<?= $user->getID() ?>">
-                                                <input class="btn btn-danger" type="submit" value="Delete"
-                                                       name="Delete">
-                                                <input type="hidden" name="hidden_delete" value="<?= $edit ?>">
+                                                <input class="btn btn-danger" type="submit" value="Delete" name="Delete<?=$edit?>">
+                                                <input type="hidden" name="hidden_delete<?=$edit?>" value="<?= $edit ?>">
 
                                             </form>
                                         </div>
