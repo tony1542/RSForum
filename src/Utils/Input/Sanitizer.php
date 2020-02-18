@@ -8,8 +8,7 @@ class Sanitizer
     {
         $variable = trim($variable);
         $variable = stripslashes($variable);
-        $variable = htmlspecialchars($variable);
-        
+        $variable = htmlspecialchars($variable, ENT_QUOTES);
         return $variable;
     }
 }
