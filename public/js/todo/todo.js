@@ -1,6 +1,5 @@
-$(document).ready(function() {
-    $('#DeleteTask').submit(function(e) {
-        return confirm('Press ok to delete task');
+$(document).ready(function () {
+    $('.deleteButton').submit(function (e) {
+        return confirm('Click ok to delete this task');
     });
 });
-

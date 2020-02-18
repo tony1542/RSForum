@@ -24,7 +24,7 @@
         </div>
         <div class="card-body">
             <div class="row">
-                <?php foreach ($todo as $value) : ?>
+                <?php  $i= 0; foreach ($todo as $value) : ?>
                     <?php $edit = $value->getTaskID(); ?>
                     <div class="col-md-4 mb-2">
                         <div class="card">
@@ -32,9 +32,9 @@
                                 Title: <br>
                                 <?= $value->getTitle(); ?>
                                 <hr>
-                                <div class="">
+                                <div class="form-group purple-border">
                                     Description:
-                                    <p><?= $value->getDescription() ?></p>
+                                    <textarea class="form-control" rows="5" maxlength="5" readonly><?= $value->getDescription() ?></textarea>
                                 </div>
                                 <hr>
                                 <div class="container">
@@ -53,19 +53,19 @@
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-4">
-                                            <form name="Complete" id="Complete" method="post" action="/Todo/Complete/<?= $user->getID() ?>">
-                                                <input class="btn btn-success" type="submit" value="Complete" name="Complete<?=$edit?>">
-                                                <input type="hidden" name="hidden_complete<?=$edit?>" value="<?= $edit ?>">
+                                            <form name="Complete" id="Complete/<?=$i;?>" method="post" action="/Todo/Complete/<?= $user->getID() ?>">
+                                                <input class="btn btn-success" type="submit" value="Complete" name="Complete<?=$edit?>" data-toggle="tooltip" title="Complete this task!">
+                                                <input type="hidden" name="hidden_complete" value="<?= $edit ?>">
                                             </form>
                                         </div>
                                         <div class="col-4">
-                                            <form name="Delete" id="DeleteTask" method="post" action="/Todo/Delete/<?= $user->getID() ?>">
-                                                <input class="btn btn-danger" type="submit" value="Delete" name="Delete<?=$edit?>">
-                                                <input type="hidden" name="hidden_delete<?=$edit?>" value="<?= $edit ?>">
+                                            <form name="Delete" class="deleteButton" method="post" action="/Todo/Delete/<?= $user->getID() ?>">
+                                                <input class="btn btn-danger" type="submit" value="Delete" name="Delete<?=$edit?>" data-toggle="tooltip" title="Delete this task!">
+                                                <input type="hidden" name="hidden_delete" value="<?= $edit ?>">
                                             </form>
                                         </div>
                                         <div class="col-4">
-                                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#TaskModal-<?= $edit ?>">
+                                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#TaskModal-<?= $edit ?>" title="Click me to edit this task.">
                                                 Edit
                                             </button>
                                         </div>
@@ -81,19 +81,19 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="ModalTitle">Edit Task</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">X
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <form name="Edit" id="Edit" method="post" action="/Todo/Edit/<?= $user->getID() ?>">
+                                    <form name="Edit" id="Edit/<?=$i;?>" method="post" action="/Todo/Edit/<?= $user->getID() ?>">
                                         <input type="hidden" name="hidden_edit" value="<?= $edit ?>"></td>
 
                                         <label for="title">Title:</label>
                                         <input type="text" name="title" value="<?= $value->getTitle(); ?>"><br>
                                         <label for="title">Description: </label>
-                                        <textarea rows="5" cols="60" name="description"><?= $value->getDescription(); ?></textarea><br>
+                                        <textarea class="form-control" rows="5" name="description"><?= $value->getDescription(); ?></textarea><br>
                                         <label for="title">Complete: </label>
-                                        <select id="complete" name="complete">
+                                        <select id="complete/<?=$i;?>" name="complete">
                                             <option
                                                 <?php if ($value->getIsCompleted() == 0) echo 'selected'; ?>value="0" name="zero">No
                                             </option>
@@ -112,14 +112,14 @@
                         </div>
                     </div>
                 <!--End model for Editing Tasks-->
-                <?php endforeach; ?>
+                <?php $i++; endforeach; ?>
                 <!--Model for Adding Tasks-->
                 <div class="modal fade" id="AddTask" tabindex="-1" role="dialog">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="ModalAddTask">Add Task</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">X
                                 </button>
                             </div>
                             <div class="modal-body">
@@ -147,3 +147,5 @@
         </div>
     </div>
 </div>
+
+<script src="/public/js/todo/todo.js"></script>
