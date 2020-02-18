@@ -50,25 +50,23 @@
                                     </div>
                                 </div>
                                 <hr>
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-4">
-                                            <form name="Complete" id="Complete/<?=$i;?>" method="post" action="/Todo/Complete/<?= $user->getID() ?>">
-                                                <input class="btn btn-success" type="submit" value="Complete" name="Complete<?=$edit?>" data-toggle="tooltip" title="Complete this task!">
-                                                <input type="hidden" name="hidden_complete" value="<?= $edit ?>">
-                                            </form>
-                                        </div>
-                                        <div class="col-4">
-                                            <form name="Delete" class="deleteButton" method="post" action="/Todo/Delete/<?= $user->getID() ?>">
-                                                <input class="btn btn-danger" type="submit" value="Delete" name="Delete<?=$edit?>" data-toggle="tooltip" title="Delete this task!">
-                                                <input type="hidden" name="hidden_delete" value="<?= $edit ?>">
-                                            </form>
-                                        </div>
-                                        <div class="col-4">
-                                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#TaskModal-<?= $edit ?>" title="Click me to edit this task.">
-                                                Edit
-                                            </button>
-                                        </div>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <form name="Complete" id="Complete/<?=$i;?>" method="post" action="/Todo/Complete/<?= $user->getID() ?>">
+                                            <input class="btn btn-success" type="submit" value="Complete" name="Complete<?=$edit?>" data-toggle="tooltip" title="Complete this task!">
+                                            <input type="hidden" name="hidden_complete" value="<?= $edit ?>">
+                                        </form>
+                                    </div>
+                                    <div class="col-4">
+                                        <form name="Delete" class="deleteButton" method="post" action="/Todo/Delete/<?= $user->getID() ?>">
+                                            <input class="btn btn-danger" type="submit" value="Delete" name="Delete<?=$edit?>" data-toggle="tooltip" title="Delete this task!">
+                                            <input type="hidden" name="hidden_delete" value="<?= $edit ?>">
+                                        </form>
+                                    </div>
+                                    <div class="col-4">
+                                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#TaskModal-<?= $edit ?>" title="Click me to edit this task.">
+                                            Edit
+                                        </button>
                                     </div>
                                 </div>
                             </div>
