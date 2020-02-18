@@ -28,6 +28,13 @@
                     <?php $edit = $value->getTaskID(); ?>
                     <div class="col-md-6 col-lg-4 mb-2">
                         <div class="card">
+                            <div class="card-header">
+                                <div class="float-right">
+                                    <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#TaskModal-<?= $edit ?>" title="Click me to edit this task.">
+                                        <i class="fas fa-info"></i>
+                                    </button>
+                                </div>
+                            </div>
                             <div class="card-body">
                                 Title: <br>
                                 <?= $value->getTitle(); ?>
@@ -63,11 +70,6 @@
                                             <input class="btn btn-danger" type="submit" value="Delete" name="Delete<?= $edit ?>" data-toggle="tooltip" title="Delete this task!">
                                             <input type="hidden" name="hidden_delete" value="<?= $edit ?>">
                                         </form>
-                                    </div>
-                                    <div>
-                                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#TaskModal-<?= $edit ?>" title="Click me to edit this task.">
-                                            Edit
-                                        </button>
                                     </div>
                                 </div>
                             </div>
