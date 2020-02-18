@@ -26,7 +26,7 @@
             <div class="row">
                 <?php  $i= 0; foreach ($todo as $value) : ?>
                     <?php $edit = $value->getTaskID(); ?>
-                    <div class="col-md-4 mb-2">
+                    <div class="col-md-6 col-lg-4 mb-2">
                         <div class="card">
                             <div class="card-body">
                                 Title: <br>
@@ -49,21 +49,22 @@
                                         </div>
                                     </div>
                                 </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-4">
-                                        <form name="Complete" id="Complete/<?=$i;?>" method="post" action="/Todo/Complete/<?= $user->getID() ?>">
-                                            <input class="btn btn-success" type="submit" value="Complete" name="Complete<?=$edit?>" data-toggle="tooltip" title="Complete this task!">
+                            </div>
+                            <div class="card-footer">
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <form name="Complete" id="Complete/<?= $i ?>" method="post" action="/Todo/Complete/<?= $user->getID() ?>">
+                                            <input class="btn btn-success" type="submit" value="Complete" name="Complete<?= $edit ?>" data-toggle="tooltip" title="Complete this task!">
                                             <input type="hidden" name="hidden_complete" value="<?= $edit ?>">
                                         </form>
                                     </div>
-                                    <div class="col-4">
+                                    <div>
                                         <form name="Delete" class="deleteButton" method="post" action="/Todo/Delete/<?= $user->getID() ?>">
-                                            <input class="btn btn-danger" type="submit" value="Delete" name="Delete<?=$edit?>" data-toggle="tooltip" title="Delete this task!">
+                                            <input class="btn btn-danger" type="submit" value="Delete" name="Delete<?= $edit ?>" data-toggle="tooltip" title="Delete this task!">
                                             <input type="hidden" name="hidden_delete" value="<?= $edit ?>">
                                         </form>
                                     </div>
-                                    <div class="col-4">
+                                    <div>
                                         <button type="button" class="btn btn-info" data-toggle="modal" data-target="#TaskModal-<?= $edit ?>" title="Click me to edit this task.">
                                             Edit
                                         </button>
