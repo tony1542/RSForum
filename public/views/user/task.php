@@ -30,8 +30,8 @@
                         <div class="card">
                             <div class="card-header">
                                 <div class="float-right">
-                                    <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#TaskModal-<?= $edit ?>" title="Click me to edit this task.">
-                                        <i class="fas fa-info"></i>
+                                    <button type="button" class="btn btn-sm btn-outline-info" data-toggle="modal" data-target="#TaskModal-<?= $edit ?>" title="Click me to edit this task.">
+                                        <i class="fas fa-edit"></i>
                                     </button>
                                 </div>
                             </div>
