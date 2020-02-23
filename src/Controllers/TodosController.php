@@ -63,6 +63,7 @@ class TodosController extends AbstractBaseController
         $user_id = Request::getID();
         $user = new user($user_id);
         $todo = new TodoCollector($user_id);
+        $errors = [];
         if (!$title) {
             $errors[] = 'Edit Canceled; User did not enter a title';
         }

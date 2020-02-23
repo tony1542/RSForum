@@ -30,7 +30,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <div class="float-right">
-                                    <button type="button" class="btn btn-sm btn-outline-info" data-toggle="modal" data-target="#TaskModal-<?= $edit ?>" title="Click me to edit this task.">
+                                    <button type="button" class="btn btn-sm btn-outline-info" data-toggle="modal" data-target="#TaskModal-<?= $edit ?>" title="Click to edit this task">
                                         <i class="fas fa-edit"></i>
                                     </button>
                                 </div>
@@ -48,7 +48,7 @@
                                     <div class="row">
                                         <div class="col-sm">
                                             Complete:<br>
-                                            <?php if ($value->getIsCompleted() == 0) {echo 'No';} elseif ($value->getIsCompleted() == 1) {echo 'Yes';} ?>
+                                            <?php if ($value->getIsCompleted() == 0) {echo '<i class="far fa-times-circle"></i>';} elseif ($value->getIsCompleted() == 1) {echo '<i class="fas fa-check"></i>';} ?>
                                         </div>
                                         <div class="col-sm">
                                             Date Created:<br>
@@ -61,13 +61,13 @@
                                 <div class="d-flex justify-content-between">
                                     <div>
                                         <form name="Complete" id="Complete/<?= $i ?>" method="post" action="/Todo/Complete/<?= $user->getID() ?>">
-                                            <input class="btn btn-success" type="submit" value="Complete" name="Complete<?= $edit ?>" data-toggle="tooltip" title="Complete this task!">
+                                            <input class="btn btn-success" type="submit" value="Complete" name="Complete<?= $edit ?>" data-toggle="tooltip" title="Complete this task">
                                             <input type="hidden" name="hidden_complete" value="<?= $edit ?>">
                                         </form>
                                     </div>
                                     <div>
                                         <form name="Delete" class="deleteButton" method="post" action="/Todo/Delete/<?= $user->getID() ?>">
-                                            <input class="btn btn-danger" type="submit" value="Delete" name="Delete<?= $edit ?>" data-toggle="tooltip" title="Delete this task!">
+                                            <input class="btn btn-danger" type="submit" value="Delete" name="Delete<?= $edit ?>" data-toggle="tooltip" title="Delete this task">
                                             <input type="hidden" name="hidden_delete" value="<?= $edit ?>">
                                         </form>
                                     </div>
@@ -85,34 +85,42 @@
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">X
                                     </button>
                                 </div>
-                                <div class="modal-body">
-                                    <form name="Edit" id="Edit/<?=$i;?>" method="post" action="/Todo/Edit/<?= $user->getID() ?>">
+                                <form name="Edit" id="Edit/<?=$i;?>" method="post" action="/Todo/Edit/<?= $user->getID() ?>">
+                                    <div class="modal-body">
                                         <input type="hidden" name="hidden_edit" value="<?= $edit ?>"></td>
 
-                                        <label for="title">Title:</label>
-                                        <input type="text" name="title" value="<?= $value->getTitle(); ?>"><br>
-                                        <label for="title">Description: </label>
-                                        <textarea class="form-control" rows="5" name="description"><?= $value->getDescription(); ?></textarea><br>
-                                        <label for="title">Complete: </label>
-                                        <select id="complete/<?=$i;?>" name="complete">
-                                            <option
-                                                <?php if ($value->getIsCompleted() == 0) echo 'selected'; ?>value="0" name="zero">No
-                                            </option>
-                                            <option
-                                                <?php if ($value->getIsCompleted() == 1) echo 'selected'; ?>value="1" name="one">Yes
-                                            </option>
-                                        </select><br>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
-                                    </button>
-                                    <input type="submit" class="btn btn-primary" value="Save changes">
-                                    </form> <?php //Closing tag for form ID Edit. phpstorm thinks it doesn't belong to anything. ?>
-                                </div>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>Title</b></span>
+                                            </div>
+                                            <textarea class="form-control" name="title" rows="1"><?= $value->getTitle(); ?></textarea>
+                                        </div>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>Description</b></span>
+                                            </div>
+                                            <textarea class="form-control" name="description" rows="4"><?= $value->getDescription(); ?></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="complete"><b>Complete:</b> </label>
+                                            <select name="complete" class="form-control">
+                                                <option value="0">No
+                                                </option>
+                                                <option value="1">Yes
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                        </button>
+                                        <input type="submit" class="btn btn-primary" value="Save changes">
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
-                <!--End model for Editing Tasks-->
+                    <!--End model for Editing Tasks-->
                 <?php $i++; endforeach; ?>
                 <!--Model for Adding Tasks-->
                 <div class="modal fade" id="AddTask" tabindex="-1" role="dialog">
@@ -123,8 +131,8 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">X
                                 </button>
                             </div>
-                            <div class="modal-body">
-                                <form name="AddTask" id="AddTask" method="post" action="/Todo/Add/<?= $user->getID() ?>">
+                            <form name="AddTask" id="AddTask" method="post" action="/Todo/Add/<?= $user->getID() ?>">
+                                <div class="modal-body">
                                     <div class="form-group">
                                         <label for="Title">Title</label>
                                         <input type="text" class="form-control" id="title" name="title"/>
@@ -133,12 +141,12 @@
                                         <label for="Description">Description</label>
                                         <input type="text" class="form-control" id="description" name="description"/>
                                     </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button class="btn btn-primary">Add Task</button>
-                                </form><?php //Closing tag for form ID AddTask. phpstorm thinks it doesn't belong to anything. ?>
-                            </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button class="btn btn-primary">Add Task</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
