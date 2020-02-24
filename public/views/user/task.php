@@ -39,7 +39,7 @@
                                 Title: <br>
                                 <?= $value->getTitle(); ?>
                                 <hr>
-                                <div class="form-group purple-border">
+                                <div class="form-group">
                                     Description:
                                     <textarea class="form-control" rows="5" maxlength="5" readonly><?= $value->getDescription() ?></textarea>
                                 </div>
@@ -88,27 +88,20 @@
                                 <form name="Edit" id="Edit/<?=$i;?>" method="post" action="/Todo/Edit/<?= $user->getID() ?>">
                                     <div class="modal-body">
                                         <input type="hidden" name="hidden_edit" value="<?= $edit ?>"></td>
-
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><b>Title</b></span>
-                                            </div>
-                                            <textarea class="form-control" name="title" rows="1"><?= $value->getTitle(); ?></textarea>
-                                        </div>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><b>Description</b></span>
-                                            </div>
-                                            <textarea class="form-control" name="description" rows="4"><?= $value->getDescription(); ?></textarea>
-                                        </div>
+                                            <label for="title/<?=$i;?>">Title
+                                            <input class="form-control" name="title" id="title/<?=$i;?>" value="<?= $value->getTitle(); ?>">
+                                            </label>
+                                            <hr>
+                                            <label for="description/<?=$i;?>">Description</label>
+                                            <textarea class="form-control" name="description" id="description/<?=$i;?>" rows="4"><?= $value->getDescription(); ?></textarea>
+                                            <hr>
                                         <div class="form-group">
-                                            <label for="complete"><b>Complete:</b> </label>
-                                            <select name="complete" class="form-control">
-                                                <option value="0">No
-                                                </option>
-                                                <option value="1">Yes
-                                                </option>
-                                            </select>
+                                            <label for="complete/<?=$i;?>"><b>Complete</b>
+                                                <select name="complete/<?=$i;?>" class="form-control">
+                                                    <option value="0">No</option>
+                                                    <option value="1">Yes</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
@@ -139,7 +132,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="Description">Description</label>
-                                        <input type="text" class="form-control" id="description" name="description"/>
+                                        <textarea class="form-control" rows="3" maxlength="5"></textarea>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
