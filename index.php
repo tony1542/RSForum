@@ -16,7 +16,7 @@ try {
         $errors = [$t->getMessage()];
     }
 
-    if (getSignedInUser()->isAdmin() || Server::isCommandLine()) {
+    if (getSignedInUser()->isAdmin() || Server::isLocalHost()) {
         $errors = [
             '<h4>Message</h4> ' . $t->getMessage(),
             '<h4>File</h4><pre>' . $t->getFile() . '</pre>',
