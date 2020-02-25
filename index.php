@@ -14,7 +14,7 @@ try {
     if ($t instanceof EnvException) {
         $errors = [$t->getMessage()];
     }
-    
+
     if (getSignedInUser()->isAdmin()) {
         $errors = [
             '<h4>Message</h4> ' . $t->getMessage(),

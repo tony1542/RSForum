@@ -140,7 +140,6 @@ class User
         foreach ($members as $member) {
             $users[] = new self($member['user_id']);
         }
-        
         return $users;
     }
     

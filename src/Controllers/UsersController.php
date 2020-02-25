@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Models\Todo\Todo;
+use App\Models\Todo\TodoCollector;
 use App\Utils\Http\Request;
 use App\Models\User\User;
 use App\Utils\Input\Sanitizer;
@@ -140,12 +142,12 @@ class UsersController extends AbstractBaseController
     {
         view($this->getIncludePrefix() . 'profile', $this->getDetails());
     }
-    
+
     protected function getDetails(): array
     {
         $user_id = Request::getID();
         $user = new User($user_id);
-    
+
         $skills = $user->getSkills();
         $skills_array = [];
         foreach ($skills as $key => $row) {
@@ -157,14 +159,14 @@ class UsersController extends AbstractBaseController
                 'rank'       => $row['rank']
             ];
         }
-    
+
         return [
             'user'        => $user,
             'skills'      => $skills_array,
             'show_skills' => count($skills_array) > 0
         ];
     }
-    
+
     public function logout(): void
     {
         getSignedInUser()->logout();
@@ -177,7 +179,7 @@ class UsersController extends AbstractBaseController
             'members' => User::getMembers()
         ]);
     }
-    
+
     public function update(): void
     {
         $post_values = Request::getPostValues();
@@ -187,7 +189,7 @@ class UsersController extends AbstractBaseController
         }
         
         $details = $this->getDetails();
-        
+
         $user_id = Request::getID();
         $user = new User($user_id);
     

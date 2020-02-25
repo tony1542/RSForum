@@ -1,5 +1,7 @@
 $(document).ready(function () {
-    $('form').submit(function () {
+    $('#UserEdit').submit(function (e) {
         return confirm('Click ok to update your profile');
     });
 });
+
+

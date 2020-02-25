@@ -12,8 +12,8 @@ abstract class AbstractBaseController
      * Checking if the current user has permissions for the requested action
      * (Letting the controller that is created determine this)
      *
-     * @param string $action
-     * @param array  $parameters
+     * @param string $action     - The requested function within our controller
+     * @param array  $parameters - Any additional parameters being sent in to be looked at
      *
      * @return bool
      */

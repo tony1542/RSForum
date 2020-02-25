@@ -75,7 +75,7 @@ function view(string $name, $data = []): void
     
     $data['rendered_view'] = null;
     $data['rendered_errors'] = null;
-    
+
     if (is_file($file_name)) {
         ob_start();
         require($file_name);

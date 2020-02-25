@@ -5,7 +5,7 @@
         <div class="card">
             <div class="card-header">Account</div>
             <div class="card-body">
-                <form method="post" action="/User/Update/<?= $user->getID() ?>">
+                <form id="UserEdit" method="post" action="/User/Update/<?= $user->getID() ?>">
                     <div class="form-group">
                         <label for="username">Username</label>
                         <input type="text" class="form-control" id="username" name="username" value="<?= $user->getUsername() ?>" />
@@ -55,5 +55,6 @@
     <?php endif; ?>
     
 </div>
+
 
 <script src="/public/js/user/profile.js"></script>
