@@ -1,13 +1,6 @@
 <?php
 
-
 namespace App\Models\Todo;
-
-use App\Utils\Database\Connection;
-use App\Utils\Http\Request;
-use App\Utils\Input\Sanitizer;
-use PDO;
-use App\Utils\Http\Session;
 
 class Todo
 {
@@ -23,6 +16,7 @@ class Todo
         if (!$user_id) {
             return;
         }
+        
         $this->task_id = $task_id;
         $this->title = $title;
         $this->description = $description;
@@ -48,7 +42,7 @@ class Todo
 
     public function getIsCompleted()
     {
-        return (int)$this->is_completed; //casted the boolean with (int) to make bool show up if it's false;O
+        return (int)$this->is_completed;
     }
 
     public function getDate()
@@ -76,18 +70,15 @@ class Todo
         if (!count($_POST)) {
             redirect("Todo/Tasks/" . getSignedInUser()->getID());
         }
-        //if we get this far, no errors, insert task into database.
-
+        
         $db = getDatabase();
         $sql = $db->prepare("INSERT INTO todo (title, description, date, user_id) VALUES (?, ?, ?, ?)");
-
-        $values = [
+        $sql->execute([
             $title,
             $description,
             $date,
             $user_id
-        ];
-        $sql->execute($values);
+        ]);
 
         redirect("Todo/Tasks/" . getSignedInUser()->getID());
     }
@@ -104,9 +95,9 @@ class Todo
     public static function delete($user_id, $task_id)
     {
         $db = getDatabase();
-        $stm = $db->prepare('DELETE FROM todo WHERE user_id =? AND task_id =?');
-        $stm->execute([$user_id, $task_id]);
+        $sql = $db->prepare('DELETE FROM todo WHERE user_id =? AND task_id =?');
+        $sql->execute([$user_id, $task_id]);
+        
         redirect("Todo/Tasks/" . getSignedInUser()->getID());
     }
-
 }
