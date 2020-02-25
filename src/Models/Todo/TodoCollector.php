@@ -17,7 +17,7 @@ class TodoCollector
         
         $tasks = [];
         $instance = getDatabase();
-        $stmt = $instance->prepare('SELECT * FROM todo WHERE user_id =?');
+        $stmt = $instance->prepare('SELECT * FROM todo WHERE user_id = ?');
         $stmt->execute([$user_id]);
         $value = $stmt->fetchAll(PDO::FETCH_ASSOC);
         

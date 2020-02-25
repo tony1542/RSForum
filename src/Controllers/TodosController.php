@@ -106,16 +106,12 @@ class TodosController extends AbstractBaseController
             view($this->getIncludePrefix() . 'task');
         }
         
-        $title = Sanitizer::sanitize($_POST['title']);
-        $description = Sanitizer::sanitize($_POST['description']);
-        $date = date('Y-m-d');
         $errors = [];
-        
-        if (!$title) {
+        if (!isset($_POST['title'])) {
             $errors[] = 'Please enter a title';
         }
         
-        if (!$description) {
+        if (!isset($_POST['description'])) {
             $errors[] = 'Please enter a description';
         }
         
@@ -130,6 +126,10 @@ class TodosController extends AbstractBaseController
                 'todo' => $todo->getTasks()
             ]);
         }
+    
+        $title = Sanitizer::sanitize($_POST['title']);
+        $description = Sanitizer::sanitize($_POST['description']);
+        $date = date('Y-m-d');
         
         Todo::add($title, $description, $date, $user_id);
     }
