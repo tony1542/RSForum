@@ -4,6 +4,7 @@ require('vendor/autoload.php');
 
 use App\Utils\Database\EnvException;
 use App\Utils\Http\Router;
+use App\Utils\Http\Server;
 
 try {
     setApplicationVariables();
@@ -15,7 +16,7 @@ try {
         $errors = [$t->getMessage()];
     }
 
-    if (getSignedInUser()->isAdmin()) {
+    if (getSignedInUser()->isAdmin() || Server::isCommandLine()) {
         $errors = [
             '<h4>Message</h4> ' . $t->getMessage(),
             '<h4>File</h4><pre>' . $t->getFile() . '</pre>',
