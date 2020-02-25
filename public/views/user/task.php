@@ -1,6 +1,3 @@
-<!--Grid layout-->
-<!--End Todo add task div-->
-
 <!--TodoList-->
 <div class="col-lg-12 mb-4">
     <div class="card">
@@ -76,7 +73,7 @@
                         </div>
                     </div>
 
-                    <!--Model for Editing Tasks-->
+                    <!--Modal for Editing Tasks-->
                     <div class="modal fade" id="TaskModal-<?= $edit ?>" tabindex="-1" role="dialog">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
@@ -113,9 +110,9 @@
                             </div>
                         </div>
                     </div>
-                    <!--End model for Editing Tasks-->
+                    <!--End Modal for Editing Tasks-->
                 <?php $i++; endforeach; ?>
-                <!--Model for Adding Tasks-->
+                <!--Modal for Adding Tasks-->
                 <div class="modal fade" id="AddTask" tabindex="-1" role="dialog">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
@@ -143,7 +140,7 @@
                         </div>
                     </div>
                 </div>
-                <!--End Model for Adding Tasks-->
+                <!--End Modal for Adding Tasks-->
                 <!--End Content Div-->
             </div>
         </div>
