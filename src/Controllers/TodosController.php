@@ -14,6 +14,8 @@ class TodosController extends AbstractBaseController
     {
         return 'user/';
     }
+    
+    public function index() {}
 
     public function canAccess($action, $parameters = []): bool
     {
@@ -102,16 +104,12 @@ class TodosController extends AbstractBaseController
 
     public function add()
     {
-        if (!count($_POST)) {
-            view($this->getIncludePrefix() . 'task');
-        }
-        
         $errors = [];
-        if (!isset($_POST['title'])) {
+        if (!$_POST['title']) {
             $errors[] = 'Please enter a title';
         }
         
-        if (!isset($_POST['description'])) {
+        if (!$_POST['description']) {
             $errors[] = 'Please enter a description';
         }
         
@@ -122,8 +120,8 @@ class TodosController extends AbstractBaseController
         if (count($errors)) {
             view($this->getIncludePrefix() . 'task', [
                 'errors' => $errors,
-                'user' => $user,
-                'todo' => $todo->getTasks()
+                'user'   => $user,
+                'todo'   => $todo->getTasks()
             ]);
         }
     

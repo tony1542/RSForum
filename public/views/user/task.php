@@ -85,20 +85,18 @@
                                 <form name="Edit" id="Edit/<?=$i;?>" method="post" action="/Todo/Edit/<?= $user->getID() ?>">
                                     <div class="modal-body">
                                         <input type="hidden" name="hidden_edit" value="<?= $edit ?>"></td>
-                                            <label for="title/<?=$i;?>">Title
-                                            <input class="form-control" name="title" id="title/<?=$i;?>" value="<?= $value->getTitle(); ?>">
-                                            </label>
+                                            <label for="title/<?=$i;?>">Title</label>
+                                        <input class="form-control" name="title" id="title/<?=$i;?>" value="<?= $value->getTitle(); ?>">
                                             <hr>
                                             <label for="description/<?=$i;?>">Description</label>
                                             <textarea class="form-control" name="description" id="description/<?=$i;?>" rows="4"><?= $value->getDescription(); ?></textarea>
                                             <hr>
                                         <div class="form-group">
-                                            <label for="complete/<?=$i;?>"><b>Complete</b>
-                                                <select name="complete/<?=$i;?>" class="form-control">
-                                                    <option value="0">No</option>
-                                                    <option value="1">Yes</option>
-                                                </select>
-                                            </label>
+                                            <label for="complete/<?=$i;?>"><b>Complete</b></label>
+                                            <select name="complete/<?=$i;?>" class="form-control">
+                                                <option value="0">No</option>
+                                                <option value="1">Yes</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
@@ -121,7 +119,7 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">X
                                 </button>
                             </div>
-                            <form name="AddTask" id="AddTask" method="post" action="/Todo/Add/<?= $user->getID() ?>">
+                            <form method="post" action="/Todo/Add/<?= $user->getID() ?>">
                                 <div class="modal-body">
                                     <div class="form-group">
                                         <label for="Title">Title</label>
@@ -129,7 +127,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="Description">Description</label>
-                                        <textarea class="form-control" rows="3" maxlength="5"></textarea>
+                                        <textarea name="description" class="form-control" rows="3" maxlength="5"></textarea>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
