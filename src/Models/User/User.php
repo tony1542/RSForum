@@ -3,6 +3,7 @@
 namespace App\Models\User;
 
 use App\Utils\Http\Request;
+use App\Utils\Input\Sanitizer;
 use PDO;
 use App\Utils\Http\Session;
 
@@ -114,6 +115,70 @@ class User
         $sql->execute([$_SESSION['email_address']]);
         
         redirect("User/Details/" . getSignedInUser()->getID());
+    }
+
+    public function register(): void
+    {
+        // Sanitizing our user input before validating
+        $username = Sanitizer::sanitize($_POST['username']);
+        $email_address = Sanitizer::sanitize($_POST['email_address']);
+        $password = Sanitizer::sanitize($_POST['password']);
+        $password_confirm = Sanitizer::sanitize($_POST['password_confirm']);
+
+        $form_errors = User::verifyUsername($username);
+
+        $db = getDatabase();
+        $sql = $db->prepare('SELECT email_address FROM user WHERE email_address =?');
+        $sql->execute([$email_address]);
+        $value = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+        if ($value) {
+            $value = $value[0];
+            $compare_email = $value['email_address'];
+
+            if ($compare_email === $email_address) {
+                $form_errors[] = 'Sorry, that email has been taken by another user, please try again';
+            }
+        }
+
+        if (!filter_var($email_address, FILTER_VALIDATE_EMAIL)) {
+            $form_errors[] = 'Please enter a valid email address';
+        }
+
+        if (!$password) {
+            $form_errors[] = 'Please enter a password';
+        }
+
+        if (!$password_confirm) {
+            $form_errors[] = 'Please fill out \'Confirm Password\'';
+        }
+
+        if ($password !== $password_confirm) {
+            $form_errors[] = 'Your passwords do not match';
+        }
+
+        // If we have found any errors, re-show the form with them
+        if (count($form_errors)) {
+            view($this->getIncludePrefix() . 'register', [
+                'errors' => $form_errors
+            ]);
+        }
+
+        // If we have gotten this far, it means there were no errors when validating. Insert the user into the database
+        $db = getDatabase();
+        $password = password_hash($password, PASSWORD_DEFAULT);
+        $sql = $db->prepare('INSERT INTO user (username, password, email_address) VALUES (?, ?, ?)');
+
+        $values = [
+            $username,
+            $password,
+            $email_address
+        ];
+        $sql->execute($values);
+        $user_id = $db->lastInsertId();
+        setSignedInUser(new User($user_id));
+
+        redirect('');
     }
     
     public function logout(): void

@@ -36,12 +36,18 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/User/Details/<?= getSignedInUser()->getID() ?>">Profile</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Todo/Tasks/<?= getSignedInUser()->getID() ?>">Todo List</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/User/Members/">Members</a>
-                    </li>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        More
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="/Todo/Tasks/<?= getSignedInUser()->getID() ?>">Todo List</a>
+                        <a class="dropdown-item" href="/Example/Example/">Public Posts</a>
+                        <a class="dropdown-item" href="/Example/Example/">Public Poll</a>
+                        <a class="dropdown-item" href="/User/Members/">Members</a>
+                        <a class="dropdown-item" href="/Example/Example/">Friends List</a>
+                    </div>
+                </div>
                     <li class="nav-item">
                         <a class="nav-link" href="/User/Logout">Log-Out</a>
                     </li>
