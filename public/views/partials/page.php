@@ -42,7 +42,7 @@
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="/Todo/Tasks/<?= getSignedInUser()->getID() ?>">Todo List</a>
-                        <a class="dropdown-item" href="/Example/Example/">Public Posts</a>
+                        <a class="dropdown-item" href="/Post/Show/<?= getSignedInUser()->getID() ?>">Public Posts</a>
                         <a class="dropdown-item" href="/Example/Example/">Public Poll</a>
                         <a class="dropdown-item" href="/User/Members/">Members</a>
                         <a class="dropdown-item" href="/Example/Example/">Friends List</a>

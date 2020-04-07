@@ -60,7 +60,6 @@ class Todo
         $db = getDatabase();
         $sql = $db->prepare("UPDATE todo SET title =  '$title', description = '$description', is_completed = '$complete'  WHERE task_id =? AND user_id = ?");
         $sql->execute([$task_id, $user_id]);
-
         redirect("Todo/Tasks/" . getSignedInUser()->getID());
 
     }

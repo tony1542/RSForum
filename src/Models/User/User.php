@@ -224,6 +224,9 @@ class User
         // If we are all good, update the database
         $sql = $database->prepare("UPDATE user SET username = ? WHERE user_id = ?");
         $sql->execute([$username, Request::getID()]);
+        //update username in post table so if a user changes username, posts stay posted by the same person.
+        $update_post_table = $database->prepare("UPDATE post SET username = ? WHERE user_id = ?");
+        $update_post_table->execute([$username, Request::getID()]);
         
         $this->load();
         
