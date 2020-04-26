@@ -1,0 +1,10 @@
+# Exclude access to the following directories / files
+RedirectMatch 403 /vendor
+RedirectMatch 403 /composer.lock
+RedirectMatch 403 /composer.json
+RedirectMatch 403 /config
+RedirectMatch 403 /docs
+RedirectMatch 403 /public
+RedirectMatch 403 /src
+RedirectMatch 403 /.gitignore
+RedirectMatch 403 /README.md
