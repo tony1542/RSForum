@@ -67,5 +67,5 @@ CREATE TABLE task
 );
 
 CREATE INDEX user_id
-    ON todo (user_id);
+    ON task (user_id);
 

@@ -5,7 +5,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm">
-                        Todo List
+                        Task List
                     </div>
                     <div class="col-sm">
                         <div class="d-flex justify-content-center">
