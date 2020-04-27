@@ -8,11 +8,11 @@ USE rsforum;
 CREATE TABLE user
 (
     user_id       int AUTO_INCREMENT,
-    username      varchar(12)  NOT NULL,
-    email_address varchar(255) NOT NULL,
-    password      varchar(255) NOT NULL,
-    logged_in     tinyint      DEFAULT 0 NOT NULL,
-    admin         tinyint      DEFAULT 0 NOT NULL,
+    username      varchar(12)       NOT NULL,
+    email_address varchar(255)      NOT NULL,
+    password      varchar(255)      NOT NULL,
+    logged_in     tinyint DEFAULT 0 NOT NULL,
+    admin         tinyint DEFAULT 0 NOT NULL,
     CONSTRAINT user_pk
         PRIMARY KEY (user_id)
 );
@@ -20,31 +20,31 @@ CREATE TABLE user
 CREATE TABLE user_skills
 (
     user_stat_id int AUTO_INCREMENT,
-    username     varchar(12)  NOT NULL,
-    overall      int NULL,
-    attack       int NULL,
-    defence      int NULL,
-    strength     int NULL,
-    hitpoints    int NULL,
-    ranged       int NULL,
-    prayer       int NULL,
-    magic        int NULL,
-    cooking      int NULL,
-    woodcutting  int NULL,
-    fletching    int NULL,
-    fishing      int NULL,
-    firemaking   int NULL,
-    crafting     int NULL,
-    smithing     int NULL,
-    mining       int NULL,
-    herblore     int NULL,
-    agility      int NULL,
-    thieving     int NULL,
-    slayer       int NULL,
-    farming      int NULL,
-    runecrafting int NULL,
-    hunter       int NULL,
-    construction int NULL,
+    username     varchar(12) NOT NULL,
+    overall      int         NULL,
+    attack       int         NULL,
+    defence      int         NULL,
+    strength     int         NULL,
+    hitpoints    int         NULL,
+    ranged       int         NULL,
+    prayer       int         NULL,
+    magic        int         NULL,
+    cooking      int         NULL,
+    woodcutting  int         NULL,
+    fletching    int         NULL,
+    fishing      int         NULL,
+    firemaking   int         NULL,
+    crafting     int         NULL,
+    smithing     int         NULL,
+    mining       int         NULL,
+    herblore     int         NULL,
+    agility      int         NULL,
+    thieving     int         NULL,
+    slayer       int         NULL,
+    farming      int         NULL,
+    runecrafting int         NULL,
+    hunter       int         NULL,
+    construction int         NULL,
     CONSTRAINT user_stats_pk
         PRIMARY KEY (user_stat_id)
 );
@@ -55,17 +55,17 @@ CREATE INDEX user_skills_user_stat_id_index
 CREATE INDEX user_skills_username_index
     ON user_skills (username);
 
-    create table todo
+CREATE TABLE task
 (
-    task_id      int auto_increment
-        primary key,
-    title        varchar(255)         null,
-    description  varchar(255)         null,
-    is_completed tinyint(1) default 0 not null,
-    date         date                 not null,
-    user_id      int                  null
+    task_id      int AUTO_INCREMENT
+        PRIMARY KEY,
+    title        varchar(255)         NULL,
+    description  varchar(255)         NULL,
+    is_completed tinyint(1) DEFAULT 0 NOT NULL,
+    date         date                 NOT NULL,
+    user_id      int                  NULL
 );
 
-create index user_id
-    on todo (user_id);
+CREATE INDEX user_id
+    ON todo (user_id);
 

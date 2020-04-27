@@ -2,8 +2,8 @@
 
 namespace App\Controllers;
 
-use App\Models\Todo\Todo;
-use App\Models\Todo\TodoCollector;
+use App\Models\Task\Task;
+use App\Models\Task\TaskCollector;
 use App\Utils\Http\Request;
 use App\Models\User\User;
 use App\Utils\Input\Sanitizer;
