@@ -24,5 +24,10 @@
   },
   "config": {
     "optimize-autoloader": true
+  },
+  "scripts": {
+    "test-all": [
+      "phpunit tests"
+    ]
   }
 }

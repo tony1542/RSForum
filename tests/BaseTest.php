@@ -15,7 +15,7 @@ class BaseTest extends TestCase
     public static function setUpBeforeClass(): void
     {
         $_SERVER['DOCUMENT_ROOT'] = __DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR;
-        setApplicationVariables();
+        @setApplicationVariables();
         parent::setUpBeforeClass();
     }
     
