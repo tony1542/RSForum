@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Models\Todo;
+namespace App\Models\Task;
 
-class Todo
+class Task
 {
     protected string $task_id = '';
     protected string $title = '';
@@ -25,54 +25,53 @@ class Todo
         $this->user_id = $user_id;
     }
 
-    public function getTaskID()
+    public function getTaskID(): string
     {
         return $this->task_id;
     }
 
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
 
-    public function getDescription()
+    public function getDescription():string
     {
         return $this->description;
     }
 
-    public function getIsCompleted()
+    public function getIsCompleted(): bool
     {
         return (int)$this->is_completed;
     }
 
-    public function getDate()
+    public function getDate(): string
     {
         return $this->date;
     }
 
-    public function getUID()
+    public function getUserID(): string
     {
         return $this->user_id;
     }
 
-    public function edit($task_id, $user_id, $title, $description, $complete)
+    public static function edit($task_id, $user_id, $title, $description, $complete): void
     {
         $db = getDatabase();
-        $sql = $db->prepare("UPDATE todo SET title =  '$title', description = '$description', is_completed = '$complete'  WHERE task_id =? AND user_id = ?");
+        $sql = $db->prepare("UPDATE task SET title =  '$title', description = '$description', is_completed = '$complete'  WHERE task_id =? AND user_id = ?");
         $sql->execute([$task_id, $user_id]);
 
-        redirect("Todo/Tasks/" . getSignedInUser()->getID());
-
+        redirect("Task/All/" . getSignedInUser()->getID());
     }
 
-    public static function add($title, $description, $date, $user_id)
+    public static function add($title, $description, $date, $user_id): void
     {
         if (!count($_POST)) {
-            redirect("Todo/Tasks/" . getSignedInUser()->getID());
+            redirect("Task/All/" . getSignedInUser()->getID());
         }
         
         $db = getDatabase();
-        $sql = $db->prepare("INSERT INTO todo (title, description, date, user_id) VALUES (?, ?, ?, ?)");
+        $sql = $db->prepare("INSERT INTO task (title, description, date, user_id) VALUES (?, ?, ?, ?)");
         $sql->execute([
             $title,
             $description,
@@ -80,24 +79,24 @@ class Todo
             $user_id
         ]);
 
-        redirect("Todo/Tasks/" . getSignedInUser()->getID());
+        redirect("Task/All/" . getSignedInUser()->getID());
     }
 
-    public static function complete($user_id, $task_id)
+    public static function complete($user_id, $task_id): void
     {
         $db = getDatabase();
-        $sql = $db->prepare('UPDATE todo SET is_completed = 1 WHERE user_id =? AND task_id =?');
+        $sql = $db->prepare('UPDATE task SET is_completed = 1 WHERE user_id =? AND task_id =?');
         $sql->execute([$user_id, $task_id]);
 
-        redirect("Todo/Tasks/" . getSignedInUser()->getID());
+        redirect("Task/All/" . getSignedInUser()->getID());
     }
 
-    public static function delete($user_id, $task_id)
+    public static function delete($user_id, $task_id): void
     {
         $db = getDatabase();
-        $sql = $db->prepare('DELETE FROM todo WHERE user_id =? AND task_id =?');
+        $sql = $db->prepare('DELETE FROM task WHERE user_id =? AND task_id =?');
         $sql->execute([$user_id, $task_id]);
         
-        redirect("Todo/Tasks/" . getSignedInUser()->getID());
+        redirect("Task/All/" . getSignedInUser()->getID());
     }
 }

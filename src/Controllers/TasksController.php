@@ -2,13 +2,13 @@
 
 namespace App\Controllers;
 
-use App\Models\Todo\TodoCollector;
+use App\Models\Task\TaskCollector;
 use App\Models\User\User;
 use App\Utils\Http\Request;
-use App\Models\Todo\Todo;
+use App\Models\Task\Task;
 use App\Utils\Input\Sanitizer;
 
-class TodosController extends AbstractBaseController
+class TasksController extends AbstractBaseController
 {
     protected function getIncludePrefix(): string
     {
@@ -33,18 +33,18 @@ class TodosController extends AbstractBaseController
         }
     }
 
-    public function tasks()
+    public function all(): void
     {
         $user_id = Request::getID();
         $user = new User($user_id);
-        $todo = new TodoCollector($user_id);
+        $task_collector = new TaskCollector($user_id);
         view($this->getIncludePrefix() . 'task', [
             'user' => $user,
-            'todo' => $todo->getTasks()
+            'tasks' => $task_collector->getTasks()
         ]);
     }
 
-    public function edit()
+    public function edit(): void
     {
         if (!count($_POST)) {
             view($this->getIncludePrefix() . 'task');
@@ -57,30 +57,30 @@ class TodosController extends AbstractBaseController
         $user_id = Request::getID();
         
         $user = new user($user_id);
-        $todo = new TodoCollector($user_id);
+        $task_collector = new TaskCollector($user_id);
         
         $errors = [];
         
         if (!$title) {
-            $errors[] = 'Edit Canceled; User did not enter a title';
+            $errors[] = 'Edit canceled; user did not enter a title';
         }
         
         if (!$description) {
-            $errors[] = 'Edit Canceled; User did not enter a description';
+            $errors[] = 'Edit canceled; user did not enter a description';
         }
         
         if (count($errors)) {
             view($this->getIncludePrefix() . 'task', [
                 'errors' => $errors,
                 'user' => $user,
-                'todo' => $todo->getTasks()
+                'tasks' => $task_collector->getTasks()
             ]);
         }
         
-        Todo::edit($task_id, $user_id, $title, $description, $complete);
+        Task::edit($task_id, $user_id, $title, $description, $complete);
     }
 
-    public function delete()
+    public function delete(): void
     {
         if (!count($_POST)) {
             view($this->getIncludePrefix() . 'task');
@@ -88,7 +88,7 @@ class TodosController extends AbstractBaseController
         
         $user_id = Request::getID();
         $task_id = $_POST['hidden_delete'];
-        Todo::delete($user_id, $task_id);
+        Task::delete($user_id, $task_id);
     }
 
     public function complete()
@@ -99,7 +99,7 @@ class TodosController extends AbstractBaseController
         
         $user_id = Request::getID();
         $task_id = $_POST['hidden_complete'];
-        Todo::complete($user_id, $task_id);
+        Task::complete($user_id, $task_id);
     }
 
     public function add()
@@ -115,13 +115,13 @@ class TodosController extends AbstractBaseController
         
         $user_id = Request::getID();
         $user = new User($user_id);
-        $todo = new TodoCollector($user_id);
+        $task_collector = new TaskCollector($user_id);
 
         if (count($errors)) {
             view($this->getIncludePrefix() . 'task', [
                 'errors' => $errors,
                 'user'   => $user,
-                'todo'   => $todo->getTasks()
+                'tasks'   => $task_collector->getTasks()
             ]);
         }
     
@@ -129,6 +129,6 @@ class TodosController extends AbstractBaseController
         $description = Sanitizer::sanitize($_POST['description']);
         $date = date('Y-m-d');
         
-        Todo::add($title, $description, $date, $user_id);
+        Task::add($title, $description, $date, $user_id);
     }
 }

@@ -37,7 +37,7 @@
                         <a class="nav-link" href="/User/Details/<?= getSignedInUser()->getID() ?>">Profile</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/Todo/Tasks/<?= getSignedInUser()->getID() ?>">Todo List</a>
+                        <a class="nav-link" href="/Task/All/<?= getSignedInUser()->getID() ?>">Task List</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/User/Members/">Members</a>

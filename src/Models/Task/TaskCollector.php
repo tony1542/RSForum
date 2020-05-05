@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Models\Todo;
+namespace App\Models\Task;
 
 use PDO;
 
-class TodoCollector
+class TaskCollector
 {
-    /** @var Todo[] $tasks */
+    /** @var Task[] $tasks */
     protected array $tasks = [];
 
     public function __construct($user_id)
@@ -17,7 +17,7 @@ class TodoCollector
         
         $tasks = [];
         $instance = getDatabase();
-        $stmt = $instance->prepare('SELECT * FROM todo WHERE user_id = ?');
+        $stmt = $instance->prepare('SELECT * FROM task WHERE user_id = ?');
         $stmt->execute([$user_id]);
         $value = $stmt->fetchAll(PDO::FETCH_ASSOC);
         
@@ -32,7 +32,7 @@ class TodoCollector
             $is_completed = $row['is_completed'];
             $date = $row['date'];
             $user_id = $row['user_id'];
-            $tasks[] = new Todo($task_id, $title, $description, $is_completed, $date, $user_id);
+            $tasks[] = new Task($task_id, $title, $description, $is_completed, $date, $user_id);
         }
         
         $this->tasks = $tasks;
