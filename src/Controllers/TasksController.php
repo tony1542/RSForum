@@ -91,7 +91,7 @@ class TasksController extends AbstractBaseController
         Task::delete($user_id, $task_id);
     }
 
-    public function complete()
+    public function complete(): void
     {
         if (!count($_POST)) {
             view($this->getIncludePrefix() . 'task');
@@ -102,7 +102,7 @@ class TasksController extends AbstractBaseController
         Task::complete($user_id, $task_id);
     }
 
-    public function add()
+    public function add(): void
     {
         $errors = [];
         if (!$_POST['title']) {
