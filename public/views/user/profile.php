@@ -31,7 +31,7 @@
                     <div class="row">
                         <?php foreach ($skills as $skill): ?>
                             <div class="col-md-4 mb-2">
-                                <div class="card">
+                                <div class="card h-100">
                                     <div class="card-body">
                                         <img src="<?= $skill['src'] ?>" alt="<?= $skill['skill_name'] ?>">
                                         &nbsp;<?= $skill['skill_name'] ?>
