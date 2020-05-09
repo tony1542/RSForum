@@ -42,7 +42,7 @@ abstract class AbstractEndpointBase implements EndpointInterface
      *
      * @return array
      */
-    public function formatStandard(StreamInterface $result)
+    public function formatStandard(StreamInterface $result): array
     {
         return explode("\n", $result);
     }

@@ -6,5 +6,5 @@ use App\Models\Equipment\Weapons\Weapon;
 
 abstract class Dagger extends Weapon
 {
-    abstract public function levelRequirement();
+    abstract public function levelRequirement(): int;
 }

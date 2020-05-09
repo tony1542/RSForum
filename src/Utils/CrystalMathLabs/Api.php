@@ -46,7 +46,7 @@ class Api
      *
      * @return array
      */
-    public static function getStatsForPlayer(string $playerName)
+    public static function getStatsForPlayer(string $playerName): ?array
     {
         try {
             $stats_for_player = new Stats($playerName);
