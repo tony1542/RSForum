@@ -6,6 +6,6 @@ class Iron extends Armor
 {
     public function getDefenceLevel(): int
     {
-        return 5;
+        return 1;
     }
 }
