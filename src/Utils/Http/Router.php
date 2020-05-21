@@ -34,11 +34,7 @@ class Router
         }
         
         /** @var AbstractBaseController $controller */
-        if ($id) {
-            $controller = new $controller($id);
-        } else {
-            $controller = new $controller;
-        }
+        $controller = new $controller($id);
         
         // If there isn't a method that matches what was passed in for that controller
         if (!method_exists($controller, $action)) {

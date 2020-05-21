@@ -10,7 +10,7 @@ abstract class AbstractBaseController
 {
     protected $model;
     
-    public function __construct(int $id)
+    public function __construct(int $id = 0)
     {
         if ($id) {
             $model_class = $this->getModelClass();

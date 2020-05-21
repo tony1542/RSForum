@@ -17,7 +17,7 @@ class UsersController extends AbstractBaseController
     
     protected function getModel(): User
     {
-        return $this->model;
+        return $this->model ?? new User();
     }
     
     protected function getIncludePrefix(): string
@@ -29,24 +29,25 @@ class UsersController extends AbstractBaseController
     {
         $return_array = [];
     
-        $skills = $this->getModel()->getSkills();
-        $skills_array = [];
-        foreach ($skills as $key => $row) {
-            $skills_array[] = [
-                'src'        => Skills::getSkillIconFromIndex($row['skill_index']),
-                'skill_name' => $row['skill_name'],
-                'exp'        => $row['exp'],
-                'level'      => $row['level'],
-                'rank'       => $row['rank']
-            ];
+        if ($this->getModel()->getID()) {
+            $skills = $this->getModel()->getSkills();
+            $skills_array = [];
+            foreach ($skills as $key => $row) {
+                $skills_array[] = [
+                    'src'        => Skills::getSkillIconFromIndex($row['skill_index']),
+                    'skill_name' => $row['skill_name'],
+                    'exp'        => $row['exp'],
+                    'level'      => $row['level'],
+                    'rank'       => $row['rank']
+                ];
+            }
+    
+            $return_array['user'] = $this->getModel();
+            $return_array['skills'] = $skills_array;
+            $return_array['show_skills'] = count($skills_array) > 0;
         }
-        
-        $return_array['user'] = $this->getModel();
-        $return_array['skills'] = $skills_array;
-        $return_array['show_skills'] = count($skills_array) > 0;
 
         $return_array = array_merge($parameters, $return_array);
-        
         view($this->getIncludePrefix() . $view, $return_array);
     }
     
