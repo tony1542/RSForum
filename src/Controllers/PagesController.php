@@ -11,6 +11,11 @@ class PagesController extends AbstractBaseController
         return 'pages/';
     }
     
+    protected function toView(string $view, array $parameters = []): void
+    {
+        view($this->getIncludePrefix() . $view, $parameters);
+    }
+    
     public function canAccess(string $action, array $parameters = []): bool
     {
         return true;
@@ -25,6 +30,6 @@ class PagesController extends AbstractBaseController
            Session::set('home_welcome', true);
         }
         
-        view($this->getIncludePrefix() . 'home_page');
+        $this->toView('home_page');
     }
 }
