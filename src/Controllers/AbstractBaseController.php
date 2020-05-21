@@ -26,4 +26,12 @@ abstract class AbstractBaseController
      * @return string
      */
     abstract protected function getIncludePrefix(): string;
+    
+    /**
+     * Call this to activate a particular view from a controller
+     *
+     * @param string $view       - File path for the view
+     * @param array  $parameters - Any additional parameters to be sent off to the view
+     */
+    abstract protected function toView(string $view, array $parameters = []): void;
 }
