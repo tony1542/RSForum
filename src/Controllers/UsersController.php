@@ -44,8 +44,10 @@ class UsersController extends AbstractBaseController
         $return_array['user'] = $this->getModel();
         $return_array['skills'] = $skills_array;
         $return_array['show_skills'] = count($skills_array) > 0;
+
+        $return_array = array_merge($parameters, $return_array);
         
-        view($this->getIncludePrefix() . $view, $parameters);
+        view($this->getIncludePrefix() . $view, $return_array);
     }
     
     public function canAccess(string $action, array $parameters = []): bool
