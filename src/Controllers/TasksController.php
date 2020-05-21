@@ -10,12 +10,37 @@ use App\Utils\Input\Sanitizer;
 
 class TasksController extends AbstractBaseController
 {
+    protected function getModelClass(): string
+    {
+        return TaskCollector::class;
+    }
+    
+    protected function getModel(): TaskCollector
+    {
+        return $this->model;
+    }
+    
+    protected function toView(string $view, array $parameters = []): void
+    {
+        $return_array = [];
+    
+        $user_id = Request::getID();
+        $user = new User($user_id);
+        
+        $return_array['user'] = $user;
+        $return_array['tasks'] = $this->getModel()->getTasks();
+        
+        $return_array = array_merge($parameters, $return_array);
+        view($this->getIncludePrefix() . $view, $return_array);
+    }
+    
+    // TODO this shouldn't be the user folder - should be a task folder
     protected function getIncludePrefix(): string
     {
         return 'user/';
     }
     
-    public function index() {}
+    public function index(): void {}
 
     public function canAccess($action, $parameters = []): bool
     {
@@ -35,19 +60,13 @@ class TasksController extends AbstractBaseController
 
     public function all(): void
     {
-        $user_id = Request::getID();
-        $user = new User($user_id);
-        $task_collector = new TaskCollector($user_id);
-        view($this->getIncludePrefix() . 'task', [
-            'user' => $user,
-            'tasks' => $task_collector->getTasks()
-        ]);
+        $this->toView('task');
     }
 
     public function edit(): void
     {
         if (!count($_POST)) {
-            view($this->getIncludePrefix() . 'task');
+            $this->toView('task');
         }
         
         $title = Sanitizer::sanitize($_POST['title']);
@@ -55,9 +74,6 @@ class TasksController extends AbstractBaseController
         $complete = $_POST['complete'];
         $task_id = $_POST['hidden_edit'];
         $user_id = Request::getID();
-        
-        $user = new user($user_id);
-        $task_collector = new TaskCollector($user_id);
         
         $errors = [];
         
@@ -70,11 +86,7 @@ class TasksController extends AbstractBaseController
         }
         
         if (count($errors)) {
-            view($this->getIncludePrefix() . 'task', [
-                'errors' => $errors,
-                'user' => $user,
-                'tasks' => $task_collector->getTasks()
-            ]);
+            $this->toView('task');
         }
         
         Task::edit($task_id, $user_id, $title, $description, $complete);
@@ -83,22 +95,24 @@ class TasksController extends AbstractBaseController
     public function delete(): void
     {
         if (!count($_POST)) {
-            view($this->getIncludePrefix() . 'task');
+            $this->toView('task');
         }
         
         $user_id = Request::getID();
         $task_id = $_POST['hidden_delete'];
+        
         Task::delete($user_id, $task_id);
     }
 
     public function complete(): void
     {
         if (!count($_POST)) {
-            view($this->getIncludePrefix() . 'task');
+            $this->toView('task');
         }
         
         $user_id = Request::getID();
         $task_id = $_POST['hidden_complete'];
+        
         Task::complete($user_id, $task_id);
     }
 
@@ -118,10 +132,8 @@ class TasksController extends AbstractBaseController
         $task_collector = new TaskCollector($user_id);
 
         if (count($errors)) {
-            view($this->getIncludePrefix() . 'task', [
-                'errors' => $errors,
-                'user'   => $user,
-                'tasks'   => $task_collector->getTasks()
+            $this->toView('task', [
+                'errors' => $errors
             ]);
         }
     
