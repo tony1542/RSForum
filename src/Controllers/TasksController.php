@@ -128,8 +128,6 @@ class TasksController extends AbstractBaseController
         }
         
         $user_id = Request::getID();
-        $user = new User($user_id);
-        $task_collector = new TaskCollector($user_id);
 
         if (count($errors)) {
             $this->toView('task', [
