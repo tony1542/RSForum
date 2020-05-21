@@ -19,6 +19,7 @@ class Router
         $parameters = Request::getParameters();
         $controller = Request::getController();
         $action     = Request::getAction();
+        $id         = Request::getID();
         $prefix     = Request::$default_controller_prefix;
         
         if ($controller !== Request::$default_controller) {
@@ -33,7 +34,11 @@ class Router
         }
         
         /** @var AbstractBaseController $controller */
-        $controller = new $controller;
+        if ($id) {
+            $controller = new $controller($id);
+        } else {
+            $controller = new $controller;
+        }
         
         // If there isn't a method that matches what was passed in for that controller
         if (!method_exists($controller, $action)) {

@@ -8,6 +8,30 @@ namespace App\Controllers;
  */
 abstract class AbstractBaseController
 {
+    protected $model;
+    
+    public function __construct(int $id)
+    {
+        if ($id) {
+            $model_class = $this->getModelClass();
+            $this->model = new $model_class($id);
+        }
+    }
+    
+    /**
+     * Declare a controller's model - used like "User::class", so it will dump a full namespaced class name
+     *
+     * @return string
+     */
+    abstract protected function getModelClass(): string;
+    
+    /**
+     * Specify the return type of the model - will hold whatever current object (if ID is present)
+     *
+     * @return mixed
+     */
+    abstract protected function getModel();
+    
     /**
      * Checking if the current user has permissions for the requested action
      * (Letting the controller that is created determine this)
@@ -29,6 +53,7 @@ abstract class AbstractBaseController
     
     /**
      * Call this to activate a particular view from a controller
+     * This will bootstrap any other parameters necessary for the view
      *
      * @param string $view       - File path for the view
      * @param array  $parameters - Any additional parameters to be sent off to the view
