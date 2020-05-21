@@ -21,6 +21,8 @@ abstract class AbstractBaseController
     /**
      * Declare a controller's model - used like "User::class", so it will dump a full namespaced class name
      *
+     * @see https://www.php.net/manual/en/language.oop5.basic.php#language.oop5.basic.class.class
+     *
      * @return string
      */
     abstract protected function getModelClass(): string;
