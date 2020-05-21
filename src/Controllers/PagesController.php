@@ -6,6 +6,12 @@ use App\Utils\Http\Session;
 
 class PagesController extends AbstractBaseController
 {
+    protected function getModel(): void {}
+    protected function getModelClass() : string
+    {
+        return '';
+    }
+    
     protected function getIncludePrefix(): string
     {
         return 'pages/';
