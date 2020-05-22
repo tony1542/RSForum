@@ -2,20 +2,53 @@
 
 namespace App\Controllers;
 
-use App\Models\Task\Task;
-use App\Models\Task\TaskCollector;
 use App\Utils\Http\Request;
 use App\Models\User\User;
 use App\Utils\Input\Sanitizer;
-use App\Utils\Http\Session;
 use App\Utils\Runescape\Skills;
 use PDO;
 
 class UsersController extends AbstractBaseController
 {
+    protected function getModelClass(): string
+    {
+        return User::class;
+    }
+    
+    protected function getModel(): User
+    {
+        return $this->model ?? new User();
+    }
+    
     protected function getIncludePrefix(): string
     {
         return 'user/';
+    }
+    
+    protected function toView(string $view, array $parameters = []): void
+    {
+        $return_array = [];
+    
+        if ($this->getModel()->getID()) {
+            $skills = $this->getModel()->getSkills();
+            $skills_array = [];
+            foreach ($skills as $key => $row) {
+                $skills_array[] = [
+                    'src'        => Skills::getSkillIconFromIndex($row['skill_index']),
+                    'skill_name' => $row['skill_name'],
+                    'exp'        => $row['exp'],
+                    'level'      => $row['level'],
+                    'rank'       => $row['rank']
+                ];
+            }
+    
+            $return_array['user'] = $this->getModel();
+            $return_array['skills'] = $skills_array;
+            $return_array['show_skills'] = count($skills_array) > 0;
+        }
+
+        $return_array = array_merge($parameters, $return_array);
+        view($this->getIncludePrefix() . $view, $return_array);
     }
     
     public function canAccess(string $action, array $parameters = []): bool
@@ -42,7 +75,7 @@ class UsersController extends AbstractBaseController
     {
         // If nothing is in $_POST, just show the register form
         if (!count($_POST)) {
-            view($this->getIncludePrefix() . 'register');
+            $this->toView('register');
         }
 
         // Sanitizing our user input before validating
@@ -85,7 +118,7 @@ class UsersController extends AbstractBaseController
         
         // If we have found any errors, re-show the form with them
         if (count($form_errors)) {
-            view($this->getIncludePrefix() . 'register', [
+            $this->toView('register', [
                 'errors' => $form_errors
             ]);
         }
@@ -111,7 +144,7 @@ class UsersController extends AbstractBaseController
     public function signIn(): void
     {
         if (!count($_POST)) {
-            view($this->getIncludePrefix() . 'signin');
+            $this->toView('signin');
         }
         
         $email_address = Sanitizer::sanitize($_POST['email_address']);
@@ -127,12 +160,11 @@ class UsersController extends AbstractBaseController
         }
     
         if (count($form_error)) {
-            view($this->getIncludePrefix() . 'signin', [
+            $this->toView('signin', [
                 'errors' => $form_error
             ]);
         }
     
-        // if the code gets this far, there are no errors.
         User::login($email_address, $password);
     
         redirect('');
@@ -140,31 +172,7 @@ class UsersController extends AbstractBaseController
     
     public function details(): void
     {
-        view($this->getIncludePrefix() . 'profile', $this->getDetails());
-    }
-
-    protected function getDetails(): array
-    {
-        $user_id = Request::getID();
-        $user = new User($user_id);
-
-        $skills = $user->getSkills();
-        $skills_array = [];
-        foreach ($skills as $key => $row) {
-            $skills_array[] = [
-                'src'        => Skills::getSkillIconFromIndex($row['skill_index']),
-                'skill_name' => $row['skill_name'],
-                'exp'        => $row['exp'],
-                'level'      => $row['level'],
-                'rank'       => $row['rank']
-            ];
-        }
-
-        return [
-            'user'        => $user,
-            'skills'      => $skills_array,
-            'show_skills' => count($skills_array) > 0
-        ];
+        $this->toView('profile');
     }
 
     public function logout(): void
@@ -175,7 +183,7 @@ class UsersController extends AbstractBaseController
     
     public function members(): void
     {
-        view($this->getIncludePrefix() . 'members', [
+        $this->toView('members', [
             'members' => User::getMembers()
         ]);
     }
@@ -185,26 +193,27 @@ class UsersController extends AbstractBaseController
         $post_values = Request::getPostValues();
 
         if (!$post_values) {
-            redirect("User/Details/" . Request::getID());
+            redirect('User/Details/' . Request::getID());
         }
         
-        $details = $this->getDetails();
-
-        $user_id = Request::getID();
-        $user = new User($user_id);
+        $user = $this->getModel();
     
         $new_username = $post_values['username'];
         $errors = User::verifyUsername($new_username);
         if (count($errors)) {
-            view($this->getIncludePrefix() . 'profile', array_merge(['errors' => $errors], $details));
+            $this->toView('profile', [
+                'errors' => $errors
+            ]);
         }
         
         $success = $user->update($new_username);
         
         if (!$success) {
-            view($this->getIncludePrefix() . 'profile', array_merge(['errors' => ['The username ' . $new_username . ' is already taken']], $details));
+            $this->toView('profile', [
+                'errors' => ['The username ' . $new_username . ' is already taken']
+            ]);
         }
         
-        redirect("User/Details/" . $user->getID());
+        redirect('User/Details/' . $user->getID());
     }
 }

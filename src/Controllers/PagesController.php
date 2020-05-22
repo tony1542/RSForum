@@ -6,9 +6,20 @@ use App\Utils\Http\Session;
 
 class PagesController extends AbstractBaseController
 {
+    protected function getModel(): void {}
+    protected function getModelClass() : string
+    {
+        return '';
+    }
+    
     protected function getIncludePrefix(): string
     {
         return 'pages/';
+    }
+    
+    protected function toView(string $view, array $parameters = []): void
+    {
+        view($this->getIncludePrefix() . $view, $parameters);
     }
     
     public function canAccess(string $action, array $parameters = []): bool
@@ -25,6 +36,6 @@ class PagesController extends AbstractBaseController
            Session::set('home_welcome', true);
         }
         
-        view($this->getIncludePrefix() . 'home_page');
+        $this->toView('home_page');
     }
 }
