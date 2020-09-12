@@ -3,10 +3,9 @@
 namespace App\Utils\CrystalMathLabs\Endpoints;
 
 use App\Utils\CrystalMathLabs\Exceptions\ApiErrorHandler;
-use App\Utils\CrystalMathLabs\Exceptions\ApiException;
-use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
 use Psr\Http\Message\StreamInterface;
+use Throwable;
 
 abstract class AbstractEndpointBase implements EndpointInterface
 {
@@ -25,8 +24,13 @@ abstract class AbstractEndpointBase implements EndpointInterface
     public function call()
     {
         $full_url = $this->base_api_url . $this->end_point_url;
+    
+        try {
+            $body = $this->client->request('GET', $full_url)->getBody();
+        } catch (Throwable $t) {
+            return [];
+        }
         
-        $body = $this->client->request('GET', $full_url)->getBody();
         $contents = substr($body->getContents(), 3, 5);
         $this->error_handler->checkForErrors($contents);
         
@@ -35,12 +39,8 @@ abstract class AbstractEndpointBase implements EndpointInterface
     
     abstract public function format(StreamInterface $data);
     
-    /**
+    /*
      * Initial format based on how the vast majority of the API Calls are returned
-     *
-     * @param StreamInterface $result
-     *
-     * @return array
      */
     public function formatStandard(StreamInterface $result): array
     {

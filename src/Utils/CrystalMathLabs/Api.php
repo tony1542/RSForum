@@ -11,10 +11,7 @@ use GuzzleHttp\Exception\RequestException;
 
 class Api
 {
-    /**
-     * @return mixed
-     */
-    public static function getCurrentPlayerCount()
+    public static function getCurrentPlayerCount(): ?array
     {
         try {
             $current_player_count = new CurrentPlayerCount();
@@ -25,10 +22,7 @@ class Api
         }
     }
     
-    /**
-     * @return array|mixed
-     */
-    public static function getCurrentTopPlayers()
+    public static function getCurrentTopPlayers(): ?array
     {
         try {
             $top_players = new TopPlayers(
@@ -40,12 +34,7 @@ class Api
             return null;
         }
     }
-    
-    /**
-     * @param string $playerName
-     *
-     * @return array
-     */
+
     public static function getStatsForPlayer(string $playerName): ?array
     {
         try {
