@@ -3,16 +3,18 @@
 namespace App\Utils\API\CrystalMathLabs\Endpoints;
 
 use App\Utils\API\AbstractEndpointBase;
-use App\Utils\API\EndpointInterface;
+use App\Utils\API\ApiErrorHandlerInterface;
+use App\Utils\API\CrystalMathLabs\Exceptions\ApiErrorHandler;
 use Psr\Http\Message\StreamInterface;
-use Throwable;
 
-abstract class AbstractEndpoint extends AbstractEndpointBase implements EndpointInterface
+abstract class AbstractEndpoint extends AbstractEndpointBase
 {
     protected string $base_api_url = 'http://crystalmathlabs.com/tracker/api.php?';
-    protected string $end_point_url = '';
     
-    abstract public function format(StreamInterface $data);
+    protected function getErrorHandler(): ApiErrorHandlerInterface
+    {
+        return new ApiErrorHandler();
+    }
     
     /*
      * Initial format based on how the vast majority of the API Calls are returned

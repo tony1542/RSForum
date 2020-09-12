@@ -11,10 +11,10 @@ class Stats extends AbstractEndpoint
 {
     protected string $end_point_url = 'type=stats&player=';
     
-    public function __construct(string $playerName)
+    public function __construct(string $player_name)
     {
         parent::__construct();
-        $this->end_point_url .= $playerName;
+        $this->end_point_url .= $player_name;
     }
     
     public function format(StreamInterface $data): array

@@ -2,15 +2,16 @@
 
 namespace App\Utils\API\OSRS\Endpoints;
 
-use App\Utils\API\EndpointInterface;
-use Psr\Http\Message\StreamInterface;
+use App\Utils\API\AbstractEndpointBase;
+use App\Utils\API\ApiErrorHandlerInterface;
+use App\Utils\API\OSRS\Exceptions\ApiErrorHandler;
 
-abstract class AbstractEndpoint implements EndpointInterface
+abstract class AbstractEndpoint extends AbstractEndpointBase
 {
-    public function call()
+    protected string $base_api_url = 'https://secure.runescape.com/m=hiscore_oldschool/index_lite.ws?';
+
+    protected function getErrorHandler(): ApiErrorHandlerInterface
     {
-        // TODO: Implement call() method.
+        return new ApiErrorHandler();
     }
-    
-    abstract public function format(StreamInterface $data);
 }

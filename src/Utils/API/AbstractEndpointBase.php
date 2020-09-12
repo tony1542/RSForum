@@ -3,12 +3,14 @@
 namespace App\Utils\API;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
+use Psr\Http\Message\StreamInterface;
 use Throwable;
 
 abstract class AbstractEndpointBase
 {
-    protected string $base_api_url;
-    protected string $end_point_url;
+    protected string $base_api_url = '';
+    protected string $end_point_url = '';
     
     protected Client $client;
     protected ApiErrorHandlerInterface $error_handler;
@@ -16,12 +18,13 @@ abstract class AbstractEndpointBase
     public function __construct()
     {
         $this->client = new Client();
+        $this->error_handler = $this->getErrorHandler();
     }
     
     /**
      * @return array
      *
-     * @throws ApiException
+     * @throws RequestException|ApiException
      */
     public function call(): array
     {
@@ -38,4 +41,7 @@ abstract class AbstractEndpointBase
         
         return $this->format($body);
     }
+    
+    abstract public function format(StreamInterface $body): array;
+    abstract protected function getErrorHandler(): ApiErrorHandlerInterface;
 }
