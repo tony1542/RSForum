@@ -15,6 +15,7 @@ class User
     protected bool $admin = false;
     
     protected UserSkills $skills;
+    protected UserAccolades $accolades;
     
     public function __construct($user_id = 0)
     {
@@ -48,6 +49,7 @@ class User
         $this->admin = $values['admin'];
     
         $this->skills = new UserSkills($this->getUsername());
+        $this->accolades = new UserAccolades($this->getUsername());
     }
     
     public function getUsername(): string
@@ -177,7 +179,7 @@ class User
             $errors[] = 'Username cannot be longer than 12 characters';
         }
     
-        if (!preg_match('/^[\w]+$/', $username)) {
+        if (!preg_match('/^[-\w ]+$/', $username)) {
             $errors[] = 'Username can only contain numbers, letters, or spaces';
         }
         

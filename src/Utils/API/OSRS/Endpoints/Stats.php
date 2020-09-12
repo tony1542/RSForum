@@ -12,8 +12,7 @@ class Stats extends AbstractEndpoint
     
     public function format(StreamInterface $body): array
     {
-        $data = (string) $body;
-        $data = explode("\n", $data);
+        $data = $this->formatStandard($body);
         
         $skills = [];
         $counter = 0;
