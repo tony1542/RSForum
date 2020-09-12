@@ -8,7 +8,7 @@ class CurrentPlayerCount extends AbstractEndpointBase
 {
     protected string $end_point_url = 'type=players';
     
-    public function format(StreamInterface $data)
+    public function format(StreamInterface $data): string
     {
         return number_format(
             explode(',' , $data)[1]

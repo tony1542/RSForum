@@ -17,7 +17,7 @@ class Stats extends AbstractEndpointBase
         $this->end_point_url .= $playerName;
     }
     
-    public function format(StreamInterface $data)
+    public function format(StreamInterface $data): array
     {
         $result = $this->formatStandard($data);
         array_shift($result);
