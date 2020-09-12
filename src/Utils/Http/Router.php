@@ -43,7 +43,7 @@ class Router
             );
         }
     
-        if (!$controller->canAccess($action, $parameters)) {
+        if (!$controller->canAccess($action, $parameters) && !getSignedInUser()->isAdmin()) {
             throw new RuntimeException(
                 '"' . get_class($controller) . '"\'s "' . $action . '" function was denied access.'
             );
