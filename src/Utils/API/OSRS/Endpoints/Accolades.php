@@ -14,10 +14,10 @@ class Accolades extends AbstractEndpoint
         $data = $this->formatStandard($body);
 
         // Strip anything not related
-        // TODO does this need a +1? to remove the delimieter from skills to accolades?
         $data = array_slice($data, count(Skills::ALL));
+        array_shift($data);
         
-        //dd($data);
+        dd($data);
         
         $accolades = [];
         $counter = 0;

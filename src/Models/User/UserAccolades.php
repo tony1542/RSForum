@@ -13,6 +13,5 @@ class UserAccolades
     {
         $this->username = $username;
         $this->accolades = OSRS::getAccoladesForPlayer($username);
-        //dd($this->accolades);
     }
 }
