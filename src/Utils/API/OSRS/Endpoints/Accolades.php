@@ -3,6 +3,7 @@
 namespace App\Utils\API\OSRS\Endpoints;
 
 use App\Utils\Runescape\Skills;
+use App\Utils\Runescape\Accolades as OSRSAccolade;
 use Psr\Http\Message\StreamInterface;
 
 class Accolades extends AbstractEndpoint
@@ -17,22 +18,28 @@ class Accolades extends AbstractEndpoint
         $data = array_slice($data, count(Skills::ALL));
         array_shift($data);
         
-        dd($data);
-        
         $accolades = [];
-        $counter = 0;
         foreach ($data as $key => $row) {
             $row = explode(',', $row);
             $rank = $row[0] ?? null;
             $score = $row[1] ?? null;
             
-            if (!$rank || !$score) {
+            if ((int) $rank === -1 || (int) $score === -1) {
                 continue;
             }
             
-            $accolades[] = [];
+            $accolade_name = OSRSAccolade::getAccoladeFromIndex($key);
             
-            $counter++;
+            if (!$accolade_name) {
+                continue;
+            }
+            
+            $accolades[] = [
+                'accolade_index' => $key,
+                'accolade_name'  => $accolade_name,
+                'score'          => $score,
+                'rank'           => number_format((float) $rank)
+            ];
         }
         
         return $accolades;

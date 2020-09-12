@@ -22,7 +22,7 @@ class Accolades
         'Callisto',
         'Cerberus',
         'Chambers of Xeric',
-        'Chambers of Xeric: Challenge Mode',
+        'Chambers of Xeric Challenge Mode',
         'Chaos Elemental',
         'Chaos Fanatic',
         'Commander Zilyana',
@@ -39,10 +39,10 @@ class Accolades
         'Kalphite Queen',
         'King Black Dragon',
         'Kraken',
-        'Kree\'Arra',
-        'K\'ril Tsutsaroth',
+        'KreeArra',
+        'Kril Tsutsaroth',
         'Mimic',
-        'Nightmare',
+        'The Nightmare',
         'Obor',
         'Sarachnis',
         'Scorpia',
@@ -54,24 +54,24 @@ class Accolades
         'TzKal-Zuk',
         'TzTok-Jad',
         'Venenatis',
-        'Vet\'ion',
+        'Vetion',
         'Vorkath',
         'Wintertodt',
         'Zalcano',
         'Zulrah'
     ];
     
-    public const PATH_TO_ICONS = 'public/Images/OSRS/Accolades/';
+    public const PATH_TO_ICONS = '/public/Images/OSRS/Accolades/';
     
     public static function getAccoladeFromIndex(int $index): string
     {
-        return self::ALL[$index];
+        return self::ALL[$index] ?? '';
     }
     
     public static function getAccoladeIconFromIndex(int $index): string
     {
         $accolade = self::getAccoladeFromIndex($index);
         
-        return self::PATH_TO_ICONS . strtolower($accolade) . '.png';
+        return self::PATH_TO_ICONS . $accolade . '.webp';
     }
 }

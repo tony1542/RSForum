@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Utils\Http\Request;
 use App\Models\User\User;
 use App\Utils\Input\Sanitizer;
+use App\Utils\Runescape\Accolades;
 use App\Utils\Runescape\Skills;
 use PDO;
 
@@ -30,6 +31,9 @@ class UsersController extends AbstractBaseController
         $return_array = [];
     
         if ($this->getModel()->getID()) {
+            $return_array['user'] = $this->getModel();
+    
+            // Load skills
             $skills = $this->getModel()->getSkills();
             $skills_array = [];
             foreach ($skills as $key => $row) {
@@ -42,9 +46,23 @@ class UsersController extends AbstractBaseController
                 ];
             }
     
-            $return_array['user'] = $this->getModel();
             $return_array['skills'] = $skills_array;
             $return_array['show_skills'] = count($skills_array) > 0;
+    
+            // Load accolades
+            $accolades = $this->getModel()->getAccolades();
+            $accolades_array = [];
+            foreach ($accolades as $key => $row) {
+                $accolades_array[] = [
+                    'src'           => Accolades::getAccoladeIconFromIndex($row['accolade_index']),
+                    'accolade_name' => $row['accolade_name'],
+                    'score'         => $row['score'],
+                    'rank'          => $row['rank']
+                ];
+            }
+    
+            $return_array['accolades'] = $accolades_array;
+            $return_array['show_accolades'] = count($accolades_array) > 0;
         }
 
         $return_array = array_merge($parameters, $return_array);

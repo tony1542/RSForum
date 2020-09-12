@@ -77,6 +77,11 @@ class User
         return $this->skills->getSkills();
     }
     
+    public function getAccolades(): array
+    {
+        return $this->accolades->getAccolades();
+    }
+    
     public function isAdmin(): bool
     {
         return $this->admin;

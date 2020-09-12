@@ -54,6 +54,34 @@
         </div>
     <?php endif; ?>
     
+    <?php if ($show_accolades): ?>
+        <div class="col-lg-8 mb-4">
+            <div class="card">
+                <div class="card-header">Accolades</div>
+                <div class="card-body">
+                    <div class="row">
+                        <?php foreach ($accolades as $accolade): ?>
+                            <div class="col-md-4 mb-2">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <img width="25" height="25" class="img-responsive" src="<?= $accolade['src'] ?>" alt="<?= $accolade['accolade_name'] ?>">
+                                        &nbsp;<?= $accolade['accolade_name'] ?>
+                                    </div>
+                                    <div class="card-footer">
+                                        # <?= $accolade['rank'] ?>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    Total Level: <?= $user->getTotalLevel() ?>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+    
 </div>
 
 

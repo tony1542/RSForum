@@ -14,4 +14,9 @@ class UserAccolades
         $this->username = $username;
         $this->accolades = OSRS::getAccoladesForPlayer($username);
     }
+    
+    public function getAccolades(): array
+    {
+        return $this->accolades;
+    }
 }
