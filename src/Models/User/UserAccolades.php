@@ -42,7 +42,7 @@ class UserAccolades
         $sql = $database->prepare('SELECT * FROM user_accolades ua
                                         INNER JOIN user_accolades_line ual ON ua.user_accolade_id = ual.user_accolade_id
                                      WHERE username = ?
-                                   ORDER BY ua.user_accolade_id DESC');
+                                   ORDER BY ua.user_accolade_id DESC, ual.accolade_index');
         $sql->execute([$this->username]);
         
         $result = $sql->fetchAll(PDO::FETCH_ASSOC);
