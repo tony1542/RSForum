@@ -4,7 +4,7 @@ namespace App\Utils\API\CrystalMathLabs\Endpoints;
 
 use Psr\Http\Message\StreamInterface;
 
-class TopPlayers extends AbstractEndpointBase
+class TopPlayers extends AbstractEndpoint
 {
     public const TIME_PERIOD_NAME = 'timePeriod';
     public const TIME_PERIOD_DAY   = 'day';

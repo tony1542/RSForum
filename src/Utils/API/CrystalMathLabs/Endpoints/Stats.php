@@ -7,7 +7,7 @@ use Psr\Http\Message\StreamInterface;
 use App\Utils\Runescape\Skills;
 use App\Utils\Runescape\Levels;
 
-class Stats extends AbstractEndpointBase
+class Stats extends AbstractEndpoint
 {
     protected string $end_point_url = 'type=stats&player=';
     

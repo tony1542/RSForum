@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Utils\API\CrystalMathLabs\Exceptions;
+namespace App\Utils\API;
 
 use Exception;
 

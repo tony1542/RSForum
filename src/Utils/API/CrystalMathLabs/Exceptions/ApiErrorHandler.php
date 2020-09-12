@@ -2,7 +2,10 @@
 
 namespace App\Utils\API\CrystalMathLabs\Exceptions;
 
-class ApiErrorHandler
+use App\Utils\API\ApiErrorHandlerInterface;
+use App\Utils\API\ApiException;
+
+class ApiErrorHandler implements ApiErrorHandlerInterface
 {
     public const INVALID_USER_ERROR     = -1;
     public const INVALID_USERNAME_ERROR = -2;
