@@ -15,10 +15,11 @@ abstract class AbstractEndpointBase
     protected Client $client;
     protected ApiErrorHandlerInterface $error_handler;
     
-    public function __construct()
+    public function __construct(string $player_name)
     {
         $this->client = new Client();
         $this->error_handler = $this->getErrorHandler();
+        $this->end_point_url .= rawurlencode($player_name);
     }
     
     /**

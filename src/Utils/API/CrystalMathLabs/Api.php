@@ -35,10 +35,10 @@ class Api
         }
     }
 
-    public static function getStatsForPlayer(string $playerName): array
+    public static function getStatsForPlayer(string $player_name): array
     {
         try {
-            $stats_for_player = new Stats($playerName);
+            $stats_for_player = new Stats($player_name);
     
             return $stats_for_player->call();
         } catch (RequestException|ApiException $e) {
