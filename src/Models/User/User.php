@@ -177,7 +177,7 @@ class User
             $errors[] = 'Username cannot be longer than 12 characters';
         }
     
-        if (!preg_match('/^[a-zA-Z]+[a-zA-Z0-9-_ ]*[a-zA-Z0-9]$/', $username)) {
+        if (!preg_match('/^[\w]+$/', $username)) {
             $errors[] = 'Username can only contain numbers, letters, or spaces';
         }
         
