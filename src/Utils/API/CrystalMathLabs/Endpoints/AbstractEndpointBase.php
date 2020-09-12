@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Utils\CrystalMathLabs\Endpoints;
+namespace App\Utils\API\CrystalMathLabs\Endpoints;
 
-use App\Utils\CrystalMathLabs\Exceptions\ApiErrorHandler;
+use App\Utils\API\CrystalMathLabs\Exceptions\ApiErrorHandler;
 use GuzzleHttp\Client;
 use Psr\Http\Message\StreamInterface;
 use Throwable;

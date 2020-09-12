@@ -2,7 +2,7 @@
 
 namespace App\Models\User;
 
-use App\Utils\CrystalMathLabs\Api;
+use App\Utils\API\CrystalMathLabs\Api;
 use App\Utils\Runescape\Levels;
 use PDO;
 

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Utils\CrystalMathLabs;
+namespace App\Utils\API\CrystalMathLabs;
 
-use App\Utils\CrystalMathLabs\Endpoints\CurrentPlayerCount;
-use App\Utils\CrystalMathLabs\Endpoints\Stats;
-use App\Utils\CrystalMathLabs\Endpoints\TopPlayers;
-use App\Utils\CrystalMathLabs\Exceptions\ApiException;
+use App\Utils\API\CrystalMathLabs\Endpoints\CurrentPlayerCount;
+use App\Utils\API\CrystalMathLabs\Endpoints\Stats;
+use App\Utils\API\CrystalMathLabs\Endpoints\TopPlayers;
+use App\Utils\API\CrystalMathLabs\Exceptions\ApiException;
 use App\Utils\Http\Session;
 use GuzzleHttp\Exception\RequestException;
 
@@ -35,7 +35,7 @@ class Api
         }
     }
 
-    public static function getStatsForPlayer(string $playerName): ?array
+    public static function getStatsForPlayer(string $playerName): array
     {
         try {
             $stats_for_player = new Stats($playerName);
