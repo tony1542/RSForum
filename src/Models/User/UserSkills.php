@@ -14,28 +14,29 @@ class UserSkills {
     public function __construct(string $username)
     {
         $this->username = $username;
+    
+        // Query DB for existing data
+        $this->skills = $this->getLastUpdated();
+    
+        if ($this->skills) {
+            $this->total_level = Levels::getTotalLevel(
+                array_column($this->getSkills(), 'level')
+            );
+            
+            return;
+        }
+        
         $this->skills = OSRS::getStatsForPlayer($username);
         
         if ($this->skills) {
             $this->total_level = Levels::getTotalLevel(
                 array_column($this->getSkills(), 'level')
             );
-        }
-        
-        // If we find a skills response from the API, insert a record into the database
-        if ($this->skills) {
+    
+            // If we find a skills response from the API, insert a record into the database
             $this->insertSkills();
-        
+            
             return;
-        }
-        
-        // If our API isn't connecting, check the DB for a user's skills
-        $this->skills = $this->getLastUpdated();
-        
-        if ($this->skills) {
-            $this->total_level = Levels::getTotalLevel(
-                array_column($this->getSkills(), 'level')
-            );
         }
         
         // If we have no record in the DB, set total level to 0
