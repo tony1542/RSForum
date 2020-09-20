@@ -1,21 +1,15 @@
 <?php
 
-namespace App\Utils\CrystalMathLabs\Endpoints;
+namespace App\Utils\API\CrystalMathLabs\Endpoints;
 
 use Psr\Http\Message\StreamInterface;
 
 use App\Utils\Runescape\Skills;
 use App\Utils\Runescape\Levels;
 
-class Stats extends AbstractEndpointBase
+class Stats extends AbstractEndpoint
 {
     protected string $end_point_url = 'type=stats&player=';
-    
-    public function __construct(string $playerName)
-    {
-        parent::__construct();
-        $this->end_point_url .= $playerName;
-    }
     
     public function format(StreamInterface $data): array
     {

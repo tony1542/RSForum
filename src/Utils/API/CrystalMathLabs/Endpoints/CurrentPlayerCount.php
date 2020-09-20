@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Utils\CrystalMathLabs\Endpoints;
+namespace App\Utils\API\CrystalMathLabs\Endpoints;
 
 use Psr\Http\Message\StreamInterface;
 
-class CurrentPlayerCount extends AbstractEndpointBase
+class CurrentPlayerCount extends AbstractEndpoint
 {
     protected string $end_point_url = 'type=players';
     

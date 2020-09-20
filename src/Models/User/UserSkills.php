@@ -2,7 +2,7 @@
 
 namespace App\Models\User;
 
-use App\Utils\CrystalMathLabs\Api;
+use App\Utils\API\OSRS\Api as OSRS;
 use App\Utils\Runescape\Levels;
 use PDO;
 
@@ -14,7 +14,7 @@ class UserSkills {
     public function __construct(string $username)
     {
         $this->username = $username;
-        $this->skills = Api::getStatsForPlayer($username);
+        $this->skills = OSRS::getStatsForPlayer($username);
         
         if ($this->skills) {
             $this->total_level = Levels::getTotalLevel(
