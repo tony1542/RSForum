@@ -19,34 +19,13 @@ CREATE TABLE user
 
 CREATE TABLE user_skills
 (
-    user_stat_id int AUTO_INCREMENT,
-    username     varchar(12) NOT NULL,
-    overall      int         NULL,
-    attack       int         NULL,
-    defence      int         NULL,
-    strength     int         NULL,
-    hitpoints    int         NULL,
-    ranged       int         NULL,
-    prayer       int         NULL,
-    magic        int         NULL,
-    cooking      int         NULL,
-    woodcutting  int         NULL,
-    fletching    int         NULL,
-    fishing      int         NULL,
-    firemaking   int         NULL,
-    crafting     int         NULL,
-    smithing     int         NULL,
-    mining       int         NULL,
-    herblore     int         NULL,
-    agility      int         NULL,
-    thieving     int         NULL,
-    slayer       int         NULL,
-    farming      int         NULL,
-    runecrafting int         NULL,
-    hunter       int         NULL,
-    construction int         NULL,
-    CONSTRAINT user_stats_pk
-        PRIMARY KEY (user_stat_id)
+    user_stat_id int AUTO_INCREMENT
+        PRIMARY KEY,
+    username     varchar(12)                          NOT NULL,
+    skill_name   varchar(255)                         NOT NULL,
+    skill_exp    int      DEFAULT 0                   NOT NULL,
+    `rank`       int      DEFAULT 0                   NOT NULL,
+    date_added   datetime DEFAULT current_timestamp() NOT NULL
 );
 
 CREATE INDEX user_skills_user_stat_id_index
