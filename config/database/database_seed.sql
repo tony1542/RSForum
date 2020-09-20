@@ -69,3 +69,20 @@ CREATE TABLE task
 CREATE INDEX user_id
     ON task (user_id);
 
+CREATE TABLE user_accolades
+(
+    user_accolade_id int AUTO_INCREMENT,
+    username         varchar(12)            NOT NULL,
+    date_added       datetime DEFAULT NOW() NULL,
+    CONSTRAINT user_accolades_pk
+        PRIMARY KEY (user_accolade_id)
+);
+
+CREATE TABLE user_accolades_line
+(
+    user_accolade_id int          NOT NULL,
+    accolade_index   int          NOT NULL,
+    accolade_name    varchar(255) NOT NULL,
+    score            int          NOT NULL,
+    `rank`           int          NOT NULL
+);

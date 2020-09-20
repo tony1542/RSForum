@@ -55,9 +55,8 @@ class Skills
      */
     public static function getSkillIconFromIndex(int $index): string
     {
-        $skillName = self::getSkillNameFromIndex($index);
-        $path = self::PATH_TO_ICONS . strtolower($skillName) . '.png';
+        $skill_name = self::getSkillNameFromIndex($index);
         
-        return $path;
+        return self::PATH_TO_ICONS . strtolower($skill_name) . '.png';
     }
 }

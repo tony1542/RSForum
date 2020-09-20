@@ -5,6 +5,7 @@ namespace App\Utils\API\OSRS\Endpoints;
 use App\Utils\API\AbstractEndpointBase;
 use App\Utils\API\ApiErrorHandlerInterface;
 use App\Utils\API\OSRS\Exceptions\ApiErrorHandler;
+use Psr\Http\Message\StreamInterface;
 
 abstract class AbstractEndpoint extends AbstractEndpointBase
 {
@@ -13,5 +14,12 @@ abstract class AbstractEndpoint extends AbstractEndpointBase
     protected function getErrorHandler(): ApiErrorHandlerInterface
     {
         return new ApiErrorHandler();
+    }
+    
+    protected function formatStandard(StreamInterface $body): array
+    {
+        $data = (string) $body;
+        
+        return explode("\n", $data);
     }
 }
