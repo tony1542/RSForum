@@ -11,14 +11,15 @@ use PDO;
 
 class UsersController extends AbstractBaseController
 {
-    protected function getModelClass(): string
-    {
-        return User::class;
+    protected User $user_object;
+    
+    public function __construct($user_id = 0) {
+        $this->user_object = new User($user_id);
     }
     
-    protected function getModel(): User
+    protected function getUser(): User
     {
-        return $this->model ?? new User();
+        return $this->user_object;
     }
     
     protected function getIncludePrefix(): string
@@ -30,11 +31,11 @@ class UsersController extends AbstractBaseController
     {
         $return_array = [];
     
-        if ($this->getModel()->getID()) {
-            $return_array['user'] = $this->getModel();
+        if ($this->getUser()->getID()) {
+            $return_array['user'] = $this->getUser();
     
             // Load skills
-            $skills = $this->getModel()->getSkills();
+            $skills = $this->getUser()->getSkills();
             $skills_array = [];
             foreach ($skills as $key => $row) {
                 $skills_array[] = [
@@ -50,7 +51,7 @@ class UsersController extends AbstractBaseController
             $return_array['show_skills'] = count($skills_array) > 0;
     
             // Load accolades
-            $accolades = $this->getModel()->getAccolades();
+            $accolades = $this->getUser()->getAccolades();
             $accolades_array = [];
             foreach ($accolades as $key => $row) {
                 $accolades_array[] = [
@@ -214,7 +215,7 @@ class UsersController extends AbstractBaseController
             redirect('User/Details/' . Request::getID());
         }
         
-        $user = $this->getModel();
+        $user = $this->getUser();
     
         $new_username = $post_values['username'];
         $errors = User::verifyUsername($new_username);

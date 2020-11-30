@@ -8,32 +8,6 @@ namespace App\Controllers;
  */
 abstract class AbstractBaseController
 {
-    protected $model;
-    
-    public function __construct(int $id = 0)
-    {
-        if ($id) {
-            $model_class = $this->getModelClass();
-            $this->model = new $model_class($id);
-        }
-    }
-    
-    /**
-     * Declare a controller's model - used like "User::class", so it will dump a full namespaced class name
-     *
-     * @see https://www.php.net/manual/en/language.oop5.basic.php#language.oop5.basic.class.class
-     *
-     * @return string
-     */
-    abstract protected function getModelClass(): string;
-    
-    /**
-     * Specify the return type of the model - will hold whatever current object (if ID is present)
-     *
-     * @return mixed
-     */
-    abstract protected function getModel();
-    
     /**
      * Checking if the current user has permissions for the requested action
      * (Letting the controller that is created determine this)

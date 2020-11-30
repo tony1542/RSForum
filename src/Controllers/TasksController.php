@@ -10,16 +10,6 @@ use App\Utils\Input\Sanitizer;
 
 class TasksController extends AbstractBaseController
 {
-    protected function getModelClass(): string
-    {
-        return TaskCollector::class;
-    }
-    
-    protected function getModel(): TaskCollector
-    {
-        return $this->model;
-    }
-    
     protected function toView(string $view, array $parameters = []): void
     {
         $return_array = [];
