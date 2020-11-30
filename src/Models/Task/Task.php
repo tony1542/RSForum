@@ -58,20 +58,20 @@ class Task
     public static function edit($task_id, $user_id, $title, $description, $complete): void
     {
         $db = getDatabase();
-        $sql = $db->prepare('UPDATE task SET title =  '$title', description = '$description', is_completed = '$complete'  WHERE task_id =? AND user_id = ?');
+        $sql = $db->prepare("UPDATE task SET title =  '$title', description = '$description', is_completed = '$complete'  WHERE task_id =? AND user_id = ?");
         $sql->execute([$task_id, $user_id]);
 
-        redirect('Task/All/' . getSignedInUser()->getID());
+        redirect("Task/All/" . getSignedInUser()->getID());
     }
 
     public static function add($title, $description, $date, $user_id): void
     {
         if (!count($_POST)) {
-            redirect('Task/All/' . getSignedInUser()->getID());
+            redirect("Task/All/" . getSignedInUser()->getID());
         }
         
         $db = getDatabase();
-        $sql = $db->prepare('INSERT INTO task (title, description, date, user_id) VALUES (?, ?, ?, ?)');
+        $sql = $db->prepare("INSERT INTO task (title, description, date, user_id) VALUES (?, ?, ?, ?)");
         $sql->execute([
             $title,
             $description,
@@ -79,7 +79,7 @@ class Task
             $user_id
         ]);
 
-        redirect('Task/All/' . getSignedInUser()->getID());
+        redirect("Task/All/" . getSignedInUser()->getID());
     }
 
     public static function complete($user_id, $task_id): void
@@ -88,7 +88,7 @@ class Task
         $sql = $db->prepare('UPDATE task SET is_completed = 1 WHERE user_id =? AND task_id =?');
         $sql->execute([$user_id, $task_id]);
 
-        redirect('Task/All/' . getSignedInUser()->getID());
+        redirect("Task/All/" . getSignedInUser()->getID());
     }
 
     public static function delete($user_id, $task_id): void
@@ -97,6 +97,6 @@ class Task
         $sql = $db->prepare('DELETE FROM task WHERE user_id =? AND task_id =?');
         $sql->execute([$user_id, $task_id]);
         
-        redirect('Task/All/' . getSignedInUser()->getID());
+        redirect("Task/All/" . getSignedInUser()->getID());
     }
 }
