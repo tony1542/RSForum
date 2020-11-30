@@ -27,8 +27,10 @@ class TasksController extends AbstractBaseController
         $user_id = Request::getID();
         $user = new User($user_id);
         
+        $task_collector = new TaskCollector($user_id);
+        
         $return_array['user'] = $user;
-        $return_array['tasks'] = $this->getModel()->getTasks();
+        $return_array['tasks'] = $task_collector->getTasks();
         
         $return_array = array_merge($parameters, $return_array);
         view($this->getIncludePrefix() . $view, $return_array);
