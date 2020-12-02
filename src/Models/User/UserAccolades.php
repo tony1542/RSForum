@@ -24,10 +24,6 @@ class UserAccolades
         if ($this->accolades) {
             $this->insertAccolades();
         }
-        
-        if ($this->accolades) {
-            return;
-        }
     }
     
     public function getAccolades(): array
