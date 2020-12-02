@@ -5,20 +5,31 @@
         <div class="card">
             <div class="card-header">Account</div>
             <div class="card-body">
-                <form id="UserEdit" method="post" action="/User/Update/<?= $user->getID() ?>">
+                <?php if (getSignedInUser()->isAdmin() || getSignedInUser()->getID() === $user->getID()) : ?>
+                    <form id="UserEdit" method="post" action="/User/Update/<?= $user->getID() ?>">
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" class="form-control" id="username" name="username" value="<?= $user->getUsername() ?>" />
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" class="form-control" id="email" disabled value="<?= $user->getEmail() ?>" />
+                        </div>
+                        
+                        <button class="btn btn-primary">
+                            Update
+                        </button>
+                    </form>
+                <?php else: ?>
                     <div class="form-group">
                         <label for="username">Username</label>
-                        <input type="text" class="form-control" id="username" name="username" value="<?= $user->getUsername() ?>" />
+                        <input type="text" class="form-control" id="username" name="username" disabled value="<?= $user->getUsername() ?>" />
                     </div>
                     <div class="form-group">
                         <label for="email">Email Address</label>
                         <input type="email" class="form-control" id="email" disabled value="<?= $user->getEmail() ?>" />
                     </div>
-                    
-                    <button class="btn btn-primary">
-                        Update
-                    </button>
-                </form>
+                <?php endif; ?>
             </div>
         </div>
     </div>
