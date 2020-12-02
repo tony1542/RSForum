@@ -2,9 +2,13 @@
     <?php /** @var \App\Models\User\User $member */ ?>
     <?php foreach ($data['members'] as $member) : ?>
         <div class="card">
-            <div class="card-header"><?= $member->getUsername() ?></div>
-            <div class="card-body text-center">
-                <img class="img-fluid" src="/public/images/comic2.png" />
+            <div class="card-header d-flex justify-content-between">
+                <span><?= $member->getUsername() ?></span>
+                <span>
+                    <a target="_blank" href="/User/Details/<?= $member->getID() ?>">
+                        <i class="fas fa-eye"></i>
+                    </a>
+                </span>
             </div>
             <div class="card-footer">
                 Total level: <?= $member->getTotalLevel() ?: 'N/A' ?>
