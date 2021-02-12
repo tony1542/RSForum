@@ -20,3 +20,15 @@ body {
 .form-label {
   color: $grey-lighter !important;
 }
+
+.modal-content {
+  background-color: $black;
+}
+
+.modal-header {
+  border-bottom: 1px solid $grey-darker;
+}
+
+.modal-footer {
+  border-top: 1px solid $grey-darker;
+}
