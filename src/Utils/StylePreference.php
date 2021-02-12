@@ -2,6 +2,8 @@
 
 namespace App\Utils;
 
+use App\Utils\Http\Session;
+
 class StylePreference
 {
     public const STYLE_LIGHT = 0;
@@ -11,13 +13,7 @@ class StylePreference
     
     public static function get(): int
     {
-        $set_style = $_SESSION[self::$session_key];
-        
-        if (!$set_style) {
-            $set_style = self::STYLE_DARK;
-        }
-        
-        return $set_style;
+        return Session::get(self::$session_key) ?? self::STYLE_LIGHT;
     }
     
     public static function set($type): void
