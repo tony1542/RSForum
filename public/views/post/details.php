@@ -12,7 +12,12 @@
     <div class="card-body">
         <div class="card-text"><?= $post->getBody() ?></div>
     </div>
-    <div class="card-footer">
-        <?= $user->getUsername() ?>
+    <div class="card-footer flex justify-between">
+        <div>
+            <?= $user->getUsername() ?>
+        </div>
+        <div>
+            <a href="/Post/All">Back</a>
+        </div>
     </div>
 </div>
