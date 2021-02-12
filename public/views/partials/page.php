@@ -75,7 +75,7 @@
     </nav>
 
     <!-- In this div is where all of our dynamic content will be nested -->
-    <div class='main-container container mt-4'>
+    <div class='main-container container mt-4 mb-4 rounded'>
         <!-- Show any rendered errors above whatever view is pulled through -->
         <div id="rendered_errors">
             <?= $data['rendered_errors'] ?>
