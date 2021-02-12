@@ -15,10 +15,8 @@
     
     <!-- Font awesome icons -->
     <script src="https://kit.fontawesome.com/75a462d440.js" crossorigin="anonymous"></script>
-
-<!--    <script src="/dist/appLight.bundle.js"></script>-->
- <script src="/dist/appDark.bundle.js"></script>
-
+    
+    <?php require 'style_preference.php' // User-preferred style ?>
 
     <!-- Bundled assets -->
     <script src="/dist/app.bundle.js"></script>
