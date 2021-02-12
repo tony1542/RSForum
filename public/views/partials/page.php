@@ -38,7 +38,7 @@
             </ul>
             <ul class='navbar-nav'>
                 <li class="nav-item">
-                    <a class="nav-link" href=/StylePreference/Toggle?parameters[redirectUrl]=<?= \App\Utils\Http\Request::getUri() ?>">
+                    <a class="nav-link" href="/StylePreference/Toggle?parameters[redirectUrl]=<?= \App\Utils\Http\Request::getUri() ?>">
                         Toggle light/dark theme
                     </a>
                 </li>
