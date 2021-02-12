@@ -93,7 +93,7 @@ class UsersController extends AbstractBaseController
     public function register(): void
     {
         // If nothing is in $_POST, just show the register form
-        if (!count($_POST)) {
+        if (!count(Request::getPostValues())) {
             $this->toView('register');
         }
 
