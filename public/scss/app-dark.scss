@@ -9,12 +9,12 @@ body {
 }
 
 .card-header, .card-footer {
-  background-color: $grey-dark;
+  background-color: $black-lightest;
 }
 
 .card {
-  background-color: $grey-darker;
-  color: $grey-lighter;
+  background-color: $black-light;
+  color: $grey-lightest;
 }
 
 .form-label {
