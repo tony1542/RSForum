@@ -8,7 +8,7 @@ use App\Utils\Http\Session;
 
 class User
 {
-    protected string $username ='';
+    protected string $username = '';
     protected string $email_address = '';
     protected string $user_id = '';
     protected bool $logged_in = false;

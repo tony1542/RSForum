@@ -4,9 +4,15 @@
  * Script iterates 10 times and enters in dummy user data
  */
 
+use App\Utils\Database\EnvException;
+
 require('vendor/autoload.php');
 
-setApplicationVariables();
+try {
+    setApplicationVariables();
+} catch (EnvException $e) {
+    die('Error initializing application');
+}
 
 $faker = Faker\Factory::create();
 $database = getDatabase();

@@ -7,4 +7,4 @@
 
 To see more helpful documents, navigate to the `/docs` folder.
 
-# [Requires PHP 7.4](https://www.apachefriends.org/xampp-files/7.4.1/xampp-windows-x64-7.4.1-0-VC15-installer.exe)
+# [Requires PHP 8](apachefriends.org/index.html)
