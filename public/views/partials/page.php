@@ -39,7 +39,11 @@
             <ul class='navbar-nav'>
                 <li class="nav-item">
                     <a class="nav-link" href="/StylePreference/Toggle?parameters[redirectUrl]=<?= \App\Utils\Http\Request::getUri() ?>">
-                        Toggle light/dark theme
+                        <?php if (\App\Utils\Http\Session::get(\App\Utils\StylePreference::SESSION_KEY) === \App\Utils\StylePreference::STYLE_LIGHT) : ?>
+                            <span class="fas fa-moon"></span>
+                        <?php else : ?>
+                            <span class="fas fa-sun"></span>
+                        <?php endif; ?>
                     </a>
                 </li>
                 <?php if (getSignedInUser()->getID() > 0) : ?>
