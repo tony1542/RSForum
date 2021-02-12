@@ -37,6 +37,11 @@
                 </li>
             </ul>
             <ul class='navbar-nav'>
+                <li class="nav-item">
+                    <a class="nav-link" href=/StylePreference/Toggle?parameters[redirectUrl]=<?= \App\Utils\Http\Request::getUri() ?>">
+                        Toggle light/dark theme
+                    </a>
+                </li>
                 <?php if (getSignedInUser()->getID() > 0) : ?>
                     <li class="nav-item">
                         <a class="nav-link" href="/User/Details/<?= getSignedInUser()->getID() ?>">Profile</a>
