@@ -1,15 +1,19 @@
 @import "components/all";
 
 body {
-  background-color: $black;
+  background-color: $black-darker;
+}
+
+.main-container {
+  background: $black-dark;
 }
 
 .card-header, .card-footer {
-  background-color: $grey-darker;
+  background-color: $grey-dark;
 }
 
 .card {
-  background-color: $grey-darkest;
+  background-color: $grey-darker;
   color: $grey-lighter;
 }
 

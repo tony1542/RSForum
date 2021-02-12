@@ -11,7 +11,13 @@ class StylePreference
     
     public static function get(): int
     {
-        return $_SESSION[self::$session_key] ?? self::STYLE_LIGHT;
+        $set_style = $_SESSION[self::$session_key];
+        
+        if (!$set_style) {
+            $set_style = self::STYLE_DARK;
+        }
+        
+        return $set_style;
     }
     
     public static function set($type): void
