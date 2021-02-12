@@ -1,0 +1,56 @@
+{
+  "name": "rsforum",
+  "version": "0.1.2",
+  "description": "",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {
+    "autoprefixer": "^9.5.0",
+    "exports-loader": "^0.7.0",
+    "imports-loader": "^0.8.0",
+    "normalize.css": "^8.0.1",
+    "postcss-import": "^12.0.1",
+    "precss": "^3.1.2",
+    "sweetalert": "^2.1.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "@babel/register": "^7.4.4",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.6",
+    "babel-preset-es2015": "^6.24.1",
+    "css-loader": "^1.0.1",
+    "extract-text-webpack-plugin": "4.0.0-beta.0",
+    "file-loader": "^2.0.0",
+    "image-webpack-loader": "^4.4.0",
+    "jquery": "^3.5.0",
+    "mini-css-extract-plugin": "^0.5.0",
+    "node-sass": "^4.13.1",
+    "postcss-loader": "^3.0.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "tar": "^4.4",
+    "transfer-webpack-plugin": "^0.1.4",
+    "uglifyjs-webpack-plugin": "^2.1.3",
+    "webpack": "^4.31.0",
+    "webpack-bundle-analyzer": "^3.3.2",
+    "webpack-cli": "^3.3.2"
+  },
+  "scripts": {
+    "watch": "webpack --watch --mode development",
+    "build-dev": "webpack --mode development",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tony1542/RSForum.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tony1542/RSForum/issues"
+  },
+  "homepage": "https://github.com/tony1542/RSForum#readme"
+}

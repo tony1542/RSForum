@@ -1,0 +1,42 @@
+@import "components/all";
+
+/**
+Main Nav
+ */
+
+.nav-hero-text {
+  color: $white;
+}
+
+/**
+Side Nav
+ */
+
+.side-nav {
+  display: none;
+  max-width: $size-64;
+  padding: $size-6;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  @extend .h-full;
+}
+
+.side-nav-button {
+  border: 2px $grey-lighter;
+}
+
+.side-nav-button:hover {
+  cursor:pointer;
+  color: $white;
+  border: $white;
+}
+
+.side-nav-menu > a {
+  color: $grey-darker;
+}
+
+.side-nav-menu > a:hover {
+  color: $white;
+}

@@ -1,0 +1,54 @@
+@import "components/all";
+@import "nav";
+
+@import "~normalize.css";
+
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+html, body {
+  font-family: 'Roboto', sans-serif;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.main-container {
+  padding-left: $size-4;
+  padding-right: $size-4;
+  padding-top: $size-4;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: $size-full;
+}
+
+footer {
+  text-align: center;
+}
+
+$screen-size-phone-small: 320px;
+$screen-size-phone-large: 576px;
+$screen-size-tablet: 768px;
+$screen-size-laptop: 992px;
+$screen-size-desktop: 1200px;
+
+@media (max-width: $screen-size-tablet) {
+  .nav-search-form {
+    display: none;
+  }
+
+  .side-nav-search-form {
+    display: inline-block;
+  }
+}
+
+@media (min-width: $screen-size-tablet) {
+  .nav-search-form {
+    display: inline-block;
+  }
+
+  .side-nav-search-form {
+    display: none;
+  }
+}

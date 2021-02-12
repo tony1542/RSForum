@@ -1,0 +1,92 @@
+@import "colors";
+
+.form-label {
+  color: $grey-darker;
+  @extend .mb-2;
+}
+
+.btn:hover {
+  @extend .cursor-pointer;
+}
+
+.btn-primary {
+  background: $blue;
+  color: $white;
+}
+
+.btn-primary:hover {
+  background-color: $blue-dark;
+  color: $grey-lighter;
+}
+
+.btn-default {
+  color: $grey-darkest;
+  background-color: $grey;
+  border-color: $grey;
+}
+
+.btn-default:hover {
+  color: $black;
+  background-color: $grey-darker;
+}
+
+.btn-danger {
+  color: $white;
+  background-color: $red;
+  border-color: $red;
+}
+
+.btn-danger:hover {
+  background-color: $red-dark;
+}
+
+.btn-info {
+  color: $white;
+  background-color: $blue-light;
+  border-color: $blue;
+}
+
+.btn-info:hover {
+  background-color: $blue-dark;
+}
+
+.btn-warning {
+  color: $white;
+  background-color: $yellow-dark;
+  border-color: $yellow;
+}
+
+.btn-warning:hover {
+  background-color: $yellow-darker;
+}
+
+.btn-pill {
+  @extend .pt-2;
+  @extend .pb-2;
+  @extend .pl-4;
+  @extend .pr-4;
+  @extend .rounded-full;
+}
+
+.btn-block {
+  @extend .w-full;
+}
+
+.btn-square {
+  border-radius: 0;
+}
+
+.btn-circle {
+  @extend .rounded-full;
+  @extend .h-24;
+  @extend .w-24;
+}
+
+.link {
+  text-decoration: none;
+  color: $blue-dark;
+}
+
+.link:hover {
+  color: $blue-darker;
+}
