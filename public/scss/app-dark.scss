@@ -1,0 +1,22 @@
+@import "components/all";
+
+body {
+  background-color: $black-darker;
+}
+
+.main-container {
+  background: $black-dark;
+}
+
+.card-header, .card-footer {
+  background-color: $black-lightest;
+}
+
+.card {
+  background-color: $black-light;
+  color: $grey-lightest;
+}
+
+.form-label {
+  color: $grey-lighter !important;
+}

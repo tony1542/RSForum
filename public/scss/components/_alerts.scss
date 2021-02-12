@@ -1,0 +1,37 @@
+@import "colors";
+
+.alert {
+  @extend .p-4;
+  @extend .rounded;
+  border: 0.05rem solid !important;
+}
+
+.alert-danger {
+  background-color: $red-lightest;
+  color: $red-dark;
+  border-color: $red-darker;
+}
+
+.alert-error {
+  background-color: $red-lightest;
+  color: $red-dark;
+  border-color: $red-darker;
+}
+
+.alert-info {
+  background-color: $blue-lightest;
+  color: $blue-dark;
+  border-color: $blue-darker;
+}
+
+.alert-success {
+  background-color: $green-lighter;
+  color: $green-dark;
+  border-color: $green-darker;
+}
+
+.alert-warning {
+  background-color: $yellow-lighter;
+  color: $yellow-dark;
+  border-color: $yellow-darker;
+}

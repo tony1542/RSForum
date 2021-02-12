@@ -23,5 +23,11 @@ wsl.distributions.xml
 # Composer auto-loaded stuff
 /vendor
 
+# Node auto-loaded stuff
+/node_modules
+
+# Webpack generated stuff
+/dist
+
 # User configurations
 config/.env
