@@ -2,6 +2,7 @@
 
 body {
   background-color: $black-darker;
+  color: $grey-lightest;
 }
 
 .main-container {
@@ -9,12 +10,11 @@ body {
 }
 
 .card-header, .card-footer {
-  background-color: $black-lightest;
+  background-color: $black-lighter;
 }
 
 .card {
-  background-color: $black-lighter;
-  color: $grey-lightest;
+  background-color: $black-lightest;
 }
 
 .form-label {

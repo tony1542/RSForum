@@ -25,7 +25,7 @@ CREATE TABLE user_skills
     skill_name   varchar(255)                         NOT NULL,
     skill_exp    int      DEFAULT 0                   NOT NULL,
     `rank`       int      DEFAULT 0                   NOT NULL,
-    date_added   datetime DEFAULT current_timestamp() NOT NULL
+    date_added   datetime DEFAULT CURRENT_TIMESTAMP() NOT NULL
 );
 
 CREATE INDEX user_skills_user_stat_id_index
@@ -64,4 +64,14 @@ CREATE TABLE user_accolades_line
     accolade_name    varchar(255) NOT NULL,
     score            int          NOT NULL,
     `rank`           int          NOT NULL
+);
+
+CREATE TABLE post
+(
+    post_id int AUTO_INCREMENT,
+    user_id int          NOT NULL,
+    title   varchar(255) NOT NULL,
+    body    text         NOT NULL,
+    CONSTRAINT post_pk
+        PRIMARY KEY (post_id)
 );

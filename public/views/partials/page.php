@@ -51,6 +51,9 @@
                         <a class="nav-link" href="/User/Details/<?= getSignedInUser()->getID() ?>">Profile</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="/Post/All">Posts</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="/Task/All/<?= getSignedInUser()->getID() ?>">Task List</a>
                     </li>
                     <li class="nav-item">
@@ -72,7 +75,7 @@
     </nav>
 
     <!-- In this div is where all of our dynamic content will be nested -->
-    <div class='main-container container mt-4'>
+    <div class='main-container container mt-4 mb-4 rounded'>
         <!-- Show any rendered errors above whatever view is pulled through -->
         <div id="rendered_errors">
             <?= $data['rendered_errors'] ?>
