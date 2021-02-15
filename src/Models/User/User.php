@@ -132,13 +132,10 @@ class User
         Session::destroy();
     }
     
-    /**
-     * @return User[]
-     */
     public static function getMembers(): array
     {
         $database = getDatabase();
-        $sql = $database->query("SELECT user_id, u.username, us.date_added
+        $sql = $database->query("SELECT u.username, us.date_added
                                 FROM user u
                                 LEFT JOIN user_skills us ON u.username = us.username AND us.skill_name = 'Overall'");
         $members = $sql->fetchAll(PDO::FETCH_ASSOC);
@@ -146,7 +143,6 @@ class User
         $users = [];
         foreach ($members as $member) {
             $users[] = [
-                'user_id'     => $member['user_id'],
                 'username'    => $member['username'],
                 'last_active' => $member['date_added'] ? Carbon::create($member['date_added'])->format('m/d/y') : 'N/A'
             ];
