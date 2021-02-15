@@ -6,7 +6,8 @@ use App\Utils\API\OSRS\Api as OSRS;
 use App\Utils\Runescape\Levels;
 use PDO;
 
-class UserSkills {
+class UserSkills extends AbstractHighscoreComponent
+{
     protected array $skills = [];
     protected int $total_level = 0;
     protected string $username;
@@ -16,7 +17,7 @@ class UserSkills {
         $this->username = $username;
     
         // Query DB for existing data
-        $this->skills = $this->getLastUpdated();
+        $this->skills = $this->getUpdatedInLastDay();
     
         if ($this->skills) {
             $this->total_level = Levels::getTotalLevel(
@@ -34,7 +35,7 @@ class UserSkills {
             );
     
             // If we find a skills response from the API, insert a record into the database
-            $this->insertSkills();
+            $this->insert();
             
             return;
         }
@@ -45,12 +46,11 @@ class UserSkills {
         }
     }
     
-    // Get latest updated stats from database
-    protected function getLastUpdated(): array
+    protected function getUpdatedInLastDay(): array
     {
         $database = getDatabase();
         $sql = $database->prepare('SELECT * FROM user_skills
-                                     WHERE username = ?
+                                     WHERE username = ? AND date_added >= NOW() - INTERVAL 1 DAY
                                    ORDER BY user_stat_id DESC
                                    LIMIT 24');
         $sql->execute([$this->username]);
@@ -81,7 +81,7 @@ class UserSkills {
         return $return_array;
     }
     
-    protected function insertSkills(): void
+    protected function insert(): void
     {
         $database = getDatabase();
     

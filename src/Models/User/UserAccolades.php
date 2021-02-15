@@ -5,7 +5,7 @@ namespace App\Models\User;
 use App\Utils\API\OSRS\Api as OSRS;
 use PDO;
 
-class UserAccolades
+class UserAccolades extends AbstractHighscoreComponent
 {
     protected array $accolades = [];
     protected string $username;
@@ -14,7 +14,7 @@ class UserAccolades
     {
         $this->username = $username;
         
-        $this->accolades = $this->getLastUpdated();
+        $this->accolades = $this->getUpdatedInLastDay();
         if ($this->accolades) {
             return;
         }
@@ -22,7 +22,7 @@ class UserAccolades
         // If we find a accolades response from the API, insert a record into the database
         $this->accolades = OSRS::getAccoladesForPlayer($username);
         if ($this->accolades) {
-            $this->insertAccolades();
+            $this->insert();
         }
     }
     
@@ -32,12 +32,12 @@ class UserAccolades
     }
     
     // Get latest updated stats from database
-    protected function getLastUpdated(): array
+    protected function getUpdatedInLastDay(): array
     {
         $database = getDatabase();
         $sql = $database->prepare('SELECT * FROM user_accolades ua
                                         INNER JOIN user_accolades_line ual ON ua.user_accolade_id = ual.user_accolade_id
-                                     WHERE username = ?
+                                     WHERE username = ? AND date_added >= NOW() - INTERVAL 1 DAY
                                    ORDER BY ua.user_accolade_id DESC, ual.accolade_index');
         $sql->execute([$this->username]);
         
@@ -60,7 +60,7 @@ class UserAccolades
         return $return_array;
     }
     
-    protected function insertAccolades(): void
+    protected function insert(): void
     {
         $database = getDatabase();
         
