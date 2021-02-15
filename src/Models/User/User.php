@@ -3,6 +3,7 @@
 namespace App\Models\User;
 
 use App\Utils\Http\Request;
+use Carbon\Carbon;
 use PDO;
 use App\Utils\Http\Session;
 
@@ -131,22 +132,22 @@ class User
         Session::destroy();
     }
     
-    /**
-     * Function returns an active list of members
-     * Note: will convert database records into User objects
-     *
-     * @return User[]
-     */
     public static function getMembers(): array
     {
         $database = getDatabase();
-        $sql = $database->query("SELECT user_id FROM user");
+        $sql = $database->query("SELECT u.username, us.date_added
+                                FROM user u
+                                LEFT JOIN user_skills us ON u.username = us.username AND us.skill_name = 'Overall'");
         $members = $sql->fetchAll(PDO::FETCH_ASSOC);
         
         $users = [];
         foreach ($members as $member) {
-            $users[] = new self($member['user_id']);
+            $users[] = [
+                'username'    => $member['username'],
+                'last_active' => $member['date_added'] ? Carbon::create($member['date_added'])->format('m/d/y') : 'N/A'
+            ];
         }
+        
         return $users;
     }
     

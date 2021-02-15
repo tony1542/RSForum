@@ -1,17 +1,11 @@
 <div class="card-columns">
-    <?php /** @var \App\Models\User\User $member */ ?>
     <?php foreach ($data['members'] as $member) : ?>
         <div class="card">
-            <div class="card-header d-flex justify-content-between">
-                <span><?= $member->getUsername() ?></span>
-                <span>
-                    <a target="_blank" href="/User/Details/<?= $member->getID() ?>">
-                        <i class="fas fa-eye"></i>
-                    </a>
-                </span>
+            <div class="card-body">
+                <span class="card-text"><?= $member['username'] ?></span>
             </div>
-            <div class="card-footer">
-                Total level: <?= $member->getTotalLevel() ?: 'N/A' ?>
+            <div class="card-footer text-muted">
+                Last active: <?= $member['last_active'] ?>
             </div>
         </div>
     <?php endforeach; ?>
