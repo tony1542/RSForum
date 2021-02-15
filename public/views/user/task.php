@@ -63,8 +63,8 @@
                                         </form>
                                     </div>
                                     <div>
-                                        <form name="Delete" class="deleteButton" method="post" action="/Task/Delete/<?= $user->getID() ?>">
-                                            <input class="btn btn-danger" type="submit" value="Delete" name="Delete<?= $edit ?>" data-toggle="tooltip" title="Delete this task">
+                                        <form name="Delete" id="deleteForm" method="post" action="/Task/Delete/<?= $user->getID() ?>">
+                                            <input class="btn btn-danger deleteButton" type="submit" value="Delete" name="Delete<?= $edit ?>" data-toggle="tooltip" title="Delete this task">
                                             <input type="hidden" name="hidden_delete" value="<?= $edit ?>">
                                         </form>
                                     </div>
@@ -144,5 +144,3 @@
         </div>
     </div>
 </div>
-
-<script src="/public/js/task/task.js"></script>

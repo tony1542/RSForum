@@ -16,7 +16,7 @@
                             <input type="email" class="form-control" id="email" disabled value="<?= $user->getEmail() ?>" />
                         </div>
                         
-                        <button class="btn btn-primary">
+                        <button class="btn btn-primary submitProfileUpdate">
                             Update
                         </button>
                     </form>
@@ -94,6 +94,3 @@
     <?php endif; ?>
     
 </div>
-
-
-<script src="/public/js/user/profile.js"></script>
