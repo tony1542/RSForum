@@ -4,9 +4,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <title>Runescape</title>
-
-    <!-- Font awesome icons -->
-    <script src="https://kit.fontawesome.com/75a462d440.js" crossorigin="anonymous"></script>
     
     <!-- Bundled assets -->
     <script src="/dist/app.bundle.js"></script>

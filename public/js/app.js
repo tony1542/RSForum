@@ -1,6 +1,11 @@
+// Custom scss
 import '../scss/app.scss';
 
+// jQuery
 import $ from 'jquery';
+
+// FontAwesome
+import '@fortawesome/fontawesome-free/js/all.js';
 
 import EventListener from './events/eventListener';
 import ProfileListener from './events/profileListener';

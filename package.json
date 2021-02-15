@@ -6,6 +6,7 @@
     "test": "tests"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.2",
     "autoprefixer": "^10.2.4",
     "bootstrap": "^4.6.0",
     "exports-loader": "^2.0.0",
