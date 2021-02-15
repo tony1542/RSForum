@@ -145,4 +145,4 @@
     </div>
 </div>
 
-<script src="/public/js/task/task.js"></script>
+<script src="/public/js/events/taskListener.js"></script>
