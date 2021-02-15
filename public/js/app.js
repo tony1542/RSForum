@@ -4,6 +4,9 @@ import '../scss/app.scss';
 // jQuery
 import $ from 'jquery';
 
+// JS-portion of Bootstrap
+import 'bootstrap';
+
 // FontAwesome
 import '@fortawesome/fontawesome-free/js/all.js';
 
