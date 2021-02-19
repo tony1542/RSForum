@@ -227,17 +227,12 @@ class UsersController extends AbstractBaseController
             ]);
         }
     
-        $success = $user->update(
+        $user->update(
             $new_username,
             $account_type_id
         );
         
-        if (!$success) {
-            $this->toView('profile', [
-                'errors' => ['The username ' . $new_username . ' is already taken']
-            ]);
-        }
-        
+        setSignedInUser($user);
         redirect('User/Details/' . $user->getID());
     }
 }
