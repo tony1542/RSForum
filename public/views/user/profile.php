@@ -22,9 +22,15 @@
                                     <div class="form-check">
                                         <label class="form-check-label">
                                             <?php if ($user->getAccountTypeID() === $player_type_id): ?>
-                                                <input type="radio" class="form-check-input" name="account_type" checked value="<?= $player_type_id ?>"><?= $text ?>
+                                                <label>
+                                                    <input type="radio" class="form-check-input" name="account_type_id" checked value="<?= $player_type_id ?>">
+                                                    <?= $text ?>
+                                                </label>
                                             <?php else: ?>
-                                                <input type="radio" class="form-check-input" name="account_type" value="<?= $player_type_id ?>"><?= $text ?>
+                                                <label>
+                                                    <input type="radio" class="form-check-input" name="account_type_id" value="<?= $player_type_id ?>">
+                                                    <?= $text ?>
+                                                </label>
                                             <?php endif; ?>
                                         </label>
                                     </div>

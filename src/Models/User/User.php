@@ -164,22 +164,13 @@ class User
         return $users;
     }
     
-    public function update(string $username): bool
+    public function update(string $username, int $account_type_id): bool
     {
         $database = getDatabase();
         
-        // Check for existing usernames
-        $sql = $database->prepare("SELECT COUNT(*) AS count FROM user WHERE username = ?");
-        $sql->execute([$username]);
-        $results = $sql->fetch(PDO::FETCH_ASSOC);
-
-        if ((int) $results['count'] !== 0) {
-            return false;
-        }
-        
         // If we are all good, update the database
-        $sql = $database->prepare("UPDATE user SET username = ? WHERE user_id = ?");
-        $sql->execute([$username, Request::getID()]);
+        $sql = $database->prepare("UPDATE user SET username = ?, account_type_id = ? WHERE user_id = ?");
+        $sql->execute([$username, $account_type_id, Request::getID()]);
         
         $this->load();
         
@@ -189,6 +180,10 @@ class User
     public static function verifyUsername(string $username): array
     {
         $errors = [];
+    
+        if ($username === getSignedInUser()->getUsername()) {
+            return [];
+        }
         
         if (!$username) {
             $errors[] = 'Enter a username';
@@ -200,6 +195,16 @@ class User
     
         if (!preg_match('/^[-\w ]+$/', $username)) {
             $errors[] = 'Username can only contain numbers, letters, or spaces';
+        }
+    
+        // Check for existing usernames
+        $database = getDatabase();
+        $sql = $database->prepare("SELECT COUNT(*) AS count FROM user WHERE username = ?");
+        $sql->execute([$username]);
+        $results = $sql->fetch(PDO::FETCH_ASSOC);
+    
+        if ((int) $results['count'] !== 0) {
+            $errors[] = 'Username already exists';
         }
         
         return $errors;
