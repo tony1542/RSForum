@@ -15,6 +15,28 @@
                             <label for="email">Email Address</label>
                             <input type="email" class="form-control" id="email" disabled value="<?= $user->getEmail() ?>" />
                         </div>
+                        <div class="form-group">
+                            <label for="account_type">Account type</label>
+                            <div id="account_type">
+                                <?php foreach (\App\Utils\Runescape\AccountType::getAll() as $player_type_id => $text): ?>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <?php if ($user->getAccountTypeID() === $player_type_id): ?>
+                                                <label>
+                                                    <input type="radio" class="form-check-input" name="account_type_id" checked value="<?= $player_type_id ?>">
+                                                    <?= $text ?>
+                                                </label>
+                                            <?php else: ?>
+                                                <label>
+                                                    <input type="radio" class="form-check-input" name="account_type_id" value="<?= $player_type_id ?>">
+                                                    <?= $text ?>
+                                                </label>
+                                            <?php endif; ?>
+                                        </label>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
                         
                         <button class="btn btn-primary submitProfileUpdate">
                             Update
@@ -37,7 +59,12 @@
     <?php if ($show_skills): ?>
         <div class="col-lg-8 mb-4">
             <div class="card">
-                <div class="card-header">Stats</div>
+                <div class="card-header">
+                    Stats
+                    <?php if($user->getAccountTypeID() !== \App\Utils\Runescape\AccountType::PLAYER_TYPE_NORMAL): ?>
+                        - <?= $user->getAccountTypeText() ?>
+                    <?php endif; ?>
+                </div>
                 <div class="card-body">
                     <div class="row">
                         <?php foreach ($skills as $skill): ?>
@@ -65,7 +92,12 @@
     
             <?php if ($show_accolades): ?>
                 <div class="card mt-4">
-                    <div class="card-header">Accolades</div>
+                    <div class="card-header">
+                        Accolades
+                        <?php if($user->getAccountTypeID() !== \App\Utils\Runescape\AccountType::PLAYER_TYPE_NORMAL): ?>
+                            - <?= $user->getAccountTypeText() ?>
+                        <?php endif; ?>
+                    </div>
                     <div class="card-body">
                         <div class="row">
                             <?php foreach ($accolades as $accolade): ?>

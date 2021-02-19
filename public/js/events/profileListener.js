@@ -7,7 +7,10 @@ export default class ProfileListener extends Event {
         $('.submitProfileUpdate').click(function (e) {
             e.preventDefault();
 
-            SweetAlert.confirm('Click ok to update your username to: ' + $('#username').val(), function () {
+            let username = $('#username').val();
+            let account_type = $('#UserEdit input[type=radio]:checked').parent('label').text().trim();
+
+            SweetAlert.confirm('Username: ' + username + ' \n Account type: ' + account_type, function () {
                 $('#UserEdit').submit();
             });
         });

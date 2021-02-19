@@ -218,21 +218,21 @@ class UsersController extends AbstractBaseController
         $user = $this->getUser();
     
         $new_username = $post_values['username'];
+        $account_type_id = $post_values['account_type_id'];
+        
         $errors = User::verifyUsername($new_username);
         if (count($errors)) {
             $this->toView('profile', [
                 'errors' => $errors
             ]);
         }
+    
+        $user->update(
+            $new_username,
+            $account_type_id
+        );
         
-        $success = $user->update($new_username);
-        
-        if (!$success) {
-            $this->toView('profile', [
-                'errors' => ['The username ' . $new_username . ' is already taken']
-            ]);
-        }
-        
+        setSignedInUser($user);
         redirect('User/Details/' . $user->getID());
     }
 }
