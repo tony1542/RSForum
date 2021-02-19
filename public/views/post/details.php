@@ -22,6 +22,14 @@
     </div>
 </div>
 
+<div class="card mb-2">
+    <div class="card-body">
+        <form>
+            <input type="text" />
+        </form>
+    </div>
+</div>
+
 <?php if ($post->hasComments()): ?>
 <div class="card">
     <div class="card-header">Comments</div>
