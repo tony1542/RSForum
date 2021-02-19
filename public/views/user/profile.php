@@ -70,7 +70,12 @@
     
             <?php if ($show_accolades): ?>
                 <div class="card mt-4">
-                    <div class="card-header">Accolades</div>
+                    <div class="card-header">
+                        Accolades
+                        <?php if($user->getAccountTypeID() !== \App\Utils\Runescape\AccountType::PLAYER_TYPE_NORMAL): ?>
+                            - <?= $user->getAccountTypeText() ?>
+                        <?php endif; ?>
+                    </div>
                     <div class="card-body">
                         <div class="row">
                             <?php foreach ($accolades as $accolade): ?>
