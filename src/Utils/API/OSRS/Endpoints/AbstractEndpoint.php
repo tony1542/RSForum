@@ -5,6 +5,7 @@ namespace App\Utils\API\OSRS\Endpoints;
 use App\Utils\API\AbstractEndpointBase;
 use App\Utils\API\ApiErrorHandlerInterface;
 use App\Utils\API\OSRS\Exceptions\ApiErrorHandler;
+use App\Utils\Runescape\AccountType;
 use Psr\Http\Message\StreamInterface;
 
 abstract class AbstractEndpoint extends AbstractEndpointBase
@@ -24,10 +25,10 @@ abstract class AbstractEndpoint extends AbstractEndpointBase
     protected function setBaseApiUrl($player_type): void
     {
         $method = match ($player_type) {
-            0 => '',
-            1 => $this->ironman_method,
-            2 => $this->hardcore_ironman_method,
-            3 => $this->ultimate_ironman_method
+            AccountType::PLAYER_TYPE_NORMAL => '',
+            AccountType::PLAYER_TYPE_IRONMAN => $this->ironman_method,
+            AccountType::PLAYER_TYPE_HARDCORE_IRONMAN => $this->hardcore_ironman_method,
+            AccountType::PLAYER_TYPE_ULTIMATE_IRONMAN => $this->ultimate_ironman_method
         };
         
         $this->base_api_url = sprintf($this->base_api_url, $method);
