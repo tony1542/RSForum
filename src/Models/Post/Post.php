@@ -41,6 +41,16 @@ class Post
         $this->body = $values['body'];
     }
     
+    protected function loadComments()
+    {
+        $database = getDatabase();
+        
+        $statement = $database->prepare("SELECT post_comment_id, post_id, user_id, comment FROM post_comment WHERE post_id = ?");
+        $statement->execute([$this->getPostID()]);
+        
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
     /**
      * @return int[]
      */
