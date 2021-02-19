@@ -9,6 +9,14 @@ body {
   background: $black-dark;
 }
 
+a {
+  color: $orange-dark;
+}
+
+a:hover {
+  color: $orange;
+}
+
 .card-header, .card-footer {
   background-color: $black-lighter;
 }

@@ -22,6 +22,10 @@ html, body {
   width: $size-full;
 }
 
+a:hover {
+  text-decoration: none;
+}
+
 footer {
   text-align: center;
 }
