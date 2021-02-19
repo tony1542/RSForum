@@ -10,7 +10,7 @@ class UserAccolades extends AbstractHighscoreComponent
     protected array $accolades = [];
     protected string $username;
     
-    public function __construct(string $username)
+    public function __construct(string $username, int $account_type_id)
     {
         $this->username = $username;
         
@@ -20,7 +20,7 @@ class UserAccolades extends AbstractHighscoreComponent
         }
     
         // If we find a accolades response from the API, insert a record into the database
-        $this->accolades = OSRS::getAccoladesForPlayer($username);
+        $this->accolades = OSRS::getAccoladesForPlayer($username, $account_type_id);
         if ($this->accolades) {
             $this->insert();
         }

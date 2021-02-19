@@ -37,7 +37,12 @@
     <?php if ($show_skills): ?>
         <div class="col-lg-8 mb-4">
             <div class="card">
-                <div class="card-header">Stats</div>
+                <div class="card-header">
+                    Stats
+                    <?php if($user->getAccountTypeID() !== \App\Utils\Runescape\AccountType::PLAYER_TYPE_NORMAL): ?>
+                        - <?= $user->getAccountTypeText() ?>
+                    <?php endif; ?>
+                </div>
                 <div class="card-body">
                     <div class="row">
                         <?php foreach ($skills as $skill): ?>

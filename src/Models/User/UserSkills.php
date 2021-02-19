@@ -11,10 +11,12 @@ class UserSkills extends AbstractHighscoreComponent
     protected array $skills = [];
     protected int $total_level = 0;
     protected string $username;
+    protected int $account_type_id;
     
-    public function __construct(string $username)
+    public function __construct(string $username, int $account_type_id)
     {
         $this->username = $username;
+        $this->account_type_id = $account_type_id;
     
         // Query DB for existing data
         $this->skills = $this->getUpdatedInLastDay();
@@ -27,7 +29,7 @@ class UserSkills extends AbstractHighscoreComponent
             return;
         }
         
-        $this->skills = OSRS::getStatsForPlayer($username);
+        $this->skills = OSRS::getStatsForPlayer($username, $account_type_id);
         
         if ($this->skills) {
             $this->total_level = Levels::getTotalLevel(

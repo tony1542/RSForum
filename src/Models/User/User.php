@@ -3,6 +3,7 @@
 namespace App\Models\User;
 
 use App\Utils\Http\Request;
+use App\Utils\Runescape\AccountType;
 use Carbon\Carbon;
 use PDO;
 use App\Utils\Http\Session;
@@ -12,6 +13,7 @@ class User
     protected string $username = '';
     protected string $email_address = '';
     protected string $user_id = '';
+    protected int $account_type_id;
     protected bool $logged_in = false;
     protected bool $admin = false;
     
@@ -33,7 +35,7 @@ class User
         
         // Creating an instance of our db connection, then using a pdo to query our db for a user_id match
         $instance = getDatabase();
-        $statement = $instance->prepare('SELECT user_id, username, email_address, logged_in, admin
+        $statement = $instance->prepare('SELECT user_id, username, email_address, logged_in, admin, account_type_id
                                             FROM user
                                          WHERE user_id = ?');
         $statement->execute([$user_id]);
@@ -46,11 +48,12 @@ class User
         $this->username = $values['username'];
         $this->email_address = $values['email_address'];
         $this->user_id = $user_id;
+        $this->account_type_id = (int) $values['account_type_id'];
         $this->logged_in = $values['logged_in'];
         $this->admin = $values['admin'];
-    
-        $this->skills = new UserSkills($this->getUsername());
-        $this->accolades = new UserAccolades($this->getUsername());
+        
+        $this->skills = new UserSkills($this->getUsername(), $this->account_type_id);
+        $this->accolades = new UserAccolades($this->getUsername(), $this->account_type_id);
     }
     
     public function getUsername(): string
@@ -71,6 +74,16 @@ class User
     public function getID(): string
     {
         return $this->user_id;
+    }
+    
+    public function getAccountTypeID(): int
+    {
+        return $this->account_type_id;
+    }
+    
+    public function getAccountTypeText(): string
+    {
+        return AccountType::PLAYER_TYPE_TEXT[$this->getAccountTypeID()];
     }
     
     public function getSkills(): array
