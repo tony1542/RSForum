@@ -15,6 +15,7 @@ class Accolades
         'Clue Scrolls (elite)',
         'Clue Scrolls (master)',
         'LMS - Rank',
+        'Soul Wars Zeal',
         'Abyssal Sire',
         'Alchemical Hydra',
         'Barrows Chests',
