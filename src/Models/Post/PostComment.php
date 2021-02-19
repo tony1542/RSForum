@@ -4,13 +4,36 @@ namespace App\Models\Post;
 
 class PostComment
 {
-    protected int $post_comment_id;
-    protected int $post_id;
-    protected int $user_id;
-    protected string $comment;
+    public function __construct(
+        protected int $post_comment_id,
+        protected int $post_id,
+        protected int $user_id,
+        protected string $comment,
+        protected string $username
+    ) {}
     
-    public function __construct($post_comment_id)
+    public function getPostCommentId(): int
     {
+        return $this->post_comment_id;
+    }
     
+    public function getPostId(): int
+    {
+        return $this->post_id;
+    }
+    
+    public function getUserId(): int
+    {
+        return $this->user_id;
+    }
+    
+    public function getComment(): string
+    {
+        return $this->comment;
+    }
+    
+    public function getUsername(): string
+    {
+        return $this->username;
     }
 }

@@ -11,6 +11,10 @@ class Post
     protected string $title;
     protected string $body;
     
+    /** @var PostComment[] $comments
+     */
+    protected array $comments;
+    
     public function __construct($post_id = 0)
     {
         if ($post_id) {
@@ -39,16 +43,34 @@ class Post
         $this->user_id = $values['user_id'];
         $this->title = $values['title'];
         $this->body = $values['body'];
+
+        $this->loadComments();
     }
     
-    protected function loadComments()
+    protected function loadComments(): void
     {
         $database = getDatabase();
         
-        $statement = $database->prepare("SELECT post_comment_id, post_id, user_id, comment FROM post_comment WHERE post_id = ?");
+        $statement = $database->prepare("SELECT pc.post_comment_id, pc.post_id, pc.user_id, pc.comment, u.username
+                                            FROM post_comment pc
+                                            INNER JOIN user u ON u.user_id = pc.user_id
+                                         WHERE post_id = ?");
         $statement->execute([$this->getPostID()]);
         
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
+        $all = $statement->fetchAll(PDO::FETCH_ASSOC) ?: [];
+        
+        $comments = [];
+        foreach ($all as $comment) {
+            $comments[] = new PostComment(
+                $comment['post_comment_id'],
+                $comment['post_id'],
+                $comment['user_id'],
+                $comment['comment'],
+                $comment['username']
+            );
+        }
+        
+        $this->comments = $comments;
     }
     
     /**
@@ -102,5 +124,18 @@ class Post
     public function getBody(): string
     {
         return $this->body;
+    }
+    
+    /**
+     * @return PostComment[]
+     */
+    public function getComments(): array
+    {
+        return $this->comments;
+    }
+    
+    public function hasComments(): bool
+    {
+        return count($this->comments) > 0;
     }
 }
