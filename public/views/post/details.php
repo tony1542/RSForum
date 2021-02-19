@@ -7,7 +7,7 @@
     </div>
 <?php endif; ?>
 
-<div class="card">
+<div class="card mb-2">
     <div class="card-header"><?= $post->getTitle() ?></div>
     <div class="card-body">
         <div class="card-text"><?= $post->getBody() ?></div>
@@ -21,3 +21,18 @@
         </div>
     </div>
 </div>
+
+<?php if ($post->hasComments()): ?>
+<div class="card">
+    <div class="card-header">Comments</div>
+    <div class="card-body">
+        <ul>
+            <?php foreach ($post->getComments() as $comment): ?>
+            <li class="mb-4">
+                <?= $comment->getUsername() . ': ' . $comment->getComment() ?>
+            </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+</div>
+<?php endif; ?>
