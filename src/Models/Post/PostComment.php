@@ -2,6 +2,8 @@
 
 namespace App\Models\Post;
 
+use App\Utils\Input\Sanitizer;
+
 class PostComment
 {
     public function __construct(
@@ -44,7 +46,7 @@ class PostComment
                                             SET user_id = ?, comment = ?, post_id = ?');
         $statement->execute([
             $user_id,
-            $comment,
+            Sanitizer::sanitize($comment),
             $post_id
         ]);
         
