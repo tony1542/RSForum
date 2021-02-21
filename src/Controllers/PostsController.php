@@ -25,13 +25,18 @@ class PostsController extends AbstractBaseController
     
     protected function toView(string $view, array $parameters = []): void
     {
-        $post = new Post(Request::getID());
-        $user = new User($post->getUserId());
+        $id = Request::getID();
+        $array_to_merge = [];
         
-        $array_to_merge = [
-            'post' => $post,
-            'user' => $user
-        ];
+        if ($id) {
+            $post = new Post(Request::getID());
+            $user = new User($post->getUserId());
+    
+            $array_to_merge = [
+                'post' => $post,
+                'user' => $user
+            ];
+        }
         
         $parameters = array_merge($parameters, $array_to_merge);
         
