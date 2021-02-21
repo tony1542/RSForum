@@ -22,25 +22,28 @@
     </div>
 </div>
 
-<div class="card mb-2">
-    <div class="card-body">
-        <form>
-            <input type="text" />
-        </form>
-    </div>
-</div>
-
-<?php if ($post->hasComments()): ?>
 <div class="card">
     <div class="card-header">Comments</div>
     <div class="card-body">
-        <ul>
-            <?php foreach ($post->getComments() as $comment): ?>
-            <li class="mb-4">
-                <?= $comment->getUsername() . ': ' . $comment->getComment() ?>
-            </li>
-            <?php endforeach; ?>
-        </ul>
+        <div>
+            <form method="post" action="/Post/AddComment/<?= $post->getPostID() ?>">
+                <div class="form-group">
+                    <input type="text" name="new_comment" class="form-control" />
+                </div>
+                <button class="btn btn-primary">
+                    Add comment
+                </button>
+            </form>
+        </div>
+        
+        <?php if ($post->hasComments()): ?>
+            <ul>
+                <?php foreach ($post->getComments() as $comment): ?>
+                <li class="mb-4">
+                    <?= $comment->getUsername() . ': ' . $comment->getComment() ?>
+                </li>
+                <?php endforeach; ?>
+            </ul>
+        <?php endif; ?>
     </div>
 </div>
-<?php endif; ?>

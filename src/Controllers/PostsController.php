@@ -24,6 +24,16 @@ class PostsController extends AbstractBaseController
     
     protected function toView(string $view, array $parameters = []): void
     {
+        $post = new Post(Request::getID());
+        $user = new User($post->getUserId());
+        
+        $array_to_merge = [
+            'post' => $post,
+            'user' => $user
+        ];
+        
+        $parameters = array_merge($parameters, $array_to_merge);
+        
         view($this->getIncludePrefix() . $view, $parameters);
     }
 
@@ -38,13 +48,7 @@ class PostsController extends AbstractBaseController
     
     public function details(): void
     {
-        $post = new Post(Request::getID());
-        $user = new User($post->getUserId());
-        
-        $this->toView('details', [
-            'post' => $post,
-            'user' => $user
-        ]);
+        $this->toView('details');
     }
     
     public function create(): void
@@ -81,5 +85,17 @@ class PostsController extends AbstractBaseController
         Session::set('post_create_success', 'Post created successfully');
         
         redirect('Post/Details/' . $post_id);
+    }
+    
+    public function addComment(): void
+    {
+        $post = Request::getPostValues();
+        $comment = $post['new_comment'];
+        
+        if (!$comment) {
+            $this->toView('details', [
+                'errors' => ['Must enter a comment']
+            ]);
+        }
     }
 }
