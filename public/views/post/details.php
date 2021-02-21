@@ -20,7 +20,7 @@
     </div>
     <div class="card-footer flex justify-between">
         <div class="text-muted">
-            Posted by: <?= $user->getUsername() ?>
+            Posted by <?= $user->getUsername() ?>
         </div>
         <div>
             <a href="/Post/All">Back</a>
@@ -31,7 +31,7 @@
 <div class="card">
     <div class="card-header">Comments</div>
     <div class="card-body">
-        <div class="mb-4">
+        <div>
             <form method="post" action="/Post/AddComment/<?= $post->getPostID() ?>">
                 <div class="form-group">
                     <input type="text" name="new_comment" class="form-control" />
@@ -44,7 +44,7 @@
         
         <div>
             <?php if ($post->hasComments()): ?>
-                <ul>
+                <ul class="mt-4">
                     <?php foreach ($post->getComments() as $comment): ?>
                         <li class="mb-4">
                             <?= $comment->getUsername() . ': ' . $comment->getComment() ?>
