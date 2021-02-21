@@ -19,8 +19,8 @@
         <div class="card-text"><?= $post->getBody() ?></div>
     </div>
     <div class="card-footer flex justify-between">
-        <div>
-            <?= $user->getUsername() ?>
+        <div class="text-muted">
+            Posted by: <?= $user->getUsername() ?>
         </div>
         <div>
             <a href="/Post/All">Back</a>

@@ -39,7 +39,6 @@ class PostsController extends AbstractBaseController
         }
         
         $parameters = array_merge($parameters, $array_to_merge);
-        
         view($this->getIncludePrefix() . $view, $parameters);
     }
 
@@ -105,7 +104,7 @@ class PostsController extends AbstractBaseController
             ]);
         }
         
-        $comment_id = PostComment::add(
+        PostComment::add(
             $post->getUserId(),
             $comment,
             Request::getID()
