@@ -36,4 +36,18 @@ class PostComment
     {
         return $this->username;
     }
+    
+    public static function add(int $user_id, string $comment, int $post_id): int
+    {
+        $database = getDatabase();
+        $statement = $database->prepare('INSERT INTO post_comment
+                                            SET user_id = ?, comment = ?, post_id = ?');
+        $statement->execute([
+            $user_id,
+            $comment,
+            $post_id
+        ]);
+        
+        return $database->lastInsertId();
+    }
 }

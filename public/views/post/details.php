@@ -7,6 +7,12 @@
     </div>
 <?php endif; ?>
 
+<?php if (\App\Utils\Http\Session::has('comment_create_success')) : ?>
+    <div class="alert alert-success" role="alert">
+        <?= \App\Utils\Http\Session::flash('comment_create_success') ?>
+    </div>
+<?php endif; ?>
+
 <div class="card mb-2">
     <div class="card-header"><?= $post->getTitle() ?></div>
     <div class="card-body">
@@ -25,7 +31,7 @@
 <div class="card">
     <div class="card-header">Comments</div>
     <div class="card-body">
-        <div>
+        <div class="mb-4">
             <form method="post" action="/Post/AddComment/<?= $post->getPostID() ?>">
                 <div class="form-group">
                     <input type="text" name="new_comment" class="form-control" />
@@ -36,14 +42,16 @@
             </form>
         </div>
         
-        <?php if ($post->hasComments()): ?>
-            <ul>
-                <?php foreach ($post->getComments() as $comment): ?>
-                <li class="mb-4">
-                    <?= $comment->getUsername() . ': ' . $comment->getComment() ?>
-                </li>
-                <?php endforeach; ?>
-            </ul>
-        <?php endif; ?>
+        <div>
+            <?php if ($post->hasComments()): ?>
+                <ul>
+                    <?php foreach ($post->getComments() as $comment): ?>
+                        <li class="mb-4">
+                            <?= $comment->getUsername() . ': ' . $comment->getComment() ?>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            <?php endif; ?>
+        </div>
     </div>
 </div>
