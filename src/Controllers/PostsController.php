@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\Post\Post;
+use App\Models\Post\PostComment;
 use App\Models\User\User;
 use App\Utils\Http\Request;
 use App\Utils\Http\Session;
@@ -24,6 +25,20 @@ class PostsController extends AbstractBaseController
     
     protected function toView(string $view, array $parameters = []): void
     {
+        $id = Request::getID();
+        $array_to_merge = [];
+        
+        if ($id) {
+            $post = new Post(Request::getID());
+            $user = new User($post->getUserId());
+    
+            $array_to_merge = [
+                'post' => $post,
+                'user' => $user
+            ];
+        }
+        
+        $parameters = array_merge($parameters, $array_to_merge);
         view($this->getIncludePrefix() . $view, $parameters);
     }
 
@@ -38,13 +53,7 @@ class PostsController extends AbstractBaseController
     
     public function details(): void
     {
-        $post = new Post(Request::getID());
-        $user = new User($post->getUserId());
-        
-        $this->toView('details', [
-            'post' => $post,
-            'user' => $user
-        ]);
+        $this->toView('details');
     }
     
     public function create(): void
@@ -79,7 +88,29 @@ class PostsController extends AbstractBaseController
         );
         
         Session::set('post_create_success', 'Post created successfully');
-        
         redirect('Post/Details/' . $post_id);
+    }
+    
+    public function addComment(): void
+    {
+        $post = new Post(Request::getID());
+        
+        $post_values = Request::getPostValues();
+        $comment = $post_values['new_comment'];
+        
+        if (!$comment) {
+            $this->toView('details', [
+                'errors' => ['Must enter a comment']
+            ]);
+        }
+        
+        PostComment::add(
+            $post->getUserId(),
+            $comment,
+            Request::getID()
+        );
+    
+        Session::set('comment_create_success', 'Comment created successfully');
+        redirect('Post/Details/' . $post->getPostID());
     }
 }
