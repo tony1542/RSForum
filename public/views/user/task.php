@@ -38,7 +38,7 @@
                                 <hr>
                                 <div class="form-group">
                                     Description:
-                                    <textarea class="form-control" rows="5" maxlength="5" readonly><?= $value->getDescription() ?></textarea>
+                                    <textarea class="form-control" rows="5" readonly><?= $value->getDescription() ?></textarea>
                                 </div>
                                 <hr>
                                 <div class="container">
@@ -127,7 +127,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="Description">Description</label>
-                                        <textarea name="description" class="form-control" rows="3" maxlength="5"></textarea>
+                                        <textarea name="description" class="form-control" rows="3"></textarea>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
