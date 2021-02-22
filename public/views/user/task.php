@@ -1,5 +1,5 @@
 <!--TaskList-->
-<div class="col-lg-12 mb-4">
+<div class="mb-4">
     <div class="card">
         <div class="card-header">
             <div class="container">
