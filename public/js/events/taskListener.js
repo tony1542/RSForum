@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import 'jquery-sortablejs';
 import SweetAlert from '../sweetAlert';
 import Event from '../events/event.js';
 
