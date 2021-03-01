@@ -9,10 +9,10 @@ use GuzzleHttp\Exception\RequestException;
 
 class Api
 {
-    public static function getStatsForPlayer(string $player_name): array
+    public static function getStatsForPlayer(string $player_name, int $account_type_id): array
     {
         try {
-            $stats_for_player = new Stats($player_name);
+            $stats_for_player = new Stats($player_name, $account_type_id);
         
             return $stats_for_player->call();
         } catch (RequestException|ApiException $e) {
@@ -20,10 +20,10 @@ class Api
         }
     }
     
-    public static function getAccoladesForPlayer(string $player_name): array
+    public static function getAccoladesForPlayer(string $player_name, int $account_type_id): array
     {
         try {
-            $accolades_for_player = new Accolades($player_name);
+            $accolades_for_player = new Accolades($player_name, $account_type_id);
             
             return $accolades_for_player->call();
         } catch (RequestException|ApiException $e) {

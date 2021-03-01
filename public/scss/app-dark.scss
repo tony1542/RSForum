@@ -9,12 +9,21 @@ body {
   background: $black-dark;
 }
 
+a {
+  color: $orange-dark;
+}
+
+a:hover {
+  color: $orange;
+}
+
 .card-header, .card-footer {
   background-color: $black-lighter;
 }
 
 .card {
   background-color: $black-lightest;
+  box-shadow: .25px 1px 4px $black;
 }
 
 .form-label {

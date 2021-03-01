@@ -7,12 +7,13 @@ USE rsforum;
 # Create user table
 CREATE TABLE user
 (
-    user_id       int AUTO_INCREMENT,
-    username      varchar(12)       NOT NULL,
-    email_address varchar(255)      NOT NULL,
-    password      varchar(255)      NOT NULL,
-    logged_in     tinyint DEFAULT 0 NOT NULL,
-    admin         tinyint DEFAULT 0 NOT NULL,
+    user_id         int AUTO_INCREMENT,
+    username        varchar(12)       NOT NULL,
+    account_type_id int(11) DEFAULT 0 NOT NULL,
+    email_address   varchar(255)      NOT NULL,
+    password        varchar(255)      NOT NULL,
+    logged_in       tinyint DEFAULT 0 NOT NULL,
+    admin           tinyint DEFAULT 0 NOT NULL,
     CONSTRAINT user_pk
         PRIMARY KEY (user_id)
 );
@@ -74,4 +75,14 @@ CREATE TABLE post
     body    text         NOT NULL,
     CONSTRAINT post_pk
         PRIMARY KEY (post_id)
+);
+
+CREATE TABLE post_comment
+(
+    post_comment_id int AUTO_INCREMENT,
+    user_id         int  NOT NULL,
+    post_id         int  NOT NULL,
+    comment         text NOT NULL,
+    CONSTRAINT post_comment_pk
+        PRIMARY KEY (post_comment_id)
 );
