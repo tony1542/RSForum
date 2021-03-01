@@ -100,9 +100,9 @@ class UsersController extends AbstractBaseController
         // Sanitizing our user input before validating
         $username = Sanitizer::sanitize($_POST['username']);
         $email_address = Sanitizer::sanitize($_POST['email_address']);
+        $account_type_id = Sanitizer::sanitize($_POST['acc_type']);
         $password = Sanitizer::sanitize($_POST['password']);
         $password_confirm = Sanitizer::sanitize($_POST['password_confirm']);
-        
         $form_errors = User::verifyUsername($username);
 
         $db = getDatabase();
@@ -145,12 +145,13 @@ class UsersController extends AbstractBaseController
         // If we have gotten this far, it means there were no errors when validating. Insert the user into the database
         $db = getDatabase();
         $password = password_hash($password, PASSWORD_DEFAULT);
-        $sql = $db->prepare('INSERT INTO user (username, password, email_address) VALUES (?, ?, ?)');
+        $sql = $db->prepare('INSERT INTO user (username, password, email_address, account_type_id) VALUES (?, ?, ?, ?)');
         
         $values = [
             $username,
             $password,
-            $email_address
+            $email_address,
+            $account_type_id
         ];
         
         $sql->execute($values);

@@ -8,19 +8,22 @@ class AccountType
     public const PLAYER_TYPE_IRONMAN          = 1;
     public const PLAYER_TYPE_HARDCORE_IRONMAN = 2;
     public const PLAYER_TYPE_ULTIMATE_IRONMAN = 3;
+    public const PLAYER_TYPE_GROUP_IRONMAN = 4;
     
     public const PLAYER_TYPES = [
         self::PLAYER_TYPE_NORMAL,
         self::PLAYER_TYPE_IRONMAN,
         self::PLAYER_TYPE_HARDCORE_IRONMAN,
-        self::PLAYER_TYPE_ULTIMATE_IRONMAN
+        self::PLAYER_TYPE_ULTIMATE_IRONMAN,
+        self::PLAYER_TYPE_GROUP_IRONMAN
     ];
     
     public const PLAYER_TYPE_TEXT = [
         self::PLAYER_TYPE_NORMAL           => 'Normal',
         self::PLAYER_TYPE_IRONMAN          => 'Ironman',
         self::PLAYER_TYPE_HARDCORE_IRONMAN => 'Hardcore Ironman',
-        self::PLAYER_TYPE_ULTIMATE_IRONMAN => 'Ultimate Ironman'
+        self::PLAYER_TYPE_ULTIMATE_IRONMAN => 'Ultimate Ironman',
+        self::PLAYER_TYPE_GROUP_IRONMAN    => 'Group Ironman'
     ];
     
     public static function getAll(): array
