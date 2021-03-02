@@ -1,22 +1,14 @@
 <!--TaskList-->
 <div class="mb-4">
     <div class="card">
-        <div class="card-header">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm">
-                        Task List
-                    </div>
-                    <div class="col-sm">
-                        <div class="d-flex justify-content-center">
-                            <button class="btn btn-outline-primary" name="AddTask" data-toggle="modal" data-target="#AddTask">Add Task
-                            </button>
-                        </div>
-                    </div>
-                    <div class="col-sm">
-                        <!--Filler-->
-                    </div>
+        <div class="card-header flex justify-between items-center">
+                <div>
+                    Task List
                 </div>
+                <div>
+                    <button class="btn btn-outline-primary" name="AddTask" data-toggle="modal" data-target="#AddTask">
+                        Add Task
+                    </button>
             </div>
         </div>
         <div class="card-body">
