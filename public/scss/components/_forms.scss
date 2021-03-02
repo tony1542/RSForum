@@ -1,7 +1,6 @@
 @import "colors";
 
-.form-label {
-  color: $grey-darker;
+label, .form-label {
   @extend .mb-2;
 }
 
