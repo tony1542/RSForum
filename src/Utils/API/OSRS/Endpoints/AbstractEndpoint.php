@@ -25,10 +25,10 @@ abstract class AbstractEndpoint extends AbstractEndpointBase
     protected function setBaseApiUrl($player_type): void
     {
         $method = match ($player_type) {
-            AccountType::PLAYER_TYPE_NORMAL => '',
             AccountType::PLAYER_TYPE_IRONMAN => $this->ironman_method,
             AccountType::PLAYER_TYPE_HARDCORE_IRONMAN => $this->hardcore_ironman_method,
-            AccountType::PLAYER_TYPE_ULTIMATE_IRONMAN => $this->ultimate_ironman_method
+            AccountType::PLAYER_TYPE_ULTIMATE_IRONMAN => $this->ultimate_ironman_method,
+            default => ''
         };
         
         $this->base_api_url = sprintf($this->base_api_url, $method);
