@@ -13,7 +13,7 @@ class AccountType
         self::PLAYER_TYPE_NORMAL,
         self::PLAYER_TYPE_IRONMAN,
         self::PLAYER_TYPE_HARDCORE_IRONMAN,
-        self::PLAYER_TYPE_ULTIMATE_IRONMAN
+        self::PLAYER_TYPE_ULTIMATE_IRONMAN,
     ];
     
     public const PLAYER_TYPE_TEXT = [

@@ -41,3 +41,11 @@ a:hover {
 .modal-footer {
   border-top: 1px solid $grey-darker;
 }
+
+a {
+  color: $orange-dark;
+}
+
+a:hover {
+  color: $orange-lighter;
+}

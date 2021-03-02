@@ -130,18 +130,19 @@ class User
         
         $user = new User($value['user_id']);
         setSignedInUser($user);
-        
-        $sql = $db->prepare("UPDATE user SET logged_in = 1 WHERE email_address = ?");
-        $sql->execute([$_SESSION['email_address']]);
-        
+
+        $sql = $db->prepare("UPDATE user SET logged_in = 1 WHERE email_address =?");
+        $email = getSignedInUser()->email_address;
+        $sql->execute([$email]);
         redirect("User/Details/" . getSignedInUser()->getID());
     }
     
     public function logout(): void
     {
+        $email = getSignedInUser()->email_address;
         $db = getDatabase();
-        $sql = $db->prepare("UPDATE user SET logged_in = 0 WHERE email_address = ?");
-        $sql->execute([$_SESSION['email_address']]);
+        $sql = $db->prepare("UPDATE user SET logged_in = 0 WHERE email_address =?");
+        $sql->execute([$email]);
         Session::destroy();
     }
     
