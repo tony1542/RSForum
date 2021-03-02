@@ -22,7 +22,6 @@
                            <option value="1">IronMan</option>
                            <option value="2">Hardcore IronMan</option>
                            <option value="3">Ultimate IronMan</option>
-                           <option value="4">Group IronMan</option>
                        </select>
                    </div>
                     <div class="form-group">
