@@ -19,7 +19,7 @@
                        <label for="acc_type">Account Type:</label>
                        <select id="acc_type" name="acc_type" class="form-control">
                            <?php foreach (\App\Utils\Runescape\AccountType::getAll() as $account_type_id => $account_type_text) : ?>
-                               <option value="<?=$account_type_id ?>"><?= $account_type_text ?></option>
+                               <option value="<?= $account_type_id ?>"><?= $account_type_text ?></option>
                            <?php endforeach; ?>
                        </select>
                    </div>
