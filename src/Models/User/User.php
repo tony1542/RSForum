@@ -149,9 +149,14 @@ class User
     public static function getMembers(): array
     {
         $database = getDatabase();
-        $sql = $database->query("SELECT u.username, us.date_added
-                                FROM user u
-                                LEFT JOIN user_skills us ON u.username = us.username AND us.skill_name = 'Overall'");
+        $sql = $database->query("SELECT u.username,
+                                (SELECT us.date_added
+                                FROM user_skills us
+                                WHERE username = u.username
+                                  AND us.skill_name = 'Overall'
+                                ORDER BY us.date_added DESC
+                                LIMIT 1) AS date_added
+                                FROM user u");
         $members = $sql->fetchAll(PDO::FETCH_ASSOC);
         
         $users = [];
