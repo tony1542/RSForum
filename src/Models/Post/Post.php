@@ -51,7 +51,7 @@ class Post
     {
         $database = getDatabase();
         
-        $statement = $database->prepare("SELECT pc.post_comment_id, pc.post_id, pc.user_id, pc.comment, u.username
+        $statement = $database->prepare("SELECT pc.post_comment_id, pc.post_id, pc.user_id, pc.comment, pc.date_added, u.username
                                             FROM post_comment pc
                                             INNER JOIN user u ON u.user_id = pc.user_id
                                          WHERE post_id = ?");
@@ -66,6 +66,7 @@ class Post
                 $comment['post_id'],
                 $comment['user_id'],
                 $comment['comment'],
+                $comment['date_added'],
                 $comment['username']
             );
         }

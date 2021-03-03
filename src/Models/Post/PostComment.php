@@ -3,6 +3,7 @@
 namespace App\Models\Post;
 
 use App\Utils\Input\Sanitizer;
+use Carbon\Carbon;
 
 class PostComment
 {
@@ -11,6 +12,7 @@ class PostComment
         protected int $post_id,
         protected int $user_id,
         protected string $comment,
+        protected string $date_added,
         protected string $username
     ) {}
     
@@ -32,6 +34,11 @@ class PostComment
     public function getComment(): string
     {
         return $this->comment;
+    }
+    
+    public function getDateAdded(): string
+    {
+        return Carbon::create($this->date_added)->ago();
     }
     
     public function getUsername(): string

@@ -47,7 +47,12 @@
                 <ul class="mt-4">
                     <?php foreach ($post->getComments() as $comment): ?>
                         <li class="mb-4">
-                            <?= $comment->getUsername() . ': ' . $comment->getComment() ?>
+                            <div>
+                                <?= $comment->getUsername() ?> <small class="text-muted"><?= $comment->getDateAdded() ?></small>
+                            </div>
+                            <div>
+                                <?= $comment->getComment() ?>
+                            </div>
                         </li>
                     <?php endforeach; ?>
                 </ul>
