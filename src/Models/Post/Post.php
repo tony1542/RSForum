@@ -2,6 +2,7 @@
 
 namespace App\Models\Post;
 
+use Carbon\Carbon;
 use PDO;
 
 class Post
@@ -120,6 +121,11 @@ class Post
     public function getBody(): string
     {
         return $this->body;
+    }
+    
+    public function getDateAdded(): string
+    {
+        return Carbon::create($this->date_added)->format('m/d/Y');
     }
     
     /**

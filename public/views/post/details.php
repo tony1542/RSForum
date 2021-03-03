@@ -14,7 +14,14 @@
 <?php endif; ?>
 
 <div class="card mb-2">
-    <div class="card-header"><?= $post->getTitle() ?></div>
+    <div class="card-header flex justify-between">
+        <div>
+            <?= $post->getTitle() ?>
+        </div>
+        <div class="text-muted">
+            <?= $post->getDateAdded() ?>
+        </div>
+    </div>
     <div class="card-body">
         <div class="card-text"><?= $post->getBody() ?></div>
     </div>
