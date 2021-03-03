@@ -13,41 +13,37 @@
         </div>
         <div class="card-body">
             <div class="row">
-                <?php  $i= 0; foreach ($tasks as $value) : ?>
-                    <?php $edit = $value->getTaskID(); ?>
+                <?php foreach ($tasks as $value) : ?>
+                    <?php $edit = $value->getTaskID(); $i = 0; ?>
                     <div class="col-md-6 col-lg-4 mb-2">
                         <div class="card">
-                            <div class="card-header">
-                                <div class="float-right">
-                                    <button type="button" class="btn btn-sm btn-outline-info" data-toggle="modal" data-target="#TaskModal-<?= $edit ?>" title="Click to edit this task">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                </div>
+                            <div class="card-header text-right">
+                                <button type="button" class="btn btn-sm btn-outline-info" data-toggle="modal" data-target="#TaskModal-<?= $edit ?>" title="Click to edit this task">
+                                    <i class="fas fa-edit"></i>
+                                </button>
                             </div>
                             <div class="card-body">
-                                Title: <br>
-                                <?= $value->getTitle(); ?>
+                                Title:
+                                <?= $value->getTitle() ?>
                                 <hr>
                                 <div class="form-group">
-                                    Description:
-                                    <textarea class="form-control" rows="5" maxlength="5" readonly><?= $value->getDescription() ?></textarea>
+                                    <label for="description">Description</label>
+                                    <textarea id="description" class="form-control" rows="5" maxlength="5" readonly><?= $value->getDescription() ?></textarea>
                                 </div>
                                 <hr>
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-sm">
-                                            Complete:<br>
-                                            <?php if ($value->getIsCompleted() == 0) {echo '<i class="far fa-times-circle"></i>';} elseif ($value->getIsCompleted() == 1) {echo '<i class="fas fa-check"></i>';} ?>
-                                        </div>
-                                        <div class="col-sm">
-                                            Date Created:<br>
-                                            <?= $value->getDate() ?>
-                                        </div>
+                                <div class="row">
+                                    <div class="col-sm">
+                                        Complete:<br>
+                                        <?php if ($value->getIsCompleted() == 0) {echo '<i class="far fa-times-circle"></i>';} elseif ($value->getIsCompleted() == 1) {echo '<i class="fas fa-check"></i>';} ?>
+                                    </div>
+                                    <div class="col-sm">
+                                        Date Created:<br>
+                                        <?= $value->getDate() ?>
                                     </div>
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <div class="d-flex justify-content-between">
+                                <div class="flex justify-between">
                                     <div>
                                         <form name="Complete" id="Complete/<?= $i ?>" method="post" action="/Task/Complete/<?= $user->getID() ?>">
                                             <input class="btn btn-success" type="submit" value="Complete" name="Complete<?= $edit ?>" data-toggle="tooltip" title="Complete this task">
@@ -74,29 +70,31 @@
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">X
                                     </button>
                                 </div>
-                                <form name="Edit" id="Edit/<?=$i;?>" method="post" action="/Task/Edit/<?= $user->getID() ?>">
-                                    <div class="modal-body">
-                                        <input type="hidden" name="hidden_edit" value="<?= $edit ?>"></td>
-                                            <label for="title/<?=$i;?>">Title</label>
-                                        <input class="form-control" name="title" id="title/<?=$i;?>" value="<?= $value->getTitle(); ?>">
-                                            <hr>
-                                            <label for="description/<?=$i;?>">Description</label>
-                                            <textarea class="form-control" name="description" id="description/<?=$i;?>" rows="4"><?= $value->getDescription(); ?></textarea>
-                                            <hr>
+                                <div class="modal-body">
+                                    <form name="Edit" id="Edit/<?= $i ?>" method="post" action="/Task/Edit/<?= $user->getID() ?>">
+                                        <input type="hidden" name="hidden_edit" value="<?= $edit ?>">
                                         <div class="form-group">
-                                            <label for="complete/<?=$i;?>"><b>Complete</b></label>
-                                            <select name="complete/<?=$i;?>" class="form-control">
+                                            <label for="title/<?= $i ?>">Title</label>
+                                            <input class="form-control" name="title" id="title/<?= $i ?>" value="<?= $value->getTitle() ?>">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="description/<?= $i ?>">Description</label>
+                                            <textarea class="form-control" name="description" id="description/<?= $i ?>" rows="4"><?= $value->getDescription() ?></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="complete/<?= $i ?>">Complete</label>
+                                            <select id="complete" name="complete/<?= $i ?>" class="form-control">
                                                 <option value="0">No</option>
                                                 <option value="1">Yes</option>
                                             </select>
                                         </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
-                                        </button>
-                                        <input type="submit" class="btn btn-primary" value="Save changes">
-                                    </div>
-                                </form>
+                                        
+                                        <div class="form-group text-right">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <input type="submit" class="btn btn-primary" value="Save changes">
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
