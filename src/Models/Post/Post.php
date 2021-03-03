@@ -10,6 +10,7 @@ class Post
     protected int $user_id;
     protected string $title;
     protected string $body;
+    protected string $date_added;
     
     /** @var PostComment[] $comments
      */
@@ -29,7 +30,7 @@ class Post
         }
     
         $instance = getDatabase();
-        $statement = $instance->prepare('SELECT post_id, user_id, title, body
+        $statement = $instance->prepare('SELECT post_id, user_id, title, body, date_added
                                             FROM post
                                          WHERE post_id = ?');
         $statement->execute([$post_id]);
@@ -43,6 +44,7 @@ class Post
         $this->user_id = $values['user_id'];
         $this->title = $values['title'];
         $this->body = $values['body'];
+        $this->date_added = $values['date_added'];
 
         $this->loadComments();
     }
@@ -98,13 +100,6 @@ class Post
         ]);
         
         return $instance->lastInsertId();
-    }
-    
-    public function delete(int $post_id): void
-    {
-        $instance = getDatabase();
-        $statement = $instance->prepare('DELETE FROM post WHERE post_id = ? LIMIT 1');
-        $statement->execute([$post_id]);
     }
     
     public function getPostID(): int
