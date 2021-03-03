@@ -80,9 +80,10 @@ CREATE TABLE post
 CREATE TABLE post_comment
 (
     post_comment_id int AUTO_INCREMENT,
-    user_id         int  NOT NULL,
-    post_id         int  NOT NULL,
-    comment         text NOT NULL,
+    user_id         int                    NOT NULL,
+    post_id         int                    NOT NULL,
+    comment         text                   NOT NULL,
+    date_added      datetime DEFAULT NOW() NOT NULL,
     CONSTRAINT post_comment_pk
         PRIMARY KEY (post_comment_id)
 );
