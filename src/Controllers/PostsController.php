@@ -118,7 +118,7 @@ class PostsController extends AbstractBaseController
     {
         $post = Request::getID();
         $db = getDatabase();
-        $sql = $db->prepare('DELETE FROM post WHERE post_id =?');
+        $sql = $db->prepare('DELETE FROM post WHERE post_id = ?');
         $sql->execute([$post]);
         redirect('Post/All');
     }
