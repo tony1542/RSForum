@@ -7,14 +7,15 @@ use App\Models\Post\PostComment;
 use App\Models\User\User;
 use App\Utils\Http\Request;
 use App\Utils\Http\Session;
+use PDO;
 
 class PostsController extends AbstractBaseController
 {
     public function canAccess(string $action, array $parameters = []): bool
     {
         return match ($action) {
-            'delete' => false,
-            default  => getSignedInUser()->getID() > 0,
+            'delete' => getSignedInUser()->getID() > 0,
+            default  => getSignedInUser()->getID() > 0, //want delete like this. checking if a user is signed in
         };
     }
     
@@ -112,5 +113,13 @@ class PostsController extends AbstractBaseController
     
         Session::set('comment_create_success', 'Comment created successfully');
         redirect('Post/Details/' . $post->getPostID());
+    }
+    public function delete(): void
+    {
+        $post = Request::getID();
+        $db = getDatabase();
+        $sql = $db->prepare('DELETE FROM post WHERE post_id =?');
+        $sql->execute([$post]);
+        redirect('Post/All');
     }
 }
