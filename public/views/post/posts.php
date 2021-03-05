@@ -20,7 +20,6 @@
                 Posted by <?= $post['username'] ?>
                 <?php
                 $value = $post['username'];
-                $bool = false;
                 if(getSignedInUser()->getUsername() === $post['username'] || getsignedinUser()->isAdmin()) { ?>
                     <a href="/Post/Delete/<?=$post['post_id']?>" class='btn btn-secondary btn-sm'>Delete Post</a>
                 <?php }?>
