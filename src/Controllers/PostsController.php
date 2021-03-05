@@ -113,6 +113,7 @@ class PostsController extends AbstractBaseController
         Session::set('comment_create_success', 'Comment created successfully');
         redirect('Post/Details/' . $post->getPostID());
     }
+    
     public function delete(): void
     {
         $post = Request::getID();
