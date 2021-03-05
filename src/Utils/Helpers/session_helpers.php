@@ -4,7 +4,6 @@ use App\Models\User\User;
 use App\Utils\Http\Session;
 use App\Utils\Container\DependencyInjectionContainer;
 use Psr\Container\ContainerInterface;
-use App\Utils\Http\Request;
 
 /**
  * Returns our injection container from our session

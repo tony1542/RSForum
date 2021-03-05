@@ -7,7 +7,6 @@ use App\Models\Post\PostComment;
 use App\Models\User\User;
 use App\Utils\Http\Request;
 use App\Utils\Http\Session;
-use PDO;
 
 class PostsController extends AbstractBaseController
 {
