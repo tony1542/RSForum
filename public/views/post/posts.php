@@ -16,11 +16,15 @@
                     </a>
                 </div>
             </div>
-            <div class="card-footer text-muted">
-                Posted by <?= $post['username'] ?>
-                <?php if(getSignedInUser()->getUsername() === $post['username'] || getsignedinUser()->isAdmin()) : ?>
-                    <a href="/Post/Delete/<?=$post['post_id']?>" class='btn btn-secondary btn-sm'>Delete Post</a>
-                <?php endif; ?>
+            <div class="card-footer text-muted flex justify-between">
+                <div>
+                    Posted by <?= $post['username'] ?>
+                </div>
+                <div>
+                    <?php if(getSignedInUser()->getUsername() === $post['username'] || getsignedinUser()->isAdmin()) : ?>
+                        <a href="/Post/Delete/<?=$post['post_id']?>" class='btn btn-secondary btn-sm'>Delete Post</a>
+                    <?php endif; ?>
+                </div>
             </div>
         </div>
     <?php endforeach; ?>
