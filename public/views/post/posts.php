@@ -18,13 +18,9 @@
             </div>
             <div class="card-footer text-muted">
                 Posted by <?= $post['username'] ?>
-                <?php
-                $value = $post['username'];
-                if(getSignedInUser()->getUsername() === $post['username'] || getsignedinUser()->isAdmin()) { ?>
+                <?php if(getSignedInUser()->getUsername() === $post['username'] || getsignedinUser()->isAdmin()) : ?>
                     <a href="/Post/Delete/<?=$post['post_id']?>" class='btn btn-secondary btn-sm'>Delete Post</a>
-                <?php }?>
-
-
+                <?php endif; ?>
             </div>
         </div>
     <?php endforeach; ?>
