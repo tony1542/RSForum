@@ -10,6 +10,12 @@ class JSONResponse
     
     private static function send($response, int $type): void
     {
+        if (is_string($response)) {
+            $response = [
+                'response' => $response
+            ];
+        }
+        
         header('Content-type: application/json');
         echo json_encode($response);
     }
