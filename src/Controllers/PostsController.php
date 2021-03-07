@@ -7,13 +7,15 @@ use App\Models\Post\PostComment;
 use App\Models\User\User;
 use App\Utils\Http\Request;
 use App\Utils\Http\Session;
+use PDO;
+use phpDocumentor\Reflection\Types\Boolean;
 
 class PostsController extends AbstractBaseController
 {
     public function canAccess(string $action, array $parameters = []): bool
     {
         return match ($action) {
-            'delete' => false,
+            'delete' => $this->verifyDelete(), //Not done with this ray, self reminder
             default  => getSignedInUser()->getID() > 0,
         };
     }
@@ -112,5 +114,23 @@ class PostsController extends AbstractBaseController
     
         Session::set('comment_create_success', 'Comment created successfully');
         redirect('Post/Details/' . $post->getPostID());
+    }
+    
+    public function delete(): void
+    {
+            $post = Request::getID();
+            $db = getDatabase();
+            $sql = $db->prepare('DELETE FROM post WHERE post_id = ?');
+            $sql->execute([$post]);
+           redirect('Post/All');
+
+    }
+
+    public function verifyDelete(): bool
+    {
+        $post = new Post(Request::getID());
+        $user = getSignedInUser()->getID();
+
+        return (int) $user ===  $post->getUserId() || getSignedInUser()->isAdmin();
     }
 }

@@ -51,3 +51,4 @@ function setSignedInUser(User $user): void
 {
     Session::set(User::class, $user);
 }
+
