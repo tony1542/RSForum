@@ -43,7 +43,8 @@ CREATE TABLE task
     description  varchar(255)         NULL,
     is_completed tinyint(1) DEFAULT 0 NOT NULL,
     date         date                 NOT NULL,
-    user_id      int                  NULL
+    user_id      int                  NULL,
+    `order`      int        DEFAULT 0 NOT NULL
 );
 
 CREATE INDEX user_id

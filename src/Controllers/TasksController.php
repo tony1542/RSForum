@@ -133,4 +133,10 @@ class TasksController extends AbstractBaseController
         
         Task::add($title, $description, $date, $user_id);
     }
+    
+    public function sort(): string
+    {
+        $sorted_card_ids = Request::getPostValues()['sorted_card_ids'];
+        
+    }
 }
