@@ -139,7 +139,6 @@ class TasksController extends AbstractBaseController
     public function reorder(): void
     {
         Task::reorder(
-            getSignedInUser()->getID(),
             Request::getPostValues()['sorted_card_ids']
         );
         
