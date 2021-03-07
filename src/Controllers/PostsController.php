@@ -7,15 +7,13 @@ use App\Models\Post\PostComment;
 use App\Models\User\User;
 use App\Utils\Http\Request;
 use App\Utils\Http\Session;
-use PDO;
-use phpDocumentor\Reflection\Types\Boolean;
 
 class PostsController extends AbstractBaseController
 {
     public function canAccess(string $action, array $parameters = []): bool
     {
         return match ($action) {
-            'delete' => $this->verifyDelete(), //Not done with this ray, self reminder
+            'delete' => $this->verifyDelete(),
             default  => getSignedInUser()->getID() > 0,
         };
     }
