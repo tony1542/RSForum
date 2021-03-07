@@ -18,8 +18,10 @@ export default class TaskListener extends Event {
                 let sorted_card_ids = $('.card-sortable').map(function () {
                     return $(this).data('id');
                 }).get();
-                
-                Request.post('Task/Sort', {'sorted_card_ids': sorted_card_ids});
+    
+                Request.post('Task/Reorder', {
+                    'sorted_card_ids': sorted_card_ids
+                });
             }
         });
     }

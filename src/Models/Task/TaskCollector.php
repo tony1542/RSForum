@@ -17,7 +17,7 @@ class TaskCollector
         
         $tasks = [];
         $instance = getDatabase();
-        $stmt = $instance->prepare('SELECT * FROM task WHERE user_id = ?');
+        $stmt = $instance->prepare('SELECT * FROM task WHERE user_id = ? ORDER BY complete_order');
         $stmt->execute([$user_id]);
         $value = $stmt->fetchAll(PDO::FETCH_ASSOC);
         
@@ -32,7 +32,8 @@ class TaskCollector
             $is_completed = $row['is_completed'];
             $date = $row['date'];
             $user_id = $row['user_id'];
-            $tasks[] = new Task($task_id, $title, $description, $is_completed, $date, $user_id);
+            $complete_order = $row['complete_order'];
+            $tasks[] = new Task($task_id, $title, $description, $is_completed, $date, $user_id, $complete_order);
         }
         
         $this->tasks = $tasks;

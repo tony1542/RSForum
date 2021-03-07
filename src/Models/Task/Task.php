@@ -10,8 +10,9 @@ class Task
     protected bool $is_completed = false;
     protected string $date = '';
     protected string $user_id = '';
+    protected int $complete_order;
 
-    public function __construct($task_id, $title, $description, $is_completed, $date, $user_id)
+    public function __construct($task_id, $title, $description, $is_completed, $date, $user_id, $complete_order)
     {
         if (!$user_id) {
             return;
@@ -23,6 +24,7 @@ class Task
         $this->is_completed = $is_completed;
         $this->date = $date;
         $this->user_id = $user_id;
+        $this->complete_order = $complete_order;
     }
 
     public function getTaskID(): string
@@ -54,6 +56,11 @@ class Task
     {
         return $this->user_id;
     }
+    
+    public function getCompleteOrder(): int
+    {
+        return $this->complete_order;
+    }
 
     public static function edit($task_id, $user_id, $title, $description, $complete): void
     {
@@ -81,11 +88,20 @@ class Task
 
         redirect("Task/All/" . getSignedInUser()->getID());
     }
+    
+    private static function getHighestCompleteOrder(int $user_id): int
+    {
+        $db = getDatabase();
+        $sql = $db->prepare("SELECT MAX(complete_order) as highest_complete_order FROM task WHERE user_id = ?");
+        $sql->execute([$user_id]);
+        
+        return (int) $sql->fetch()['highest_complete_order'];
+    }
 
     public static function complete($user_id, $task_id): void
     {
         $db = getDatabase();
-        $sql = $db->prepare('UPDATE task SET is_completed = 1 WHERE user_id =? AND task_id =?');
+        $sql = $db->prepare('UPDATE task SET is_completed = 1 WHERE user_id = ? AND task_id = ?');
         $sql->execute([$user_id, $task_id]);
 
         redirect("Task/All/" . getSignedInUser()->getID());
@@ -94,9 +110,21 @@ class Task
     public static function delete($user_id, $task_id): void
     {
         $db = getDatabase();
-        $sql = $db->prepare('DELETE FROM task WHERE user_id =? AND task_id =?');
+        $sql = $db->prepare('DELETE FROM task WHERE user_id = ? AND task_id = ?');
         $sql->execute([$user_id, $task_id]);
         
         redirect("Task/All/" . getSignedInUser()->getID());
+    }
+    
+    public static function reorder(int $user_id, array $task_ids): void
+    {
+        dd(self::getHighestCompleteOrder($user_id), 1);
+        $db = getDatabase();
+        
+        $count =  count($task_ids);
+        for ($i = 1; $i < $count; $i++) {
+            $sql = $db->prepare('UPDATE task SET complete_order = ' . $i . ' WHERE task_id = ? AND user_id = ?');
+            $sql->execute([$task_ids[$i], $user_id]);
+        }
     }
 }
