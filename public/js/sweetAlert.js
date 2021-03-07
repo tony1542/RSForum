@@ -8,6 +8,10 @@ export default class SweetAlert {
     static success(title, text) {
         this.alert(title, text, 'success');
     }
+    
+    static warning(title, text) {
+        this.alert(title, text, 'warning');
+    }
 
     static alert(title, text, type) {
         swal(title, text, type);

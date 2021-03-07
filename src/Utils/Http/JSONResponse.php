@@ -16,6 +16,8 @@ class JSONResponse
             ];
         }
         
+        $response['type'] = $type;
+        
         header('Content-type: application/json');
         echo json_encode($response);
     }
