@@ -22,7 +22,7 @@
                 </div>
                 <div>
                     <?php if(getSignedInUser()->getUsername() === $post['username'] || getsignedinUser()->isAdmin()) : ?>
-                        <a href="/Post/Delete/<?=$post['post_id']?>" class='btn btn-secondary btn-sm'>Delete Post</a>
+                        <a href="/Post/Delete/<?=$post['post_id']?>" class='btn btn-secondary btn-sm deletePost'>Delete Post</a>
                     <?php endif; ?>
                 </div>
             </div>

@@ -7,14 +7,16 @@ use App\Models\Post\PostComment;
 use App\Models\User\User;
 use App\Utils\Http\Request;
 use App\Utils\Http\Session;
+use PDO;
+use phpDocumentor\Reflection\Types\Boolean;
 
 class PostsController extends AbstractBaseController
 {
     public function canAccess(string $action, array $parameters = []): bool
     {
         return match ($action) {
-            'delete' => getSignedInUser()->getID() > 0,
-            default  => getSignedInUser()->getID() > 0, //want delete like this. checking if a user is signed in
+            'delete' => $this->verifyDelete(), //Not done with this ray, self reminder
+            default  => getSignedInUser()->getID() > 0,
         };
     }
     
@@ -116,10 +118,19 @@ class PostsController extends AbstractBaseController
     
     public function delete(): void
     {
-        $post = Request::getID();
-        $db = getDatabase();
-        $sql = $db->prepare('DELETE FROM post WHERE post_id = ?');
-        $sql->execute([$post]);
-        redirect('Post/All');
+            $post = Request::getID();
+            $db = getDatabase();
+            $sql = $db->prepare('DELETE FROM post WHERE post_id = ?');
+            $sql->execute([$post]);
+           redirect('Post/All');
+
+    }
+
+    public function verifyDelete(): bool
+    {
+        $post = new Post(Request::getID());
+        $user = getSignedInUser()->getID();
+
+        return (int) $user ===  $post->getUserId() || getSignedInUser()->isAdmin();
     }
 }
