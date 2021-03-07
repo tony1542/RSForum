@@ -78,12 +78,13 @@ class Task
         }
         
         $db = getDatabase();
-        $sql = $db->prepare("INSERT INTO task (title, description, date, user_id) VALUES (?, ?, ?, ?)");
+        $sql = $db->prepare("INSERT INTO task (title, description, date, user_id, complete_order) VALUES (?, ?, ?, ?, ?)");
         $sql->execute([
             $title,
             $description,
             $date,
-            $user_id
+            $user_id,
+            self::getHighestCompleteOrder($user_id) + 1
         ]);
 
         redirect("Task/All/" . getSignedInUser()->getID());
@@ -118,7 +119,6 @@ class Task
     
     public static function reorder(int $user_id, array $task_ids): void
     {
-        dd(self::getHighestCompleteOrder($user_id), 1);
         $db = getDatabase();
         
         $count =  count($task_ids);
