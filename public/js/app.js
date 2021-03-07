@@ -3,6 +3,7 @@ import '../scss/app.scss';
 
 // jQuery
 import $ from 'jquery';
+import 'jquery-ui-dist/jquery-ui';
 
 // JS-portion of Bootstrap
 import 'bootstrap';
