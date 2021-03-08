@@ -102,10 +102,14 @@ function setApplicationVariables(): void
 {
     // Turn sessions on so we have access to the $_SESSION super-global
     session_start();
-    $env_file_path = Server::getRoot() . DIRECTORY_SEPARATOR . 'config';
     
-    // Verify our env file exists
-    EnvValidator::fileExists($env_file_path . DIRECTORY_SEPARATOR . '.env.');
+    if (Server::isLocalHost()) {
+        $env_file_path = Server::getRoot() . DIRECTORY_SEPARATOR . 'config';
+        EnvValidator::fileExists($env_file_path . DIRECTORY_SEPARATOR . '.env');
+    } else {
+        $env_file_path = Server::getRoot() . 'config';
+        EnvValidator::fileExists($env_file_path . DIRECTORY_SEPARATOR . '.env');
+    }
     
     // Load .env file into the application
     $dot_env = Dotenv::create($env_file_path);
