@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\Task\TaskCollector;
 use App\Models\User\User;
+use App\Utils\Http\JSONResponse;
 use App\Utils\Http\Request;
 use App\Models\Task\Task;
 use App\Utils\Input\Sanitizer;
@@ -44,6 +45,7 @@ class TasksController extends AbstractBaseController
             case 'delete':
             case 'edit':
             case 'complete':
+            case 'reorder':
                 return $same_user_as_requesting;
             default:
                 return true;
@@ -132,5 +134,14 @@ class TasksController extends AbstractBaseController
         $date = date('Y-m-d');
         
         Task::add($title, $description, $date, $user_id);
+    }
+    
+    public function reorder(): void
+    {
+        Task::reorder(
+            Request::getPostValues()['sorted_card_ids']
+        );
+        
+        JSONResponse::success('Tasks successfully reordered');
     }
 }

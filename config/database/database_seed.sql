@@ -37,13 +37,14 @@ CREATE INDEX user_skills_username_index
 
 CREATE TABLE task
 (
-    task_id      int AUTO_INCREMENT
+    task_id        int AUTO_INCREMENT
         PRIMARY KEY,
-    title        varchar(255)         NULL,
-    description  varchar(255)         NULL,
-    is_completed tinyint(1) DEFAULT 0 NOT NULL,
-    date         date                 NOT NULL,
-    user_id      int                  NULL
+    title          varchar(255)         NULL,
+    description    varchar(255)         NULL,
+    is_completed   tinyint(1) DEFAULT 0 NOT NULL,
+    date           date                 NOT NULL,
+    user_id        int                  NULL,
+    complete_order int        DEFAULT 0 NOT NULL
 );
 
 CREATE INDEX user_id

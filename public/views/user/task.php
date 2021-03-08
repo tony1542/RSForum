@@ -12,11 +12,11 @@
             </div>
         </div>
         <div class="card-body">
-            <div class="row">
+            <div class="row" id="sortable">
                 <?php foreach ($tasks as $value) : ?>
                     <?php $edit = $value->getTaskID(); $i = 0; ?>
                     <div class="col-md-6 col-lg-4 mb-2">
-                        <div class="card">
+                        <div class="card card-sortable" data-id="<?= $value->getTaskID() ?>">
                             <div class="card-header text-right">
                                 <button type="button" class="btn btn-sm btn-outline-info" data-toggle="modal" data-target="#TaskModal-<?= $edit ?>" title="Click to edit this task">
                                     <i class="fas fa-edit"></i>
