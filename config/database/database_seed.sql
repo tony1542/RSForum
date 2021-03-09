@@ -88,3 +88,14 @@ CREATE TABLE post_comment
     CONSTRAINT post_comment_pk
         PRIMARY KEY (post_comment_id)
 );
+
+CREATE TABLE home_page_posts
+(
+    home_page_post_id int AUTO_INCREMENT,
+    user_id           int                    NOT NULL,
+    title             varchar(255)           NOT NULL,
+    body              text                   NOT NULL,
+    date_added        datetime DEFAULT NOW() NOT NULL,
+    CONSTRAINT home_page_posts_pk
+        PRIMARY KEY (home_page_post_id)
+);
