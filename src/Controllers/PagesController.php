@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\Post\HomePagePost;
 use App\Utils\Http\Session;
 
 class PagesController extends AbstractBaseController
@@ -30,6 +31,8 @@ class PagesController extends AbstractBaseController
            Session::set('home_welcome', true);
         }
         
-        $this->toView('home_page');
+        $this->toView('home_page', [
+            'posts' => HomePagePost::getAll()
+        ]);
     }
 }
