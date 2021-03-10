@@ -103,6 +103,9 @@ function setApplicationVariables(): void
     // Turn sessions on so we have access to the $_SESSION super-global
     session_start();
     
+    // Set proper timezone for all date calls
+    date_default_timezone_set('America/Chicago');
+    
     if (Server::isLocalHost()) {
         $env_file_path = Server::getRoot() . DIRECTORY_SEPARATOR . 'config';
         EnvValidator::fileExists($env_file_path . DIRECTORY_SEPARATOR . '.env');
