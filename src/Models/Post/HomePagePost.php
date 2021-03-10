@@ -42,6 +42,17 @@ class HomePagePost
         return $return;
     }
     
+    public static function create(string $title, string $body): void
+    {
+        $database = getDatabase();
+        $statement = $database->prepare('INSERT INTO home_page_posts SET user_id = ?, title = ?, body = ?');
+        $statement->execute([
+            getSignedInUser()->getID(),
+            $title,
+            $body
+        ]);
+    }
+    
     public function getHomePagePostId(): int
     {
         return $this->home_page_post_id;

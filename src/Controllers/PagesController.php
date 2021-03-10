@@ -65,5 +65,12 @@ class PagesController extends AbstractBaseController
                 'title' => $parameters['title']
             ]);
         }
+        
+        HomePagePost::create(
+            $parameters['title'],
+            $parameters['body']
+        );
+        
+        redirect('');
     }
 }
