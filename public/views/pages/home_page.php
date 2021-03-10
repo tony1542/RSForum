@@ -10,6 +10,12 @@
     </div>
 <?php endif; ?>
 
+<?php if (getSignedInUser()->isAdmin()) : ?>
+    <div class="mb-2 text-right">
+        <a class="btn btn-primary" href="/HomePagePost/Create">Create a post</a>
+    </div>
+<?php endif; ?>
+
 <div class="flex flex-wrap">
     <?php foreach ($posts as $post) : ?>
         <div class="card col-sm-12 mb-2">
