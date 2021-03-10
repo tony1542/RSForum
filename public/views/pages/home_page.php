@@ -12,7 +12,7 @@
 
 <?php if (getSignedInUser()->isAdmin()) : ?>
     <div class="mb-2 text-right">
-        <a class="btn btn-primary" href="/HomePagePost/Create">Create a post</a>
+        <a class="btn btn-primary" href="/Page/Create">Create a post</a>
     </div>
 <?php endif; ?>
 

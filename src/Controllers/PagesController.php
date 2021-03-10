@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\Post\HomePagePost;
+use App\Utils\Http\Request;
 use App\Utils\Http\Session;
 
 class PagesController extends AbstractBaseController
@@ -19,6 +20,10 @@ class PagesController extends AbstractBaseController
     
     public function canAccess(string $action, array $parameters = []): bool
     {
+        if ($action === 'create') {
+            return getSignedInUser()->isAdmin();
+        }
+        
         return true;
     }
     
@@ -34,5 +39,31 @@ class PagesController extends AbstractBaseController
         $this->toView('home_page', [
             'posts' => HomePagePost::getAll()
         ]);
+    }
+    
+    public function create()
+    {
+        $parameters = Request::getPostValues();
+
+        if (!$parameters) {
+            $this->toView('create');
+        }
+        
+        $errors = [];
+        if (!$parameters['title']) {
+            $errors[] = 'Must enter a title';
+        }
+        
+        if (!$parameters['body']) {
+            $errors[] = 'Must enter a body';
+        }
+        
+        if (count($errors)) {
+            $this->toView('create', [
+                'errors' => $errors,
+                'body' => $parameters['body'],
+                'title' => $parameters['title']
+            ]);
+        }
     }
 }
