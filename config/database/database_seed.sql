@@ -99,3 +99,11 @@ CREATE TABLE home_page_posts
     CONSTRAINT home_page_posts_pk
         PRIMARY KEY (home_page_post_id)
 );
+
+CREATE TABLE item
+(
+    item_id   int  NULL,
+    item_name text NULL,
+    CONSTRAINT item_pk
+        PRIMARY KEY (item_id)
+);
