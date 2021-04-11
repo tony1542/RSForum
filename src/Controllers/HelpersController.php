@@ -3801,5 +3801,7 @@ class HelpersController extends AbstractBaseController
                 $item_name
             ]);
         }
+        
+        $this->toView('');
     }
 }
