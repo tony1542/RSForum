@@ -3,8 +3,8 @@
 namespace App\Utils\API\OSRS;
 
 use App\Utils\API\ApiException;
-use App\Utils\API\OSRS\Endpoints\Accolades;
-use App\Utils\API\OSRS\Endpoints\Stats;
+use App\Utils\API\OSRS\Endpoints\Highscores\Accolades;
+use App\Utils\API\OSRS\Endpoints\Highscores\Stats;
 use GuzzleHttp\Exception\RequestException;
 
 class Api
@@ -29,5 +29,10 @@ class Api
         } catch (RequestException|ApiException $e) {
             return [];
         }
+    }
+    
+    public static function getPrices(): array
+    {
+        
     }
 }

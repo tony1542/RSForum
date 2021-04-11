@@ -108,11 +108,11 @@ function setApplicationVariables(): void
     
     if (Server::isLocalHost()) {
         $env_file_path = Server::getRoot() . DIRECTORY_SEPARATOR . 'config';
-        EnvValidator::fileExists($env_file_path . DIRECTORY_SEPARATOR . '.env');
     } else {
         $env_file_path = Server::getRoot() . 'config';
-        EnvValidator::fileExists($env_file_path . DIRECTORY_SEPARATOR . '.env');
     }
+    
+    EnvValidator::fileExists($env_file_path . DIRECTORY_SEPARATOR . '.env');
     
     // Load .env file into the application
     $dot_env = Dotenv::create($env_file_path);

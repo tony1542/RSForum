@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Utils\API\OSRS\Endpoints;
+namespace App\Utils\API\OSRS\Endpoints\Highscores;
 
 use App\Utils\Runescape\Levels;
 use App\Utils\Runescape\Skills;
