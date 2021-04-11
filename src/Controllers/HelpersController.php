@@ -21,6 +21,8 @@ class HelpersController extends AbstractBaseController
     
     public function insertItemIDs(): void
     {
+        set_time_limit(9001);
+        
         $data = [
                 "3rd age amulet"                           => 10344,
                 "3rd age axe"                              => 20011,
