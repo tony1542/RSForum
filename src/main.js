@@ -2,7 +2,8 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 
-// TODO include sass file in here
+// Include our custom styles
+import styles from './assets/scss/styles.scss';
 
 new Vue({
   router,

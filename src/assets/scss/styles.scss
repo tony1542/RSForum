@@ -1,0 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap");
+
+// Custom components
+@import "components/all";
+
+:root {
+  --font: Roboto, sans-serif;
+
+  // TODO these two lines don't work in other components
+  --textColor: $blue;
+  --linkActiveColor: $green;
+}
+
+html {
+  font-family: var(--font);
+}
+
+a {
+  font-weight: 500;
+  color: var(--textColor);
+  margin: 0 5px;
+}
