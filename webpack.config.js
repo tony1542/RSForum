@@ -65,8 +65,8 @@ module.exports = {
       chunkFilename: "[name].[contenthash:8].css",
     }),
     new htmlWebpackPlugin({
-      template: path.resolve(__dirname, "public", "index.html"),
-      favicon: "./public/favicon.ico",
+      template: path.resolve(__dirname, "public", "index.php"),
+      // favicon: "./public/favicon.ico",
     }),
   ],
   resolve: {
