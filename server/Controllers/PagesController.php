@@ -15,6 +15,11 @@ class PagesController extends AbstractBaseController
     
     public function index(): void
     {
+        // TODO
+    }
     
+    public function create(): void
+    {
+        // TODO
     }
 }

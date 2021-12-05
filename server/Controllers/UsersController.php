@@ -23,11 +23,6 @@ class UsersController extends AbstractBaseController
         return $this->user_object;
     }
     
-    protected function getIncludePrefix(): string
-    {
-        return 'user/';
-    }
-    
     protected function toJson(string $view, array $parameters = []): void
     {
         $return_array = [];
@@ -68,7 +63,6 @@ class UsersController extends AbstractBaseController
         }
 
         $return_array = array_merge($parameters, $return_array);
-        view($this->getIncludePrefix() . $view, $return_array);
     }
     
     public function canAccess(string $action, array $parameters = []): bool
@@ -158,8 +152,6 @@ class UsersController extends AbstractBaseController
         $sql->execute($values);
         $user_id = $db->lastInsertId();
         setSignedInUser(new User($user_id));
-        
-        redirect('');
     }
 
     public function signIn(): void
@@ -193,8 +185,6 @@ class UsersController extends AbstractBaseController
                 'errors' => $errors
             ]);
         }
-        
-        redirect('');
     }
     
     public function details(): void
@@ -205,7 +195,6 @@ class UsersController extends AbstractBaseController
     public function logout(): void
     {
         getSignedInUser()->logout();
-        redirect('');
     }
     
     public function members(): void
@@ -220,7 +209,7 @@ class UsersController extends AbstractBaseController
         $post_values = Request::getPostValues();
 
         if (!$post_values) {
-            redirect('User/Details/' . Request::getID());
+            //redirect('User/Details/' . Request::getID());
         }
         
         $user = $this->getUser();
@@ -241,6 +230,5 @@ class UsersController extends AbstractBaseController
         );
         
         setSignedInUser($user);
-        redirect('User/Details/' . $user->getID());
     }
 }
