@@ -1,0 +1,34 @@
+<?php
+
+header('Access-Control-Allow-Origin: *');
+header('Content-Type: application/json');
+
+require('vendor/autoload.php');
+
+use App\Utils\Database\EnvException;
+use App\Utils\Http\Router;
+use App\Utils\Http\Server;
+
+try {
+    setApplicationVariables();
+    Router::callAction();
+} catch (Throwable $t) {
+    $errors = ['Something went wrong.'];
+    
+    if (Server::isLocalHost() || getSignedInUser()->isAdmin()) {
+        $errors = [
+            'Message ' => [$t->getMessage()],
+            'File '    => [$t->getFile()],
+            'Line '    => [$t->getLine()],
+            'Trace '   => [$t->getTraceAsString()],
+        ];
+        
+        if ($t instanceof EnvException) {
+            $errors = [$t->getMessage()];
+        }
+    }
+
+    \jsonResponse($errors);
+}
+
+die;

@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <Nav />
+        <Nav/>
 
         <!-- Render requested component -->
         <router-view/>
@@ -16,9 +16,16 @@
             Nav
         },
         data() {
-            return {
-
-            }
+            return {}
+        },
+        created() {
+            // TODO have this in an environment var somewhere
+            // TODO or a main network class that has it as a property
+            fetch('http://localhost:9001', {
+                mode: 'cors'
+            })
+                .then(response => response.json())
+                .then(data => console.log(data));
         }
     }
 </script>
