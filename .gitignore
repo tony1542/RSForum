@@ -5,8 +5,8 @@ vendor
 
 # local env files
 config/.env
-.env.local
-.env.*.local
+config/.env.local
+config/.env.*.local
 
 # Log files
 npm-debug.log*
