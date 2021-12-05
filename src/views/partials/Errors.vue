@@ -1,7 +1,6 @@
 <template>
-    <!-- TODO finish -->
     <div v-show="errors.length > 0">
-        <span v-for="(error, id) in errors" v-bind:key="id">
+        <span class="p-8 rounded mb-2" v-for="(error, id) in errors" v-bind:key="id">
             {{ error }}
         </span>
     </div>
@@ -22,8 +21,7 @@
     span {
         background-color: var(--red-lightest);
         border: 1px solid var(--red-light);
-    }
-
-    span {
+        color: var(--red-dark);
+        display: block;
     }
 </style>
