@@ -7,7 +7,9 @@ header('Content-Type: application/json');
 
 require('vendor/autoload.php');
 
-use App\Utils\Database\EnvException;
+use App\Models\User\User;
+use App\Utils\EnvException;
+use App\Utils\Http\JWTAuthenticator;
 use App\Utils\Http\Router;
 use App\Utils\Http\Server;
 
@@ -15,7 +17,9 @@ try {
     $header = Server::getAuthHeader();
 
     if ($header) {
-        \App\Utils\Http\JWTAuthenticator::authenticate($header);
+        $decoded = JWTAuthenticator::authenticate($header);
+        dd($decoded, 1);
+        $user = new User();
     }
 
     // TODO have a helper method here to check a JWT if it exists

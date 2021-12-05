@@ -246,10 +246,17 @@ class UsersController extends AbstractBaseController
         ]);
     }
 
+    // TODO once this is done, move it to index.php in the $header() if statement
     public function testJWT(): void
     {
-        JWTAuthenticator::authenticate(
+        $decoded = JWTAuthenticator::authenticate(
+//            Server::getAuthHeader()
             Request::getParameters()['jwt']
         );
+
+        if ($decoded instanceof \stdClass) {
+            $user = new User($decoded->data->id);
+            dd($user);
+        }
     }
 }
