@@ -7,15 +7,27 @@ export default class Request {
     }
 
     // Return 'thenable' promise
-    async call() {
-        // TODO check if JWT exist before including them in here
-        return await fetch(`${ this.base }/${ this.url }`, {
+    async call(parameters, method = 'GET') {
+        let options = {
             headers: {
-                'Authorization': `Bearer ${ store.JWT }`
-            }
-        })
+                'Authorization': `Bearer ${ store.JWT }`,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: method,
+        };
 
-        // return await fetch(`${ this.base }/${ this.url }`)
+        if (parameters) {
+            options.body = JSON.stringify(parameters);
+        }
+
+        // TODO check if JWT exist before including them in here
+        return await fetch(`${ this.base }/${ this.url }`, options)
             .then(response => response.json());
+    }
+
+    async post(parameters)
+    {
+        return await this.call(parameters, 'POST');
     }
 }

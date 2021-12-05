@@ -22,7 +22,7 @@ class Server
     {
         $header = self::getOptions()['HTTP_AUTHORIZATION'] ?? '';
 
-        if ($header === '') {
+        if ($header === 'Bearer' || $header === '') {
             return '';
         }
 

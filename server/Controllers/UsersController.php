@@ -5,7 +5,6 @@ namespace App\Controllers;
 use App\Utils\Http\JWTAuthenticator;
 use App\Utils\Http\Request;
 use App\Models\User\User;
-use App\Utils\Http\Server;
 use App\Utils\Input\Sanitizer;
 use App\Utils\Runescape\Accolades;
 use App\Utils\Runescape\Skills;
@@ -89,17 +88,18 @@ class UsersController extends AbstractBaseController
     
     public function register(): void
     {
+        $parameters = Request::getParameters();
+
         // If nothing is in $_POST, just show the register form
-        if (!count(Request::getPostValues())) {
+        if (!count($parameters)) {
             $this->toJson('register');
         }
 
         // Sanitizing our user input before validating
-        $username = Sanitizer::sanitize($_POST['username']);
-        $email_address = Sanitizer::sanitize($_POST['email_address']);
-        $account_type_id = Sanitizer::sanitize($_POST['acc_type']);
-        $password = Sanitizer::sanitize($_POST['password']);
-        $password_confirm = Sanitizer::sanitize($_POST['password_confirm']);
+        $username = Sanitizer::sanitize($parameters['username']);
+        $email_address = Sanitizer::sanitize($parameters['email']);
+        $account_type_id = Sanitizer::sanitize($parameters['accountType']);
+        $password = Sanitizer::sanitize($parameters['password']);
         $form_errors = User::verifyUsername($username);
 
         $db = getDatabase();
@@ -123,22 +123,15 @@ class UsersController extends AbstractBaseController
         if (!$password) {
             $form_errors[] = 'Please enter a password';
         }
-        
-        if (!$password_confirm) {
-            $form_errors[] = 'Please fill out \'Confirm Password\'';
-        }
-        
-        if ($password !== $password_confirm) {
-            $form_errors[] = 'Your passwords do not match';
-        }
-        
+
         // If we have found any errors, re-show the form with them
         if (count($form_errors)) {
-            $this->toJson('register', [
+            jsonResponse([
                 'errors' => $form_errors
             ]);
         }
-        
+
+        // TODO move this to the user model
         // If we have gotten this far, it means there were no errors when validating. Insert the user into the database
         $db = getDatabase();
         $password = password_hash($password, PASSWORD_DEFAULT);
@@ -154,6 +147,11 @@ class UsersController extends AbstractBaseController
         $sql->execute($values);
         $user_id = $db->lastInsertId();
         setSignedInUser(new User($user_id));
+
+        $parameters['id'] = $user_id;
+        jsonResponse([
+            'token' => JWTAuthenticator::generate($parameters)
+        ]);
     }
 
     public function signIn(): void
@@ -232,18 +230,6 @@ class UsersController extends AbstractBaseController
         );
         
         setSignedInUser($user);
-    }
-
-    // TODO does this get stored in DB when done or just local storage client-side?
-    public function issueJWT(): void
-    {
-        $parameters = Request::getParameters();
-
-        JWTAuthenticator::test([
-            'id' => $parameters['id'],
-            'username' => $parameters['username'],
-            'email' => $parameters['email']
-        ]);
     }
 
     // TODO once this is done, move it to index.php in the $header() if statement

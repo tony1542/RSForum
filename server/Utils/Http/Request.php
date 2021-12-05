@@ -64,9 +64,14 @@ class Request
         return urldecode(self::explodeUri()[self::ID_POSITION] ?? 0);
     }
 
+    public static function getInputStream(): array
+    {
+        return json_decode(file_get_contents("php://input"), true) ?? [];
+    }
+
     public static function getParameters(): array
     {
-        return $_GET['parameters'] ?? $_POST['parameters'] ?? [];
+        return self::getInputStream() ?? $_GET['parameters'] ?? $_POST['parameters'] ?? [];
     }
     
     public static function getPostValues(): array
@@ -93,6 +98,7 @@ class Request
             'parameters' => self::getParameters(),
             'postArray'  => self::getPostValues(),
             'getArray'   => self::getGetValues(),
+            'all'        => $_REQUEST,
             'uri'        => self::getUri()
         ], $verbose);
     }

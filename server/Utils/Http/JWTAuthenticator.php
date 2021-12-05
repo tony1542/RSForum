@@ -44,9 +44,11 @@ class JWTAuthenticator
         }
     }
 
-    public static function test($data)
+    public static function generate($data): string
     {
-        $issuer_claim = "localhost:8080"; // this can be the servername
+        // TODO maybe move to an ENV key
+        $issuer_claim = "localhost:8080";
+        // TODO is this needed?
         $audience_claim = "test_audience";
         $issuedat_claim = time(); // issued at
         $notbefore_claim = $issuedat_claim; // not before in seconds
@@ -64,6 +66,6 @@ class JWTAuthenticator
             )
         );
 
-        jsonResponse(JWT::encode($payload, self::getSecretKey()));
+        return JWT::encode($payload, self::getSecretKey());
     }
 }

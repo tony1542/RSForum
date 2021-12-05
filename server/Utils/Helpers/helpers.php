@@ -37,6 +37,7 @@ function dd($array, $verbose = false): void
 function jsonResponse($data, $jsonOption = 0): void
 {
     echo json_encode($data, $jsonOption);
+    die;
 }
 
 /**

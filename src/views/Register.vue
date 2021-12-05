@@ -80,16 +80,32 @@ export default {
 				this.addError('Must give an email');
 			}
 
-			if (!this.accountType) {
-				this.addError('Must specify account type');
-			}
-
 			if (!this.password || !this.confirmPassword) {
 				this.addError('Must give a password and confirm password');
 			}
 
 			if (this.confirmPassword !== this.password) {
 				this.addError('Passwords do not match');
+			}
+
+			if (this.errors.length === 0) {
+				let request = new Request('User/Register');
+				request.post({
+					'username': this.username,
+					'email': this.email,
+					'accountType': this.accountType,
+					'password': this.password,
+				})
+					.then(data => {
+						if (data.token) {
+							this.store.setJWT(data.token);
+						}
+
+						// TODO error injection in here
+						if (data.errors) {
+							this.errors = data.errors;
+						}
+					});
 			}
 		},
 		addError: function (error) {
