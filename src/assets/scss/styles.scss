@@ -27,8 +27,8 @@
   --grey-light: #{$grey-light};
   --grey-lighter: #{$grey-lighter};
   --grey-lightest: #{$grey-lightest};
-
   --white: #{$white};
+
   --red-darkest: #{$red-darkest};
   --red-darker: #{$red-darker};
   --red-dark: #{$red-dark};
@@ -73,4 +73,11 @@
 html {
   font-family: var(--font);
   background-color: $grey-light;
+}
+
+hr {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 0;
+  border-top: 1px solid rgba(42, 51, 58, 0.1);
 }
