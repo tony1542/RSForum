@@ -3,8 +3,10 @@
         <Nav/>
 
         <!-- Render requested component -->
-        <div class="content">
-            <router-view />
+        <div class="flex justify-center align-items-center">
+            <div class="content rounded">
+                <router-view />
+            </div>
         </div>
     </div>
 </template>
@@ -36,6 +38,9 @@
     @import "src/assets/scss/styles.scss";
 
     .content {
-        margin-top: 100px;
+        padding: 1rem;
+        background-color: var(--grey-lightest);
+        margin-top: 90px;
+        width: 75%;
     }
 </style>

@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto");
 
 // Custom components
 @import "components/all";
@@ -9,6 +9,65 @@
   --textColor: #{$blue};
   --linkActiveColor: #{$green};
   --darkBackground: #{$black-light};
+
+  // Colors
+  --transparent: #{$transparent};
+  --black-darkest: #{$black-darkest};
+  --black-darker: #{$black-darker};
+  --black-dark: #{$black-dark};
+  --black: #{$black};
+  --black-light: #{$black-light};
+  --black-lighter: #{$black-lighter};
+  --black-lightest: #{$black-lightest};
+
+  --grey-darkest: #{$grey-darkest};
+  --grey-darker: #{$grey-darker};
+  --grey-dark: #{$grey-dark};
+  --grey: #{$grey};
+  --grey-light: #{$grey-light};
+  --grey-lighter: #{$grey-lighter};
+  --grey-lightest: #{$grey-lightest};
+
+  --white: #{$white};
+  --red-darkest: #{$red-darkest};
+  --red-darker: #{$red-darker};
+  --red-dark: #{$red-dark};
+  --red: #{$red};
+  --red-light: #{$red-light};
+  --red-lighter: #{$red-lighter};
+  --red-lightest: #{$red-lightest};
+
+  --orange-darkest: #{$orange-darkest};
+  --orange-darker: #{$orange-darker};
+  --orange-dark: #{$orange-dark};
+  --orange: #{$orange};
+  --orange-light: #{$orange-light};
+  --orange-lighter: #{$orange-lighter};
+  --orange-lightest: #{$orange-lightest};
+
+  --yellow-darkest: #{$yellow-darkest};
+  --yellow-darker: #{$yellow-darker};
+  --yellow-dark: #{$yellow-dark};
+  --yellow: #{$yellow};
+  --yellow-light: #{$yellow-light};
+  --yellow-lighter: #{$yellow-lighter};
+  --yellow-lightest: #{$yellow-lightest};
+
+  --green-darkest: #{$green-darkest};
+  --green-darker: #{$green-darker};
+  --green-dark: #{$green-dark};
+  --green: #{$green};
+  --green-light: #{$green-light};
+  --green-lighter: #{$green-lighter};
+  --green-lightest: #{$green-lightest};
+
+  --blue-darkest: #{$blue-darkest};
+  --blue-darker: #{$blue-darker};
+  --blue-dark: #{$blue-dark};
+  --blue: #{$blue};
+  --blue-light: #{$blue-light};
+  --blue-lighter: #{$blue-lighter};
+  --blue-lightest: #{$blue-lightest};
 }
 
 html {
