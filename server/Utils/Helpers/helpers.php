@@ -53,11 +53,11 @@ function setApplicationVariables(): void
     date_default_timezone_set('America/Chicago');
     
     if (Server::isLocalHost()) {
-        $env_file_path = Server::getRoot();
+        $env_file_path = Server::getRoot() . DIRECTORY_SEPARATOR . 'config';
         EnvValidator::fileExists($env_file_path . DIRECTORY_SEPARATOR . '.env');
     } else {
-        $env_file_path = Server::getRoot();
-        EnvValidator::fileExists($env_file_path . '.env');
+        $env_file_path = Server::getRoot() . 'config';
+        EnvValidator::fileExists($env_file_path . DIRECTORY_SEPARATOR . '.env');
     }
     
     // Load .env file into the application
