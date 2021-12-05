@@ -67,7 +67,6 @@ export default {
 		}
 	},
 	methods: {
-		// TODO backend validation & how to handle the response
 		register: function () {
 			this.errors = [];
 
@@ -75,7 +74,6 @@ export default {
 				this.addError('Must give a username');
 			}
 
-			// TODO check for email format too
 			if (!this.email) {
 				this.addError('Must give an email');
 			}
@@ -98,10 +96,10 @@ export default {
 				})
 					.then(data => {
 						if (data.token) {
+							localStorage.setItem('token', data.token);
 							this.store.setJWT(data.token);
 						}
 
-						// TODO error injection in here
 						if (data.errors) {
 							this.errors = data.errors;
 						}

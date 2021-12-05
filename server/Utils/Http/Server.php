@@ -26,7 +26,13 @@ class Server
             return '';
         }
 
-        return explode(' ', $header)[1];
+        $header = explode(' ', $header)[1];
+
+        if ($header === 'null') {
+            return '';
+        }
+
+        return $header;
     }
     
     public static function isLocalHost(): bool

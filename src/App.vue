@@ -13,6 +13,7 @@
 
 <script>
     import Nav from "./views/partials/Nav";
+	import Store from "./store";
 
     export default {
         name: 'App',
@@ -22,15 +23,12 @@
         data() {
             return {}
         },
-        // created() {
-        //     // TODO have this in an environment var somewhere
-        //     // TODO or a main network class that has it as a property
-        //     fetch('http://localhost:9001', {
-        //         mode: 'cors'
-        //     })
-        //         .then(response => response.json())
-        //         .then(data => console.log(data));
-        // }
+        created() {
+			const token = localStorage.getItem('token');
+			if (Store.JWT !== token) {
+				Store.setJWT(token);
+			}
+        }
     }
 </script>
 

@@ -1,8 +1,7 @@
 <template>
     <div class="flex flex-col justify-between">
-        <header>
+        <header class="p-4">
             <slot name="header"></slot>
-            <hr v-show="$slots.header">
         </header>
 
         <main>
@@ -23,10 +22,15 @@
 </script>
 
 <style scoped>
+header {
+	background-color: var(--grey-lighter);
+	margin-bottom: 0;
+	border-bottom: 1px solid rgba(42, 51, 58, 0.125);
+}
 main {
-    padding: 10px 30px 20px 30px;
-    background-color: var(--white);
-    border: 1px solid rgba(42, 51, 58, 0.125);
-    border-radius: .25rem;
+	border: 1px solid rgba(42, 51, 58, 0.125);
+	border-radius: 0 0 .25em .25em;
+	background-color: var(--white);
+	padding: 10px 30px 20px 30px;
 }
 </style>
