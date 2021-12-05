@@ -45,6 +45,7 @@
 <script>
 import Card from "./partials/Card";
 import Errors from "./partials/Errors";
+import Request from "../helpers/Request";
 
 export default {
 	name: "Register",
@@ -64,8 +65,26 @@ export default {
 		}
 	},
 	methods: {
+		// TODO backend validation & how to handle the response
 		register: function () {
 			this.errors = [];
+
+			if (!this.username) {
+				this.addError('Must give a username');
+			}
+
+			// TODO check for email format too
+			if (!this.email) {
+				this.addError('Must give an email');
+			}
+
+			if (!this.accountType) {
+				this.addError('Must specify account type');
+			}
+
+			if (!this.password || !this.confirmPassword) {
+				this.addError('Must give a password and confirm password');
+			}
 
 			if (this.confirmPassword !== this.password) {
 				this.addError('Passwords do not match');
@@ -80,9 +99,8 @@ export default {
 		}
 	},
 	created() {
-		// TODO make a base network request class to contain a lot of this stuff
-		fetch('http://localhost:9001/AccountType/All')
-			.then(response => response.json())
+		let request = new Request('AccountType/All');
+		request.call()
 			.then(data => this.accountTypes = data);
 	}
 }
