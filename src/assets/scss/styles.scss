@@ -5,10 +5,8 @@
 
 :root {
   --font: Roboto, sans-serif;
-
-  // TODO these two lines don't work in other components
-  --textColor: $blue;
-  --linkActiveColor: $green;
+  --textColor: #{$blue};
+  --linkActiveColor: #{$green};
 }
 
 html {

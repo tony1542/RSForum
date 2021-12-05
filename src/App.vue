@@ -18,14 +18,18 @@
         data() {
             return {}
         },
-        created() {
-            // TODO have this in an environment var somewhere
-            // TODO or a main network class that has it as a property
-            fetch('http://localhost:9001', {
-                mode: 'cors'
-            })
-                .then(response => response.json())
-                .then(data => console.log(data));
-        }
+        // created() {
+        //     // TODO have this in an environment var somewhere
+        //     // TODO or a main network class that has it as a property
+        //     fetch('http://localhost:9001', {
+        //         mode: 'cors'
+        //     })
+        //         .then(response => response.json())
+        //         .then(data => console.log(data));
+        // }
     }
 </script>
+
+<style>
+    @import "src/assets/scss/styles.scss";
+</style>
