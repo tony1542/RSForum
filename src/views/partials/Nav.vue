@@ -1,7 +1,7 @@
 <template>
     <div class="nav flex justify-between items-center">
         <div class="links">
-            <router-link to="/">Home</router-link>
+            <router-link to="/" exact>Home</router-link>
             <router-link to="/about">About</router-link>
         </div>
         <div class="links">
@@ -43,7 +43,6 @@ a:hover {
     color: var(--grey-lightest);
 }
 
-/* TODO / for home is always active and shows green no matter what page we're on */
 .router-link-active {
     color: var(--linkActiveColor);
 }
