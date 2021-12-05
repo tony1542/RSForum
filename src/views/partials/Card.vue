@@ -25,7 +25,8 @@
 header {
 	background-color: var(--grey-lighter);
 	margin-bottom: 0;
-	border-bottom: 1px solid rgba(42, 51, 58, 0.125);
+	border: 1px solid rgba(42, 51, 58, 0.125);
+	border-radius: .25em .25em 0 0;
 }
 main {
 	border: 1px solid rgba(42, 51, 58, 0.125);
