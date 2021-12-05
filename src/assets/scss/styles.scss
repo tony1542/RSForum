@@ -84,7 +84,7 @@ hr {
   border-top: 1px solid rgba(42, 51, 58, 0.1);
 }
 
-form div {
+.form div {
   @extend .mt-4;
 }
 label {
@@ -101,13 +101,15 @@ input {
 input:focus {
   outline-color: var(--primary);
 }
-form {
+.form {
   margin-top: 10px;
   margin-bottom: 10px;
 }
 
 button {
   @extend .rounded;
+  font-size: 1rem;
+  line-height: 1;
 }
 button.primary {
   @extend .cursor-pointer;
