@@ -3,7 +3,9 @@
         <Nav/>
 
         <!-- Render requested component -->
-        <router-view/>
+        <div class="content">
+            <router-view />
+        </div>
     </div>
 </template>
 
@@ -32,4 +34,8 @@
 
 <style>
     @import "src/assets/scss/styles.scss";
+
+    .content {
+        margin-top: 100px;
+    }
 </style>

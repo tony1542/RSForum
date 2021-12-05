@@ -3,18 +3,15 @@
 // Custom components
 @import "components/all";
 
+// "Global" vars to be used in various style sheets
 :root {
   --font: Roboto, sans-serif;
   --textColor: #{$blue};
   --linkActiveColor: #{$green};
+  --darkBackground: #{$black-light};
 }
 
 html {
   font-family: var(--font);
-}
-
-a {
-  font-weight: 500;
-  color: var(--textColor);
-  margin: 0 5px;
+  background-color: $grey-light;
 }

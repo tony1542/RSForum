@@ -13,6 +13,18 @@
 
 <style scoped>
 .nav {
-    padding: 30px 0 100px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    padding: 1.5rem;
+    background-color: var(--darkBackground);
+}
+
+a {
+    font-weight: 500;
+    color: var(--textColor);
+    margin: 0 5px;
+    text-decoration: none;
 }
 </style>
