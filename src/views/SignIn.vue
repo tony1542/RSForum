@@ -9,14 +9,14 @@
                 <form class="flex flex-col justify-between">
                     <div>
                         <label for="username">Username</label>
-                        <input type="text" id="username">
+                        <input v-model="username" type="text" id="username">
                     </div>
                     <div>
                         <label for="password">Password</label>
-                        <input type="text" id="password">
+                        <input v-model="password" type="password" id="password">
                     </div>
                     <div>
-                        <button class="primary">Sign in</button>
+                        <button @click="signIn" class="primary">Sign in</button>
                     </div>
                 </form>
             </div>
@@ -30,6 +30,17 @@
         name: "SignIn",
         components: {
             Card
+        },
+        data() {
+            return {
+                username: '',
+                password: ''
+            }
+        },
+        methods: {
+            signIn: function () {
+                // TODO implement
+            }
         }
     }
 </script>
