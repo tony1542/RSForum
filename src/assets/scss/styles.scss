@@ -10,6 +10,9 @@
   --linkActiveColor: #{$green};
   --darkBackground: #{$black-light};
 
+  --primary: #{$green};
+  --primary-dark: #{$green-dark};
+
   // Colors
   --transparent: #{$transparent};
   --black-darkest: #{$black-darkest};
@@ -80,4 +83,22 @@ hr {
   margin-bottom: 1rem;
   border: 0;
   border-top: 1px solid rgba(42, 51, 58, 0.1);
+}
+
+button {
+  @extend .rounded;
+}
+
+button.primary {
+  @extend .cursor-pointer;
+
+  background-color: var(--primary);
+  border: 1px solid transparent;
+  color: var(--grey-lightest);
+  padding: .5rem;
+  text-align: center;
+}
+
+button:hover {
+  background-color: var(--primary-dark);
 }
