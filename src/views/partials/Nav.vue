@@ -42,4 +42,9 @@ a {
 a:hover {
     color: var(--grey-lightest);
 }
+
+/* TODO / for home is always active and shows green no matter what page we're on */
+.router-link-active {
+    color: var(--linkActiveColor);
+}
 </style>
