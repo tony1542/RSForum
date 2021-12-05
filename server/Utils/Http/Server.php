@@ -17,6 +17,17 @@ class Server
         
         return self::getOptions()['DOCUMENT_ROOT'];
     }
+
+    public static function getAuthHeader(): string
+    {
+        $header = self::getOptions()['HTTP_AUTHORIZATION'] ?? '';
+
+        if ($header === '') {
+            return '';
+        }
+
+        return explode(' ', $header)[1];
+    }
     
     public static function isLocalHost(): bool
     {

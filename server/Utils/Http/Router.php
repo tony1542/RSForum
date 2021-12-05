@@ -8,6 +8,8 @@ use RuntimeException;
 class Router
 {
     /**
+     * TODO only allow api responses; no blank page responses should ever happen in here
+     *
      * Call the requested action's method with any parameters
      *
      * @return mixed

@@ -1,3 +1,5 @@
+import store from "../store";
+
 export default class Request {
     constructor(url) {
         this.base = 'http://localhost:9001';
@@ -6,7 +8,14 @@ export default class Request {
 
     // Return 'thenable' promise
     async call() {
-        return await fetch(`${ this.base }/${ this.url }`)
+        // TODO check if JWT exist before including them in here
+        return await fetch(`${ this.base }/${ this.url }`, {
+            headers: {
+                'Authorization': `Bearer ${ store.JWT }`
+            }
+        })
+
+        // return await fetch(`${ this.base }/${ this.url }`)
             .then(response => response.json());
     }
 }

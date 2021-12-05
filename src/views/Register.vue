@@ -45,6 +45,7 @@
 <script>
 import Card from "./partials/Card";
 import Errors from "./partials/Errors";
+import Store from "../store";
 import Request from "../helpers/Request";
 
 export default {
@@ -55,6 +56,7 @@ export default {
 	},
 	data() {
 		return {
+			store: Store,
 			username: '',
 			email: '',
 			accountType: 0,

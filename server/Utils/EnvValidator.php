@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Utils\Database;
+namespace App\Utils;
 
 /**
  * This class is enforcing we have the proper values in our .env configuration file
@@ -18,7 +18,7 @@ class EnvValidator
             throw new EnvException('No configuration found for the site');
         }
     }
-    
+
     /**
      * Loops through the enforcements & checks our .env file for them
      * If they are not found, an exception is thrown
@@ -33,9 +33,10 @@ class EnvValidator
             $database_name . '_NAME',
             $database_name . '_CONNECTION_URL',
             $database_name . '_USERNAME',
-            $database_name . '_PASSWORD'
+            $database_name . '_PASSWORD',
+            'JWT_SECRET_KEY'
         ];
-        
+
         $throw_exception = false;
         $exception_messages = [];
         foreach ($enforcements as $enforcement) {
@@ -44,7 +45,7 @@ class EnvValidator
                 $exception_messages[] = $enforcement;
             }
         }
-        
+
         if ($throw_exception) {
             throw new EnvException('Missing .env configuration(s) for: ' . implode(', ', $exception_messages));
         }

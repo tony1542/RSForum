@@ -2,8 +2,10 @@
 
 namespace App\Controllers;
 
+use App\Utils\Http\JWTAuthenticator;
 use App\Utils\Http\Request;
 use App\Models\User\User;
+use App\Utils\Http\Server;
 use App\Utils\Input\Sanitizer;
 use App\Utils\Runescape\Accolades;
 use App\Utils\Runescape\Skills;
@@ -230,5 +232,24 @@ class UsersController extends AbstractBaseController
         );
         
         setSignedInUser($user);
+    }
+
+    // TODO does this get stored in DB when done or just local storage client-side?
+    public function issueJWT(): void
+    {
+        $parameters = Request::getParameters();
+
+        JWTAuthenticator::test([
+            'id' => $parameters['id'],
+            'username' => $parameters['username'],
+            'email' => $parameters['email']
+        ]);
+    }
+
+    public function testJWT(): void
+    {
+        JWTAuthenticator::authenticate(
+            Request::getParameters()['jwt']
+        );
     }
 }

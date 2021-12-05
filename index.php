@@ -1,6 +1,8 @@
 <?php
 
 header('Access-Control-Allow-Origin: *');
+header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+header("Access-Control-Allow-Methods: POST, GET, PATCH, DELETE");
 header('Content-Type: application/json');
 
 require('vendor/autoload.php');
@@ -10,6 +12,13 @@ use App\Utils\Http\Router;
 use App\Utils\Http\Server;
 
 try {
+    $header = Server::getAuthHeader();
+
+    if ($header) {
+        \App\Utils\Http\JWTAuthenticator::authenticate($header);
+    }
+
+    // TODO have a helper method here to check a JWT if it exists
     setApplicationVariables();
     Router::callAction();
 } catch (Throwable $t) {

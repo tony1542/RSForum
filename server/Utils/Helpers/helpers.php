@@ -1,7 +1,7 @@
 <?php
 
-use App\Utils\Database\EnvException;
-use App\Utils\Database\EnvValidator;
+use App\Utils\EnvException;
+use App\Utils\EnvValidator;
 use App\Utils\Http\Server;
 use Dotenv\Dotenv;
 use Psr\Container\ContainerInterface;
@@ -66,7 +66,7 @@ function setApplicationVariables(): void
     
     // Check if our expected .env file has the expected values
     EnvValidator::enforce('DB');
-    
+
     // Checks if we have a dependency injection container set. If we don't, add a new one to the session
     $container = getDependencyContainer();
     
