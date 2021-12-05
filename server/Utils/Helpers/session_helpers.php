@@ -43,7 +43,7 @@ function getSignedInUser(): User
 }
 
 /**
- * Sets our signed in user (object) within our session
+ * Sets our signed-in user (object) within our session
  *
  * @param User $user
  */

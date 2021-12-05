@@ -50,7 +50,7 @@ class JWTAuthenticator
         $audience_claim = "test_audience";
         $issuedat_claim = time(); // issued at
         $notbefore_claim = $issuedat_claim; // not before in seconds
-        $expire_claim = $issuedat_claim + (60 * 60); // expire time in seconds
+        $expire_claim = $issuedat_claim + (60 * 60 * 60); // expire time in seconds
         $payload = array(
             "iss" => $issuer_claim,
             "aud" => $audience_claim,

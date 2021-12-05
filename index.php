@@ -14,16 +14,15 @@ use App\Utils\Http\Router;
 use App\Utils\Http\Server;
 
 try {
+    setApplicationVariables();
+
     $header = Server::getAuthHeader();
 
     if ($header) {
         $decoded = JWTAuthenticator::authenticate($header);
-        dd($decoded, 1);
-        $user = new User();
+        setSignedInUser(new User($decoded->data->id));
     }
 
-    // TODO have a helper method here to check a JWT if it exists
-    setApplicationVariables();
     Router::callAction();
 } catch (Throwable $t) {
     $errors = ['Something went wrong.'];
