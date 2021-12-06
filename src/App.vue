@@ -2,10 +2,15 @@
     <div id="app">
         <Nav/>
 
+
+
         <!-- Render requested component -->
         <div class="flex justify-center align-items-center">
             <div class="content rounded">
-                <router-view />
+	            <div class="loader" v-if="store.waitingOnAjax">
+		            <h1>Loading</h1>
+	            </div>
+                <router-view v-else />
             </div>
         </div>
     </div>
@@ -21,7 +26,9 @@
             Nav
         },
         data() {
-            return {}
+            return {
+				store: Store
+            }
         },
         created() {
 			const token = localStorage.getItem('token');
@@ -40,5 +47,9 @@
         background-color: var(--grey-lightest);
         margin-top: 90px;
         width: 75%;
+    }
+
+    .loader {
+
     }
 </style>

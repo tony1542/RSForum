@@ -4,14 +4,14 @@
 
 		<Card>
 			<template v-slot:header>
-				Sign in
+				Register
 			</template>
 
 			<div class="flex flex-col justify-between">
 				<form @submit.prevent="register">
 					<div>
 						<label for="username">Username</label>
-						<input v-model="username" type="text" id="username">
+						<input v-model="username" type="text" id="username" placeholder="Zezima">
 					</div>
 					<div>
 						<label for="email">Email</label>
@@ -98,6 +98,7 @@ export default {
 						if (data.token) {
 							localStorage.setItem('token', data.token);
 							this.store.setJWT(data.token);
+							this.resetForm();
 						}
 
 						if (data.errors) {
@@ -112,6 +113,14 @@ export default {
 			}
 
 			this.errors.push(error);
+		},
+		resetForm: function () {
+			this.username = '';
+			this.email = '';
+			this.accountType = 0;
+			this.password = '';
+			this.confirmPassword = '';
+			this.errors = [];
 		}
 	},
 	created() {
