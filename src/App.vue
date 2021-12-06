@@ -7,10 +7,11 @@
         <!-- Render requested component -->
         <div class="flex justify-center align-items-center">
             <div class="content rounded">
-	            <div class="loader" v-if="store.waitingOnAjax">
-		            <h1>Loading</h1>
+	            <!-- TODO make this not look so rudimentary; maybe a spinner with our primary color? -->
+	            <div class="loader" v-show="store.waitingOnAjax">
+		            <h2>Loading..</h2>
 	            </div>
-                <router-view v-else />
+                <router-view v-show="!store.waitingOnAjax" />
             </div>
         </div>
     </div>
