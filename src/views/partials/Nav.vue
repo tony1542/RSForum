@@ -44,6 +44,6 @@ a:hover {
 }
 
 .router-link-active {
-    color: var(--linkActiveColor);
+    color: var(--primary);
 }
 </style>

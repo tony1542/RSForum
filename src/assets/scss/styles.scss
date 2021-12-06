@@ -6,12 +6,10 @@
 // "Global" vars to be used in various style sheets
 :root {
   --font: Roboto, sans-serif;
-  --textColor: #{$blue};
-  --linkActiveColor: #{$green};
-  --darkBackground: #{$black-light};
 
   --primary: #{$green};
   --primary-dark: #{$green-dark};
+  --darkBackground: #{$black-light};
 
   // Colors
   --transparent: #{$transparent};
