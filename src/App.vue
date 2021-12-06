@@ -2,14 +2,13 @@
     <div id="app">
         <Nav/>
 
-
-
         <!-- Render requested component -->
         <div class="flex justify-center align-items-center">
             <div class="content rounded">
 	            <!-- TODO make this not look so rudimentary; maybe a spinner with our primary color? -->
 	            <div class="loader" v-show="store.waitingOnAjax">
 		            <h2>Loading..</h2>
+		            <LoadingSpinner />
 	            </div>
                 <router-view v-show="!store.waitingOnAjax" />
             </div>
@@ -20,10 +19,12 @@
 <script>
     import Nav from "./views/partials/Nav";
 	import Store from "./store";
+    import LoadingSpinner from "./views/partials/LoadingSpinner";
 
     export default {
         name: 'App',
         components: {
+	        LoadingSpinner,
             Nav
         },
         data() {
