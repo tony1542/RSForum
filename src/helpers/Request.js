@@ -1,4 +1,3 @@
-import store from "../store";
 import Store from "../store";
 
 export default class Request {
@@ -11,7 +10,7 @@ export default class Request {
     async call(parameters, method = 'GET') {
         let options = {
             headers: {
-                'Authorization': `Bearer ${ store.JWT }`,
+                'Authorization': `Bearer ${ Store.JWT }`,
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
@@ -31,6 +30,8 @@ export default class Request {
                 return response.json();
             })
     }
+
+    // TODO catch the error response in here and add it to the top-level store's error to show errors from App.vue?
 
     async post(parameters)
     {
