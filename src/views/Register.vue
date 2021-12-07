@@ -19,6 +19,7 @@
 					</div>
 					<div>
 						<label for="account-type">Account Type</label>
+						<!-- TODO this is slightly less wide than other inputs; fix this -->
 						<select id="account-type" v-model.number="accountType">
 							<option v-for="(type, id) in accountTypes" :key="type" :value="id">
 								{{ type }}
