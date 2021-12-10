@@ -37,7 +37,8 @@
         },
         created() {
 			const token = localStorage.getItem('token');
-			if (Store.JWT !== token) {
+
+			if (Store.JWT !== token && token !== null) {
 				Store.setJWT(token);
 			}
         }

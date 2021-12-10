@@ -5,18 +5,33 @@
             <router-link to="/about">About</router-link>
         </div>
         <div class="links">
-	        <div>
-
+	        <div v-if="store.isUserSignedIn()">
+		        <a class="cursor-pointer" @click="logout">Logout</a>
 	        </div>
-            <router-link to="/SignIn">Sign-in</router-link>
-            <router-link to="/Register">Register</router-link>
+	        <div v-else>
+		        <router-link to="/SignIn">Sign-in</router-link>
+		        <router-link to="/Register">Register</router-link>
+	        </div>
         </div>
     </div>
 </template>
 
 <script>
+    import Store from "../../store";
+
     export default {
-        name: "Nav"
+        name: "Nav",
+	    data() {
+			return {
+				store: Store
+			}
+	    },
+	    methods: {
+			logout() {
+				localStorage.clear();
+				this.store.clearJWTAndData();
+			}
+	    }
     }
 </script>
 
