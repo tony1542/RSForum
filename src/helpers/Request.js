@@ -10,12 +10,18 @@ export default class Request {
     async call(parameters, method = 'GET') {
         let options = {
             headers: {
-                'Authorization': `Bearer ${ Store.JWT }`,
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
             method: method,
         };
+
+        if (Store.JWT) {
+            options.headers = {
+                'Authorization': `Bearer ${ Store.JWT }`,
+                ...options.headers
+            }
+        }
 
         if (parameters) {
             options.body = JSON.stringify(parameters);
@@ -26,6 +32,11 @@ export default class Request {
         // TODO check if JWT exist before including them in here
         return await fetch(`${ this.base }/${ this.url }`, options)
             .then(response => {
+                if (response.status === 401) {
+                    localStorage.clear();
+                    location.reload();
+                }
+
                 Store.setWaitingOnAjax(false);
                 return response.json();
             })

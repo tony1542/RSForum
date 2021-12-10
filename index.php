@@ -21,14 +21,15 @@ try {
     if ($header) {
         $decoded = JWTAuthenticator::authenticate($header);
 
+        // JWT failed
         if ($decoded === false) {
             header('HTTP/1.1 401 Unauthorized');
             jsonResponse([
                 "message" => "Access denied."
             ]);
+        } else {
+            setSignedInUser(new User($decoded->data->id));
         }
-
-        setSignedInUser(new User($decoded->data->id));
     }
 
     Router::callAction();

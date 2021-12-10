@@ -6,7 +6,7 @@
             </template>
 
             <div>
-                <form class="flex flex-col justify-between">
+                <form @submit.prevent="signIn" class="flex flex-col justify-between">
                     <div>
                         <label for="username">Username</label>
                         <input v-model="username" type="text" id="username">
