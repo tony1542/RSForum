@@ -29,7 +29,6 @@ export default class Request {
 
         Store.setWaitingOnAjax(true);
 
-        // TODO check if JWT exist before including them in here
         return await fetch(`${ this.base }/${ this.url }`, options)
             .then(response => {
                 if (response.status === 401) {
