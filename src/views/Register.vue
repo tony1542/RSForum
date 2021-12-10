@@ -1,7 +1,5 @@
 <template>
 	<div>
-		<Errors :errors="errors"/>
-
 		<Card>
 			<template v-slot:header>
 				Register
@@ -69,25 +67,27 @@ export default {
 	},
 	methods: {
 		register: function () {
-			this.errors = [];
+			let errors = [];
 
 			if (!this.username) {
-				this.addError('Must give a username');
+				errors.push('Must give a username');
 			}
 
 			if (!this.email) {
-				this.addError('Must give an email');
+				errors.push('Must give an email');
 			}
 
 			if (!this.password || !this.confirmPassword) {
-				this.addError('Must give a password and confirm password');
+				errors.push('Must give a password and confirm password');
 			}
 
 			if (this.confirmPassword !== this.password) {
-				this.addError('Passwords do not match');
+				errors.push('Passwords do not match');
 			}
 
-			if (this.errors.length !== 0) {
+			if (errors.length !== 0) {
+				Store.setErrors(errors);
+
 				return;
 			}
 
@@ -103,10 +103,6 @@ export default {
 						localStorage.setItem('token', data.token);
 						this.store.setJWT(data.token);
 						this.resetForm();
-					}
-
-					if (data.errors) {
-						this.errors = data.errors;
 					}
 				});
 		},

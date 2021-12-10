@@ -37,7 +37,14 @@ export default class Request {
                 }
 
                 Store.setWaitingOnAjax(false);
+
                 return response.json();
+            }).then(response => {
+                if (response.errors) {
+                    Store.setErrors(response.errors);
+                }
+
+                return response;
             })
     }
 
