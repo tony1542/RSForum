@@ -105,9 +105,9 @@ class User
      * @param string $email_address
      * @param string $password
      *
-     * @return void|array
+     * @return bool
      */
-    public static function login(string $email_address, string $password)
+    public static function login(string $email_address, string $password): bool
     {
         $data_error = [];
         $db = getDatabase();
@@ -117,27 +117,25 @@ class User
     
         // If value isn't set or isn't an array, their credentials were wrong
         if (!$value || !is_array($value)) {
-           $data_error[] = "Your Email or Password is incorrect";
+            return false;
         }
     
         // If $value has an array with stuff in that array, step in to grab them
         if ($value) {
             $value = $value[0];
             if (!password_verify($password, $value['password'])) {
-                $data_error[] = 'Your Email or Password is incorrect.';
+                return false;
             }
         }
-        
-        if (count($data_error)) {
-            return $data_error;
-        }
-        
+
         $user = new User($value['user_id']);
         setSignedInUser($user);
 
         $sql = $db->prepare("UPDATE user SET logged_in = 1 WHERE email_address =?");
         $email = getSignedInUser()->email_address;
         $sql->execute([$email]);
+
+        return true;
     }
     
     public function logout(): void

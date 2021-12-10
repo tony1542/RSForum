@@ -161,7 +161,7 @@ class UsersController extends AbstractBaseController
             return;
         }
         
-        $emailAddress = Sanitizer::sanitize($parameters['username']);
+        $emailAddress = Sanitizer::sanitize($parameters['email']);
         $password = Sanitizer::sanitize($parameters['password']);
         $errors = [];
     
@@ -179,11 +179,11 @@ class UsersController extends AbstractBaseController
             ]);
         }
     
-        $errors = User::login($emailAddress, $password);
+        $success = User::login($emailAddress, $password);
     
-        if (count($errors)) {
+        if (!$success) {
             jsonResponse([
-                'errors' => $errors
+                'errors' => 'Your Email or Password is incorrect.'
             ]);
         }
 

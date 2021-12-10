@@ -16,6 +16,10 @@ export default {
     },
 
     setErrors: function (errors) {
+        if (typeof errors === 'string') {
+            errors = [errors];
+        }
+
         this.errors = errors;
     },
     clearErrors() {

@@ -8,8 +8,8 @@
 			<div>
 				<form @submit.prevent="signIn" class="flex flex-col justify-between">
 					<div>
-						<label for="username">Username</label>
-						<input v-model="username" type="text" id="username">
+						<label for="email">Email</label>
+						<input v-model="email" type="text" id="email">
 					</div>
 					<div>
 						<label for="password">Password</label>
@@ -27,6 +27,7 @@
 <script>
 import Card from "./partials/Card";
 import Request from "../helpers/Request";
+import Store from "../store";
 
 export default {
 	name: "SignIn",
@@ -35,37 +36,38 @@ export default {
 	},
 	data() {
 		return {
-			username: '',
+			email: '',
 			password: ''
 		}
 	},
 	methods: {
 		signIn: function () {
-			this.errors = [];
+			let errors = [];
 
-			if (!this.username) {
-				this.addError('Must give a username');
+			if (!this.email) {
+				errors.push('Must give an email');
 			}
 
 			if (!this.password) {
-				this.addError('Must give password');
+				errors.push('Must give password');
+			}
+
+			if (errors.length !== 0) {
+				Store.setErrors(errors);
+
+				return;
 			}
 
 			let request = new Request('User/SignIn');
 			request.post({
-				'username': this.username,
+				'email': this.email,
 				'password': this.password,
 			})
 				.then(data => {
 					if (data.token) {
 						localStorage.setItem('token', data.token);
-						this.store.setJWT(data.token);
+						Store.setJWT(data.token);
 						this.resetForm();
-					}
-
-					// TODO put this in top-level so it doesn't need to be accounted for in each component
-					if (data.errors) {
-						this.errors = data.errors;
 					}
 				});
 		},
@@ -73,7 +75,7 @@ export default {
 			this.errors.push(error);
 		},
 		resetForm() {
-			this.username = '';
+			this.email = '';
 			this.password = '';
 		}
 	}

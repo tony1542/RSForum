@@ -8,6 +8,8 @@ export default class Request {
 
     // Return 'thenable' promise
     async call(parameters, method = 'GET') {
+        Store.clearErrors();
+
         let options = {
             headers: {
                 'Accept': 'application/json',
