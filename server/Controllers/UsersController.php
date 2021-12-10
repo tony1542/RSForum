@@ -97,37 +97,37 @@ class UsersController extends AbstractBaseController
 
         // Sanitizing our user input before validating
         $username = Sanitizer::sanitize($parameters['username']);
-        $email_address = Sanitizer::sanitize($parameters['email']);
-        $account_type_id = Sanitizer::sanitize($parameters['accountType']);
+        $emailAddress = Sanitizer::sanitize($parameters['email']);
+        $accountTypeId = Sanitizer::sanitize($parameters['accountType']);
         $password = Sanitizer::sanitize($parameters['password']);
-        $form_errors = User::verifyUsername($username);
+        $errors = User::verifyUsername($username);
 
         $db = getDatabase();
         $sql = $db->prepare('SELECT email_address FROM user WHERE email_address =?');
-        $sql->execute([$email_address]);
+        $sql->execute([$emailAddress]);
         $value = $sql->fetchAll(PDO::FETCH_ASSOC);
     
         if ($value) {
             $value = $value[0];
-            $compare_email = $value['email_address'];
+            $compare = $value['email_address'];
         
-            if ($compare_email === $email_address) {
-                $form_errors[] = 'Sorry, that email has been taken by another user, please try again';
+            if ($compare === $emailAddress) {
+                $errors[] = 'Sorry, that email has been taken by another user, please try again';
             }
         }
 
-        if (!filter_var($email_address, FILTER_VALIDATE_EMAIL)) {
-            $form_errors[] = 'Please enter a valid email address';
+        if (!filter_var($emailAddress, FILTER_VALIDATE_EMAIL)) {
+            $errors[] = 'Please enter a valid email address';
         }
         
         if (!$password) {
-            $form_errors[] = 'Please enter a password';
+            $errors[] = 'Please enter a password';
         }
 
         // If we have found any errors, re-show the form with them
-        if (count($form_errors)) {
+        if (count($errors)) {
             jsonResponse([
-                'errors' => $form_errors
+                'errors' => $errors
             ]);
         }
 
@@ -140,15 +140,15 @@ class UsersController extends AbstractBaseController
         $values = [
             $username,
             $password,
-            $email_address,
-            $account_type_id
+            $emailAddress,
+            $accountTypeId
         ];
         
         $sql->execute($values);
-        $user_id = $db->lastInsertId();
-        setSignedInUser(new User($user_id));
+        $userId = $db->lastInsertId();
+        setSignedInUser(new User($userId));
 
-        $parameters['id'] = $user_id;
+        $parameters['id'] = $userId;
         jsonResponse([
             'token' => JWTAuthenticator::generate($parameters)
         ]);
@@ -156,35 +156,46 @@ class UsersController extends AbstractBaseController
 
     public function signIn(): void
     {
-        if (!count($_POST)) {
-            $this->toJson('signin');
+        $parameters = Request::getParameters();
+        if (!count($parameters)) {
+            return;
         }
         
-        $email_address = Sanitizer::sanitize($_POST['email_address']);
-        $password = Sanitizer::sanitize($_POST['password']);
-        $form_error = [];
+        $emailAddress = Sanitizer::sanitize($parameters['username']);
+        $password = Sanitizer::sanitize($parameters['password']);
+        $errors = [];
     
-        if (!filter_var($email_address, FILTER_VALIDATE_EMAIL)) {
-            $form_error[] = 'Please enter a valid email address';
+        if (!filter_var($emailAddress, FILTER_VALIDATE_EMAIL)) {
+            $errors[] = 'Please enter a valid email address';
         }
     
         if (!$password) {
-            $form_error[] = 'Please enter a password';
+            $errors[] = 'Please enter a password';
         }
-    
-        if (count($form_error)) {
-            $this->toJson('signin', [
-                'errors' => $form_error
-            ]);
-        }
-    
-        $errors = User::login($email_address, $password);
     
         if (count($errors)) {
-            $this->toJson('signin', [
+           jsonResponse([
                 'errors' => $errors
             ]);
         }
+    
+        $errors = User::login($emailAddress, $password);
+    
+        if (count($errors)) {
+            jsonResponse([
+                'errors' => $errors
+            ]);
+        }
+
+        $user = getSignedInUser();
+        $parameters = [
+            'id' => $user->getID(),
+            'username' => $user->getUsername(),
+            'email' => $user->getEmail()
+        ];
+        jsonResponse([
+            'token' => JWTAuthenticator::generate($parameters)
+        ]);
     }
     
     public function details(): void

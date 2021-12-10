@@ -138,7 +138,6 @@ class User
         $sql = $db->prepare("UPDATE user SET logged_in = 1 WHERE email_address =?");
         $email = getSignedInUser()->email_address;
         $sql->execute([$email]);
-        redirect("User/Details/" . getSignedInUser()->getID());
     }
     
     public function logout(): void

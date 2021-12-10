@@ -16,7 +16,7 @@
                         <input v-model="password" type="password" id="password">
                     </div>
                     <div>
-                        <button @click="signIn" class="primary">Sign in</button>
+                        <button class="primary">Sign in</button>
                     </div>
                 </form>
             </div>
@@ -26,6 +26,7 @@
 
 <script>
     import Card from "./partials/Card";
+    import Request from "../helpers/Request";
     export default {
         name: "SignIn",
         components: {
@@ -39,8 +40,41 @@
         },
         methods: {
             signIn: function () {
-                // TODO implement
-            }
+	            this.errors = [];
+
+	            if (!this.username) {
+		            this.addError('Must give a username');
+	            }
+
+	            if (!this.password) {
+		            this.addError('Must give password');
+	            }
+
+	            let request = new Request('User/SignIn');
+	            request.post({
+		            'username': this.username,
+		            'password': this.password,
+	            })
+		            .then(data => {
+			            if (data.token) {
+				            localStorage.setItem('token', data.token);
+				            this.store.setJWT(data.token);
+				            this.resetForm();
+			            }
+
+						// TODO put this in top-level so it doesn't need to be accounted for in each component
+			            if (data.errors) {
+				            this.errors = data.errors;
+			            }
+		            });
+            },
+	        addError(error) {
+				this.errors.push(error);
+	        },
+	        resetForm() {
+				this.username = '';
+				this.password = '';
+	        }
         }
     }
 </script>

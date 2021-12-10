@@ -87,26 +87,28 @@ export default {
 				this.addError('Passwords do not match');
 			}
 
-			if (this.errors.length === 0) {
-				let request = new Request('User/Register');
-				request.post({
-					'username': this.username,
-					'email': this.email,
-					'accountType': this.accountType,
-					'password': this.password,
-				})
-					.then(data => {
-						if (data.token) {
-							localStorage.setItem('token', data.token);
-							this.store.setJWT(data.token);
-							this.resetForm();
-						}
-
-						if (data.errors) {
-							this.errors = data.errors;
-						}
-					});
+			if (this.errors.length !== 0) {
+				return;
 			}
+
+			let request = new Request('User/Register');
+			request.post({
+				'username': this.username,
+				'email': this.email,
+				'accountType': this.accountType,
+				'password': this.password,
+			})
+				.then(data => {
+					if (data.token) {
+						localStorage.setItem('token', data.token);
+						this.store.setJWT(data.token);
+						this.resetForm();
+					}
+
+					if (data.errors) {
+						this.errors = data.errors;
+					}
+				});
 		},
 		addError: function (error) {
 			if (this.errors.includes(error)) {
