@@ -5,6 +5,9 @@
             <router-link to="/about">About</router-link>
         </div>
         <div class="links">
+	        <div>
+
+	        </div>
             <router-link to="/SignIn">Sign-in</router-link>
             <router-link to="/Register">Register</router-link>
         </div>
