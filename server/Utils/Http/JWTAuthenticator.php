@@ -15,11 +15,7 @@ class JWTAuthenticator
         return getenv('JWT_SECRET_KEY');
     }
 
-    /**
-     * @param $jwt
-     * @return stdClass|void
-     */
-    public static function authenticate($jwt)
+    public static function authenticate(string $jwt): bool|stdClass
     {
         try {
             $decoded = JWT::decode($jwt, self::getSecretKey(), array('HS256'));
@@ -28,23 +24,16 @@ class JWTAuthenticator
             $timestamp = $now->getTimestamp();
 
             if ($decoded->nbf > $timestamp || $decoded->exp < $timestamp) {
-                header('HTTP/1.1 401 Unauthorized');
-
-                jsonResponse([
-                    "message" => "Access denied."
-                ]);
+                return false;
             }
 
             return $decoded;
         } catch (Exception $e) {
-            jsonResponse([
-                "message" => "Access denied.",
-                "error" => $e->getMessage()
-            ]);
+            return false;
         }
     }
 
-    public static function generate($data): string
+    public static function generate(array $data): string
     {
         // TODO maybe move to an ENV key
         $issuer_claim = "localhost:8080";
@@ -52,7 +41,7 @@ class JWTAuthenticator
         $audience_claim = "test_audience";
         $issuedat_claim = time(); // issued at
         $notbefore_claim = $issuedat_claim; // not before in seconds
-        $expire_claim = $issuedat_claim + (60 * 60 * 60); // expire time in seconds
+        $expire_claim = $issuedat_claim + (60 * 60 * 60 * 60 * 60); // expire time in seconds
         $payload = array(
             "iss" => $issuer_claim,
             "aud" => $audience_claim,

@@ -20,6 +20,14 @@ try {
 
     if ($header) {
         $decoded = JWTAuthenticator::authenticate($header);
+
+        if ($decoded === false) {
+            header('HTTP/1.1 401 Unauthorized');
+            jsonResponse([
+                "message" => "Access denied."
+            ]);
+        }
+
         setSignedInUser(new User($decoded->data->id));
     }
 
