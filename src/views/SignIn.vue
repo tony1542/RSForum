@@ -68,6 +68,7 @@ export default {
 						localStorage.setItem('token', data.token);
 						Store.setJWT(data.token);
 						this.resetForm();
+						this.$router.push('/');
 					}
 				});
 		},
