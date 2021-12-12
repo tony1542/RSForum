@@ -13,24 +13,24 @@ use PDO;
 class UsersController extends AbstractBaseController
 {
     protected User $user_object;
-    
+
     public function __construct($user_id = 0)
     {
         $this->user_object = new User($user_id);
     }
-    
+
     protected function getUser(): User
     {
         return $this->user_object;
     }
-    
+
     protected function toJson(string $view, array $parameters = []): void
     {
         $return_array = [];
-    
+
         if ($this->getUser()->getID()) {
             $return_array['user'] = $this->getUser();
-    
+
             // Load skills
             $skills = $this->getUser()->getSkills();
             $skills_array = [];
@@ -43,10 +43,10 @@ class UsersController extends AbstractBaseController
                     'rank'       => $row['rank']
                 ];
             }
-    
+
             $return_array['skills'] = $skills_array;
             $return_array['show_skills'] = count($skills_array) > 0;
-    
+
             // Load accolades
             $accolades = $this->getUser()->getAccolades();
             $accolades_array = [];
@@ -58,20 +58,20 @@ class UsersController extends AbstractBaseController
                     'rank'          => $row['rank']
                 ];
             }
-    
+
             $return_array['accolades'] = $accolades_array;
             $return_array['show_accolades'] = count($accolades_array) > 0;
         }
 
         $return_array = array_merge($parameters, $return_array);
     }
-    
+
     public function canAccess(string $action, array $parameters = []): bool
     {
         $signed_in_user = getSignedInUser();
         $is_user_signed_in = $signed_in_user->getID() > 0;
         $same_user_as_requesting = $signed_in_user->getID() === Request::getID();
-        
+
         switch ($action) {
             case 'members':
             case 'logout':
@@ -83,9 +83,9 @@ class UsersController extends AbstractBaseController
                 return true;
         }
     }
-    
+
     public function index(): void {}
-    
+
     public function register(): void
     {
         $parameters = Request::getParameters();
@@ -106,11 +106,11 @@ class UsersController extends AbstractBaseController
         $sql = $db->prepare('SELECT email_address FROM user WHERE email_address =?');
         $sql->execute([$emailAddress]);
         $value = $sql->fetchAll(PDO::FETCH_ASSOC);
-    
+
         if ($value) {
             $value = $value[0];
             $compare = $value['email_address'];
-        
+
             if ($compare === $emailAddress) {
                 $errors[] = 'Sorry, that email has been taken by another user, please try again';
             }
@@ -119,7 +119,7 @@ class UsersController extends AbstractBaseController
         if (!filter_var($emailAddress, FILTER_VALIDATE_EMAIL)) {
             $errors[] = 'Please enter a valid email address';
         }
-        
+
         if (!$password) {
             $errors[] = 'Please enter a password';
         }
@@ -136,14 +136,14 @@ class UsersController extends AbstractBaseController
         $db = getDatabase();
         $password = password_hash($password, PASSWORD_DEFAULT);
         $sql = $db->prepare('INSERT INTO user (username, password, email_address, account_type_id) VALUES (?, ?, ?, ?)');
-        
+
         $values = [
             $username,
             $password,
             $emailAddress,
             $accountTypeId
         ];
-        
+
         $sql->execute($values);
         $userId = $db->lastInsertId();
         setSignedInUser(new User($userId));
@@ -160,27 +160,27 @@ class UsersController extends AbstractBaseController
         if (!count($parameters)) {
             return;
         }
-        
+
         $emailAddress = Sanitizer::sanitize($parameters['email']);
         $password = Sanitizer::sanitize($parameters['password']);
         $errors = [];
-    
+
         if (!filter_var($emailAddress, FILTER_VALIDATE_EMAIL)) {
             $errors[] = 'Please enter a valid email address';
         }
-    
+
         if (!$password) {
             $errors[] = 'Please enter a password';
         }
-    
+
         if (count($errors)) {
            jsonResponse([
                 'errors' => $errors
             ]);
         }
-    
+
         $success = User::login($emailAddress, $password);
-    
+
         if (!$success) {
             jsonResponse([
                 'errors' => 'Your Email or Password is incorrect.'
@@ -197,63 +197,44 @@ class UsersController extends AbstractBaseController
             'token' => JWTAuthenticator::generate($parameters)
         ]);
     }
-    
+
     public function details(): void
     {
         $this->toJson('profile');
     }
 
-    public function logout(): void
-    {
-        getSignedInUser()->logout();
-    }
-    
-    public function members(): void
-    {
-        $this->toJson('members', [
-            'members' => User::getMembers()
-        ]);
-    }
-
     public function update(): void
     {
         $post_values = Request::getPostValues();
-
-        if (!$post_values) {
-            //redirect('User/Details/' . Request::getID());
-        }
-        
         $user = $this->getUser();
-    
+
         $new_username = $post_values['username'];
         $account_type_id = $post_values['account_type_id'];
-        
+
         $errors = User::verifyUsername($new_username);
         if (count($errors)) {
             $this->toJson('profile', [
                 'errors' => $errors
             ]);
         }
-    
+
         $user->update(
             $new_username,
             $account_type_id
         );
-        
+
         setSignedInUser($user);
     }
 
-    // TODO once this is done, move it to index.php in the $header() if statement
-    public function testJWT(): void
+    public function account()
     {
-        $decoded = JWTAuthenticator::authenticate(
-//            Server::getAuthHeader()
-            Request::getParameters()['jwt']
-        );
-
-        if ($decoded instanceof \stdClass) {
-            $user = new User($decoded->data->id);
-            dd($user);
-        }
+        $user = getSignedInUser();
+        jsonResponse([
+            'username' => $user->getUsername(),
+            'account_type_id' => $user->getAccountTypeID(),
+            'account_type_text' => $user->getAccountTypeText(),
+            'skills' => $user->getSkills(),
+            'accolades' => $user->getAccolades()
+        ]);
     }
 }
