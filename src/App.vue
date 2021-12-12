@@ -41,7 +41,12 @@
 			if (Store.JWT !== token && token !== null) {
 				Store.setJWT(token);
 			}
-        }
+        },
+	    watch: {
+		    $route (to, from) {
+				Store.clearErrors();
+		    }
+	    }
     }
 </script>
 
