@@ -22,7 +22,6 @@
 	import Store from "./store";
     import LoadingSpinner from "./views/partials/LoadingSpinner";
 	import Errors from "./views/partials/Errors";
-    import Request from "./helpers/Request";
 
     export default {
         name: 'App',
@@ -42,12 +41,6 @@
 			if (Store.JWT !== token && token !== null) {
 				Store.setJWT(token);
 			}
-
-			let request = new Request('User/Account');
-			request.post()
-			.then(data => {
-				console.log(data)
-			});
         },
 	    watch: {
 		    $route (to, from) {
@@ -58,6 +51,7 @@
 </script>
 
 <style>
+	/* Include our custom styles */
     @import "src/assets/scss/styles.scss";
 
     .content {
