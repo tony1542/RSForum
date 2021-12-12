@@ -3,6 +3,7 @@
         <div class="links">
             <router-link to="/" exact>Home</router-link>
             <router-link to="/about">About</router-link>
+	        <router-link v-if="store.isUserSignedIn()" to="/account">Account</router-link>
         </div>
         <div class="links">
 	        <div v-if="store.isUserSignedIn()">
