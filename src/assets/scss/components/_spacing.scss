@@ -14,6 +14,7 @@ $size-24: 6rem;
 $size-32: 8rem;
 $size-48: 12rem;
 $size-64: 16rem;
+$size-128: 32rem;
 
 $size-one-half: 50%;
 $size-one-third: 33.33333%;
@@ -84,6 +85,10 @@ Width
 
 .w-64 {
   width: $size-64;
+}
+
+.w-128 {
+  width: $size-128;
 }
 
 .w-full {

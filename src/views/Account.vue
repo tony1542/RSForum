@@ -1,15 +1,16 @@
 <template>
 	<div class="flex justify-between">
-		<Card>
+		<Card class="pr-4 w-128">
 			<template v-slot:header>
 				{{ username }}
 			</template>
-			{{ accountTypeText }}
-			<!-- TODO allow account type switching or something here -->
+			Account type: {{ accountTypeText }}
 		</Card>
-		<Card>
-			<Accolades :accolades="accolades" />
+		<Card class="w-full">
+			<h3>Skills</h3>
 			<Skills :skills="skills" />
+			<h3>Accolades</h3>
+			<Accolades :accolades="accolades" />
 		</Card>
 	</div>
 </template>
