@@ -11,7 +11,7 @@
 		            <h2>Loading..</h2>
 		            <LoadingSpinner />
 	            </div>
-                <router-view v-show="!store.waitingOnAjax" />
+	            <router-view v-show="!store.waitingOnAjax" />
             </div>
         </div>
     </div>
