@@ -1,14 +1,14 @@
 <template>
-    <div class="pt-2 pb-2 flex flex-col">
-        <header class="p-4">
+    <div class="card flex flex-col">
+        <header v-show="this.$slots.header" class="card-header">
             <slot name="header"></slot>
         </header>
 
-        <main class="p-4">
+        <main class="card-body">
             <slot></slot>
         </main>
 
-        <footer class="p-4">
+        <footer v-show="this.$slots.footer" class="card-footer">
             <slot name="footer"></slot>
         </footer>
     </div>

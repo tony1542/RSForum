@@ -56,7 +56,6 @@
 
     .content {
         padding: 1rem;
-        background-color: var(--grey-lightest);
         margin-top: 90px;
         width: 75%;
     }
