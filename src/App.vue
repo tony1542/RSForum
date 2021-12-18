@@ -11,7 +11,7 @@
 		            <h2>Loading..</h2>
 		            <LoadingSpinner />
 	            </div>
-                <router-view v-show="!store.waitingOnAjax" />
+	            <router-view v-show="!store.waitingOnAjax" />
             </div>
         </div>
     </div>
@@ -56,7 +56,6 @@
 
     .content {
         padding: 1rem;
-        background-color: var(--grey-lightest);
         margin-top: 90px;
         width: 75%;
     }
