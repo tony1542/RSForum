@@ -14,7 +14,7 @@
     "guzzlehttp/guzzle": "^6.5.2",
     "vlucas/phpdotenv": "^3.6",
     "nesbot/carbon": "^2.28",
-    "php": "^8.0",
+    "php": "^8.1",
     "fakerphp/faker": "^1.13",
     "firebase/php-jwt": "^5.5"
   },
