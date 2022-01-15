@@ -38,10 +38,10 @@ try {
     
     if (Server::isLocalHost() || getSignedInUser()->isAdmin()) {
         $errors = [
-            'Message ' => [$t->getMessage()],
-            'File '    => [$t->getFile()],
-            'Line '    => [$t->getLine()],
-            'Trace '   => [$t->getTraceAsString()],
+            'Message ' . $t->getMessage(),
+            'File '    . $t->getFile(),
+            'Line '    . $t->getLine(),
+            'Trace '   . $t->getTraceAsString(),
         ];
         
         if ($t instanceof EnvException) {
@@ -49,7 +49,9 @@ try {
         }
     }
 
-    \jsonResponse($errors);
+    \jsonResponse([
+        'errors' => $errors
+    ]);
 }
 
 die;
