@@ -23,5 +23,6 @@
         border: 1px solid var(--red-light);
         color: var(--red-dark);
         display: block;
+	    overflow: auto;
     }
 </style>
