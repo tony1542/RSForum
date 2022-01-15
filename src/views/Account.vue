@@ -1,12 +1,13 @@
 <template>
-	<div class="flex justify-between">
-		<Card class="pr-4 w-128">
+	<div class="row">
+		<Card class="col">
 			<template v-slot:header>
 				{{ username }}
 			</template>
 			Account type: {{ accountTypeText }}
 		</Card>
-		<Card class="w-full">
+
+		<Card class="col">
 			<h3>Skills</h3>
 			<Skills :skills="skills" />
 			<h3>Accolades</h3>
