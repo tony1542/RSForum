@@ -23,6 +23,8 @@
 
 <script>
     import Card from "./partials/Card";
+    import Request from "../helpers/Request";
+
     export default {
         name: 'Home',
         components: {Card},
@@ -31,7 +33,12 @@
                 text: 'Hello world',
                 footerText: 'There are currently no posts. Sign in or create an account and create the first!'
             }
-        }
+        },
+	    created() {
+		    let request = new Request('AccountType/All');
+		    request.call()
+			    .then(data => this.accountTypes = data);
+	    }
     }
 </script>
 

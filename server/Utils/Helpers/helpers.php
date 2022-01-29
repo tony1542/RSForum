@@ -47,7 +47,6 @@ function jsonResponse($data, $jsonOption = 0): void
  */
 function setApplicationVariables(): void
 {
-    // Turn sessions on so we have access to the $_SESSION super-global
     session_start();
     
     // Set proper timezone for all date calls
