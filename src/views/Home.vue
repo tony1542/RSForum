@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Card>
+        <Card class="mb-8">
             <p>
                 This application allows you to connect to a game's (Old School Runescape) high scores and view various information about an account.
             </p>
@@ -10,28 +10,53 @@
                 <li>Click the 'Profile' menu option to see relevant stats</li>
             </ol>
 
-            <hr>
-
-            To create a home-page post, you must be an admin user. There is a boolean column in the 'user' table that can be updated quick to view that functionality
-
             <template v-slot:footer>
                 {{ footerText }}
             </template>
         </Card>
+
+	    <Card v-for="post in feed" v-bind:key="feed.guid" class="mb-8">
+			<template v-slot:header>
+				{{ post.title }}
+			</template>
+
+		    <div class="flex align-items-center">
+			    <div class="pr-6">
+				    <img :src="post.enclosure['@attributes'].url" alt="Descriptive Image" />
+			    </div>
+
+			    <div>
+				    {{ post.description }}
+			    </div>
+		    </div>
+
+		    <template v-slot:footer>
+			    <a :href="post.link" target="_blank">
+				    Read more..
+			    </a>
+		    </template>
+	    </Card>
     </div>
 </template>
 
 <script>
     import Card from "./partials/Card";
+    import Request from "../helpers/Request";
+
     export default {
         name: 'Home',
         components: {Card},
         data() {
             return {
-                text: 'Hello world',
-                footerText: 'There are currently no posts. Sign in or create an account and create the first!'
+                footerText: 'There are currently no posts. Sign in or create an account and create the first!',
+	            feed: []
             }
-        }
+        },
+	    created() {
+		    let request = new Request('RS/Home');
+		    request.call()
+			    .then(data => this.feed = data.channel.item);
+	    }
     }
 </script>
 
