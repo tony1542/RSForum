@@ -99,3 +99,12 @@ CREATE TABLE home_page_posts
     CONSTRAINT home_page_posts_pk
         PRIMARY KEY (home_page_post_id)
 );
+
+CREATE TABLE rss_results
+(
+    rss_results_id       int AUTO_INCREMENT,
+    saved_at datetime DEFAULT NOW() NOT NULL,
+    results  blob                   NOT NULL,
+    CONSTRAINT rss_results_pk
+        PRIMARY KEY (rss_results_id)
+);
