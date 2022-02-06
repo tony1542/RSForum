@@ -55,7 +55,9 @@
 
     export default {
         name: 'Home',
-        components: {Card},
+        components: {
+            Card
+        },
         data() {
             return {
                 footerText: 'There are currently no posts. Sign in or create an account and create the first!',
