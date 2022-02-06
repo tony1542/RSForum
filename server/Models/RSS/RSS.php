@@ -44,9 +44,8 @@ abstract class RSS
         $dbh = getDatabase();
         $stmt = $dbh->prepare("INSERT INTO rss_results SET results = :results");
 
-        $contents = (string) $this->contents;
-        $stmt->bindParam(':results', $contents);
-
+        $asXML = $this->contents->asXML();
+        $stmt->bindParam(':results', $asXML);
         $stmt->execute();
     }
 
