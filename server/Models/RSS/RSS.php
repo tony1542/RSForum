@@ -6,7 +6,8 @@ use SimpleXMLElement;
 
 abstract class RSS
 {
-    protected SimpleXMLElement $contents;
+    /** @var false|SimpleXMLElement $contents */
+    protected $contents;
 
     public function __construct($url)
     {
@@ -19,7 +20,10 @@ abstract class RSS
         }
 
         // No existing results; fetch new ones and save them to the DB
-        $this->contents = simplexml_load_string(file_get_contents($url));
+        $this->contents = simplexml_load_string(
+            file_get_contents($url)
+        );
+
         $this->storeResults();
     }
 
@@ -33,9 +37,16 @@ abstract class RSS
 
     protected function storeResults(): void
     {
+        if (!$this->contents) {
+            return;
+        }
+
         $dbh = getDatabase();
-        $stmt = $dbh->prepare("INSERT INTO rss_results SET results = ?");
-        $stmt->bindParam('s', $this->contents);
+        $stmt = $dbh->prepare("INSERT INTO rss_results SET results = :results");
+
+        $contents = (string) $this->contents;
+        $stmt->bindParam(':results', $contents);
+
         $stmt->execute();
     }
 
