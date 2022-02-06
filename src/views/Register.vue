@@ -134,6 +134,7 @@
                             localStorage.setItem('token', data.token);
                             this.store.setJWT(data.token);
                             this.resetForm();
+                            this.$router.push('/');
                         }
                     });
             },
