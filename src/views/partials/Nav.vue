@@ -1,39 +1,106 @@
 <template>
-    <div class="nav flex justify-between items-center">
-        <div class="links">
+    <!--    <div class="nav flex justify-between items-center">-->
+    <!--        <div class="links">-->
+    <!--            <router-link-->
+    <!--                to="/"-->
+    <!--                exact-->
+    <!--            >-->
+    <!--                Home-->
+    <!--            </router-link>-->
+    <!--            <router-link to="/about">-->
+    <!--                About-->
+    <!--            </router-link>-->
+    <!--            <router-link-->
+    <!--                v-if="store.isUserSignedIn()"-->
+    <!--                to="/account"-->
+    <!--            >-->
+    <!--                Account-->
+    <!--            </router-link>-->
+    <!--        </div>-->
+    <!--        <div class="links">-->
+    <!--            <div v-if="store.isUserSignedIn()">-->
+    <!--                <a-->
+    <!--                    class="cursor-pointer"-->
+    <!--                    @click="logout"-->
+    <!--                >Logout</a>-->
+    <!--            </div>-->
+    <!--            <div v-else>-->
+    <!--                <router-link to="/SignIn">-->
+    <!--                    Sign-in-->
+    <!--                </router-link>-->
+    <!--                <router-link to="/Register">-->
+    <!--                    Register-->
+    <!--                </router-link>-->
+    <!--            </div>-->
+    <!--        </div>-->
+    <!--    </div>-->
+	
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
             <router-link
+                class="navbar-brand"
                 to="/"
                 exact
             >
                 Home
             </router-link>
-            <router-link to="/about">
-                About
-            </router-link>
-            <router-link
-                v-if="store.isUserSignedIn()"
-                to="/account"
+	        
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNav"
+                aria-controls="navbarNav"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
             >
-                Account
-            </router-link>
-        </div>
-        <div class="links">
-            <div v-if="store.isUserSignedIn()">
-                <a
-                    class="cursor-pointer"
-                    @click="logout"
-                >Logout</a>
+                <span class="navbar-toggler-icon" />
+            </button>
+	        
+            <div
+                id="navbarNav"
+                class="collapse navbar-collapse"
+            >
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <router-link
+                            class="nav-link"
+                            to="/about"
+                        >
+                            About
+                        </router-link>
+                    </li>
+                    <li class="nav-item">
+                        <router-link
+                            v-if="store.isUserSignedIn()"
+                            class="nav-link"
+                            to="/account"
+                        >
+                            Account
+                        </router-link>
+                    </li>
+                </ul>
+                <div class="navbar-text">
+                    <div v-if="store.isUserSignedIn()">
+                        <a
+                            class="cursor-pointer"
+                            @click="logout"
+                        >
+                            Logout
+                        </a>
+                    </div>
+                    <div v-else>
+                        <router-link to="/SignIn">
+                            Sign-in
+                        </router-link>
+                        <router-link to="/Register">
+                            Register
+                        </router-link>
+                    </div>
+                </div>
             </div>
-            <div v-else>
-                <router-link to="/SignIn">
-                    Sign-in
-                </router-link>
-                <router-link to="/Register">
-                    Register
-                </router-link>
-            </div>
         </div>
-    </div>
+    </nav>
 </template>
 
 <script>
@@ -81,6 +148,7 @@ a:hover {
     color: var(--grey-lightest);
 }
 
+/* https://router.vuejs.org/api/#active-class */
 .router-link-active {
     color: var(--primary);
 }

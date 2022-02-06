@@ -60,7 +60,6 @@
 
     .content {
         padding: 1rem;
-        margin-top: 90px;
         width: 75%;
     }
 </style>
