@@ -1,18 +1,37 @@
 <template>
     <div class="nav flex justify-between items-center">
         <div class="links">
-            <router-link to="/" exact>Home</router-link>
-            <router-link to="/about">About</router-link>
-	        <router-link v-if="store.isUserSignedIn()" to="/account">Account</router-link>
+            <router-link
+                to="/"
+                exact
+            >
+                Home
+            </router-link>
+            <router-link to="/about">
+                About
+            </router-link>
+            <router-link
+                v-if="store.isUserSignedIn()"
+                to="/account"
+            >
+                Account
+            </router-link>
         </div>
         <div class="links">
-	        <div v-if="store.isUserSignedIn()">
-		        <a class="cursor-pointer" @click="logout">Logout</a>
-	        </div>
-	        <div v-else>
-		        <router-link to="/SignIn">Sign-in</router-link>
-		        <router-link to="/Register">Register</router-link>
-	        </div>
+            <div v-if="store.isUserSignedIn()">
+                <a
+                    class="cursor-pointer"
+                    @click="logout"
+                >Logout</a>
+            </div>
+            <div v-else>
+                <router-link to="/SignIn">
+                    Sign-in
+                </router-link>
+                <router-link to="/Register">
+                    Register
+                </router-link>
+            </div>
         </div>
     </div>
 </template>
@@ -22,17 +41,17 @@
 
     export default {
         name: "Nav",
-	    data() {
-			return {
-				store: Store
-			}
-	    },
-	    methods: {
-			logout() {
-				localStorage.clear();
-				this.store.clearJWTAndData();
-			}
-	    }
+        data() {
+            return {
+                store: Store
+            }
+        },
+        methods: {
+            logout() {
+                localStorage.clear();
+                this.store.clearJWTAndData();
+            }
+        }
     }
 </script>
 
