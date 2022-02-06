@@ -1,6 +1,10 @@
 <template>
     <div v-show="errors.length > 0">
-        <span class="p-8 rounded mb-2" v-for="(error, id) in errors" v-bind:key="id">
+        <span
+            v-for="(error, id) in errors"
+            :key="id"
+            class="p-8 rounded mb-2"
+        >
             {{ error }}
         </span>
     </div>

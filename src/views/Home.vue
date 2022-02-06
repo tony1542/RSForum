@@ -10,32 +10,42 @@
                 <li>Click the 'Profile' menu option to see relevant stats</li>
             </ol>
 
-            <template v-slot:footer>
+            <template #footer>
                 {{ footerText }}
             </template>
         </Card>
 
-	    <Card v-for="post in feed" v-bind:key="feed.guid" class="mb-8">
-			<template v-slot:header>
-				{{ post.title }}
-			</template>
+        <Card
+            v-for="post in feed"
+            :key="post.guid"
+            class="mb-8"
+        >
+            <template #header>
+                {{ post.title }}
+            </template>
 
-		    <div class="flex align-items-center">
-			    <div class="pr-6">
-				    <img :src="post.enclosure['@attributes'].url" alt="Descriptive Image" />
-			    </div>
+            <div class="flex align-items-center">
+                <div class="pr-6">
+                    <img
+                        :src="post.enclosure['@attributes'].url"
+                        alt="Descriptive Image"
+                    >
+                </div>
 
-			    <div>
-				    {{ post.description }}
-			    </div>
-		    </div>
+                <div>
+                    {{ post.description }}
+                </div>
+            </div>
 
-		    <template v-slot:footer>
-			    <a :href="post.link" target="_blank">
-				    Read more..
-			    </a>
-		    </template>
-	    </Card>
+            <template #footer>
+                <a
+                    :href="post.link"
+                    target="_blank"
+                >
+                    Read more..
+                </a>
+            </template>
+        </Card>
     </div>
 </template>
 
@@ -49,14 +59,14 @@
         data() {
             return {
                 footerText: 'There are currently no posts. Sign in or create an account and create the first!',
-	            feed: []
+                feed: []
             }
         },
-	    created() {
-		    let request = new Request('RS/Home');
-		    request.call()
-			    .then(data => this.feed = data.channel.item);
-	    }
+        created() {
+            let request = new Request('RS/Home');
+            request.call()
+                .then(data => this.feed = data.channel.item);
+        }
     }
 </script>
 

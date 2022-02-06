@@ -1,17 +1,21 @@
 <template>
     <div id="app">
-        <Nav/>
+        <Nav />
 
         <!-- Render requested component -->
         <div class="flex justify-center align-items-center">
             <div class="content rounded">
-	            <Errors :errors="store.errors"/>
+                <Errors :errors="store.errors" />
 
-	            <div class="flex flex-col items-center" v-show="store.waitingOnAjax">
-		            <h2>Loading..</h2>
-		            <LoadingSpinner />
-	            </div>
-	            <router-view v-show="!store.waitingOnAjax" />
+                <div
+                    v-show="store.waitingOnAjax"
+                    class="flex flex-col items-center"
+                >
+                    <h2>Loading..</h2>
+                    <LoadingSpinner />
+                </div>
+	            
+                <router-view v-show="!store.waitingOnAjax" />
             </div>
         </div>
     </div>
@@ -19,34 +23,34 @@
 
 <script>
     import Nav from "./views/partials/Nav";
-	import Store from "./store";
+    import Store from "./store";
     import LoadingSpinner from "./views/partials/LoadingSpinner";
-	import Errors from "./views/partials/Errors";
+    import Errors from "./views/partials/Errors";
 
     export default {
         name: 'App',
         components: {
-	        LoadingSpinner,
+            LoadingSpinner,
             Nav,
-	        Errors
+            Errors
         },
         data() {
             return {
-				store: Store
+                store: Store
+            }
+        },
+        watch: {
+            $route (to, from) {
+                Store.clearErrors();
             }
         },
         created() {
-			const token = localStorage.getItem('token');
+            const token = localStorage.getItem('token');
 
-			if (Store.JWT !== token && token !== null) {
-				Store.setJWT(token);
-			}
-        },
-	    watch: {
-		    $route (to, from) {
-				Store.clearErrors();
-		    }
-	    }
+            if (Store.JWT !== token && token !== null) {
+                Store.setJWT(token);
+            }
+        }
     }
 </script>
 
