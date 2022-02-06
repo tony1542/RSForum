@@ -1,41 +1,5 @@
 <template>
-    <!--    <div class="nav flex justify-between items-center">-->
-    <!--        <div class="links">-->
-    <!--            <router-link-->
-    <!--                to="/"-->
-    <!--                exact-->
-    <!--            >-->
-    <!--                Home-->
-    <!--            </router-link>-->
-    <!--            <router-link to="/about">-->
-    <!--                About-->
-    <!--            </router-link>-->
-    <!--            <router-link-->
-    <!--                v-if="store.isUserSignedIn()"-->
-    <!--                to="/account"-->
-    <!--            >-->
-    <!--                Account-->
-    <!--            </router-link>-->
-    <!--        </div>-->
-    <!--        <div class="links">-->
-    <!--            <div v-if="store.isUserSignedIn()">-->
-    <!--                <a-->
-    <!--                    class="cursor-pointer"-->
-    <!--                    @click="logout"-->
-    <!--                >Logout</a>-->
-    <!--            </div>-->
-    <!--            <div v-else>-->
-    <!--                <router-link to="/SignIn">-->
-    <!--                    Sign-in-->
-    <!--                </router-link>-->
-    <!--                <router-link to="/Register">-->
-    <!--                    Register-->
-    <!--                </router-link>-->
-    <!--            </div>-->
-    <!--        </div>-->
-    <!--    </div>-->
-	
-    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar sticky-top navbar-expand-lg bg-dark">
         <div class="container-fluid">
             <router-link
                 class="navbar-brand"

@@ -69,14 +69,12 @@
 
 <script>
     import Card from "./partials/Card";
-    import Errors from "./partials/Errors";
     import Store from "../store";
     import Request from "../helpers/Request";
 
     export default {
         name: "Register",
         components: {
-            Errors,
             Card
         },
         data() {
