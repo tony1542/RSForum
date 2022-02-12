@@ -24,15 +24,16 @@
                 {{ post.title }}
             </template>
 
-            <div class="flex align-items-center">
-                <div class="pr-6">
+            <div class="flex align-items-center row">
+                <div class="pr-6 col-md-6">
                     <img
+                        class="img-fluid"
                         :src="post.enclosure['@attributes'].url"
                         alt="Descriptive Image"
                     >
                 </div>
 
-                <div>
+                <div class="col-md-6">
                     {{ post.description }}
                 </div>
             </div>
