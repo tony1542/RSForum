@@ -47,22 +47,35 @@
                 <ul class="navbar-nav mb-2 mb-lg-0">
                     <li
                         v-show="store.isUserSignedIn()"
-                        class="cursor-pointer"
+                        class="nav-item"
                         @click="logout"
                     >
-                        Logout
+                        <router-link
+                            to="/"
+                            class="nav-link"
+                        >
+                            Logout
+                        </router-link>
                     </li>
                     <li
                         v-show="!store.isUserSignedIn()"
+                        class="nav-item"
                     >
-                        <router-link to="/SignIn">
+                        <router-link
+                            to="/SignIn"
+                            class="nav-link"
+                        >
                             Sign-in
                         </router-link>
                     </li>
                     <li
                         v-show="!store.isUserSignedIn()"
+                        class="nav-item"
                     >
-                        <router-link to="/Register">
+                        <router-link
+                            class="nav-link"
+                            to="/Register"
+                        >
                             Register
                         </router-link>
                     </li>

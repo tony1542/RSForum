@@ -9,10 +9,6 @@
                 <li>Create an account under the 'register' menu option <em>("Settled" can be a username if you don't know one)</em></li>
                 <li>Click the 'Profile' menu option to see relevant stats</li>
             </ol>
-
-            <template #footer>
-                {{ footerText }}
-            </template>
         </Card>
 
         <Card
@@ -61,7 +57,6 @@
         },
         data() {
             return {
-                footerText: 'There are currently no posts. Sign in or create an account and create the first!',
                 feed: []
             }
         },
