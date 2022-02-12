@@ -44,9 +44,15 @@
     import Asset from "../Asset";
     export default {
         name: "Skills",
-        components: {Asset, Card},
+        components: {
+            Asset,
+            Card
+        },
         props: {
-            skills: Array
+            skills: {
+                type: Array,
+                default: () => []
+            }
         }
     }
 </script>
