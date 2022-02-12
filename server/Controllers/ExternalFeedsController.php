@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Models\RSS\HomePage;
 
-class RSSController extends AbstractBaseController
+class ExternalFeedsController extends AbstractBaseController
 {
     public function canAccess(string $action, array $parameters = []): bool
     {

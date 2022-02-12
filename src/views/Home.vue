@@ -61,7 +61,7 @@
             }
         },
         created() {
-            let request = new Request('RS/Home');
+            let request = new Request('ExternalFeed/Home');
             request.call()
                 .then(data => this.feed = data.channel.item);
         }

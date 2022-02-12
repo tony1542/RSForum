@@ -72,16 +72,11 @@ class UsersController extends AbstractBaseController
         $is_user_signed_in = $signed_in_user->getID() > 0;
         $same_user_as_requesting = $signed_in_user->getID() === Request::getID();
 
-        switch ($action) {
-            case 'members':
-            case 'logout':
-                return $is_user_signed_in;
-            case 'update':
-            case 'details':
-                return $is_user_signed_in && $same_user_as_requesting;
-            default:
-                return true;
-        }
+        return match ($action) {
+            'members', 'logout' => $is_user_signed_in,
+            'update', 'details' => $is_user_signed_in && $same_user_as_requesting,
+            default => true,
+        };
     }
 
     public function index(): void {}
@@ -112,7 +107,7 @@ class UsersController extends AbstractBaseController
             $compare = $value['email_address'];
 
             if ($compare === $emailAddress) {
-                $errors[] = 'Sorry, that email has been taken by another user, please try again';
+                $errors[] = 'That email is already taken';
             }
         }
 
@@ -132,7 +127,6 @@ class UsersController extends AbstractBaseController
         }
 
         // TODO move this to the user model
-        // If we have gotten this far, it means there were no errors when validating. Insert the user into the database
         $db = getDatabase();
         $password = password_hash($password, PASSWORD_DEFAULT);
         $sql = $db->prepare('INSERT INTO user (username, password, email_address, account_type_id) VALUES (?, ?, ?, ?)');

@@ -17,7 +17,6 @@ try {
     setApplicationVariables();
 
     $header = Server::getAuthHeader();
-
     if ($header) {
         $decoded = JWTAuthenticator::authenticate($header);
 
