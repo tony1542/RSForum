@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar sticky-top navbar-expand-lg bg-dark">
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <router-link
                 class="navbar-brand"
@@ -44,24 +44,29 @@
                         </router-link>
                     </li>
                 </ul>
-                <div class="navbar-text">
-                    <div v-if="store.isUserSignedIn()">
-                        <a
-                            class="cursor-pointer"
-                            @click="logout"
-                        >
-                            Logout
-                        </a>
-                    </div>
-                    <div v-else>
+                <ul class="navbar-nav mb-2 mb-lg-0">
+                    <li
+                        v-show="store.isUserSignedIn()"
+                        class="cursor-pointer"
+                        @click="logout"
+                    >
+                        Logout
+                    </li>
+                    <li
+                        v-show="!store.isUserSignedIn()"
+                    >
                         <router-link to="/SignIn">
                             Sign-in
                         </router-link>
+                    </li>
+                    <li
+                        v-show="!store.isUserSignedIn()"
+                    >
                         <router-link to="/Register">
                             Register
                         </router-link>
-                    </div>
-                </div>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
