@@ -1,22 +1,22 @@
 <template>
     <div class="card">
-        <header
+        <div
             v-show="$slots.header"
             class="card-header"
         >
             <slot name="header" />
-        </header>
+        </div>
 
-        <main class="card-body">
+        <div class="card-body">
             <slot class="card-text" />
-        </main>
+        </div>
 
-        <footer
+        <div
             v-show="$slots.footer"
             class="card-footer"
         >
             <slot name="footer" />
-        </footer>
+        </div>
     </div>
 </template>
 

@@ -1,18 +1,23 @@
 <template>
     <div class="row">
-        <Card class="col">
-            <template #header>
-                {{ username }}
-            </template>
-            Account type: {{ accountTypeText }}
-        </Card>
-
-        <Card class="col">
-            <h3>Skills</h3>
-            <Skills :skills="skills" />
-            <h3>Accolades</h3>
-            <Accolades :accolades="accolades" />
-        </Card>
+        <div class="col-md-3 pb-3">
+            <Card>
+                <h5 class="card-title">
+                    {{ username }}
+                </h5>
+			
+                Account type: {{ accountTypeText }}
+            </Card>
+        </div>
+	    
+        <div class="col-md-9">
+            <Card>
+                <h3>Skills</h3>
+                <Skills :skills="skills" />
+                <h3>Accolades</h3>
+                <Accolades :accolades="accolades" />
+            </Card>
+        </div>
     </div>
 </template>
 
