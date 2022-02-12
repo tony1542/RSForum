@@ -25,7 +25,7 @@
             </template>
 
             <div class="flex align-items-center row">
-                <div class="pr-6 col-md-6">
+                <div class="pr-6 col-md-6 col-lg-3">
                     <img
                         class="img-fluid"
                         :src="post.enclosure['@attributes'].url"
@@ -33,7 +33,7 @@
                     >
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-md-6 col-lg-9">
                     {{ post.description }}
                 </div>
             </div>
