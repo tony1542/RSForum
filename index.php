@@ -1,8 +1,8 @@
 <?php
 
 header('Access-Control-Allow-Origin: *');
-header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-header("Access-Control-Allow-Methods: POST, GET, PATCH, DELETE");
+header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With');
+header('Access-Control-Allow-Methods: POST, GET, PATCH, DELETE');
 header('Content-Type: application/json');
 
 require('vendor/autoload.php');
@@ -24,7 +24,7 @@ try {
         if ($decoded === false) {
             header('HTTP/1.1 401 Unauthorized');
             jsonResponse([
-                "message" => "Access denied."
+                'message' => 'Access denied.'
             ]);
         } else {
             setSignedInUser(new User($decoded->data->id));
