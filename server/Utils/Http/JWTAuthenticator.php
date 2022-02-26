@@ -7,7 +7,6 @@ use Exception;
 use Firebase\JWT\JWT;
 use stdClass;
 
-// TODO extract secret key into .env
 class JWTAuthenticator
 {
     private static function getSecretKey(): string
@@ -35,10 +34,8 @@ class JWTAuthenticator
 
     public static function generate(array $data): string
     {
-        // TODO maybe move to an ENV key
-        $issuer_claim = "localhost:8080";
-        // TODO is this needed?
-        $audience_claim = "test_audience";
+        $issuer_claim = getenv('JWT_SECRET_KEY');
+        $audience_claim = "RSForum";
         $issuedat_claim = time(); // issued at
         $notbefore_claim = $issuedat_claim; // not before in seconds
         $expire_claim = $issuedat_claim + (60 * 60 * 60 * 60 * 60); // expire time in seconds
