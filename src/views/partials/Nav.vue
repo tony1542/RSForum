@@ -25,7 +25,7 @@
                 id="navbarNav"
                 class="collapse navbar-collapse"
             >
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav me-auto">
                     <li class="nav-item">
                         <router-link
                             class="nav-link"
@@ -44,7 +44,7 @@
                         </router-link>
                     </li>
                 </ul>
-                <ul class="navbar-nav mb-2 mb-lg-0">
+                <ul class="navbar-nav">
                     <li
                         v-show="store.isUserSignedIn()"
                         class="nav-item"
