@@ -4,7 +4,7 @@
 
         <!-- Render requested component -->
         <div class="flex justify-center align-items-center">
-            <div class="content rounded">
+            <div class="container">
                 <Errors :errors="store.errors" />
 
                 <div
@@ -57,9 +57,4 @@
 <style>
 	/* Include our custom styles */
     @import "src/assets/scss/styles.scss";
-
-    .content {
-        padding: 1rem;
-        width: 75%;
-    }
 </style>
