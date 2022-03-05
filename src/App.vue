@@ -4,7 +4,7 @@
 
         <!-- Render requested component -->
         <div class="flex justify-center align-items-center">
-            <div class="container">
+            <div class="container mb-8 mt-8">
                 <Errors :errors="store.errors" />
 
                 <div
