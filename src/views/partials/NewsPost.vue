@@ -10,7 +10,7 @@
             <div class="flex align-items-center row">
                 <div class="pr-6 col-md-6 col-lg-3">
                     <img
-                        class="img-fluid mb-sm-3"
+                        class="img-fluid mb-2"
                         :src="post.enclosure['@attributes'].url"
                         alt="Descriptive Image"
                     >
