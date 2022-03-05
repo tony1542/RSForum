@@ -11,6 +11,11 @@
   --primary-dark: #{$green-dark};
   --darkBackground: #{$black-light};
 
+  --background-color-primary: #ebebeb;
+  --background-color-secondary: #fafafa;
+  --accent-color: #cacaca;
+  --text-primary-color: #222;
+
   // Colors
   --transparent: #{$transparent};
   --black-darkest: #{$black-darkest};
@@ -69,6 +74,14 @@
   --blue-light: #{$blue-light};
   --blue-lighter: #{$blue-lighter};
   --blue-lightest: #{$blue-lightest};
+}
+
+// A few overrides for dark themes
+:root.dark-theme {
+  --background-color-primary: #1e1e1e;
+  --background-color-secondary: #2d2d30;
+  --accent-color: #3f3f3f;
+  --text-primary-color: #ddd;
 }
 
 html {
