@@ -32,13 +32,11 @@
                     this.setTheme("light-theme");
                 }
             },
-		
             setTheme(theme) {
                 localStorage.setItem("user-theme", theme);
                 this.userTheme = theme;
                 document.documentElement.className = theme;
             },
-		
             getMediaPreference() {
                 const hasDarkPreference = window.matchMedia(
                     "(prefers-color-scheme: dark)"

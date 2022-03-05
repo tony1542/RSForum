@@ -27,4 +27,11 @@
 </script>
 
 <style scoped>
+	.card {
+		background-color: var(--background-color-secondary);
+	}
+	
+	.card-header, .card-footer {
+		background-color: var(--accent-color);
+	}
 </style>

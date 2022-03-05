@@ -13,7 +13,7 @@
 
   --background-color-primary: #ebebeb;
   --background-color-secondary: #fafafa;
-  --accent-color: #cacaca;
+  --accent-color: rgba(0, 0, 0, 0.03);
   --text-primary-color: #222;
 
   // Colors
@@ -84,10 +84,12 @@
   --text-primary-color: #ddd;
 }
 
-html {
+html, body {
   font-family: var(--font);
-  background-color: $grey-light;
+  background-color: var(--background-color-primary);
+  color: var(--text-primary-color);
 }
+
 hr {
   margin-top: 1rem;
   margin-bottom: 1rem;
