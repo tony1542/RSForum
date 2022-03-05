@@ -45,6 +45,11 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <span class="nav-link">
+                            <ThemeSwitcher />
+                        </span>
+                    </li>
                     <li
                         v-show="store.isUserSignedIn()"
                         class="nav-item"
@@ -87,9 +92,11 @@
 
 <script>
     import Store from "../../store";
+    import ThemeSwitcher from "./ThemeSwitcher";
 
     export default {
         name: "Nav",
+        components: {ThemeSwitcher},
         data() {
             return {
                 store: Store
