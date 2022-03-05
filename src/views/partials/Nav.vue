@@ -132,6 +132,6 @@ a:hover {
 
 /* https://router.vuejs.org/api/#active-class */
 .router-link-active {
-    color: var(--primary);
+    color: var(--primary) !important;
 }
 </style>
