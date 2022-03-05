@@ -51,15 +51,11 @@ function setApplicationVariables(): void
     
     // Set proper timezone for all date calls
     date_default_timezone_set('America/Chicago');
-    
-    if (Server::isLocalHost()) {
-        $env_file_path = Server::getRoot() . DIRECTORY_SEPARATOR . 'config';
-        EnvValidator::fileExists($env_file_path . DIRECTORY_SEPARATOR . '.env');
-    } else {
-        $env_file_path = Server::getRoot() . 'config';
-        EnvValidator::fileExists($env_file_path . DIRECTORY_SEPARATOR . '.env');
-    }
-    
+
+    // Ensure .env file exists
+    $env_file_path = Server::getRoot() . DIRECTORY_SEPARATOR;
+    EnvValidator::fileExists($env_file_path . DIRECTORY_SEPARATOR . '.env');
+
     // Load .env file into the application
     $dot_env = Dotenv::create($env_file_path);
     $dot_env->load();

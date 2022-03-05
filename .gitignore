@@ -4,9 +4,9 @@ vendor
 /dist
 
 # local env files
-config/.env
-config/.env.local
-config/.env.*.local
+.env
+.env.local
+.env.*.local
 
 # Log files
 npm-debug.log*
