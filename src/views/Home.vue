@@ -11,12 +11,10 @@
 <script>
     import Request from "../helpers/Request";
     import NewsPost from "./partials/NewsPost";
-    import ThemeSwitcher from "./partials/ThemeSwitcher";
 
     export default {
         name: 'Home',
         components: {
-            ThemeSwitcher,
             NewsPost
         },
         data() {
