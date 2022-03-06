@@ -3,8 +3,8 @@
         <Nav />
 
         <!-- Render requested component -->
-        <div class="flex justify-center align-items-center">
-            <div class="container mb-8 mt-8">
+        <div>
+            <div class="container flex justify-center align-items-center mb-8 mt-8">
                 <Errors :errors="store.errors" />
 
                 <div
