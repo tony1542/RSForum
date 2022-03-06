@@ -74,10 +74,13 @@
                 defaultTheme: 'device-default-theme'
             }
         },
-        created() {
+        mounted() {
             const preference = this.getMediaPreference();
-	
-            if (preference === this.defaultTheme) {
+            const activeTheme = localStorage.getItem(
+                this.userThemeKey
+            );
+			
+            if (preference === this.defaultTheme || !activeTheme) {
                 document.documentElement.className = this.getDeviceDefault();
             } else {
                 this.setTheme(
