@@ -64,7 +64,6 @@
 	height: 100%;
 	background-color: rgba(0, 0, 0, 0.5);
 	display: table;
-	transition: opacity 0.3s ease;
 }
 
 .modal-wrapper {
@@ -79,33 +78,10 @@
 	background-color: var(--background-color-secondary);
 	border-radius: 2px;
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
-	transition: all 0.3s ease;
 }
 
 .modal-body {
 	margin: 20px 0;
 }
 
-/*
- * The following styles are auto-applied to elements with
- * transition="modal" when their visibility is toggled
- * by Vue.js.
- *
- * You can easily play with the modal transition by editing
- * these styles.
- */
-
-.modal-enter-from {
-	opacity: 0;
-}
-
-.modal-leave-to {
-	opacity: 0;
-}
-
-.modal-enter-from .modal-container,
-.modal-leave-to .modal-container {
-	-webkit-transform: scale(1.1);
-	transform: scale(1.1);
-}
 </style>
