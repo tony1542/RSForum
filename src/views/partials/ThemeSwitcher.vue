@@ -1,8 +1,6 @@
 <template>
     <span @click="toggleTheme">
-        <span
-            v-if="userTheme === 'dark-theme'"
-        >
+        <span v-if="userTheme === 'dark-theme'">
             <FontAwesomeIcon icon="fa-solid fa-sun" />
         </span>
         <span v-else>
@@ -38,6 +36,11 @@
                 document.documentElement.className = theme;
             },
             getMediaPreference() {
+                const activeTheme = localStorage.getItem("user-theme");
+                if (activeTheme) {
+                    return activeTheme;
+                }
+				
                 const hasDarkPreference = window.matchMedia(
                     "(prefers-color-scheme: dark)"
                 ).matches;
