@@ -50,6 +50,13 @@
     }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+	a {
+		color: var(--primary);
+		text-decoration: none;
+		
+		&:hover {
+			color: var(--primary-dark);
+		}
+	}
 </style>
