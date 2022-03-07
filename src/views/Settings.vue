@@ -61,8 +61,6 @@
 </template>
 
 <script>
-    import Card from "./partials/Card";
-	
     export default {
         name: "Settings",
         data() {

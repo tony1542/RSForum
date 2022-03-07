@@ -1,15 +1,17 @@
+<!-- TODO the click-outside is firing before the modal is visible; need to dig a little more -->
 <template>
     <transition
         name="modal"
     >
         <div
             v-show="show"
+            v-click-outside="emitClose"
             class="modal-mask"
         >
             <div class="modal-wrapper">
                 <div
                     class="modal-container"
-                    @keydown.esc="$emit('close')"
+                    @keydown.esc="emitClose"
                 >
                     <div
                         class="modal-header flex justify-between"
@@ -17,7 +19,7 @@
                         <slot name="header" />
                         <span
                             class="cursor-pointer"
-                            @click="$emit('close')"
+                            @click="emitClose"
                         >
                             x
                         </span>
@@ -34,7 +36,7 @@
                     >
                         <slot name="footer" />
                         <button
-                            @click="$emit('close')"
+                            @click="emitClose"
                         >
                             Close
                         </button>
@@ -50,6 +52,15 @@
         name: "Modal",
         props: {
             show: Boolean
+        },
+        methods: {
+            emitClose: function () {
+                if (!this.show) {
+                    return;
+                }
+				
+                this.$emit('close');
+            }
         }
     }
 </script>
