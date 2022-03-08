@@ -81,7 +81,7 @@
                             localStorage.setItem('token', data.token);
                             Store.setJWT(data.token);
                             this.resetForm();
-                            this.$router.push('/');
+                            this.$router.push('/Account');
                         }
                     });
             },

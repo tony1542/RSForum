@@ -144,10 +144,6 @@
     background-color: var(--darkBackground);
 }
 
-.links {
-    padding: 0.5rem 1rem;
-}
-
 a {
     font-weight: 500;
     color: var(--grey);

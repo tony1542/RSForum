@@ -1,11 +1,9 @@
-<!-- TODO the click-outside is firing before the modal is visible; need to dig a little more -->
 <template>
     <transition
         name="modal"
     >
         <div
             v-show="show"
-            v-click-outside="emitClose"
             class="modal-mask"
         >
             <div class="modal-wrapper">

@@ -26,7 +26,6 @@
                     </div>
                     <div>
                         <label for="account-type">Account Type</label>
-                        <!-- TODO this is slightly less wide than other inputs; fix this -->
                         <select
                             id="account-type"
                             v-model.number="accountType"
@@ -132,7 +131,7 @@
                             localStorage.setItem('token', data.token);
                             this.store.setJWT(data.token);
                             this.resetForm();
-                            this.$router.push('/');
+                            this.$router.push('/Account');
                         }
                     });
             },
