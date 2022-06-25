@@ -64,13 +64,9 @@ function setApplicationVariables(): void
     EnvValidator::enforce();
 
     // Checks if we have a dependency injection container set. If we don't, add a new one to the session
-    $container = getDependencyContainer();
-    
-    if (!$container instanceof ContainerInterface) {
-        $container = new DependencyInjectionContainer();
-    }
-    
-    setDependencyContainer($container);
+    setDependencyContainer(
+        getDependencyContainer()
+    );
 }
 
 /**
