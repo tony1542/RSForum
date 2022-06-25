@@ -1,0 +1,20 @@
+# docker-compose.yml
+version: "3.8"
+services:
+  apache:
+    container_name: apache
+    build: ./docker/apache
+    links:
+      - php
+    ports:
+      - "80:80"
+    volumes:
+      - ./src:/usr/local/apache2/htdocs
+  php:
+    container_name: php
+    build: ./docker/php
+    ports:
+      - "9001:9001"
+    volumes:
+      - ./server:/usr/local/apache2/htdocs
+    working_dir: /usr/local/apache2/htdocs
