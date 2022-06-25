@@ -59,12 +59,7 @@
                             class="nav-item"
                             @click="logout"
                         >
-                            <router-link
-                                to="/"
-                                class="nav-link"
-                            >
-                                Logout
-                            </router-link>
+                            <span class="nav-link cursor-pointer">Logout</span>
                         </li>
                         <li
                             v-show="!store.isUserSignedIn()"
@@ -128,6 +123,9 @@
             logout() {
                 localStorage.clear();
                 this.store.clearJWTAndData();
+                this.$router.push({
+                    path: '/'
+                });
             }
         }
     }
@@ -142,17 +140,6 @@
     padding-top: 1rem;
     padding-bottom: 1rem;
     background-color: var(--darkBackground);
-}
-
-a {
-    font-weight: 500;
-    color: var(--grey);
-    margin: 0 5px;
-    text-decoration: none;
-}
-
-a:hover {
-    color: var(--grey-lightest);
 }
 
 /* https://router.vuejs.org/api/#active-class */

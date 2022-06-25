@@ -11,3 +11,5 @@
 - `$ npm run start` to get Vue frontend up (dev with hot-reload)
      - _`$ npm run build` for prod use_
 - `localhost:8080` to view the running site
+# Running Tests
+- `./bin/test.sh`
