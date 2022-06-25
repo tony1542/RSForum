@@ -30,7 +30,7 @@ class Connection
         $password = $options[self::PASSWORD];
     
         $pdo = new PDO(
-            $connection . ';dbname=' . $dbname,
+            'mysql:host=' . $connection . ';dbname=' . $dbname,
             $username,
             $password
         );
