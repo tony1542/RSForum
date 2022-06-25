@@ -61,7 +61,7 @@ function setApplicationVariables(): void
     $dot_env->load();
     
     // Check if our expected .env file has the expected values
-    EnvValidator::enforce('DB');
+    EnvValidator::enforce();
 
     // Checks if we have a dependency injection container set. If we don't, add a new one to the session
     $container = getDependencyContainer();

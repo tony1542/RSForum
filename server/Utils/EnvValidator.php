@@ -23,17 +23,15 @@ class EnvValidator
      * Loops through the enforcements & checks our .env file for them
      * If they are not found, an exception is thrown
      *
-     * @param string $database_name
-     *
      * @throws EnvException
      */
-    public static function enforce(string $database_name): void
+    public static function enforce(): void
     {
         $enforcements = [
-            $database_name . '_NAME',
-            $database_name . '_CONNECTION_URL',
-            $database_name . '_USERNAME',
-            $database_name . '_PASSWORD',
+            'DB_NAME',
+            'DB_CONNECTION_URL',
+            'DB_USERNAME',
+            'DB_PASSWORD',
             'JWT_SECRET_KEY'
         ];
 
