@@ -34,7 +34,7 @@ class JWTAuthenticator
 
     public static function generate(array $data): string
     {
-        $issuer_claim = getenv('JWT_SECRET_KEY');
+        $issuer_claim = getenv("JWT_SECRET_KEY");
         $audience_claim = "RSForum";
         $issuedat_claim = time(); // issued at
         $notbefore_claim = $issuedat_claim; // not before in seconds

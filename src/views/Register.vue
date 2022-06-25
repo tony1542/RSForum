@@ -135,13 +135,6 @@
                         }
                     });
             },
-            addError: function (error) {
-                if (this.errors.includes(error)) {
-                    return;
-                }
-
-                this.errors.push(error);
-            },
             resetForm: function () {
                 this.username = '';
                 this.email = '';
