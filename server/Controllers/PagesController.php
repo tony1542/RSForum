@@ -2,8 +2,12 @@
 
 namespace App\Controllers;
 
+use App\Utils\Traits\Json;
+
 class PagesController extends AbstractBaseController
 {
+    use Json;
+    
     public function canAccess(string $action, array $parameters = []): bool
     {
         if ($action === 'create') {
@@ -15,7 +19,9 @@ class PagesController extends AbstractBaseController
     
     public function index(): void
     {
-        // TODO
+        echo $this->toJson([
+            'Home page'
+        ]);
     }
     
     public function create(): void
