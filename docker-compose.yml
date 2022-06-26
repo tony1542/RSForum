@@ -1,20 +1,26 @@
-# docker-compose.yml
-version: "3.8"
+version: "3.9"
 services:
-  apache:
-    container_name: apache
-    build: ./docker/apache
-    links:
-      - php
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-server-80
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - .:/application
+    restart: always
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+      - MYSQL_ROOT_PASSWORD=
+      - MYSQL_DATABASE=rsforumvue
+      - MYSQL_PASSWORD=
+    ports:
+      - "8082:3306"
+  php:
+    container_name: website_img
+    build:
+      context: ./
     ports:
       - "80:80"
     volumes:
-      - ./src:/usr/local/apache2/htdocs
-  php:
-    container_name: php
-    build: ./docker/php
-    ports:
-      - "9001:9001"
-    volumes:
-      - ./server:/usr/local/apache2/htdocs
-    working_dir: /usr/local/apache2/htdocs
+      - ./server:/var/www/html
+    depends_on:
+      - mysql
