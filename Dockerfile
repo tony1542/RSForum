@@ -4,7 +4,7 @@ WORKDIR /var/www/html
 
 # Copy files over and expose port
 COPY server/ server
-COPY composer.json ./
+COPY server/composer.json ./
 
 # TODO somehow to init the db said against our db container?
 
@@ -20,9 +20,11 @@ RUN a2enmod rewrite
 RUN apt-get install -y nano
 
 # Install Composer & run the install for project dependencies
-RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-RUN php composer-setup.php --install-dir=. --filename=composer
-RUN mv composer /usr/local/bin/
+#RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+#RUN php composer-setup.php --install-dir=. --filename=composer
+#RUN mv composer /usr/local/bin/
+#RUN composer install
+COPY --from=composer /usr/bin/composer /usr/bin/composer
 RUN composer install
 
 # Expose the port to use
