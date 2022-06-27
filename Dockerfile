@@ -6,8 +6,6 @@ WORKDIR /var/www/html
 COPY server/ server
 COPY server/composer.json ./
 
-# TODO somehow to init the db said against our db container?
-
 # Install git, PDO, mysqli and enable apache rewriting
 RUN apt-get update \
     && apt-get install -y git \
@@ -20,10 +18,6 @@ RUN a2enmod rewrite
 RUN apt-get install -y nano
 
 # Install Composer & run the install for project dependencies
-#RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-#RUN php composer-setup.php --install-dir=. --filename=composer
-#RUN mv composer /usr/local/bin/
-#RUN composer install
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 RUN composer install
 
