@@ -13,7 +13,7 @@ services:
       - MYSQL_DATABASE=rsforumvue
       - MYSQL_PASSWORD=
     ports:
-      - "8082:3306"
+      - "3306:3306"
   php:
     container_name: website_img
     build:

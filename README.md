@@ -2,9 +2,9 @@
 - `$ npm install`
 - `$ composer install`
 # Populate DB
-- Run the `seed.sql` against your localhost DB
+- Run the `server/seed.sql` against your localhost DB (the container is brought up on port 3306 with all mysql defaults for login)
 # Load environment variables
-- Populate the `.env` file replacing the values where it makes sense with the `.env.example` file
+- Populate the `server/.env` file replacing the values where it makes sense with the `.env.example` file
 - The `JWT_SECRET_KEY` can be any string; make sure it is populated
 # Docker
 - To get the PHP / Apache container up and running
