@@ -5,12 +5,15 @@ WORKDIR /var/www/html
 # Copy files over and expose port
 COPY server/ ./
 
-# Install git, PDO, mysqli and enable apache rewriting
+# Install PDO & mysqli
 RUN apt-get update \
-    && apt-get install -y git \
-    libzip-dev \
-    zip
+    && apt-get install -y libzip-dev zip
 RUN docker-php-ext-install pdo pdo_mysql mysqli zip
+
+# Debug install & enable
+RUN pecl install xdebug \
+    && docker-php-ext-enable xdebug
+
 RUN a2enmod rewrite
 
 # Install utils
