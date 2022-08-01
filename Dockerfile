@@ -3,8 +3,7 @@ FROM php:8.1-apache
 WORKDIR /var/www/html
 
 # Copy files over and expose port
-COPY server/ server
-COPY composer.json ./
+COPY server/ ./
 
 # Install git, PDO, mysqli and enable apache rewriting
 RUN apt-get update \

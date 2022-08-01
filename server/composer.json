@@ -1,11 +1,11 @@
 {
   "autoload": {
     "psr-4": {
-      "App\\": "server/src/",
-      "Tests\\": "server/Tests/"
+      "App\\": "src/",
+      "Tests\\": "Tests/"
     },
     "files": [
-      "server/src/Utils/Helpers/helpers.php",
+      "src/Utils/Helpers/helpers.php",
       "src/Utils/Helpers/session_helpers.php"
     ]
   },
