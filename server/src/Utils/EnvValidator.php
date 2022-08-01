@@ -32,6 +32,7 @@ class EnvValidator
             'DB_CONNECTION_URL',
             'DB_USERNAME',
             'DB_PASSWORD',
+            'DB_PORT',
             'JWT_SECRET_KEY'
         ];
 
