@@ -26,7 +26,7 @@ function setDependencyContainer(ContainerInterface $container): void
 }
 
 /**
- * Returns the current signed in user (object) from our session
+ * Returns the current signed-in user (object) from our session
  * If one doesn't exist, return an empty user object
  *
  * @return User
