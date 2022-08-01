@@ -5,7 +5,7 @@ services:
     container_name: mysql-server-80
     command: --default-authentication-plugin=mysql_native_password
     volumes:
-      - .:/application
+      - ./server/init:/docker-entrypoint-initdb.d
     restart: always
     environment:
       - MYSQL_ALLOW_EMPTY_PASSWORD=true
