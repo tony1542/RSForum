@@ -44,7 +44,7 @@ class Request
         if ($controller === '') {
             return self::$default_controller;
         }
-        
+    
         return urldecode($controller) . self::$default_controller_suffix;
     }
     

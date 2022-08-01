@@ -71,7 +71,7 @@ class UserAccolades extends AbstractHighscoreComponent
         foreach ($this->accolades as $accolade_row) {
             $sql = '';
             $sql .= 'score = ' . (int) filter_var($accolade_row['score'], FILTER_SANITIZE_NUMBER_INT);
-            $sql .= ', rank = ' . (int) filter_var($accolade_row['rank'], FILTER_SANITIZE_NUMBER_INT);
+            $sql .= ', `rank` = ' . (int) filter_var($accolade_row['rank'], FILTER_SANITIZE_NUMBER_INT);
             $sql .= ', accolade_name = ?';
             $sql .= ', accolade_index = ?';
             $sql = $database->prepare('INSERT INTO user_accolades_line SET ' . $sql . ', user_accolade_id = ?');

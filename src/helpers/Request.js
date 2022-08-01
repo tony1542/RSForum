@@ -2,7 +2,7 @@ import Store from "../store";
 
 export default class Request {
     constructor(url) {
-        this.base = 'http://localhost:9001';
+        this.base = 'http://localhost';
         this.url = url;
     }
 

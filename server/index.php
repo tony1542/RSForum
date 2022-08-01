@@ -15,11 +15,11 @@ use App\Utils\Http\Server;
 
 try {
     setApplicationVariables();
-
+    
     $header = Server::getAuthHeader();
     if ($header) {
         $decoded = JWTAuthenticator::authenticate($header);
-
+        
         // JWT failed
         if ($decoded === false) {
             header('HTTP/1.1 401 Unauthorized');
@@ -30,7 +30,7 @@ try {
             setSignedInUser(new User($decoded->data->id));
         }
     }
-
+    
     Router::callAction();
 } catch (Throwable $t) {
     $errors = ['Something went wrong.'];
@@ -47,7 +47,7 @@ try {
             $errors = [$t->getMessage()];
         }
     }
-
+    
     \jsonResponse([
         'errors' => $errors
     ]);

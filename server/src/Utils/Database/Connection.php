@@ -12,6 +12,7 @@ class Connection
     public const DB_NAME    = 'db_name';
     public const USERNAME   = 'username';
     public const PASSWORD   = 'password';
+    public const PORT   = 'port';
     
     /**
      * Create an instance of our database
@@ -28,9 +29,10 @@ class Connection
         $dbname = $options[self::DB_NAME];
         $username = $options[self::USERNAME];
         $password = $options[self::PASSWORD];
-    
+        $port = $options[self::PORT];
+        
         $pdo = new PDO(
-            'mysql:host=' . $connection . ';dbname=' . $dbname,
+            'mysql:host=' . $connection . ';port=' . $port . ';dbname=' . $dbname,
             $username,
             $password
         );
@@ -57,7 +59,8 @@ class Connection
             self::CONNECTION => getenv('DB_CONNECTION_URL'),
             self::DB_NAME    => getenv('DB_NAME'),
             self::USERNAME   => getenv('DB_USERNAME'),
-            self::PASSWORD   => getenv('DB_PASSWORD')
+            self::PASSWORD   => getenv('DB_PASSWORD'),
+            self::PORT   => getenv('DB_PORT')
         ];
     }
     
