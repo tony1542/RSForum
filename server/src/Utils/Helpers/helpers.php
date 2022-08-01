@@ -4,8 +4,6 @@ use App\Utils\EnvException;
 use App\Utils\EnvValidator;
 use App\Utils\Http\Server;
 use Dotenv\Dotenv;
-use Psr\Container\ContainerInterface;
-use App\Utils\Container\DependencyInjectionContainer;
 use App\Utils\Database\Connection;
 
 /**
@@ -36,6 +34,7 @@ function dd($array, $verbose = false): void
 
 function jsonResponse($data, $jsonOption = 0): void
 {
+    header('Content-Type: application/json');
     echo json_encode($data, $jsonOption);
     die;
 }
