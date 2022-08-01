@@ -3,7 +3,7 @@ FROM php:8.1-apache
 WORKDIR /var/www/html
 
 # Copy files over and expose port
-COPY server/ ./
+COPY ../../server ./
 
 # Install PDO & mysqli
 RUN apt-get update \

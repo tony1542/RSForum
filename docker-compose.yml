@@ -18,6 +18,7 @@ services:
     container_name: website_img
     build:
       context: ./
+      dockerfile: docker/php/Dockerfile
     ports:
       - "80:80"
     volumes:

@@ -18,4 +18,4 @@
     - `$ npm install`
     - `$ composer install`
   - Populate DB
-    - Run the `server/seed.sql` against your localhost DB (the container is brought up on port 3306 with all mysql defaults for login)
+    - Run the `server/seed.sql` against your localhost DB
