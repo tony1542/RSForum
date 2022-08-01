@@ -91,7 +91,7 @@ class UserSkills extends AbstractHighscoreComponent
             $sql = '';
             $sql .= 'skill_exp = ' . (int) filter_var($skill_row['exp'], FILTER_SANITIZE_NUMBER_INT);
             $sql .= ', skill_name = ?';
-            $sql .= ', rank = ' . (int) filter_var($skill_row['rank'], FILTER_SANITIZE_NUMBER_INT);
+            $sql .= ', `rank` = ' . (int) filter_var($skill_row['rank'], FILTER_SANITIZE_NUMBER_INT);
             $sql = $database->prepare('INSERT INTO user_skills SET ' . $sql . ', username = ?');
             $sql->execute([$skill_row['skill_name'], $this->username]);
         }
