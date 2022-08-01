@@ -49,7 +49,11 @@ class Server
             '[::1]'
         ];
         
-        return (in_array($address, $whitelist));
+        if (in_array($address, $whitelist)) {
+            return true;
+        }
+        
+        return self::getOptions()['HTTP_HOST'] === 'localhost';
     }
     
     public static function isCommandLine(): bool

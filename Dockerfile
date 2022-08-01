@@ -4,7 +4,7 @@ WORKDIR /var/www/html
 
 # Copy files over and expose port
 COPY server/ server
-COPY server/composer.json ./
+COPY composer.json ./
 
 # Install git, PDO, mysqli and enable apache rewriting
 RUN apt-get update \

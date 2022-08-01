@@ -1,12 +1,12 @@
 {
   "autoload": {
     "psr-4": {
-      "App\\": "",
-      "Tests\\": "Tests/"
+      "App\\": "server/src/",
+      "Tests\\": "server/Tests/"
     },
     "files": [
-      "Utils/Helpers/helpers.php",
-      "Utils/Helpers/session_helpers.php"
+      "server/src/Utils/Helpers/helpers.php",
+      "src/Utils/Helpers/session_helpers.php"
     ]
   },
   "require": {
