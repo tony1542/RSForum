@@ -1,5 +1,15 @@
 version: "3.9"
 services:
+  php:
+    container_name: website_img
+    build:
+      context: ./
+    ports:
+      - "80:80"
+    volumes:
+      - ./server:/var/www/html
+    depends_on:
+      - mysql
   mysql:
     image: mysql:8.0
     container_name: mysql-server-80
@@ -14,13 +24,3 @@ services:
       - MYSQL_PASSWORD=
     ports:
       - "3306:3306"
-  php:
-    container_name: website_img
-    build:
-      context: ./
-    ports:
-      - "80:80"
-    volumes:
-      - ./server:/var/www/html
-    depends_on:
-      - mysql
