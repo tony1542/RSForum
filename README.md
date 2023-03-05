@@ -17,5 +17,5 @@
   - Dependency Installation
     - `$ npm install`
     - `$ composer install`
-  - Populate DB
-    - Run the `server/seed.sql` against your localhost DB
+  - Populate DB (if doing non-docker way)
+    - Run the `server/init/seed.sql` against your localhost DB
