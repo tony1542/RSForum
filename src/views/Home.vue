@@ -9,8 +9,8 @@
 </template>
 
 <script>
-    // import Request from "../helpers/Request";
-    // import NewsPost from "./partials/NewsPost.vue";
+    import Request from "../helpers/Request";
+    import NewsPost from "./partials/NewsPost.vue";
 
     export default {
         name: 'Home',
