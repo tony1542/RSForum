@@ -3,6 +3,10 @@ import router from "./router";
 import {createApp} from 'vue'
 import store from './store'
 
+// Bootstrap includes
+import "bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
+
 // Custom directives
 // import clickOutside from "./helpers/Directives/clickOutside";
 

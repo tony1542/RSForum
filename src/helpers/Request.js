@@ -2,7 +2,8 @@ import Store from "../store";
 
 export default class Request {
     constructor(url) {
-        this.base = 'http://localhost';
+        // Defined within docker-compose.yml
+        this.base = 'http://localhost:80';
         this.url = url;
     }
 

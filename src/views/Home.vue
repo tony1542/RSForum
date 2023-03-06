@@ -1,10 +1,10 @@
 <template>
     <div>
-<!--        <NewsPost-->
-<!--            v-for="post in feed"-->
-<!--            :key="post.guid"-->
-<!--            :post="post"-->
-<!--        />-->
+        <NewsPost
+            v-for="post in feed"
+            :key="post.guid"
+            :post="post"
+        />
     </div>
 </template>
 
