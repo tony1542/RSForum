@@ -12,13 +12,16 @@
   "license": "ISC",
   "dependencies": {
     "jwt-decode": "^3.1.2",
+    "rollup-plugin-vue": "^6.0.0",
     "vue": "^3.2.37",
     "vue-router": "^4.1.6",
     "vuex": "^4.0.2"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^3.0.3",
-    "vite": "^3.0.7"
+    "@vitejs/plugin-vue": "^4.0.0",
+    "postcss-nesting": "^11.2.1",
+    "sass": "^1.58.3",
+    "vite": "^4.1.4"
   },
   "browserslist": [
     "Chrome >= 45",

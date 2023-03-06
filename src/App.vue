@@ -56,5 +56,5 @@
 
 <style>
 	/* Include our custom styles */
-    @import "src/assets/scss/styles.scss";
+    @import "assets/scss/styles.scss";
 </style>
