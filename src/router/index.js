@@ -1,8 +1,5 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
-
-Vue.use(VueRouter);
+import VueRouter from "vue-router"
+import Home from "../views/Home.vue"
 
 const routes = [
 	{
@@ -13,28 +10,28 @@ const routes = [
 	{
 		path: "/About",
 		name: "About",
-		component: () => import(/* webpackChunkName: "about" */ "../views/About.vue"),
+		component: () => import( "../views/About.vue"),
 	},
 	{
 		path: "/SignIn",
 		name: "Sign In",
-		component: () => import(/* webpackChunkName: "signin" */ "../views/SignIn.vue"),
+		component: () => import("../views/SignIn.vue"),
 	},
 	{
 		path: "/Register",
 		name: "Register",
-		component: () => import(/* webpackChunkName: "register" */ "../views/Register.vue"),
+		component: () => import("../views/Register.vue"),
 	},
 	{
 		path: "/Account",
 		name: "Account",
-		component: () => import(/* webpackChunkName: "account" */ "../views/Account.vue"),
+		component: () => import("../views/Account.vue"),
 	},
-];
+]
 
-const router = new VueRouter({
-	mode: "history",
+const router = VueRouter.createRouter({
+	history: VueRouter.createWebHistory(),
 	routes,
-});
+})
 
-export default router;
+export default router

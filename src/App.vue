@@ -1,5 +1,5 @@
 <template>
-    <div id="app">
+    <div>
         <Nav />
 
         <!-- Render requested component -->
@@ -22,10 +22,10 @@
 </template>
 
 <script>
-    import Nav from "./views/partials/Nav";
+    import Nav from "./views/partials/Nav.vue";
     import Store from "./store";
-    import LoadingSpinner from "./views/partials/LoadingSpinner";
-    import Errors from "./views/partials/Errors";
+    import LoadingSpinner from "./views/partials/LoadingSpinner.vue";
+    import Errors from "./views/partials/Errors.vue";
 
     export default {
         name: 'App',

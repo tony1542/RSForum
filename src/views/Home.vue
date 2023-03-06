@@ -1,16 +1,16 @@
 <template>
     <div>
-        <NewsPost
-            v-for="post in feed"
-            :key="post.guid"
-            :post="post"
-        />
+<!--        <NewsPost-->
+<!--            v-for="post in feed"-->
+<!--            :key="post.guid"-->
+<!--            :post="post"-->
+<!--        />-->
     </div>
 </template>
 
 <script>
-    import Request from "../helpers/Request";
-    import NewsPost from "./partials/NewsPost";
+    // import Request from "../helpers/Request";
+    // import NewsPost from "./partials/NewsPost.vue";
 
     export default {
         name: 'Home',
