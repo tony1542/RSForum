@@ -23,10 +23,10 @@
 
 <style scoped lang="scss">
     span {
-        background-color: var(--red-lightest);
-        border: 1px solid var(--red-light);
-        color: var(--red-dark);
-        display: block;
+	    background-color: var(--red-lightest);
+	    border: 1px solid var(--red-light);
+	    color: var(--red-dark);
+	    display: block;
 	    overflow: auto;
     }
 </style>
