@@ -2,6 +2,9 @@
 - Populate the `server/.env` file replacing the values where it makes sense with the `.env.example` file
 - The `JWT_SECRET_KEY` can be any string; make sure it is populated
 
+# Build images
+- `docker compose up`
+
 # Running Tests
 - `./bin/test.sh`
 

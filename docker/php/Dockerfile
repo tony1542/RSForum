@@ -21,7 +21,7 @@ RUN apt-get install -y nano
 
 # Install Composer & run the install for project dependencies
 COPY --from=composer /usr/bin/composer /usr/bin/composer
-RUN composer install
+RUN cd /var/www/html && composer install --no-interaction
 
 # Expose the port to use
 EXPOSE 80
