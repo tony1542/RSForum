@@ -40,8 +40,8 @@
 </template>
 
 <script>
-    import Card from "../Card";
-    import Asset from "../Asset";
+    import Card from "../Card.vue";
+    import Asset from "../Asset.vue";
     export default {
         name: "Skills",
         components: {

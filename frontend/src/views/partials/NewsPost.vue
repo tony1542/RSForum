@@ -34,7 +34,7 @@
 </template>
 
 <script>
-    import Card from "./Card";
+    import Card from "./Card.vue";
 
     export default {
         name: "NewsPost",

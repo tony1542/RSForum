@@ -104,8 +104,8 @@
 
 <script>
     import Store from "../../store";
-    import Settings from "../Settings";
-    import Modal from "./Modal";
+    import Settings from "../Settings.vue";
+    import Modal from "./Modal.vue";
 	
     export default {
         name: "Nav",

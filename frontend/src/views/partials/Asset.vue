@@ -32,7 +32,7 @@
         },
         methods: {
             getFilePath: function () {
-                return `/src/assets/images/OSRS/${ this.path }.${ this.fileType }`;
+                return `src/assets/images/OSRS/${ this.path }.${ this.fileType }`;
             }
         }
     }

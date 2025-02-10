@@ -10,7 +10,7 @@
 
 <script>
     import Request from "../helpers/Request";
-    import NewsPost from "./partials/NewsPost";
+    import NewsPost from "./partials/NewsPost.vue";
 
     export default {
         name: 'Home',

@@ -26,8 +26,8 @@
 </template>
 
 <script>
-    import Asset from "../Asset";
-    import Card from "../Card";
+    import Asset from "../Asset.vue";
+    import Card from "../Card.vue";
     export default {
         name: "Accolades",
         components: {Card, Asset},
