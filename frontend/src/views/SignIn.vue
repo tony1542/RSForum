@@ -38,7 +38,7 @@
 </template>
 
 <script>
-    import Card from "./partials/Card";
+    import Card from "./partials/Card.vue";
     import Request from "../helpers/Request";
     import Store from "../store";
 

@@ -23,9 +23,9 @@
 
 <script>
     import Request from "../helpers/Request";
-    import Accolades from "./partials/account/Accolades";
-    import Skills from "./partials/account/Skills";
-    import Card from "./partials/Card";
+    import Accolades from "./partials/account/Accolades.vue";
+    import Skills from "./partials/account/Skills.vue";
+    import Card from "./partials/Card.vue";
 
     export default {
         name: "Account",
