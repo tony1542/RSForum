@@ -11,5 +11,4 @@ COPY . .
 
 EXPOSE 8080
 
-CMD ["sh", "-c", "npm run start & tail -f /dev/null"]
-#CMD ["npm", "run", "start"]
+CMD ["npm", "run", "start"]
