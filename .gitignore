@@ -4,6 +4,8 @@ server/vendor
 /dist
 
 server/.env
+server/coverage
+server/.phpunit.result.cache
 
 npm-debug.log*
 yarn-debug.log*
