@@ -2,7 +2,7 @@
   "autoload": {
     "psr-4": {
       "App\\": "src/",
-      "Tests\\": "Tests/"
+      "Tests\\": "tests/"
     },
     "files": [
       "src/Utils/Helpers/helpers.php",

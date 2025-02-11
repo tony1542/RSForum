@@ -6,7 +6,7 @@
 - The `JWT_SECRET_KEY` can be any string; make sure it is populated
 
 # Running Tests
-- `./bin/test.sh`
+- `docker exec website_img ./vendor/bin/phpunit -v`
 
 # Running the stack
 - `docker compose up`
