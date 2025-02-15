@@ -61,7 +61,7 @@ class Request
 
     public static function getParameters(): array
     {
-        return $_GET['parameters'] ?? $_POST['parameters'] ?? [];
+        return self::getInputStream() ?? $_GET['parameters'] ?? $_POST['parameters'] ?? [];
     }
 
     public static function getInputStream(): array

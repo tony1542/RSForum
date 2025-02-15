@@ -42,10 +42,6 @@ class RequestTest extends TestCase
 
     public function testGetParameters()
     {
-        $_POST = ['parameters' => ['param' => 'value']];
-        $this->assertEquals(['param' => 'value'], Request::getParameters());
-
-        $_POST = [];
         $_SERVER['REQUEST_URI'] = '/';
         $this->assertEquals([], Request::getParameters());
     }

@@ -16,7 +16,7 @@ use App\Utils\Http\Server;
 try {
     setApplicationVariables();
 
-    $server = new Server;
+    $server = new Server();
     $header = $server->getAuthHeader();
     if ($header) {
         $decoded = JWTAuthenticator::authenticate($header);
