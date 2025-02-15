@@ -1,15 +1,6 @@
-#
-CREATE
-database
 CREATE
 DATABASE IF NOT EXISTS rsforumvue;
 
-#
-SELECT our new database FOR operation USE rsforumvue;
-
-#
-CREATE
-USER TABLE
 CREATE TABLE user
 (
     user_id         int AUTO_INCREMENT,
