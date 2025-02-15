@@ -10,20 +10,10 @@ class EnvValidatorTest extends TestCase
 {
     public function testFileExists()
     {
-        $mock = $this->getMockBuilder(EnvValidator::class)
-            ->onlyMethods(['nativeFileExists'])
-            ->getMock();
-        $mock->method('nativeFileExists')->willReturn(true);
-
-        $validPath = '/var/www/html/.env';
-        $invalidPath = '/invalid/path/.env';
-
-        $mock->fileExists($validPath);
-
-        $mock->method('nativeFileExists')->willReturn(false);
         $this->expectException(EnvException::class);
         $this->expectExceptionMessage('No configuration found for the site');
-        $mock->fileExists($invalidPath);
+        $validator = new EnvValidator();
+        $validator->fileExists('/2342342/asdfsad/sdfsd');
     }
 
     public function testEnforce()

@@ -14,14 +14,9 @@ class EnvValidator
      */
     public static function fileExists(string $env_file_path): void
     {
-        if (!(new self)->nativeFileExists($env_file_path)) {
+        if (!file_exists($env_file_path)) {
             throw new EnvException('No configuration found for the site');
         }
-    }
-
-    public function nativeFileExists($path): bool
-    {
-        return file_exists($path);
     }
 
     /**
