@@ -1,3 +1,5 @@
+[![Tests](https://github.com/tony1542/RSForumVue/actions/workflows/tests.yml/badge.svg)](https://github.com/tony1542/RSForumVue/actions/workflows/tests.yml)
+
 # Pre-requisites
 
 - Docker
