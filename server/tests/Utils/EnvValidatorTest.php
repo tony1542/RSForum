@@ -23,7 +23,7 @@ class EnvValidatorTest extends TestCase
         $mock->method('nativeFileExists')->willReturn(false);
         $this->expectException(EnvException::class);
         $this->expectExceptionMessage('No configuration found for the site');
-        EnvValidator::fileExists($invalidPath);
+        $mock->fileExists($invalidPath);
     }
 
     public function testEnforce()
