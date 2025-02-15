@@ -149,7 +149,7 @@ class User
 
         // Check for existing usernames
         $database = getDatabase();
-        $sql = $database->prepare("SELECT COUNT(*) AS COUNT FROM USER WHERE username = ?");
+        $sql = $database->prepare("SELECT COUNT(*) AS count FROM user WHERE username = ?");
         $sql->execute([$username]);
         $results = $sql->fetch(PDO::FETCH_ASSOC);
 
