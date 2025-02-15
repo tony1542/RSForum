@@ -1,66 +1,66 @@
 <template>
-    <transition
-        name="modal"
-    >
-        <div
-            v-show="show"
-            class="modal-mask"
-        >
-            <div class="modal-wrapper">
-                <div
-                    class="modal-container"
-                    @keydown.esc="emitClose"
-                >
-                    <div
-                        class="modal-header flex justify-between"
-                    >
-                        <slot name="header" />
-                        <span
-                            class="cursor-pointer"
-                            @click="emitClose"
-                        >
+	<transition
+		name="modal"
+	>
+		<div
+			v-show="show"
+			class="modal-mask"
+		>
+			<div class="modal-wrapper">
+				<div
+					class="modal-container"
+					@keydown.esc="emitClose"
+				>
+					<div
+						class="modal-header flex justify-between"
+					>
+						<slot name="header"/>
+						<span
+							class="cursor-pointer"
+							@click="emitClose"
+						>
                             x
                         </span>
-                    </div>
+					</div>
 					
-                    <div class="modal-body">
-                        <slot name="body">
-                            default body
-                        </slot>
-                    </div>
+					<div class="modal-body">
+						<slot name="body">
+							default body
+						</slot>
+					</div>
 					
-                    <div
-                        class="modal-footer"
-                    >
-                        <slot name="footer" />
-                        <button
-                            @click="emitClose"
-                        >
-                            Close
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </transition>
+					<div
+						class="modal-footer"
+					>
+						<slot name="footer"/>
+						<button
+							@click="emitClose"
+						>
+							Close
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</transition>
 </template>
 
 <script>
-    export default {
-        name: "Modal",
-        props: {
-            show: Boolean
-        },
-        methods: {
-            emitClose: function () {
-                if (!this.show) {
-                    return;
-                }
-				
-                this.$emit('close');
-            }
-        }
-    }
+export default {
+	name: "Modal",
+	props: {
+		show: Boolean
+	},
+	methods: {
+		emitClose: function () {
+			if (!this.show) {
+				return;
+			}
+			
+			this.$emit('close');
+		}
+	}
+}
 </script>
 
 <style>

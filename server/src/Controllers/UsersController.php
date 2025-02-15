@@ -2,9 +2,9 @@
 
 namespace App\Controllers;
 
+use App\Models\User\User;
 use App\Utils\Http\JWTAuthenticator;
 use App\Utils\Http\Request;
-use App\Models\User\User;
 use App\Utils\Input\Sanitizer;
 use App\Utils\Runescape\Accolades;
 use App\Utils\Runescape\Skills;
@@ -17,53 +17,6 @@ class UsersController extends AbstractBaseController
     public function __construct($user_id = 0)
     {
         $this->user_object = new User($user_id);
-    }
-
-    protected function getUser(): User
-    {
-        return $this->user_object;
-    }
-
-    protected function toJson(string $view, array $parameters = []): void
-    {
-        $return_array = [];
-
-        if ($this->getUser()->getID()) {
-            $return_array['user'] = $this->getUser();
-
-            // Load skills
-            $skills = $this->getUser()->getSkills();
-            $skills_array = [];
-            foreach ($skills as $key => $row) {
-                $skills_array[] = [
-                    'src'        => Skills::getSkillIconFromIndex($row['skill_index']),
-                    'skill_name' => $row['skill_name'],
-                    'exp'        => $row['exp'],
-                    'level'      => $row['level'],
-                    'rank'       => $row['rank']
-                ];
-            }
-
-            $return_array['skills'] = $skills_array;
-            $return_array['show_skills'] = count($skills_array) > 0;
-
-            // Load accolades
-            $accolades = $this->getUser()->getAccolades();
-            $accolades_array = [];
-            foreach ($accolades as $key => $row) {
-                $accolades_array[] = [
-                    'src'           => Accolades::getAccoladeIconFromIndex($row['accolade_index']),
-                    'accolade_name' => $row['accolade_name'],
-                    'score'         => $row['score'],
-                    'rank'          => $row['rank']
-                ];
-            }
-
-            $return_array['accolades'] = $accolades_array;
-            $return_array['show_accolades'] = count($accolades_array) > 0;
-        }
-
-        $return_array = array_merge($parameters, $return_array);
     }
 
     public function canAccess(string $action, array $parameters = []): bool
@@ -79,7 +32,9 @@ class UsersController extends AbstractBaseController
         };
     }
 
-    public function index(): void {}
+    public function index(): void
+    {
+    }
 
     public function register(): void
     {
@@ -148,6 +103,53 @@ class UsersController extends AbstractBaseController
         ]);
     }
 
+    protected function toJson(string $view, array $parameters = []): void
+    {
+        $return_array = [];
+
+        if ($this->getUser()->getID()) {
+            $return_array['user'] = $this->getUser();
+
+            // Load skills
+            $skills = $this->getUser()->getSkills();
+            $skills_array = [];
+            foreach ($skills as $key => $row) {
+                $skills_array[] = [
+                    'src' => Skills::getSkillIconFromIndex($row['skill_index']),
+                    'skill_name' => $row['skill_name'],
+                    'exp' => $row['exp'],
+                    'level' => $row['level'],
+                    'rank' => $row['rank']
+                ];
+            }
+
+            $return_array['skills'] = $skills_array;
+            $return_array['show_skills'] = count($skills_array) > 0;
+
+            // Load accolades
+            $accolades = $this->getUser()->getAccolades();
+            $accolades_array = [];
+            foreach ($accolades as $key => $row) {
+                $accolades_array[] = [
+                    'src' => Accolades::getAccoladeIconFromIndex($row['accolade_index']),
+                    'accolade_name' => $row['accolade_name'],
+                    'score' => $row['score'],
+                    'rank' => $row['rank']
+                ];
+            }
+
+            $return_array['accolades'] = $accolades_array;
+            $return_array['show_accolades'] = count($accolades_array) > 0;
+        }
+
+        $return_array = array_merge($parameters, $return_array);
+    }
+
+    protected function getUser(): User
+    {
+        return $this->user_object;
+    }
+
     public function signIn(): void
     {
         $parameters = Request::getParameters();
@@ -168,7 +170,7 @@ class UsersController extends AbstractBaseController
         }
 
         if (count($errors)) {
-           jsonResponse([
+            jsonResponse([
                 'errors' => $errors
             ]);
         }

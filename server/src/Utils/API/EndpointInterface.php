@@ -15,7 +15,7 @@ interface EndpointInterface
      * @throws RequestException|ApiException
      */
     public function call();
-    
+
     /**
      * Format the data after retrieving it
      *

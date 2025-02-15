@@ -1,28 +1,30 @@
 <?php
 
+use App\Utils\Database\Connection;
 use App\Utils\EnvException;
 use App\Utils\EnvValidator;
 use App\Utils\Http\Server;
 use Dotenv\Dotenv;
-use App\Utils\Database\Connection;
 
 /**
  * Used to 'pretty-print' any array, object, or the like
  *
  * @param mixed $array
- * @param bool  $verbose - A flag to specify whether we want a print_r or a more verbose var_dump
+ * @param bool $verbose - A flag to specify whether we want a print_r or a more verbose var_dump
  */
 function dump($array, $verbose = false): void
 {
     $method = $verbose ? 'var_dump' : 'print_r';
-    echo '<pre>'; $method($array); echo '</pre>';
+    echo '<pre>';
+    $method($array);
+    echo '</pre>';
 }
 
 /**
  * Dump and die
  *
  * @param mixed $array
- * @param bool  $verbose
+ * @param bool $verbose
  *
  * @see dump()
  */
@@ -47,7 +49,7 @@ function jsonResponse($data, $jsonOption = 0): void
 function setApplicationVariables(): void
 {
     session_start();
-    
+
     // Set proper timezone for all date calls
     date_default_timezone_set('America/Chicago');
 
@@ -58,7 +60,7 @@ function setApplicationVariables(): void
     // Load .env file into the application
     $dot_env = Dotenv::create($env_file_path);
     $dot_env->load();
-    
+
     // Check if our expected .env file has the expected values
     EnvValidator::enforce();
 

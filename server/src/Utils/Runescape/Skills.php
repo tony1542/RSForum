@@ -30,22 +30,10 @@ class Skills
         'Hunter',
         'Construction'
     ];
-    
+
     // Our path to the skill thumbnails
     public const PATH_TO_ICONS = '/public/Images/OSRS/Skills/';
-    
-    /**
-     * Get skill name out of our array given an index
-     *
-     * @param int $index
-     *
-     * @return string
-     */
-    public static function getSkillNameFromIndex(int $index): string
-    {
-        return self::ALL[$index];
-    }
-    
+
     /**
      * Gets a skill icon thumbnail path from an index
      *
@@ -56,7 +44,19 @@ class Skills
     public static function getSkillIconFromIndex(int $index): string
     {
         $skill_name = self::getSkillNameFromIndex($index);
-        
+
         return self::PATH_TO_ICONS . strtolower($skill_name) . '.png';
+    }
+
+    /**
+     * Get skill name out of our array given an index
+     *
+     * @param int $index
+     *
+     * @return string
+     */
+    public static function getSkillNameFromIndex(int $index): string
+    {
+        return self::ALL[$index];
     }
 }
