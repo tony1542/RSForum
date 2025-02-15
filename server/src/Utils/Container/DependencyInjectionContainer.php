@@ -7,7 +7,7 @@ use Psr\Container\ContainerInterface;
 class DependencyInjectionContainer implements ContainerInterface
 {
     protected array $registry = [];
-    
+
     /**
      * Returns an item in the container if it exists
      *
@@ -22,10 +22,10 @@ class DependencyInjectionContainer implements ContainerInterface
         if (!$this->has($id)) {
             throw new NotFoundException('Could not find requested resource (' . $id . ') in the container.');
         }
-        
+
         return $this->registry[$id];
     }
-    
+
     /**
      * Checks if an item exists within our container
      *
@@ -37,12 +37,12 @@ class DependencyInjectionContainer implements ContainerInterface
     {
         return array_key_exists($id, $this->registry);
     }
-    
+
     /**
      * Set a new key/value into the container
      *
-     * @param  string $id
-     * @param  mixed  $value
+     * @param string $id
+     * @param mixed $value
      */
     public function set(string $id, $value): void
     {

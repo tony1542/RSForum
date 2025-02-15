@@ -14,14 +14,14 @@ class Session
     public static function flash(string $key)
     {
         $value = $_SESSION[$key];
-        
+
         if (isset($_SESSION[$key])) {
             unset($_SESSION[$key]);
         }
-    
+
         return $value;
     }
-    
+
     /**
      * Retrieves an item from the session if it exists
      *
@@ -34,10 +34,10 @@ class Session
         if (self::has($key)) {
             return $_SESSION[$key];
         }
-        
+
         return false;
     }
-    
+
     /**
      * Checks if an item exists within the session
      *
@@ -49,18 +49,18 @@ class Session
     {
         return isset($_SESSION[$key]);
     }
-    
+
     /**
      * Sets a key => value in the session array
      *
      * @param string $key
-     * @param mixed  $value
+     * @param mixed $value
      */
     public static function set(string $key, $value): void
     {
         $_SESSION[$key] = $value;
     }
-    
+
     /**
      * Removes an item from the session if it exists
      *
@@ -72,7 +72,7 @@ class Session
             unset($_SESSION[$key]);
         }
     }
-    
+
     /**
      * Destroy all session variables
      *

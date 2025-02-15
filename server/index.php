@@ -15,11 +15,11 @@ use App\Utils\Http\Server;
 
 try {
     setApplicationVariables();
-    
+
     $header = Server::getAuthHeader();
     if ($header) {
         $decoded = JWTAuthenticator::authenticate($header);
-        
+
         // JWT failed
         if ($decoded === false) {
             header('HTTP/1.1 401 Unauthorized');
@@ -30,24 +30,24 @@ try {
             setSignedInUser(new User($decoded->data->id));
         }
     }
-    
+
     Router::callAction();
 } catch (Throwable $t) {
     $errors = ['Something went wrong.'];
-    
+
     if (Server::isLocalHost() || getSignedInUser()->isAdmin()) {
         $errors = [
             'Message ' . $t->getMessage(),
-            'File '    . $t->getFile(),
-            'Line '    . $t->getLine(),
-            'Trace '   . $t->getTraceAsString(),
+            'File ' . $t->getFile(),
+            'Line ' . $t->getLine(),
+            'Trace ' . $t->getTraceAsString(),
         ];
-        
+
         if ($t instanceof EnvException) {
             $errors = [$t->getMessage()];
         }
     }
-    
+
     \jsonResponse([
         'errors' => $errors
     ]);

@@ -61,18 +61,18 @@ class Accolades
         'Zalcano',
         'Zulrah'
     ];
-    
+
     public const PATH_TO_ICONS = '/public/Images/OSRS/Accolades/';
-    
-    public static function getAccoladeFromIndex(int $index): string
-    {
-        return self::ALL[$index] ?? '';
-    }
-    
+
     public static function getAccoladeIconFromIndex(int $index): string
     {
         $accolade = self::getAccoladeFromIndex($index);
-        
+
         return self::PATH_TO_ICONS . $accolade . '.webp';
+    }
+
+    public static function getAccoladeFromIndex(int $index): string
+    {
+        return self::ALL[$index] ?? '';
     }
 }

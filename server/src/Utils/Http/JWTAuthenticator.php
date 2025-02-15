@@ -9,11 +9,6 @@ use stdClass;
 
 class JWTAuthenticator
 {
-    private static function getSecretKey(): string
-    {
-        return getenv('JWT_SECRET_KEY');
-    }
-
     public static function authenticate(string $jwt): bool|stdClass
     {
         try {
@@ -30,6 +25,11 @@ class JWTAuthenticator
         } catch (Exception $e) {
             return false;
         }
+    }
+
+    private static function getSecretKey(): string
+    {
+        return getenv('JWT_SECRET_KEY');
     }
 
     public static function generate(array $data): string

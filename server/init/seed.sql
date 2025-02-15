@@ -1,10 +1,15 @@
-# Create database
-CREATE DATABASE IF NOT EXISTS rsforumvue;
+#
+CREATE
+database
+CREATE
+DATABASE IF NOT EXISTS rsforumvue;
 
-# Select our new database for operation
-USE rsforumvue;
+#
+SELECT our new database FOR operation USE rsforumvue;
 
-# Create user table
+#
+CREATE
+USER TABLE
 CREATE TABLE user
 (
     user_id         int AUTO_INCREMENT,
@@ -39,11 +44,11 @@ CREATE TABLE task
 (
     task_id      int AUTO_INCREMENT
         PRIMARY KEY,
-    title        varchar(255)         NULL,
-    description  varchar(255)         NULL,
+    title        varchar(255) NULL,
+    description  varchar(255) NULL,
     is_completed tinyint(1) DEFAULT 0 NOT NULL,
-    date         date                 NOT NULL,
-    user_id      int                  NULL
+    date         date NOT NULL,
+    user_id      int NULL
 );
 
 CREATE INDEX user_id
@@ -52,7 +57,7 @@ CREATE INDEX user_id
 CREATE TABLE user_accolades
 (
     user_accolade_id int AUTO_INCREMENT,
-    username         varchar(12)            NOT NULL,
+    username         varchar(12) NOT NULL,
     date_added       datetime DEFAULT NOW() NULL,
     CONSTRAINT user_accolades_pk
         PRIMARY KEY (user_accolade_id)
@@ -102,9 +107,9 @@ CREATE TABLE home_page_posts
 
 CREATE TABLE rss_results
 (
-    rss_results_id       int AUTO_INCREMENT,
-    saved_at datetime DEFAULT NOW() NOT NULL,
-    results  blob                   NOT NULL,
+    rss_results_id int AUTO_INCREMENT,
+    saved_at       datetime DEFAULT NOW() NOT NULL,
+    results        blob                   NOT NULL,
     CONSTRAINT rss_results_pk
         PRIMARY KEY (rss_results_id)
 );

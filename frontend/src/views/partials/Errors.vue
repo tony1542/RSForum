@@ -1,32 +1,32 @@
 <template>
-    <div v-show="errors.length > 0">
+	<div v-show="errors.length > 0">
         <span
-            v-for="(error, id) in errors"
-            :key="id"
-            class="p-8 rounded mb-2"
+	        v-for="(error, id) in errors"
+	        :key="id"
+	        class="p-8 rounded mb-2"
         >
             {{ error }}
         </span>
-    </div>
+	</div>
 </template>
 
 <script>
-    export default {
-        name: "Errors",
-        props: {
-            errors: {
-                type: Array
-            }
-        }
-    }
+export default {
+	name: "Errors",
+	props: {
+		errors: {
+			type: Array
+		}
+	}
+}
 </script>
 
-<style scoped lang="scss">
-    span {
-	    background-color: var(--red-lightest);
-	    border: 1px solid var(--red-light);
-	    color: var(--red-dark);
-	    display: block;
-	    overflow: auto;
-    }
+<style lang="scss" scoped>
+span {
+	background-color: var(--red-lightest);
+	border: 1px solid var(--red-light);
+	color: var(--red-dark);
+	display: block;
+	overflow: auto;
+}
 </style>

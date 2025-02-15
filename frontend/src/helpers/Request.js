@@ -20,7 +20,7 @@ export default class Request {
 
         if (Store.JWT) {
             options.headers = {
-                'Authorization': `Bearer ${ Store.JWT }`,
+                'Authorization': `Bearer ${Store.JWT}`,
                 ...options.headers
             }
         }
@@ -31,7 +31,7 @@ export default class Request {
 
         Store.setWaitingOnAjax(true);
 
-        return await fetch(`${ this.base }/${ this.url }`, options)
+        return await fetch(`${this.base}/${this.url}`, options)
             .then(response => {
                 if (response.status === 401) {
                     localStorage.clear();
@@ -50,8 +50,7 @@ export default class Request {
             });
     }
 
-    async post(parameters)
-    {
+    async post(parameters) {
         return await this.call(parameters, 'POST');
     }
 }

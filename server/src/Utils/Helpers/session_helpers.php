@@ -1,8 +1,8 @@
 <?php
 
 use App\Models\User\User;
-use App\Utils\Http\Session;
 use App\Utils\Container\DependencyInjectionContainer;
+use App\Utils\Http\Session;
 use Psr\Container\ContainerInterface;
 
 /**
@@ -38,7 +38,7 @@ function getSignedInUser(): User
     if ($signed_in_user instanceof User) {
         return $signed_in_user;
     }
-    
+
     return new User();
 }
 
