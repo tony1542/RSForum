@@ -88,7 +88,7 @@ class Accolades
         'Zulrah'
     ];
 
-    public const PATH_TO_ICONS = '/public/Images/OSRS/AccoladesTest/';
+    public const PATH_TO_ICONS = '/public/Images/OSRS/Accolades/';
 
     public static function getAccoladeIconFromIndex(int $index): string
     {
