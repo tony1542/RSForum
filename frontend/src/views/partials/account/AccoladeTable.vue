@@ -12,6 +12,9 @@
 				v-for="accolade in accolades"
 				:key="accolade.accolade_index"
 			>
+				
+				{{accolade}}
+				
 				<td>
 					<div class="flex">
 						<Asset
