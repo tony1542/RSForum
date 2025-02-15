@@ -19,7 +19,11 @@ jobs:
           php-version: '8.1'
 
       - name: Install Composer dependencies
-        run: composer install --prefer-dist --no-progress --no-suggest
+        run: |
+          cd server/
+          composer install --prefer-dist --no-progress
 
       - name: Run PHPUnit tests
-        run: vendor/bin/phpunit --coverage-text
+        run: |
+          cd server/
+          vendor/bin/phpunit --coverage-text
