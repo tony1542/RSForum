@@ -14,13 +14,6 @@ class Connection
     public const PASSWORD = 'password';
     public const PORT = 'port';
 
-    /**
-     * Create an instance of our database
-     *
-     * @return PDO
-     *
-     * @see https://www.php.net/manual/en/class.pdo.php
-     */
     public static function getInstance(): PDO
     {
         $options = self::getConnectionParameters();
@@ -48,11 +41,6 @@ class Connection
         return $pdo;
     }
 
-    /**
-     * Grabs our database values from our .env file
-     *
-     * @return array
-     */
     protected static function getConnectionParameters(): array
     {
         return [
@@ -62,20 +50,5 @@ class Connection
             self::PASSWORD => getenv('DB_PASSWORD'),
             self::PORT => getenv('DB_PORT')
         ];
-    }
-
-    /**
-     * Allows us to see more details about why a query might not have worked like we wanted
-     *
-     * @param PDOStatement $statement
-     *
-     * @see https://www.php.net/manual/en/pdostatement.debugdumpparams.php
-     */
-    public static function debugQuery(PDOStatement $statement): void
-    {
-        ob_start();
-        $statement->debugDumpParams();
-        $contents = ob_get_clean();
-        dump($contents);
     }
 }

@@ -20,30 +20,10 @@ class Request
     protected static string $default_controller_action = 'index';
     protected static string $default_controller_suffix = 'sController';
 
-    /**
-     * Dumps all relevant information in a request
-     *
-     * @param bool|int $verbose
-     */
-    public static function dump($verbose = 0): void
-    {
-        dump([
-            'controller' => self::getController(),
-            'action' => self::getAction(),
-            'id' => self::getID(),
-            'parameters' => self::getParameters(),
-            'postArray' => self::getPostValues(),
-            'getArray' => self::getGetValues(),
-            'all' => $_REQUEST,
-            'uri' => self::getUri()
-        ], $verbose);
-    }
-
     public static function getController(): string
     {
         $controller = self::explodeUri()[self::CONTROLLER_POSITION];
 
-        // If no controller is passed, use our default
         if ($controller === '') {
             return self::$default_controller;
         }
@@ -56,9 +36,6 @@ class Request
         return explode('/', self::getUri());
     }
 
-    /**
-     * Fetch the request URI
-     */
     public static function getUri(): string
     {
         return trim(
@@ -84,7 +61,7 @@ class Request
 
     public static function getParameters(): array
     {
-        return self::getInputStream() ?? $_GET['parameters'] ?? $_POST['parameters'] ?? [];
+        return $_GET['parameters'] ?? $_POST['parameters'] ?? [];
     }
 
     public static function getInputStream(): array
