@@ -57,6 +57,6 @@ class Skills
      */
     public static function getSkillNameFromIndex(int $index): string
     {
-        return self::ALL[$index];
+        return self::ALL[$index] ?? '';
     }
 }

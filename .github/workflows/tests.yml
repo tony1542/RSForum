@@ -1,0 +1,29 @@
+name: Tests
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+
+      - name: Install Composer dependencies
+        run: |
+          cd server/
+          composer install --prefer-dist --no-progress
+
+      - name: Run PHPUnit tests
+        run: |
+          cd server/
+          vendor/bin/phpunit --coverage-text

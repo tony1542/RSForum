@@ -4,28 +4,28 @@ namespace App\Utils\Http;
 
 class Server
 {
-    public static function getRoot(): string
+    public function getRoot(): string
     {
-        if (self::isCommandLine()) {
-            return self::getOptions()['PWD'];
+        if ($this->isCommandLine()) {
+            return $this->getOptions()['PWD'];
         }
 
-        return self::getOptions()['DOCUMENT_ROOT'];
+        return $this->getOptions()['DOCUMENT_ROOT'];
     }
 
-    public static function isCommandLine(): bool
+    public function isCommandLine(): bool
     {
         return PHP_SAPI === 'cli';
     }
 
-    public static function getOptions(): array
+    public function getOptions(): array
     {
         return $_SERVER;
     }
 
-    public static function getAuthHeader(): string
+    public function getAuthHeader(): string
     {
-        $header = self::getOptions()['HTTP_AUTHORIZATION'] ?? '';
+        $header = $this->getOptions()['HTTP_AUTHORIZATION'] ?? '';
 
         if ($header === 'Bearer' || $header === '') {
             return '';
@@ -40,13 +40,13 @@ class Server
         return $header;
     }
 
-    public static function isLocalHost(): bool
+    public function isLocalHost(): bool
     {
-        if (self::isCommandLine()) {
+        if ($this->isCommandLine()) {
             return true;
         }
 
-        $address = self::getOptions()['REMOTE_ADDR'];
+        $address = $this->getOptions()['REMOTE_ADDR'];
 
         $whitelist = [
             '127.0.0.1',
@@ -58,6 +58,6 @@ class Server
             return true;
         }
 
-        return self::getOptions()['HTTP_HOST'] === 'localhost';
+        return $this->getOptions()['HTTP_HOST'] === 'localhost';
     }
 }

@@ -12,7 +12,7 @@ class JWTAuthenticator
     public static function authenticate(string $jwt): bool|stdClass
     {
         try {
-            $decoded = JWT::decode($jwt, self::getSecretKey(), array('HS256'));
+            $decoded = JWT::decode($jwt, self::getSecretKey(), array("HS256"));
 
             $now = new DateTimeImmutable();
             $timestamp = $now->getTimestamp();
@@ -29,7 +29,7 @@ class JWTAuthenticator
 
     private static function getSecretKey(): string
     {
-        return getenv('JWT_SECRET_KEY');
+        return getenv("JWT_SECRET_KEY");
     }
 
     public static function generate(array $data): string
@@ -46,9 +46,9 @@ class JWTAuthenticator
             "nbf" => $notbefore_claim,
             "exp" => $expire_claim,
             "data" => array(
-                "id" => $data['id'],
-                "username" => $data['username'],
-                "email" => $data['email']
+                "id" => $data["id"],
+                "username" => $data["username"],
+                "email" => $data["email"]
             )
         );
 
