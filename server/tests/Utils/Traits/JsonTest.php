@@ -2,11 +2,12 @@
 
 namespace Tests\Utils\Traits;
 
+use App\Utils\Traits\Json;
 use PHPUnit\Framework\TestCase;
 
-class Json extends TestCase
+class JsonTest extends TestCase
 {
-    use \App\Utils\Traits\Json;
+    use Json;
 
     public function testToJson(): void
     {

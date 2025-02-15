@@ -2,9 +2,10 @@
 
 namespace Tests\Utils\Runescape;
 
+use App\Utils\Runescape\AccountType;
 use PHPUnit\Framework\TestCase;
 
-class AccountType extends TestCase
+class AccountTypeTest extends TestCase
 {
     public function testGetAll(): void
     {
@@ -13,6 +14,6 @@ class AccountType extends TestCase
             1 => 'Ironman',
             2 => 'Hardcore Ironman',
             3 => 'Ultimate Ironman'
-        ], \App\Utils\Runescape\AccountType::getAll());
+        ], AccountType::getAll());
     }
 }
