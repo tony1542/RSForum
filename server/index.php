@@ -16,7 +16,8 @@ use App\Utils\Http\Server;
 try {
     setApplicationVariables();
 
-    $header = Server::getAuthHeader();
+    $server = new Server;
+    $header = $server->getAuthHeader();
     if ($header) {
         $decoded = JWTAuthenticator::authenticate($header);
 
@@ -35,7 +36,8 @@ try {
 } catch (Throwable $t) {
     $errors = ['Something went wrong.'];
 
-    if (Server::isLocalHost() || getSignedInUser()->isAdmin()) {
+    $server = new Server();
+    if ($server->isLocalHost() || getSignedInUser()->isAdmin()) {
         $errors = [
             'Message ' . $t->getMessage(),
             'File ' . $t->getFile(),

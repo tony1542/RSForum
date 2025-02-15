@@ -30,8 +30,9 @@ class Connection
             $password
         );
 
+        $server = new Server();
         // If we are on localhost, we want more detailed error messages since we are developing
-        if (Server::isLocalHost()) {
+        if ($server->isLocalHost()) {
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }
 
