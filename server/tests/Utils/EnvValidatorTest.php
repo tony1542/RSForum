@@ -10,11 +10,14 @@ class EnvValidatorTest extends TestCase
 {
     public function testFileExists()
     {
-        $validPath = '/var/www/html/.env';
+        $validPath = '/var/www/html/sample_file.txt';
+        file_put_contents($validPath, 'text');
+
         $invalidPath = '/invalid/path/.env';
 
         $this->assertTrue(file_exists($validPath));
         EnvValidator::fileExists($validPath);
+        unlink($validPath);
 
         $this->expectException(EnvException::class);
         $this->expectExceptionMessage('No configuration found for the site');
