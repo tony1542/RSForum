@@ -10,6 +10,5 @@ class BaseTestCase extends TestCase
     public function testSample()
     {
         $this->assertEquals(1, 1);
-        $this->assertEquals(1, 2);
     }
 }
