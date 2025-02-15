@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<img
-			:alt="path"
+			alt="Accolade image"
 			:height="height"
 			:src="getFilePath()"
 			:width="width"

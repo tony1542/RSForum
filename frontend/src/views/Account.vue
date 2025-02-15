@@ -1,35 +1,29 @@
 <template>
 	<div class="row">
-		<div class="col-md-3 pb-3">
-			<Card>
-				<h5 class="card-title">
-					{{ username }}
-				</h5>
-				
-				Account type: {{ accountTypeText }}
-			</Card>
-		</div>
+		<Card class="mb-4">
+			<h5 class="card-title">
+				{{ username }}
+			</h5>
+			
+			Account type: {{ accountTypeText }}
+		</Card>
 		
-		<div class="col-md-9">
-			<Card>
-				<h3>Skills</h3>
-				<Skills :skills="skills"/>
-				<h3>Accolades</h3>
-				<Accolades :accolades="accolades"/>
-			</Card>
-		</div>
+		<SkillTable :skills="skills"/>
+		<AccoladeTable :accolades="accolades" />
 	</div>
 </template>
 
 <script>
 import Request from "../helpers/Request";
-import Accolades from "./partials/account/Accolades.vue";
-import Skills from "./partials/account/Skills.vue";
 import Card from "./partials/Card.vue";
+import SkillTable from "./partials/account/SkillTable.vue";
+import AccoladeTable from "./partials/account/AccoladeTable.vue";
 
 export default {
 	name: "Account",
 	components: {
+		AccoladeTable,
+		SkillTable,
 		Card,
 		Skills,
 		Accolades
