@@ -54,7 +54,8 @@ function setApplicationVariables(): void
     date_default_timezone_set('America/Chicago');
 
     // Ensure .env file exists
-    $env_file_path = Server::getRoot() . DIRECTORY_SEPARATOR;
+    $server = new Server();
+    $env_file_path = $server->getRoot() . DIRECTORY_SEPARATOR;
     EnvValidator::fileExists($env_file_path . DIRECTORY_SEPARATOR . '.env');
 
     // Load .env file into the application
