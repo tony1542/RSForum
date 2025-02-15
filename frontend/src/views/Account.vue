@@ -25,8 +25,6 @@ export default {
 		AccoladeTable,
 		SkillTable,
 		Card,
-		Skills,
-		Accolades
 	},
 	data() {
 		return {
