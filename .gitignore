@@ -2,6 +2,7 @@
 frontend/node_modules
 server/vendor
 /dist
+.phpunit.*
 
 server/.env
 server/coverage
