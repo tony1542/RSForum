@@ -8,11 +8,11 @@ use PDOStatement;
 
 class Connection
 {
-    public const CONNECTION = 'connection';
-    public const DB_NAME = 'db_name';
-    public const USERNAME = 'username';
-    public const PASSWORD = 'password';
-    public const PORT = 'port';
+    public const string CONNECTION = 'connection';
+    public const string DB_NAME = 'db_name';
+    public const string USERNAME = 'username';
+    public const string PASSWORD = 'password';
+    public const string PORT = 'port';
 
     public static function getInstance(): PDO
     {
@@ -45,11 +45,11 @@ class Connection
     protected static function getConnectionParameters(): array
     {
         return [
-            self::CONNECTION => getenv('DB_CONNECTION_URL'),
-            self::DB_NAME => getenv('DB_NAME'),
-            self::USERNAME => getenv('DB_USERNAME'),
-            self::PASSWORD => getenv('DB_PASSWORD'),
-            self::PORT => getenv('DB_PORT')
+            self::CONNECTION => $_ENV['DB_CONNECTION_URL'],
+            self::DB_NAME => $_ENV['DB_NAME'],
+            self::USERNAME => $_ENV['DB_USERNAME'],
+            self::PASSWORD => $_ENV['DB_PASSWORD'],
+            self::PORT => $_ENV['DB_PORT']
         ];
     }
 }

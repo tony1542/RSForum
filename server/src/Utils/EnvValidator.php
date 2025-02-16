@@ -39,7 +39,7 @@ class EnvValidator
         $throw_exception = false;
         $exception_messages = [];
         foreach ($enforcements as $enforcement) {
-            if (getenv($enforcement) === false) {
+            if ($_ENV[$enforcement] === false) {
                 $throw_exception = true;
                 $exception_messages[] = $enforcement;
             }

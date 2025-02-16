@@ -28,13 +28,13 @@ class EnvValidatorTest extends TestCase
         ];
 
         foreach ($enforcements as $enforcement) {
-            putenv("$enforcement=value");
+            $_ENV("$enforcement=value");
         }
 
         EnvValidator::enforce();
 
-        putenv('DB_NAME');
-        putenv('DB_CONNECTION_URL');
+        $_ENV('DB_NAME');
+        $_ENV('DB_CONNECTION_URL');
         $this->expectException(EnvException::class);
         $this->expectExceptionMessage('Missing .env configuration(s) for: DB_NAME, DB_CONNECTION_URL');
         EnvValidator::enforce();

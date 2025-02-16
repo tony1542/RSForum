@@ -55,12 +55,12 @@ function setApplicationVariables(): void
 
     // Ensure .env file exists
     $server = new Server();
-    $env_file_path = $server->getRoot() . DIRECTORY_SEPARATOR;
-    EnvValidator::fileExists($env_file_path . DIRECTORY_SEPARATOR . '.env');
+    $filepath = $server->getRoot() . DIRECTORY_SEPARATOR;
+    EnvValidator::fileExists($filepath . DIRECTORY_SEPARATOR . '.env');
 
     // Load .env file into the application
-    $dot_env = Dotenv::create($env_file_path);
-    $dot_env->load();
+    $dotenv = Dotenv::createImmutable($filepath);
+    $dotenv->load();
 
     // Check if our expected .env file has the expected values
     EnvValidator::enforce();
