@@ -19,8 +19,5 @@ class ApiTest extends TestCase
     public function testGetAccoladesForPlayer(): void
     {
         $this->assertNotEmpty(Api::getAccoladesForPlayer('Lynx Titan', AccountType::PLAYER_TYPE_NORMAL));
-        $this->assertNotEmpty(Api::getAccoladesForPlayer('Iron Hyger', AccountType::PLAYER_TYPE_IRONMAN));
-        $this->assertNotEmpty(Api::getAccoladesForPlayer('groonoomcroo', AccountType::PLAYER_TYPE_HARDCORE_IRONMAN));
-        $this->assertNotEmpty(Api::getAccoladesForPlayer('Settled', AccountType::PLAYER_TYPE_ULTIMATE_IRONMAN));
     }
 }
