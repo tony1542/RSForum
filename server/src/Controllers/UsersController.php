@@ -183,7 +183,8 @@ class UsersController extends AbstractBaseController
             ]);
         }
 
-        $user = getSignedInUser();
+        setSignedInUser($user);
+
         $parameters = [
             'id' => $user->getID(),
             'username' => $user->getUsername(),
