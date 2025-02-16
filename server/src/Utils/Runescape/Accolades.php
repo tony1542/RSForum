@@ -5,6 +5,8 @@ namespace App\Utils\Runescape;
 class Accolades
 {
     public const ALL = [
+        'League Points',
+        'Deadman Points',
         'Bounty Hunter - Hunter',
         'Bounty Hunter - Rogue',
         'Bounty Hunter (Legacy) - Hunter',

@@ -33,13 +33,7 @@ class User
             $user_id = (int)$this->getID();
         }
 
-        // Creating an instance of our db connection, then using a pdo to query our db for a user_id match
-        $instance = getDatabase();
-        $statement = $instance->prepare('SELECT user_id, username, email_address, logged_in, admin, account_type_id
-                                            FROM user
-                                         WHERE user_id = ?');
-        $statement->execute([$user_id]);
-        $values = $statement->fetch(PDO::FETCH_ASSOC);
+        $values = $this->getUserFromDB($user_id);
 
         if (!$values || !is_array($values)) {
             return;
@@ -54,6 +48,17 @@ class User
 
         $this->skills = new UserSkills($this->getUsername(), $this->account_type_id);
         $this->accolades = new UserAccolades($this->getUsername(), $this->account_type_id);
+    }
+
+    public function getUserFromDB($user_id): array
+    {
+        $instance = getDatabase();
+        $statement = $instance->prepare('SELECT user_id, username, email_address, logged_in, admin, account_type_id
+                                            FROM user
+                                         WHERE user_id = ?');
+        $statement->execute([$user_id]);
+
+        return $statement->fetch(PDO::FETCH_ASSOC);
     }
 
     public function getID(): string
@@ -74,18 +79,15 @@ class User
      */
     public static function login(string $email_address, string $password): bool
     {
-        $data_error = [];
         $db = getDatabase();
         $sql = $db->prepare('SELECT * FROM user WHERE email_address =?');
         $sql->execute([$email_address]);
         $value = $sql->fetchAll(PDO::FETCH_ASSOC);
 
-        // If value isn't set or isn't an array, their credentials were wrong
-        if (!$value || !is_array($value)) {
+        if (!count($value)) {
             return false;
         }
 
-        // If $value has an array with stuff in that array, step in to grab them
         if ($value) {
             $value = $value[0];
             if (!password_verify($password, $value['password'])) {
@@ -113,7 +115,7 @@ class User
                                   AND us.skill_name = 'Overall'
                                 ORDER BY us.date_added DESC
                                 LIMIT 1) AS date_added
-                                FROM USER u");
+                                FROM user u");
         $members = $sql->fetchAll(PDO::FETCH_ASSOC);
 
         $users = [];
@@ -211,7 +213,6 @@ class User
     {
         $database = getDatabase();
 
-        // If we are all good, update the database
         $sql = $database->prepare("UPDATE user SET username = ?, account_type_id = ? WHERE user_id = ?");
         $sql->execute([$username, $account_type_id, Request::getID()]);
 
