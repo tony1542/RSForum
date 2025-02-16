@@ -45,7 +45,9 @@ class UsersController extends AbstractBaseController
         $emailAddress = Sanitizer::sanitize($parameters['email']);
         $accountTypeId = Sanitizer::sanitize($parameters['accountType']);
         $password = Sanitizer::sanitize($parameters['password']);
-        $errors = User::verifyUsername($username);
+
+        $user = new User();
+        $errors = $user->verifyUsername($username);
 
         $db = getDatabase();
         $sql = $db->prepare('SELECT email_address FROM user WHERE email_address =?');
@@ -205,7 +207,7 @@ class UsersController extends AbstractBaseController
         $new_username = $post_values['username'];
         $account_type_id = $post_values['account_type_id'];
 
-        $errors = User::verifyUsername($new_username);
+        $errors = $user->verifyUsername($new_username);
         if (count($errors)) {
             $this->toJson('profile', [
                 'errors' => $errors

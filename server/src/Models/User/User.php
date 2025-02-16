@@ -127,7 +127,7 @@ class User
         return $users;
     }
 
-    public static function verifyUsername(string $username): array
+    public function verifyUsername(string $username): array
     {
         $errors = [];
 
@@ -147,17 +147,20 @@ class User
             $errors[] = 'Username can only contain numbers, letters, or spaces';
         }
 
-        // Check for existing usernames
-        $database = getDatabase();
-        $sql = $database->prepare("SELECT COUNT(*) AS count FROM user WHERE username = ?");
-        $sql->execute([$username]);
-        $results = $sql->fetch(PDO::FETCH_ASSOC);
-
-        if ((int)$results['count'] !== 0) {
+        if ($this->getUsernameCount($username) !== 0) {
             $errors[] = 'Username already exists';
         }
 
         return $errors;
+    }
+
+    public function getUsernameCount($username): int
+    {
+        $database = getDatabase();
+        $sql = $database->prepare("SELECT COUNT(*) AS count FROM user WHERE username = ?");
+        $sql->execute([$username]);
+
+        return (int) $sql->fetch(PDO::FETCH_ASSOC)['count'];
     }
 
     public function getEmail(): string
