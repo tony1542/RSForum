@@ -23,6 +23,11 @@ jobs:
       - name: Install Composer dependencies
         run: composer install --prefer-dist --no-progress
 
+      - name: Create coverage directory
+        run: |
+          mkdir -p /var/www/html/coverage
+          chmod -R 777 /var/www/html/coverage
+
       - name: Run PHPUnit tests and generate coverage report
         run: vendor/bin/phpunit
 
