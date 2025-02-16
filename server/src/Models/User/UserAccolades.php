@@ -2,7 +2,8 @@
 
 namespace App\Models\User;
 
-use App\Utils\API\OSRS\Api as OSRS;
+use App\Utils\API\OSRS\Api;
+use App\Utils\API\OSRS\Endpoints\Accolades;
 use PDO;
 
 class UserAccolades extends AbstractHighscoreComponent
@@ -19,8 +20,8 @@ class UserAccolades extends AbstractHighscoreComponent
             return;
         }
 
-        // If we find an accolades response from the API, insert a record into the database
-        $this->accolades = OSRS::getAccoladesForPlayer($username, $account_type_id);
+        $api = new Api(new Accolades($username, $account_type_id));
+        $this->accolades = $api->call();
         if ($this->accolades) {
             $this->insert();
         }

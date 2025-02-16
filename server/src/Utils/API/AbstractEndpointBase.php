@@ -17,12 +17,16 @@ abstract class AbstractEndpointBase
 
     public function __construct(string $player_name)
     {
-        $this->client = new Client();
         $this->error_handler = $this->getErrorHandler();
         $this->end_point_url .= rawurlencode($player_name);
     }
 
     abstract protected function getErrorHandler(): ApiErrorHandlerInterface;
+
+    public function setClient(Client $client): void
+    {
+        $this->client = $client;
+    }
 
     /**
      * @return array
@@ -39,11 +43,11 @@ abstract class AbstractEndpointBase
             return [];
         }
 
-        $contents = substr($body->getContents(), 3, 5);
+        $contents = $body->getContents();
         $this->error_handler->checkForErrors($contents);
 
-        return $this->format($body);
+        return $this->format($contents);
     }
 
-    abstract public function format(StreamInterface $body): array;
+    abstract public function format(string $body): array;
 }

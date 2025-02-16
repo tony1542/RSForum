@@ -2,7 +2,8 @@
 
 namespace App\Models\User;
 
-use App\Utils\API\OSRS\Api as OSRS;
+use App\Utils\API\OSRS\Api;
+use App\Utils\API\OSRS\Endpoints\Stats;
 use App\Utils\Runescape\Levels;
 use PDO;
 
@@ -18,7 +19,6 @@ class UserSkills extends AbstractHighscoreComponent
         $this->username = $username;
         $this->account_type_id = $account_type_id;
 
-        // Query DB for existing data
         $this->skills = $this->getUpdatedInLastDay();
 
         if ($this->skills) {
@@ -29,20 +29,19 @@ class UserSkills extends AbstractHighscoreComponent
             return;
         }
 
-        $this->skills = OSRS::getStatsForPlayer($username, $account_type_id);
+        $api = new Api(new Stats($username, $account_type_id));
+        $this->skills = $api->call();
 
         if ($this->skills) {
             $this->total_level = Levels::getTotalLevel(
                 array_column($this->getSkills(), 'level')
             );
 
-            // If we find a skills response from the API, insert a record into the database
             $this->insert();
 
             return;
         }
 
-        // If we have no record in the DB, set total level to 0
         if (!$this->skills) {
             $this->total_level = 0;
         }
