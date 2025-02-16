@@ -15,16 +15,16 @@
     </coverage>
     <source>
         <include>
-            <directory suffix=".php">/var/www/html/src/</directory>
+            <directory suffix=".php">src/</directory>
         </include>
         <exclude>
-            <directory suffix=".php">/var/www/html/src/Utils/Helpers/</directory>
-            <directory suffix=".php">/var/www/html/src/Utils/Database/</directory>
+            <directory suffix=".php">src/Utils/Helpers/</directory>
+            <directory suffix=".php">src/Utils/Database/</directory>
         </exclude>
     </source>
     <testsuites>
         <testsuite name="Tests">
-            <directory suffix=".php">/var/www/html/tests</directory>
+            <directory suffix=".php">tests</directory>
         </testsuite>
     </testsuites>
 </phpunit>
