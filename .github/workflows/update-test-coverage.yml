@@ -23,14 +23,9 @@ jobs:
       - name: Install Composer dependencies
         run: composer install --prefer-dist --no-progress
 
-      - name: Run PHPUnit tests and generate coverage report
-        id: phpunit
-        run: vendor/bin/phpunit --coverage-text
-
       - name: Generate coverage badge
-        id: badge
         run: |
-          COVERAGE=$(echo "${{ steps.phpunit.outputs.stdout }}" | grep -E 'Lines:' | awk '{print $2}' | tr -d '%')
+          COVERAGE=$(vendor/bin/phpunit --coverage-text | grep -E 'Lines:' | awk '{print $2}' | tr -d '%')
           echo "Coverage: $COVERAGE"
 
           COLOR="gray"
