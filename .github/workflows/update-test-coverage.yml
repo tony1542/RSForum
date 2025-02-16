@@ -24,7 +24,7 @@ jobs:
         run: composer install --prefer-dist --no-progress
 
       - name: Run PHPUnit tests and generate coverage report
-        run: vendor/bin/phpunit --coverage-clover clover.xml
+        run: vendor/bin/phpunit
 
       - name: debug dir
         run: pwd && ls -la
@@ -32,7 +32,7 @@ jobs:
       - name: Generate coverage badge
         id: badge
         run: |
-          COVERAGE=$(grep -Po 'lines\.\s*:\s*\K[0-9]+\.[0-9]+' coverage.xml)
+          COVERAGE=$(grep -E 'Lines:' /var/www/html/coverage.txt | awk '{print $2}') | tr -d '%'
           echo "Coverage: $COVERAGE"
 
           COLOR="gray"

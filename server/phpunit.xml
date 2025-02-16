@@ -11,6 +11,7 @@
               disableCodeCoverageIgnore="true">
         <report>
             <html outputDirectory="/var/www/html/coverage"/>
+            <text outputFile="/var/www/html/coverage.txt" showUncoveredFiles="false" showOnlySummary="true"/>
         </report>
     </coverage>
     <source>
