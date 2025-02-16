@@ -11,7 +11,7 @@
 
 # Running tests and generating coverage
 
-- `docker exec website_img ./vendor/bin/phpunit`
+- `docker exec backend ./vendor/bin/phpunit`
 
 # Running the stack
 

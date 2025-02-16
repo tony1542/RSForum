@@ -8,13 +8,13 @@ namespace App\Utils;
 class EnvValidator
 {
     /**
-     * @param string $env_file_path
+     * @param string $path
      *
      * @throws EnvException
      */
-    public static function fileExists(string $env_file_path): void
+    public static function fileExists(string $path): void
     {
-        if (!file_exists($env_file_path)) {
+        if (!file_exists($path)) {
             throw new EnvException('No configuration found for the site');
         }
     }

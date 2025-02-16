@@ -12,7 +12,7 @@ class JWTAuthenticatorTest extends TestCase
 
     protected function setUp(): void
     {
-        $_ENV("JWT_SECRET_KEY={$this->secretKey}");
+        $_ENV["JWT_SECRET_KEY"] = $this->secretKey;
     }
 
     public function testGenerate()
