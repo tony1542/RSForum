@@ -7,7 +7,7 @@ on:
 jobs:
 
   build:
-    name: PHP test coverage
+    name: Test coverage
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -25,7 +25,7 @@ jobs:
 
       - name: Generate coverage badge
         run: |
-          COVERAGE=$(vendor/bin/phpunit --coverage-text | grep -E 'Lines:' | awk '{print $2}' | tr -d '%')
+          COVERAGE=$(vendor/bin/phpunit --coverage-text --configuration phpunit.xml | grep -E 'Lines:' | awk '{print $2}' | tr -d '%' | head -n 1)
           echo "Coverage: $COVERAGE"
 
           COLOR="gray"
