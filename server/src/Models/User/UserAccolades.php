@@ -19,7 +19,7 @@ class UserAccolades extends AbstractHighscoreComponent
             return;
         }
 
-        // If we find a accolades response from the API, insert a record into the database
+        // If we find an accolades response from the API, insert a record into the database
         $this->accolades = OSRS::getAccoladesForPlayer($username, $account_type_id);
         if ($this->accolades) {
             $this->insert();
@@ -53,8 +53,6 @@ class UserAccolades extends AbstractHighscoreComponent
 
         return $return_array;
     }
-
-    // Get latest updated stats from database
 
     protected function insert(): void
     {

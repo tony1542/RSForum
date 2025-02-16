@@ -38,10 +38,6 @@ class Levels
     {
         $total_level = 0;
 
-        if (!is_array($levels)) {
-            return 0;
-        }
-
         foreach ($levels as $level) {
             if (!is_numeric($level)) {
                 continue;
