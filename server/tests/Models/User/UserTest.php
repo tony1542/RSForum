@@ -168,7 +168,7 @@ class UserTest extends TestCase
     public function testGetters()
     {
         $userMock = $this->getMockBuilder(User::class)
-            ->onlyMethods(['getUserFromDB', 'setRanks'])
+            ->onlyMethods(['getUserFromDB', 'setRanks', 'getSkills', 'getAccolades'])
             ->getMock();
 
         $userMock->expects($this->once())
@@ -180,6 +180,20 @@ class UserTest extends TestCase
                 'logged_in' => 1,
                 'admin' => 0,
                 'account_type_id' => 1
+            ]);
+
+        $userMock->expects($this->once())
+            ->method('getSkills')
+            ->willReturn([
+                ['skill' => 'attack', 'level' => 99, 'xp' => 13034431],
+                ['skill' => 'defence', 'level' => 99, 'xp' => 13034431]
+            ]);
+
+        $userMock->expects($this->once())
+            ->method('getAccolades')
+            ->willReturn([
+                ['accolade' => 'zezima', 'score' => 1000],
+                ['accolade' => 'lynx titan', 'score' => 2000]
             ]);
 
         $userMock->load(1);

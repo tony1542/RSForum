@@ -35,7 +35,7 @@ abstract class AbstractEndpointBase
 
         try {
             $body = $this->client->request('GET', $full_url)->getBody();
-        } catch (Throwable $t) {
+        } catch (Throwable) {
             return [];
         }
 
