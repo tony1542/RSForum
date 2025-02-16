@@ -40,11 +40,6 @@ class UsersController extends AbstractBaseController
     {
         $parameters = Request::getParameters();
 
-        // If nothing is in $_POST, just show the register form
-        if (!count($parameters)) {
-            $this->toJson('register');
-        }
-
         // Sanitizing our user input before validating
         $username = Sanitizer::sanitize($parameters['username']);
         $emailAddress = Sanitizer::sanitize($parameters['email']);
@@ -154,7 +149,9 @@ class UsersController extends AbstractBaseController
     {
         $parameters = Request::getParameters();
         if (!count($parameters)) {
-            return;
+            jsonResponse([
+                'errors' => ['Must provide an email and password']
+            ]);
         }
 
         $emailAddress = Sanitizer::sanitize($parameters['email']);
@@ -189,6 +186,7 @@ class UsersController extends AbstractBaseController
             'username' => $user->getUsername(),
             'email' => $user->getEmail()
         ];
+
         jsonResponse([
             'token' => JWTAuthenticator::generate($parameters)
         ]);

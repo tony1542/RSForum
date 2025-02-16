@@ -9,7 +9,7 @@ services:
     environment:
       - MYSQL_ALLOW_EMPTY_PASSWORD=true
       - MYSQL_ROOT_PASSWORD=
-      - MYSQL_DATABASE=rsforumvue
+      - MYSQL_DATABASE=rsforum
       - MYSQL_PASSWORD=
     ports:
       - "3306:3306"
@@ -20,7 +20,7 @@ services:
       retries: 10
 
   php:
-    container_name: website_img
+    container_name: backend
     build:
       context: ./
       dockerfile: docker/php/Dockerfile

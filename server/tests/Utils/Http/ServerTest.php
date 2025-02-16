@@ -7,16 +7,17 @@ use App\Utils\Http\Server;
 
 class ServerTest extends TestCase
 {
+    private array $serverData = [
+        'DOCUMENT_ROOT' => '/var/www/html',
+        'PWD' => '/home/user',
+        'HTTP_AUTHORIZATION' => 'Bearer abc123',
+        'REMOTE_ADDR' => '127.0.0.1',
+        'HTTP_HOST' => 'localhost'
+    ];
+
     protected function setUp(): void
     {
-        // Mock the $_SERVER array for testing purposes
-        $_SERVER = [
-            'DOCUMENT_ROOT' => '/var/www/html',
-            'PWD' => '/home/user',
-            'HTTP_AUTHORIZATION' => 'Bearer abc123',
-            'REMOTE_ADDR' => '127.0.0.1',
-            'HTTP_HOST' => 'localhost'
-        ];
+        $_SERVER = $this->serverData;
     }
 
     public function testGetRootCommandLine()
@@ -60,15 +61,32 @@ class ServerTest extends TestCase
         $serverMock = $this->getMockBuilder(Server::class)
             ->onlyMethods(['isCommandLine', 'getOptions'])
             ->getMock();
+        $serverMock->method('isCommandLine')->willReturn(false);
+        $serverMock->method('getOptions')->willReturn($this->serverData);
+        $this->assertTrue($serverMock->isLocalHost());
+    }
+
+    public function testIsLocalHostIsCommandLine(): void
+    {
+        $serverMock = $this->getMockBuilder(Server::class)
+            ->onlyMethods(['isCommandLine', 'getOptions'])
+            ->getMock();
         $serverMock->method('isCommandLine')->willReturn(true);
         $this->assertTrue($serverMock->isLocalHost());
+    }
 
+    public function testIsLocalHostIsWhiteListed(): void
+    {
+        $serverMock = $this->getMockBuilder(Server::class)
+            ->onlyMethods(['isCommandLine', 'getOptions'])
+            ->getMock();
         $serverMock->method('isCommandLine')->willReturn(false);
-        $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
-        $this->assertTrue($serverMock->isLocalHost());
 
-        $_SERVER['REMOTE_ADDR'] = '192.168.1.1';
-        $_SERVER['HTTP_HOST'] = 'localhost';
+        $data = $this->serverData;
+        $data['REMOTE_ADDR'] = '192.168.1.1';
+        $data['HTTP_HOST'] = 'localhost';
+
+        $serverMock->method('getOptions')->willReturn($data);
         $this->assertTrue($serverMock->isLocalHost());
     }
 }

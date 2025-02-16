@@ -28,7 +28,9 @@ class LevelsTest extends TestCase
     public function testGetTotalLevel(): void
     {
         $this->assertSame(141, Levels::getTotalLevel([20, 15, 25, 10, 30, 5, 20, 16]));
+        $this->assertSame(220, Levels::getTotalLevel([126, 15, 25, 10, 30, 5, 20, 16]));
         $this->assertSame(0, Levels::getTotalLevel([]));
+        $this->assertSame(0, Levels::getTotalLevel(['string', 'still not a number']));
     }
 
     public function testGetTotalVirtualLevel(): void

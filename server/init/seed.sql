@@ -1,7 +1,7 @@
-CREATE
-DATABASE IF NOT EXISTS rsforumvue;
+CREATE DATABASE IF NOT EXISTS rsforum;
 
-CREATE TABLE user
+CREATE TABLE
+    user
 (
     user_id         int AUTO_INCREMENT,
     username        varchar(12)       NOT NULL,

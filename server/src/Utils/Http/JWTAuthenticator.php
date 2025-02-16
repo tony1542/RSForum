@@ -2,7 +2,6 @@
 
 namespace App\Utils\Http;
 
-use DateTimeImmutable;
 use Exception;
 use Firebase\JWT\JWT;
 use stdClass;
@@ -12,29 +11,20 @@ class JWTAuthenticator
     public static function authenticate(string $jwt): bool|stdClass
     {
         try {
-            $decoded = JWT::decode($jwt, self::getSecretKey(), array("HS256"));
-
-            $now = new DateTimeImmutable();
-            $timestamp = $now->getTimestamp();
-
-            if ($decoded->nbf > $timestamp || $decoded->exp < $timestamp) {
-                return false;
-            }
-
-            return $decoded;
-        } catch (Exception $e) {
+            return JWT::decode($jwt, self::getSecretKey(), array("HS256"));
+        } catch (Exception) {
             return false;
         }
     }
 
     private static function getSecretKey(): string
     {
-        return getenv("JWT_SECRET_KEY");
+        return $_ENV["JWT_SECRET_KEY"];
     }
 
     public static function generate(array $data): string
     {
-        $issuer_claim = getenv("JWT_SECRET_KEY");
+        $issuer_claim = self::getSecretKey();
         $audience_claim = "RSForum";
         $issuedat_claim = time(); // issued at
         $notbefore_claim = $issuedat_claim; // not before in seconds

@@ -4,14 +4,7 @@ namespace App\Utils\Http;
 
 class Session
 {
-    /**
-     * Show the contents of a session variable & unset it after
-     *
-     * @param string $key - The key of the session variable
-     *
-     * @return mixed      - The value of whatever session variable provided
-     */
-    public static function flash(string $key)
+    public static function flash(string $key): mixed
     {
         $value = $_SESSION[$key];
 
@@ -22,14 +15,7 @@ class Session
         return $value;
     }
 
-    /**
-     * Retrieves an item from the session if it exists
-     *
-     * @param string $key
-     *
-     * @return bool|mixed
-     */
-    public static function get(string $key)
+    public static function get(string $key): mixed
     {
         if (self::has($key)) {
             return $_SESSION[$key];
@@ -38,34 +24,16 @@ class Session
         return false;
     }
 
-    /**
-     * Checks if an item exists within the session
-     *
-     * @param string $key
-     *
-     * @return bool
-     */
     public static function has(string $key): bool
     {
         return isset($_SESSION[$key]);
     }
 
-    /**
-     * Sets a key => value in the session array
-     *
-     * @param string $key
-     * @param mixed $value
-     */
-    public static function set(string $key, $value): void
+    public static function set(string $key, mixed $value): void
     {
         $_SESSION[$key] = $value;
     }
 
-    /**
-     * Removes an item from the session if it exists
-     *
-     * @param string $key
-     */
     public static function unset(string $key): void
     {
         if (self::has($key)) {
@@ -73,11 +41,6 @@ class Session
         }
     }
 
-    /**
-     * Destroy all session variables
-     *
-     * @return bool
-     */
     public static function destroy(): bool
     {
         return session_destroy();

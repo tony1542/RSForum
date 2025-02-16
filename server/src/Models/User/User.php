@@ -13,7 +13,7 @@ class User
     protected string $username = '';
     protected string $email_address = '';
     protected string $user_id = '';
-    protected int $account_type_id;
+    protected int $account_type_id = 0;
     protected bool $logged_in = false;
     protected bool $admin = false;
 

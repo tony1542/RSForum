@@ -50,7 +50,7 @@ try {
         }
     }
 
-    \jsonResponse([
+    jsonResponse([
         'errors' => $errors
     ]);
 }
