@@ -23,21 +23,14 @@ jobs:
       - name: Install Composer dependencies
         run: composer install --prefer-dist --no-progress
 
-      - name: Create coverage directory
-        run: |
-          mkdir -p /var/www/html/coverage
-          chmod -R 777 /var/www/html/coverage
-
       - name: Run PHPUnit tests and generate coverage report
-        run: vendor/bin/phpunit
-
-      - name: debug dir
-        run: pwd && ls -la
+        id: phpunit
+        run: vendor/bin/phpunit --coverage-text
 
       - name: Generate coverage badge
         id: badge
         run: |
-          COVERAGE=$(grep -E 'Lines:' /var/www/html/coverage.txt | awk '{print $2}') | tr -d '%'
+          COVERAGE=$(echo "${{ steps.phpunit.outputs.stdout }}" | grep -E 'Lines:' | awk '{print $2}' | tr -d '%')
           echo "Coverage: $COVERAGE"
 
           COLOR="gray"
