@@ -3,30 +3,25 @@
 namespace App\Utils\API\OSRS;
 
 use App\Utils\API\ApiException;
-use App\Utils\API\OSRS\Endpoints\Accolades;
-use App\Utils\API\OSRS\Endpoints\Stats;
+use App\Utils\API\OSRS\Endpoints\AbstractEndpoint;
+use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 
 class Api
 {
-    public static function getStatsForPlayer(string $player_name, int $account_type_id): array
-    {
-        try {
-            $stats_for_player = new Stats($player_name, $account_type_id);
+    private AbstractEndpoint $endpoint;
 
-            return $stats_for_player->call();
-        } catch (RequestException|ApiException $e) {
-            return [];
-        }
+    public function __construct(AbstractEndpoint $endpoint)
+    {
+        $this->endpoint = $endpoint;
     }
 
-    public static function getAccoladesForPlayer(string $player_name, int $account_type_id): array
+    public function call(): array
     {
         try {
-            $accolades_for_player = new Accolades($player_name, $account_type_id);
-
-            return $accolades_for_player->call();
-        } catch (RequestException|ApiException $e) {
+            $this->endpoint->setClient(new Client());
+            return $this->endpoint->call();
+        } catch (RequestException|ApiException) {
             return [];
         }
     }
