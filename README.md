@@ -1,4 +1,5 @@
 [![Tests](https://github.com/tony1542/RSForumVue/actions/workflows/tests.yml/badge.svg)](https://github.com/tony1542/RSForumVue/actions/workflows/tests.yml)
+![Coverage Badge](https://img.shields.io/badge/Coverage-45.7%25-red.svg)
 
 # Pre-requisites
 
