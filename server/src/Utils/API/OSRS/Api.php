@@ -19,10 +19,17 @@ class Api
     public function call(): array
     {
         try {
-            $this->endpoint->setClient(new Client());
+            $this->endpoint->setClient(
+                $this->getClient()
+            );
             return $this->endpoint->call();
         } catch (RequestException|ApiException) {
             return [];
         }
+    }
+
+    public function getClient(): Client
+    {
+        return new Client();
     }
 }

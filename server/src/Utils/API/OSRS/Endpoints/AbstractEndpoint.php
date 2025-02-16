@@ -39,10 +39,8 @@ abstract class AbstractEndpoint extends AbstractEndpointBase
         return new ApiErrorHandler();
     }
 
-    protected function formatStandard(StreamInterface $body): array
+    protected function formatStandard(string $body): array
     {
-        $data = (string)$body;
-
-        return explode("\n", $data);
+        return explode("\n", $body);
     }
 }

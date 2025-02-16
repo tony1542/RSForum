@@ -43,11 +43,11 @@ abstract class AbstractEndpointBase
             return [];
         }
 
-        $contents = substr($body->getContents(), 3, 5);
+        $contents = $body->getContents();
         $this->error_handler->checkForErrors($contents);
 
-        return $this->format($body);
+        return $this->format($contents);
     }
 
-    abstract public function format(StreamInterface $body): array;
+    abstract public function format(string $body): array;
 }

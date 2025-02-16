@@ -10,7 +10,7 @@ class Accolades extends AbstractEndpoint
 {
     protected string $end_point_url = 'player=';
 
-    public function format(StreamInterface $body): array
+    public function format(string $body): array
     {
         $data = $this->formatStandard($body);
 

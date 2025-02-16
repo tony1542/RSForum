@@ -4,13 +4,12 @@ namespace App\Utils\API\OSRS\Endpoints;
 
 use App\Utils\Runescape\Levels;
 use App\Utils\Runescape\Skills;
-use Psr\Http\Message\StreamInterface;
 
 class Stats extends AbstractEndpoint
 {
     protected string $end_point_url = 'player=';
 
-    public function format(StreamInterface $body): array
+    public function format(string $body): array
     {
         $data = $this->formatStandard($body);
 
@@ -29,9 +28,9 @@ class Stats extends AbstractEndpoint
             $skills[] = [
                 'skill_index' => $key,
                 'skill_name' => Skills::getSkillNameFromIndex($key),
-                'exp' => number_format($exp),
+                'exp' => number_format((int) $exp),
                 'level' => $counter !== 0 ? Levels::findFromExp($exp) : null,
-                'rank' => number_format($rank)
+                'rank' => number_format((int) $rank)
             ];
 
             $counter++;
