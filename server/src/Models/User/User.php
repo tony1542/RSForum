@@ -127,20 +127,14 @@ class User
     {
         $errors = [];
 
-        if ($username === getSignedInUser()->getUsername()) {
-            return [];
-        }
-
         if (!$username) {
             $errors[] = 'Enter a username';
+        } else if (!preg_match('/^[-\w ]+$/', $username)) {
+            $errors[] = 'Username can only contain numbers, letters, or spaces';
         }
 
         if (strlen($username) > 12) {
             $errors[] = 'Username cannot be longer than 12 characters';
-        }
-
-        if (!preg_match('/^[-\w ]+$/', $username)) {
-            $errors[] = 'Username can only contain numbers, letters, or spaces';
         }
 
         if ($this->getUsernameCount($username) !== 0) {
