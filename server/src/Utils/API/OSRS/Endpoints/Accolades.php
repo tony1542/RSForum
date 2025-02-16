@@ -16,7 +16,6 @@ class Accolades extends AbstractEndpoint
 
         // Strip anything not related
         $data = array_slice($data, count(Skills::ALL));
-        array_shift($data);
 
         $accolades = [];
         foreach ($data as $key => $row) {

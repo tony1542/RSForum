@@ -33,15 +33,9 @@ class User
             $user_id = (int)$this->getID();
         }
 
-        // Creating an instance of our db connection, then using a pdo to query our db for a user_id match
-        $instance = getDatabase();
-        $statement = $instance->prepare('SELECT user_id, username, email_address, logged_in, admin, account_type_id
-                                            FROM user
-                                         WHERE user_id = ?');
-        $statement->execute([$user_id]);
-        $values = $statement->fetch(PDO::FETCH_ASSOC);
+        $values = $this->getUserFromDB($user_id);
 
-        if (!$values || !is_array($values)) {
+        if (!count($values)) {
             return;
         }
 
@@ -52,8 +46,34 @@ class User
         $this->logged_in = $values['logged_in'];
         $this->admin = $values['admin'];
 
-        $this->skills = new UserSkills($this->getUsername(), $this->account_type_id);
-        $this->accolades = new UserAccolades($this->getUsername(), $this->account_type_id);
+        $this->setRanks();
+    }
+
+    public function setRanks(): void
+    {
+        $this->setSkills(new UserSkills($this->getUsername(), $this->account_type_id));
+        $this->setAccolades(new UserAccolades($this->getUsername(), $this->account_type_id));
+    }
+
+    public function setSkills(UserSkills $skills): void
+    {
+        $this->skills = $skills;
+    }
+
+    public function setAccolades(UserAccolades $accolades): void
+    {
+        $this->accolades = $accolades;
+    }
+
+    public function getUserFromDB($user_id): array
+    {
+        $instance = getDatabase();
+        $statement = $instance->prepare('SELECT user_id, username, email_address, logged_in, admin, account_type_id
+                                            FROM user
+                                         WHERE user_id = ?');
+        $statement->execute([$user_id]);
+
+        return $statement->fetch(PDO::FETCH_ASSOC);
     }
 
     public function getID(): string
@@ -66,26 +86,14 @@ class User
         return $this->username;
     }
 
-    /**
-     * @param string $email_address
-     * @param string $password
-     *
-     * @return bool
-     */
-    public static function login(string $email_address, string $password): bool
+    public function login(string $email_address, string $password): bool
     {
-        $data_error = [];
-        $db = getDatabase();
-        $sql = $db->prepare('SELECT * FROM user WHERE email_address =?');
-        $sql->execute([$email_address]);
-        $value = $sql->fetchAll(PDO::FETCH_ASSOC);
+        $value = $this->getUserByEmail($email_address);
 
-        // If value isn't set or isn't an array, their credentials were wrong
-        if (!$value || !is_array($value)) {
+        if (!count($value)) {
             return false;
         }
 
-        // If $value has an array with stuff in that array, step in to grab them
         if ($value) {
             $value = $value[0];
             if (!password_verify($password, $value['password'])) {
@@ -93,71 +101,56 @@ class User
             }
         }
 
-        $user = new User($value['user_id']);
-        setSignedInUser($user);
-
-        $sql = $db->prepare("UPDATE user SET logged_in = 1 WHERE email_address =?");
-        $email = getSignedInUser()->email_address;
-        $sql->execute([$email]);
+        $this->setUserAsLoggedIn();
 
         return true;
     }
 
-    public static function getMembers(): array
+    public function getUserByEmail($email): array
     {
-        $database = getDatabase();
-        $sql = $database->query("SELECT u.username,
-                                (SELECT us.date_added
-                                FROM user_skills us
-                                WHERE username = u.username
-                                  AND us.skill_name = 'Overall'
-                                ORDER BY us.date_added DESC
-                                LIMIT 1) AS date_added
-                                FROM USER u");
-        $members = $sql->fetchAll(PDO::FETCH_ASSOC);
+        $db = getDatabase();
+        $sql = $db->prepare('SELECT * FROM user WHERE email_address = ?');
+        $sql->execute([$email]);
 
-        $users = [];
-        foreach ($members as $member) {
-            $users[] = [
-                'username' => $member['username'],
-                'last_active' => $member['date_added'] ? Carbon::create($member['date_added'])->format('m/d/y') : 'N/A'
-            ];
-        }
-
-        return $users;
+        return $sql->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public static function verifyUsername(string $username): array
+    public function setUserAsLoggedIn(): void
+    {
+        $db = getDatabase();
+        $sql = $db->prepare("UPDATE user SET logged_in = 1 WHERE email_address = ?");
+        $email = $this->email_address;
+        $sql->execute([$email]);
+    }
+
+    public function verifyUsername(string $username): array
     {
         $errors = [];
 
-        if ($username === getSignedInUser()->getUsername()) {
-            return [];
-        }
-
         if (!$username) {
             $errors[] = 'Enter a username';
+        } else if (!preg_match('/^[-\w ]+$/', $username)) {
+            $errors[] = 'Username can only contain numbers, letters, or spaces';
         }
 
         if (strlen($username) > 12) {
             $errors[] = 'Username cannot be longer than 12 characters';
         }
 
-        if (!preg_match('/^[-\w ]+$/', $username)) {
-            $errors[] = 'Username can only contain numbers, letters, or spaces';
-        }
-
-        // Check for existing usernames
-        $database = getDatabase();
-        $sql = $database->prepare("SELECT COUNT(*) AS count FROM user WHERE username = ?");
-        $sql->execute([$username]);
-        $results = $sql->fetch(PDO::FETCH_ASSOC);
-
-        if ((int)$results['count'] !== 0) {
+        if ($this->getUsernameCount($username) !== 0) {
             $errors[] = 'Username already exists';
         }
 
         return $errors;
+    }
+
+    public function getUsernameCount($username): int
+    {
+        $database = getDatabase();
+        $sql = $database->prepare("SELECT COUNT(*) AS count FROM user WHERE username = ?");
+        $sql->execute([$username]);
+
+        return (int) $sql->fetch(PDO::FETCH_ASSOC)['count'];
     }
 
     public function getEmail(): string
@@ -197,18 +190,21 @@ class User
 
     public function logout(): void
     {
-        $email = getSignedInUser()->email_address;
+        $this->setUserAsLoggedOut();
+        Session::destroy();
+    }
+
+    public function setUserAsLoggedOut(): void
+    {
         $db = getDatabase();
         $sql = $db->prepare("UPDATE user SET logged_in = 0 WHERE email_address =?");
-        $sql->execute([$email]);
-        Session::destroy();
+        $sql->execute([$this->email_address]);
     }
 
     public function update(string $username, int $account_type_id): bool
     {
         $database = getDatabase();
 
-        // If we are all good, update the database
         $sql = $database->prepare("UPDATE user SET username = ?, account_type_id = ? WHERE user_id = ?");
         $sql->execute([$username, $account_type_id, Request::getID()]);
 

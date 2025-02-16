@@ -4,7 +4,6 @@ namespace App\Utils\Database;
 
 use App\Utils\Http\Server;
 use PDO;
-use PDOStatement;
 
 class Connection
 {
