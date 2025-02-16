@@ -19,12 +19,12 @@ class JWTAuthenticator
 
     private static function getSecretKey(): string
     {
-        return getenv("JWT_SECRET_KEY");
+        return $_ENV["JWT_SECRET_KEY"];
     }
 
     public static function generate(array $data): string
     {
-        $issuer_claim = getenv("JWT_SECRET_KEY");
+        $issuer_claim = self::getSecretKey();
         $audience_claim = "RSForum";
         $issuedat_claim = time(); // issued at
         $notbefore_claim = $issuedat_claim; // not before in seconds
