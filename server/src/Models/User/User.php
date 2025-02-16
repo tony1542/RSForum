@@ -35,7 +35,7 @@ class User
 
         $values = $this->getUserFromDB($user_id);
 
-        if (!$values || !is_array($values)) {
+        if (!count($values)) {
             return;
         }
 
@@ -71,18 +71,9 @@ class User
         return $this->username;
     }
 
-    /**
-     * @param string $email_address
-     * @param string $password
-     *
-     * @return bool
-     */
-    public static function login(string $email_address, string $password): bool
+    public function login(string $email_address, string $password): bool
     {
-        $db = getDatabase();
-        $sql = $db->prepare('SELECT * FROM user WHERE email_address =?');
-        $sql->execute([$email_address]);
-        $value = $sql->fetchAll(PDO::FETCH_ASSOC);
+        $value = $this->getUserByEmail($email_address);
 
         if (!count($value)) {
             return false;
@@ -97,12 +88,26 @@ class User
 
         $user = new User($value['user_id']);
         setSignedInUser($user);
-
-        $sql = $db->prepare("UPDATE user SET logged_in = 1 WHERE email_address =?");
-        $email = getSignedInUser()->email_address;
-        $sql->execute([$email]);
+        $this->setUserAsLoggedIn();
 
         return true;
+    }
+
+    public function getUserByEmail($email): array
+    {
+        $db = getDatabase();
+        $sql = $db->prepare('SELECT * FROM user WHERE email_address = ?');
+        $sql->execute([$email]);
+
+        return $sql->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function setUserAsLoggedIn(): void
+    {
+        $db = getDatabase();
+        $sql = $db->prepare("UPDATE user SET logged_in = 1 WHERE email_address = ?");
+        $email = getSignedInUser()->email_address;
+        $sql->execute([$email]);
     }
 
     public static function getMembers(): array

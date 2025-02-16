@@ -174,7 +174,8 @@ class UsersController extends AbstractBaseController
             ]);
         }
 
-        $success = User::login($emailAddress, $password);
+        $user = new User();
+        $success = $user->login($emailAddress, $password);
 
         if (!$success) {
             jsonResponse([
