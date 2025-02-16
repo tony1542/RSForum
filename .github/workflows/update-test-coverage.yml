@@ -23,9 +23,6 @@ jobs:
       - name: Install Composer dependencies
         run: composer install --prefer-dist --no-progress
 
-      - name: Sanity check
-        run: cat phpunit.xml
-
       - name: Generate coverage badge
         run: |
           COVERAGE=$(vendor/bin/phpunit --coverage-text | grep -E 'Lines:' | awk '{print $2}' | tr -d '%' | head -n 1)
