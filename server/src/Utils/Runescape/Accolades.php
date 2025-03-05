@@ -19,6 +19,7 @@ class Accolades
         'Clue Scrolls (elite)',
         'Clue Scrolls (master)',
         'LMS - Rank',
+        'PVP Arena',
         'Soul Wars Zeal',
         'Rifts closed',
         'Colosseum Glory',

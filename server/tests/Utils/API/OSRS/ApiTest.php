@@ -141,31 +141,31 @@ class ApiTest extends TestCase
             ],
             [
                 "accolade_index" => 24,
-                "accolade_name" => "Bryophyta",
+                "accolade_name" => "Barrows Chests",
                 "score" => "288",
                 "rank" => "79,194"
             ],
             [
                 "accolade_index" => 37,
-                "accolade_name" => "Dagannoth Supreme",
+                "accolade_name" => "Dagannoth Rex",
                 "score" => "78",
                 "rank" => "98,222"
             ],
             [
                 "accolade_index" => 44,
-                "accolade_name" => "Kalphite Queen",
+                "accolade_name" => "Hespori",
                 "score" => "25",
                 "rank" => "97,264"
             ],
             [
                 "accolade_index" => 60,
-                "accolade_name" => "Sol Heredit",
+                "accolade_name" => "Skotizo",
                 "score" => "7",
                 "rank" => "81,187"
             ],
             [
                 "accolade_index" => 81,
-                "accolade_name" => "Zalcano",
+                "accolade_name" => "Wintertodt",
                 "score" => "587",
                 "rank" => "68,760"
             ]
