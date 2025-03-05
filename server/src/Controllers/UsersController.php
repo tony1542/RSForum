@@ -3,6 +3,8 @@
 namespace App\Controllers;
 
 use App\Models\User\User;
+use App\Utils\API\OSRS\Api;
+use App\Utils\API\OSRS\Endpoints\Stats;
 use App\Utils\Http\JWTAuthenticator;
 use App\Utils\Http\Request;
 use App\Utils\Input\Sanitizer;
@@ -71,13 +73,19 @@ class UsersController extends AbstractBaseController
             $errors[] = 'Please enter a password';
         }
 
+        $api = new Api(new Stats($username, $accountTypeId));
+        $result = $api->call();
+        if (empty($result)) {
+            $errors[] = 'This username does not exist on RuneScape';
+        }
+
         // If we have found any errors, re-show the form with them
         if (count($errors)) {
             jsonResponse([
                 'errors' => $errors
             ]);
         }
-
+        
         // TODO move this to the user model
         $db = getDatabase();
         $password = password_hash($password, PASSWORD_DEFAULT);
